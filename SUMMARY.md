@@ -2,6 +2,13 @@
 
 * [OSDeploy Home](README.md)
 * [Events](events.md)
+
+## Start Here
+
+* [PowerShell](start-here/powershell.md)
+
+***
+
 * [Community](community.md)
 
 ## PowerShell Gallery
