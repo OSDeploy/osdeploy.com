@@ -1,4 +1,4 @@
-# PowerShell
+# PowerShell 7.6+
 
 {% embed url="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6" %}
 

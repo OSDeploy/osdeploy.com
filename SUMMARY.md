@@ -6,6 +6,7 @@
 ## Start Here
 
 * [PowerShell](start-here/powershell.md)
+* [PowerShell Modules](start-here/psmodules.md)
 
 ***
 
