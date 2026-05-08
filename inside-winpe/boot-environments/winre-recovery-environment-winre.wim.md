@@ -12,7 +12,7 @@
 
 {% stepper %}
 {% step %}
-### winlogon.exe
+#### winlogon.exe
 
 ```
 HKEY_LOCAL_MACHINE\SYSTEM\Setup\CmdLine
@@ -22,7 +22,7 @@ winpeshl.exe
 {% endstep %}
 
 {% step %}
-### winpeshl.exe
+#### winpeshl.exe
 
 ```
 YYYY-MM-DD HH:mm:ss.SSS, Info    Windows PE Shell beginning execution
@@ -36,9 +36,7 @@ YYYY-MM-DD HH:mm:ss.SSS, Info    PNP initialization succeeded; terminating threa
 {% endstep %}
 
 {% step %}
-### recenv.exe
-
-
+#### recenv.exe
 {% endstep %}
 {% endstepper %}
 
@@ -46,13 +44,13 @@ YYYY-MM-DD HH:mm:ss.SSS, Info    PNP initialization succeeded; terminating threa
 
 {% stepper %}
 {% step %}
-### winpe.jpg
+#### winpe.jpg
 
 <figure><img src="../../.gitbook/assets/winpe.jpg" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
-### winre.jpg
+#### winre.jpg
 
 <figure><img src="../../.gitbook/assets/winre.jpg" alt=""><figcaption></figcaption></figure>
 {% endstep %}

@@ -4,13 +4,13 @@ We've taken a look at two steps of the WinPE Startup flow, but there are a few m
 
 {% stepper %}
 {% step %}
-### Registry: SYSTEM\Setup\CmdLine
+#### Registry: SYSTEM\Setup\CmdLine
 
 Winlogon reads the value of CmdLine, which is winpeshl.exe
 {% endstep %}
 
 {% step %}
-### Windows PE Shell (winpeshl.exe)
+#### Windows PE Shell (winpeshl.exe)
 
 Initializes PNP and WallpaperHost.exe
 
@@ -24,13 +24,13 @@ Executes \[SystemDrive]\windows\system32\cmd.exe /k startnet.cmd
 {% endstep %}
 
 {% step %}
-### Startnet.cmd
+#### Startnet.cmd
 
 Executes wpeinit.exe and remains as the shell application. This is the Command Prompt window that is left open. When the Command Prompt window is closed, WinPE will restart
 {% endstep %}
 
 {% step %}
-### Wpeinit.exe
+#### Wpeinit.exe
 
 Completes the WinPE initialization and Unattend.xml
 {% endstep %}

@@ -3,39 +3,30 @@
 * [OSDeploy Home](README.md)
 * [Events](events.md)
 
-## Start Here
+## OSDeploy Prerequesites
 
-* [PowerShell](start-here/powershell.md)
-* [PowerShell Modules](start-here/psmodules.md)
+* [PowerShell](osdeploy-prerequesites/powershell/README.md)
+  * [Install PowerShell 7](osdeploy-prerequesites/powershell/install-powershell.md)
+  * [OSDeploy Module](osdeploy-prerequesites/powershell/psmodules.md)
+  * [OSD Module](osdeploy-prerequesites/powershell/osd-module.md)
+  * [OSDCloud Module](osdeploy-prerequesites/powershell/osdcloud-module.md)
+* [Microsoft Windows ADK](osdeploy-prerequesites/microsoft-windows-adk/README.md)
+  * [Install 25H2](osdeploy-prerequesites/microsoft-windows-adk/install-25h2.md)
+  * [Install 26H1](osdeploy-prerequesites/microsoft-windows-adk/install-26h1.md)
+* [Microsoft Deployment Toolkit](osdeploy-prerequesites/microsoft-deployment-toolkit/README.md)
+  * [Install MDT](osdeploy-prerequesites/microsoft-deployment-toolkit/install-mdt.md)
 
-***
+## Links
 
-* [Community](community.md)
-
-## PowerShell Gallery
-
-* [About](powershell-gallery/about.md)
-* [AutopilotOOBE](https://www.powershellgallery.com/packages/AutopilotOOBE/)
-* [OSD](https://www.powershellgallery.com/packages/OSD/)
-* [OSDCloud](https://www.powershellgallery.com/packages/OSDCloud/)
-
-## Secure Boot
-
-* [Links](secure-boot/links.md)
-
-## WinPE Drivers
-
-* [Links](winpe-drivers/links.md)
+* [Community](links/community.md)
+* [WinPE Drivers](links/winpe-drivers.md)
+* [Secure Boot](links/secure-boot.md)
 
 ## OSDeployMDT
 
 * [About](osdeploymdt/about.md)
 * [Enable-OSDeployMDT](osdeploymdt/enable-osdeploymdt.md)
 * [Build-OSDeployMDT](osdeploymdt/build-osdeploymdt.md)
-
-## OSDCloud
-
-* [About](osdcloud/about.md)
 
 ## Inside WinPE
 
@@ -52,14 +43,7 @@
 * [WinPE Problems](inside-winpe/winpe-problems.md)
 * [Create a BootImage](inside-winpe/create-a-bootimage/README.md)
   * [ADK Default BootImage](inside-winpe/create-a-bootimage/adk-default-bootimage.md)
-* [Windows ADK](inside-winpe/windows-adk.md)
 * [WinPE Solutions](inside-winpe/winpe-solutions.md)
-
-## Windows ADK
-
-* [About the Windows ADK](windows-adk/about-the-windows-adk.md)
-* [Download the Windows ADK](windows-adk/download-the-windows-adk.md)
-* [Install the Windows ADK](windows-adk/install-the-windows-adk.md)
 
 ## Guides
 

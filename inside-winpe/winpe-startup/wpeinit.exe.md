@@ -16,13 +16,13 @@ In simple terms, Wpeinit is used to start the WinPE environment, optionally load
 
 {% stepper %}
 {% step %}
-### Loads settings from X:\Unattend.xml
+#### Loads settings from X:\Unattend.xml
 
 This file does not exist by default, and must be added to the mounted boot.wim
 {% endstep %}
 
 {% step %}
-### Display Settings
+#### Display Settings
 
 Unattend.xml: [Microsoft-Windows-Setup/Display](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-display)
 
@@ -30,13 +30,13 @@ On UEFI-based computers, this setting is ignored unless you have added a graphic
 {% endstep %}
 
 {% step %}
-### Computer Name
+#### Computer Name
 
 Random computer name is generated, then winmgmr (WMI) is started
 {% endstep %}
 
 {% step %}
-### Virtual Memory Paging File
+#### Virtual Memory Paging File
 
 Unattend.xml: [Microsoft-Windows-Setup/PageFile](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-pagefile)
 
@@ -44,13 +44,13 @@ Specifies the location and the size of the Windows PE operating system page file
 {% endstep %}
 
 {% step %}
-### Optional Components
+#### Optional Components
 
 ADK WinPE OC's such as WMI and WSH are initialized if present
 {% endstep %}
 
 {% step %}
-### Network Access and Applying Configuration
+#### Network Access and Applying Configuration
 
 Unattend.xml: [Microsoft-Windows-Setup/EnableNetwork](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-enablenetwork)
 
@@ -58,7 +58,7 @@ Specifies whether network connection is enabled.
 {% endstep %}
 
 {% step %}
-### Firewall Settings
+#### Firewall Settings
 
 Unattend.xml: [Microsoft-Windows-Setup/EnableFirewall](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-enablefirewall)
 
@@ -66,7 +66,7 @@ Specifies whether Windows Firewall is enabled for Windows Preinstallation Enviro
 {% endstep %}
 
 {% step %}
-### Synchronous User-Provided Commands
+#### Synchronous User-Provided Commands
 
 Unattend.xml: [Microsoft-Windows-Setup/RunSynchronous](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-runsynchronous)
 
@@ -78,7 +78,7 @@ To start a command that needs to finish before other commands can start, use syn
 {% endstep %}
 
 {% step %}
-### Asynchronous User-Provided Commands
+#### Asynchronous User-Provided Commands
 
 Unattend.xml: [Microsoft-Windows-Setup/RunAsynchronous](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-runasynchronous)
 
@@ -88,7 +88,7 @@ To run services or commands that can start at the same time, use asynchronous co
 {% endstep %}
 
 {% step %}
-### Shutdown Settings
+#### Shutdown Settings
 
 Unattend.xml: [Microsoft-Windows-Setup/Restart](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-setup-restart)
 

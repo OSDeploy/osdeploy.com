@@ -1,7 +1,7 @@
 # Windows 10 1809 Appx Issues
 
 {% hint style="success" %}
-This issue does not occur when using [**`Mount-WindowsImage`**](https://docs.microsoft.com/en-us/powershell/module/dism/mount-windowsimage?view=win10-ps) without the **`-Optimize`** parameter.  Thanks [**Johan**](https://twitter.com/jarwidmark/status/1063594435252875265)!
+This issue does not occur when using [**`Mount-WindowsImage`**](https://docs.microsoft.com/en-us/powershell/module/dism/mount-windowsimage?view=win10-ps) without the **`-Optimize`** parameter. Thanks [**Johan**](https://twitter.com/jarwidmark/status/1063594435252875265)!
 {% endhint %}
 
 {% embed url="https://aka.ms/AA38dwn" %}
@@ -27,8 +27,6 @@ A simple PowerShell script is used to complete the following
 * Remove the Zune Video package (with logging)
 * Dismount the Image
 
-
-
 ```
 $SourceDir = 'C:\DEV\Appx'
 $Images = @('17134.407','17763.1','17763.107','17763.134')
@@ -47,7 +45,7 @@ foreach ($UBR in $Images) {
 
 ## The Errors
 
-All three versions of Windows 10 1809 resulted in the following error message.  Windows 10 1803 worked perfectly.
+All three versions of Windows 10 1809 resulted in the following error message. Windows 10 1803 worked perfectly.
 
 ![](../../../.gitbook/assets/2018-11-16_12-01-03.png)
 
@@ -55,13 +53,13 @@ All three versions of Windows 10 1809 resulted in the following error message.  
 
 Windows 10 1803 works perfectly when removing Zune Video as expected
 
-{% file src="../../../.gitbook/assets/17134.407 (1).log" %}
+{% file src="../../../.gitbook/assets/17134.407.log" %}
 Windows 10 1803 Remove Appx Provisioned Package Log
 {% endfile %}
 
 ![Windows 10 1803](../../../.gitbook/assets/2018-11-16_12-05-42.png)
 
-Windows 10 1809 fails when removing Zune Video with errors.  This occurs in all 1809 UBRs (17763.1, 17763.107, and 17763.134)
+Windows 10 1809 fails when removing Zune Video with errors. This occurs in all 1809 UBRs (17763.1, 17763.107, and 17763.134)
 
 {% file src="../../../.gitbook/assets/17763.1.log" %}
 Windows 10 1809 17763.1 Log
@@ -79,7 +77,4 @@ Windows 10 1809 17763.134 Log
 
 ## The Conclusion
 
-There are obviously some internal DISM issues with Windows 10 1809.  I would be very cautious about any Enterprise deployment until this can be addressed.
-
-
-
+There are obviously some internal DISM issues with Windows 10 1809. I would be very cautious about any Enterprise deployment until this can be addressed.

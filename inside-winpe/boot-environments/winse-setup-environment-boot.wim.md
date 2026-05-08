@@ -2,13 +2,11 @@
 
 <figure><img src="../../.gitbook/assets/image (718).png" alt=""><figcaption></figcaption></figure>
 
-
-
 ## Boot Process
 
 {% stepper %}
 {% step %}
-### winlogon.exe
+#### winlogon.exe
 
 ```
 HKEY_LOCAL_MACHINE\SYSTEM\Setup\CmdLine
@@ -18,7 +16,7 @@ winpeshl.exe
 {% endstep %}
 
 {% step %}
-### winpeshl.exe
+#### winpeshl.exe
 
 ```
 YYYY-MM-DD HH:mm:ss.SSS, Info    Windows PE Shell beginning execution
@@ -31,9 +29,7 @@ YYYY-MM-DD HH:mm:ss.SSS, Info    Succeeded launching application (null) [command
 {% endstep %}
 
 {% step %}
-### setup.exe
-
-
+#### setup.exe
 {% endstep %}
 {% endstepper %}
 
@@ -41,15 +37,15 @@ YYYY-MM-DD HH:mm:ss.SSS, Info    Succeeded launching application (null) [command
 
 {% stepper %}
 {% step %}
-### winpe.jpg
+#### winpe.jpg
 
 <figure><img src="../../.gitbook/assets/winpe (1).jpg" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
-### winre.jpg
+#### winre.jpg
 
-<figure><img src="../../.gitbook/assets/winre (1).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/winre.jpg" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 {% endstepper %}
 
