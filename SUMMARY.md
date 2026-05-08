@@ -3,30 +3,41 @@
 * [OSDeploy Home](README.md)
 * [Events](events.md)
 
-## OSDeploy Prerequesites
+## Core Components
 
-* [PowerShell](osdeploy-prerequesites/powershell/README.md)
-  * [Install PowerShell 7](osdeploy-prerequesites/powershell/install-powershell.md)
-  * [OSDeploy Module](osdeploy-prerequesites/powershell/psmodules.md)
-  * [OSD Module](osdeploy-prerequesites/powershell/osd-module.md)
-  * [OSDCloud Module](osdeploy-prerequesites/powershell/osdcloud-module.md)
-* [Microsoft Windows ADK](osdeploy-prerequesites/microsoft-windows-adk/README.md)
-  * [Install 25H2](osdeploy-prerequesites/microsoft-windows-adk/install-25h2.md)
-  * [Install 26H1](osdeploy-prerequesites/microsoft-windows-adk/install-26h1.md)
-* [Microsoft Deployment Toolkit](osdeploy-prerequesites/microsoft-deployment-toolkit/README.md)
-  * [Install MDT](osdeploy-prerequesites/microsoft-deployment-toolkit/install-mdt.md)
+* [About](core-components/about.md)
+* [PowerShell](core-components/powershell/README.md)
+  * [Install PowerShell 7](core-components/powershell/install-powershell.md)
+* [PowerShell Modules](core-components/powershell-modules/README.md)
+  * [OSDeploy Module](core-components/powershell-modules/psmodules.md)
+  * [OSDCloud Module](core-components/powershell-modules/osdcloud-module.md)
+  * [OSD Module](core-components/powershell-modules/osd-module.md)
+* [Microsoft Windows ADK](core-components/microsoft-windows-adk/README.md)
+  * [Install 25H2](core-components/microsoft-windows-adk/install-25h2.md)
+  * [Install 26H1](core-components/microsoft-windows-adk/install-26h1.md)
+* [Microsoft Deployment Toolkit](core-components/microsoft-deployment-toolkit/README.md)
+  * [Install MDT](core-components/microsoft-deployment-toolkit/install-mdt.md)
+* [WinPE Drivers](core-components/winpe-drivers/README.md)
+  * [Dell](core-components/winpe-drivers/dell.md)
+  * [HP](core-components/winpe-drivers/hp.md)
+  * [Lenovo](core-components/winpe-drivers/lenovo.md)
+  * [Intel Ethernet](core-components/winpe-drivers/intel-ethernet.md)
+  * [Intel Wireless](core-components/winpe-drivers/intel-wireless.md)
+  * [Microsoft Features](core-components/winpe-drivers/microsoft-features.md)
+* [Windows Components](core-components/windows-components/README.md)
+  * [Hyper-V](core-components/windows-components/hyper-v.md)
+
+## OSDeploy MDT Integration
+
+* [About](osdeploy-mdt-integration/about.md)
+* [Enable-OSDeployMDT](osdeploy-mdt-integration/enable-osdeploymdt.md)
+* [Build-OSDeployMDT](osdeploy-mdt-integration/build-osdeploymdt.md)
 
 ## Links
 
 * [Community](links/community.md)
 * [WinPE Drivers](links/winpe-drivers.md)
 * [Secure Boot](links/secure-boot.md)
-
-## OSDeployMDT
-
-* [About](osdeploymdt/about.md)
-* [Enable-OSDeployMDT](osdeploymdt/enable-osdeploymdt.md)
-* [Build-OSDeployMDT](osdeploymdt/build-osdeploymdt.md)
 
 ## Inside WinPE
 
