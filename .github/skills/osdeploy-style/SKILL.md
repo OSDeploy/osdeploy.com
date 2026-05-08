@@ -2,9 +2,9 @@
 
 ## Description
 
-Apply the OSDeploy documentation page style to prerequisite overview pages and other reference pages in the `osdeploy.com` GitBook site. Use this skill when:
+Apply the OSDeploy documentation page style to core component overview pages and other reference pages in the `osdeploy.com` GitBook site. Use this skill when:
 
-- Writing or updating a `README.md` under `osdeploy-prerequesites/`
+- Writing or updating a `README.md` under `core-components/`
 - Adding a new overview/landing page for a tool, module, or concept
 - Ensuring existing pages conform to the site's common structure and GitBook shortcodes
 
@@ -143,6 +143,6 @@ For retired tools, insert a `{% hint style="warning" %}` block immediately after
 
 These existing pages in the `osdeploy.com` repo demonstrate correct style and can be used as reference:
 
-- [`osdeploy-prerequesites/microsoft-deployment-toolkit/install-mdt.md`](../../osdeploy-prerequesites/microsoft-deployment-toolkit/install-mdt.md) — best example of hint blocks, property tables, and Related section
-- [`osdeploy-prerequesites/powershell/install-powershell.md`](../../osdeploy-prerequesites/powershell/install-powershell.md) — embed shortcode + code block style + architecture-aware scripting
-- [`osdeploy-prerequesites/powershell/psmodules.md`](../../osdeploy-prerequesites/powershell/psmodules.md) — H2-per-topic pattern with install blocks
+- [`core-components/microsoft-deployment-toolkit/install-mdt.md`](../../core-components/microsoft-deployment-toolkit/install-mdt.md) — best example of hint blocks, property tables, and Related section
+- [`core-components/powershell/install-powershell.md`](../../core-components/powershell/install-powershell.md) — embed shortcode + code block style + architecture-aware scripting
+- [`core-components/powershell-modules/psmodules.md`](../../core-components/powershell-modules/psmodules.md) — H2-per-topic pattern with install blocks

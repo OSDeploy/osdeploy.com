@@ -26,6 +26,9 @@
   * [Microsoft Features](core-components/winpe-drivers/microsoft-features.md)
 * [Windows Components](core-components/windows-components/README.md)
   * [Hyper-V](core-components/windows-components/hyper-v.md)
+* [Developer Tools](core-components/developer-tools/README.md)
+  * [Git for Windows](core-components/developer-tools/git.md)
+  * [Visual Studio Code](core-components/developer-tools/vscode.md)
 
 ## OSDeploy MDT Integration
 
