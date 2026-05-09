@@ -29,6 +29,7 @@
 
 ## PowerShell Modules
 
+* [About](powershell-modules/about.md)
 * [OSDeploy Module](powershell-modules/psmodules.md)
 * [OSDCloud Module](powershell-modules/osdcloud-module.md)
 * [OSD Module](powershell-modules/osd-module.md)
