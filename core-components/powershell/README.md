@@ -12,6 +12,7 @@ PowerShell 7.6 or later is required for all OSDeploy workflows. It installs side
 | Required by      | All OSDeploy, OSDCloud, and OSD module workflows |
 
 {% embed url="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6" %}
+{% endembed %}
 
 ## Overview
 

@@ -1,18 +1,23 @@
 # PowerShell 7.6+
 
 {% embed url="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6" %}
+{% endembed %}
 
 OSDeploy requires **PowerShell 7.6 or later**. PowerShell 7 installs side-by-side with Windows PowerShell 5.1 and does not replace it. It is installed to `$env:ProgramFiles\PowerShell\7` and launched using `pwsh`.
 
 These instructions target **Windows only** (amd64 and arm64). The snippets detect the current architecture automatically.
 
-> **Note:** PowerShell releases frequently. Always check the [PowerShell GitHub Releases](https://github.com/PowerShell/PowerShell/releases/latest) page for the current version and update the `$Version` variable accordingly.
+{% hint style="info" %}
+PowerShell releases frequently. Always check the [PowerShell GitHub Releases](https://github.com/PowerShell/PowerShell/releases/latest) page for the current version and update the `$Version` variable accordingly.
+{% endhint %}
 
 ## Why Not WinGet?
 
 Beginning with PowerShell 7.6.0, WinGet installs the **MSIX package by default**. MSIX packages run inside an application sandbox that virtualizes filesystem and registry access. This sandbox **blocks system-level operations**, including commands that call `dism.exe`. This makes MSIX-based installations incompatible with OSD workflows such as OSDCloud.
 
-> Use the **MSI package** for all system and enterprise deployment scenarios.
+{% hint style="warning" %}
+Use the **MSI package** for all system and enterprise deployment scenarios.
+{% endhint %}
 
 ## Download the MSI
 

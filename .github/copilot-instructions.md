@@ -4,13 +4,14 @@
 
 | Field       | Value                                                          |
 |-------------|----------------------------------------------------------------|
-| Site name   | OSDeploy                                                       |
-| URL         | https://docs.osdeploy.com                                      |
-| Author      | David Segura                                                   |
-| Company     | Recast Software (https://www.recastsoftware.com)               |
-| Platform    | GitBook (Markdown + GitBook shortcodes)                        |
-| Audience    | Windows sysadmins and IT deployment engineers                  |
-| Purpose     | Documentation for OSDeploy, OSDCloud, and related tooling      |
+| Site name    | OSDeploy                                                                           |
+| URL          | https://www.osdeploy.com/                                                          |
+| Author       | David Segura                                                                       |
+| Company      | Recast Software (https://www.recastsoftware.com)                                   |
+| Platform     | GitBook (Markdown + GitBook shortcodes)                                            |
+| Audience     | Windows sysadmins and IT deployment engineers                                      |
+| Purpose      | Public website documenting how to use the OSDeploy PowerShell module               |
+| Module repo  | [OSDeploy/RecastOSDeploy](https://github.com/OSDeploy/RecastOSDeploy)              |
 
 ## Writing Style
 
@@ -38,6 +39,10 @@ Use these GitBook-native shortcodes where appropriate:
 ```
 
 Do **not** use standard Markdown blockquotes (`>`) as a replacement for `{% hint %}` blocks in new content.
+
+## Formatting
+
+All page content must follow the formatting guidelines defined in the `gitbook` skill at `.github/skills/gitbook/SKILL.md`. Load and apply that skill when writing or editing any page in this repository.
 
 ## PowerShell Modules
 

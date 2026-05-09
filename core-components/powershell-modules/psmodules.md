@@ -26,9 +26,14 @@ Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 
 ***
 
-## OSDThe **OSD** module is used **in WinPE** to deploy Windows 11. It also supports the older OSDCloud implementation, known as OSDCloud v1 (legacy).
+## OSD
 
-````powershell
+The **OSD** module is used **in WinPE** to deploy Windows 11. It also supports the older OSDCloud implementation, known as OSDCloud v1 (legacy).
+
+```powershell
 Install-Module -Name OSD -Force -SkipPublisherCheck
-```<div data-gb-custom-block data-tag="hint" data-style='warning'>For OSDCloud functionality, use the **OSDCloud** module instead of OSD. The OSDCloud module supersedes the OSDCloud v1 implementation that existed in OSD. The OSD module is maintained, but the OSDCloud module is preferred.</div>
-````
+```
+
+{% hint style="warning" %}
+For OSDCloud functionality, use the **OSDCloud** module instead of OSD. The OSDCloud module supersedes the OSDCloud v1 implementation that existed in OSD. The OSD module is maintained, but the OSDCloud module is preferred.
+{% endhint %}
