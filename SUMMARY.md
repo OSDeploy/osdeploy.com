@@ -8,7 +8,6 @@
 * [About](core-components/about.md)
 * [PowerShell](core-components/powershell/README.md)
   * [Install PowerShell 7](core-components/powershell/install-powershell.md)
-* [PowerShell Modules](core-components/powershell-modules.md)
 * [Microsoft Windows ADK](core-components/microsoft-windows-adk/README.md)
   * [Install 25H2](core-components/microsoft-windows-adk/install-25h2.md)
   * [Install 26H1](core-components/microsoft-windows-adk/install-26h1.md)
