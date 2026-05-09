@@ -27,17 +27,17 @@
   * [Git for Windows](core-components/developer-tools/git.md)
   * [Visual Studio Code](core-components/developer-tools/vscode.md)
 
-## OSDeploy MDT Integration
-
-* [About](osdeploy-mdt-integration/about.md)
-* [Enable-OSDeployMDT](osdeploy-mdt-integration/enable-osdeploymdt.md)
-* [Build-OSDeployMDT](osdeploy-mdt-integration/build-osdeploymdt.md)
-
 ## PowerShell Modules
 
 * [OSDeploy Module](powershell-modules/psmodules.md)
 * [OSDCloud Module](powershell-modules/osdcloud-module.md)
 * [OSD Module](powershell-modules/osd-module.md)
+
+## OSDeploy MDT Integration
+
+* [About](osdeploy-mdt-integration/about.md)
+* [Enable-OSDeployMDT](osdeploy-mdt-integration/enable-osdeploymdt.md)
+* [Build-OSDeployMDT](osdeploy-mdt-integration/build-osdeploymdt.md)
 
 ## Links
 
