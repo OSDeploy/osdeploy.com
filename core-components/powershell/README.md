@@ -12,7 +12,6 @@ PowerShell 7.6 or later is required for all OSDeploy workflows. It installs side
 | Required by      | All OSDeploy, OSDCloud, and OSD module workflows |
 
 {% embed url="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6" %}
-{% endembed %}
 
 ## Overview
 
@@ -32,6 +31,6 @@ Do **not** install PowerShell 7 via WinGet or the Microsoft Store. Beginning wit
 ## In This Section
 
 * [Install PowerShell 7](install-powershell.md) — Download and silently install the MSI package for amd64 or arm64
-* [PowerShell Modules](../powershell-modules/psmodules.md) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
-* [OSD Module](../powershell-modules/osd-module.md) — Details for the OSD module (legacy OSDCloud v1 support)
-* [OSDCloud Module](../powershell-modules/osdcloud-module.md) — Details for the OSDCloud module (current, recommended)
+* [PowerShell Modules](../../powershell-modules/psmodules.md) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
+* [OSD Module](../../powershell-modules/osd-module.md) — Details for the OSD module (legacy OSDCloud v1 support)
+* [OSDCloud Module](../../powershell-modules/osdcloud-module.md) — Details for the OSDCloud module (current, recommended)

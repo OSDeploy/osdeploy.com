@@ -8,10 +8,7 @@
 * [About](core-components/about.md)
 * [PowerShell](core-components/powershell/README.md)
   * [Install PowerShell 7](core-components/powershell/install-powershell.md)
-* [PowerShell Modules](core-components/powershell-modules/README.md)
-  * [OSDeploy Module](core-components/powershell-modules/psmodules.md)
-  * [OSDCloud Module](core-components/powershell-modules/osdcloud-module.md)
-  * [OSD Module](core-components/powershell-modules/osd-module.md)
+* [PowerShell Modules](core-components/powershell-modules.md)
 * [Microsoft Windows ADK](core-components/microsoft-windows-adk/README.md)
   * [Install 25H2](core-components/microsoft-windows-adk/install-25h2.md)
   * [Install 26H1](core-components/microsoft-windows-adk/install-26h1.md)
@@ -35,6 +32,12 @@
 * [About](osdeploy-mdt-integration/about.md)
 * [Enable-OSDeployMDT](osdeploy-mdt-integration/enable-osdeploymdt.md)
 * [Build-OSDeployMDT](osdeploy-mdt-integration/build-osdeploymdt.md)
+
+## PowerShell Modules
+
+* [OSDeploy Module](powershell-modules/psmodules.md)
+* [OSDCloud Module](powershell-modules/osdcloud-module.md)
+* [OSD Module](powershell-modules/osd-module.md)
 
 ## Links
 
