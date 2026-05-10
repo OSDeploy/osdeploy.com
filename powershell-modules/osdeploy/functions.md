@@ -14,14 +14,14 @@ The OSDeploy module (version 26.5.1.1) exports 14 public functions across six fu
 | Function | Description |
 |---|---|
 | [Build-OSDeployBootMedia](Build-OSDeployBootMedia.md) | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
-| [Build-OSDeployHydra](Build-OSDeployHydra.md) | Runs the full OSDeploy hydration workflow end-to-end |
+| [Invoke-OSDeployHydration](Invoke-OSDeployHydration.md) | Runs the full OSDeploy hydration workflow end-to-end |
 | [Update-OSDeployISO](Update-OSDeployISO.md) | Rebuilds bootable ISO files for an existing BootImage build |
 
 ## USB
 
 | Function | Description |
 |---|---|
-| [Build-OSDeployUSB](Build-OSDeployUSB.md) | Creates a new bootable OSDeploy USB drive |
+| [New-OSDeployUSB](New-OSDeployUSB.md) | Creates a new bootable OSDeploy USB drive |
 | [Update-OSDeployUSB](Update-OSDeployUSB.md) | Updates an existing OSDeploy USB drive with new BootMedia |
 
 ## MDT Integration

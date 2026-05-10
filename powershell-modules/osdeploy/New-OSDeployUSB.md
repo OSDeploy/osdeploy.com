@@ -1,4 +1,4 @@
-# Build-OSDeployUSB
+# New-OSDeployUSB
 
 Creates a new bootable OSDeploy USB drive from an OSDeployCore BootImage build.
 
@@ -27,7 +27,7 @@ This function clears and repartitions the selected USB disk. All existing data o
 ## Syntax
 
 ```powershell
-Build-OSDeployUSB [-BootLabel <String>] [-DataLabel <String>]
+New-OSDeployUSB [-BootLabel <String>] [-DataLabel <String>]
 ```
 
 ## Parameters
@@ -41,10 +41,10 @@ Build-OSDeployUSB [-BootLabel <String>] [-DataLabel <String>]
 
 ```powershell
 # Create a new OSDeploy USB using default partition labels
-Build-OSDeployUSB
+New-OSDeployUSB
 ```
 
 ```powershell
 # Create a new OSDeploy USB with custom partition labels
-Build-OSDeployUSB -BootLabel 'OSDEPLOY' -DataLabel 'OSD-DATA'
+New-OSDeployUSB -BootLabel 'OSDEPLOY' -DataLabel 'OSD-DATA'
 ```

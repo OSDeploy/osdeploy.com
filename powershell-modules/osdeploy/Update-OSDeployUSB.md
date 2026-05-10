@@ -6,7 +6,7 @@ Updates an existing OSDeploy USB drive with new BootMedia from an OSDeployCore B
 |----------|--------------------------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                                   |
 | Platform | Windows 10 or later (amd64 / arm64)                                                       |
-| Requires | Run as Administrator, a completed BootImage build, a USB drive previously created by `Build-OSDeployUSB` |
+| Requires | Run as Administrator, a completed BootImage build, a USB drive previously created by `New-OSDeployUSB` |
 
 ## Description
 
@@ -18,7 +18,7 @@ Refreshes the BootMedia files on one or more existing OSDeploy USB drives withou
 - Copies the selected media to each matching USB volume using `robocopy`
 - Writes a `BootMedia.json` file to each updated volume
 
-No partitioning or formatting is performed. Use `Build-OSDeployUSB` to create a new bootable USB drive.
+No partitioning or formatting is performed. Use `New-OSDeployUSB` to create a new bootable USB drive.
 
 ## Syntax
 

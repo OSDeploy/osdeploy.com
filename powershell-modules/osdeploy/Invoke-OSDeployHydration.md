@@ -1,4 +1,4 @@
-# Build-OSDeployHydra
+# Invoke-OSDeployHydration
 
 Runs the complete OSDeploy hydration workflow end-to-end on a supported Windows 11 machine.
 
@@ -22,7 +22,7 @@ Without `-Force`, interactive pickers (Out-GridView) are shown at each step. Wit
 ## Syntax
 
 ```powershell
-Build-OSDeployHydra [-Force] [-WhatIf] [-Confirm]
+Invoke-OSDeployHydration [-Force] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
@@ -35,10 +35,10 @@ Build-OSDeployHydra [-Force] [-WhatIf] [-Confirm]
 
 ```powershell
 # Run the full hydration workflow with interactive pickers at each step
-Build-OSDeployHydra
+Invoke-OSDeployHydration
 ```
 
 ```powershell
 # Run the full hydration workflow non-interactively
-Build-OSDeployHydra -Force
+Invoke-OSDeployHydration -Force
 ```
