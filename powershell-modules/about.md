@@ -1,4 +1,4 @@
-# PowerShell Modules
+# About
 
 Three PowerShell modules support OSDeploy workflows. Each targets a different execution context — a full Windows OS build machine, WinPE, or both.
 
@@ -25,6 +25,6 @@ For new OSDCloud deployments, use the **OSDCloud** module. The OSDCloud function
 
 ## In This Section
 
-* [OSDeploy Module](../powershell-modules/psmodules.md) — Install the OSDeploy, OSDCloud, and OSD modules
-* [OSDCloud Module](../powershell-modules/osdcloud-module.md) — Current, recommended module for OSDCloud deployments in WinPE
-* [OSD Module](../powershell-modules/osd-module.md) — Legacy module; maintains OSDCloud v1 and WinPE deployment support
+* [OSDeploy Module](osdeploy/) — Install the OSDeploy, OSDCloud, and OSD modules
+* [OSDCloud Module](osdcloud-module.md) — Current, recommended module for OSDCloud deployments in WinPE
+* [OSD Module](osd-module.md) — Legacy module; maintains OSDCloud v1 and WinPE deployment support
