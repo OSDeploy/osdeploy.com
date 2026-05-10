@@ -25,12 +25,28 @@
 * [Developer Tools](core-components/developer-tools/README.md)
   * [Git for Windows](core-components/developer-tools/git.md)
   * [Visual Studio Code](core-components/developer-tools/vscode.md)
+* [Utilities](core-components/utilities/README.md)
+  * [7-Zip](core-components/utilities/7zip.md)
 
 ## PowerShell Modules
 
 * [About](powershell-modules/about.md)
 * [OSDeploy Module](powershell-modules/osdeploy/README.md)
   * [Functions](powershell-modules/osdeploy/functions.md)
+  * [Build-OSDeployBootMedia](powershell-modules/osdeploy/Build-OSDeployBootMedia.md)
+  * [Build-OSDeployHydra](powershell-modules/osdeploy/Build-OSDeployHydra.md)
+  * [Build-OSDeployUSB](powershell-modules/osdeploy/Build-OSDeployUSB.md)
+  * [Get-OSDeployModulePath](powershell-modules/osdeploy/Get-OSDeployModulePath.md)
+  * [Get-OSDeployModuleVersion](powershell-modules/osdeploy/Get-OSDeployModuleVersion.md)
+  * [Get-OSDeployWinPEDrivers](powershell-modules/osdeploy/Get-OSDeployWinPEDrivers.md)
+  * [Import-OSDeployOS](powershell-modules/osdeploy/Import-OSDeployOS.md)
+  * [Install-OSDeployMDT](powershell-modules/osdeploy/Install-OSDeployMDT.md)
+  * [Install-OSDeploySoftware](powershell-modules/osdeploy/Install-OSDeploySoftware.md)
+  * [Invoke-OSDeployMDT](powershell-modules/osdeploy/Invoke-OSDeployMDT.md)
+  * [New-OSDeployHyperVM](powershell-modules/osdeploy/New-OSDeployHyperVM.md)
+  * [Update-OSDeployISO](powershell-modules/osdeploy/Update-OSDeployISO.md)
+  * [Update-OSDeployUSB](powershell-modules/osdeploy/Update-OSDeployUSB.md)
+  * [Update-OSDeployWinPEDrivers](powershell-modules/osdeploy/Update-OSDeployWinPEDrivers.md)
 * [OSDCloud Module](powershell-modules/osdcloud-module.md)
 * [OSD Module](powershell-modules/osd-module.md)
 

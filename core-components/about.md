@@ -16,8 +16,7 @@ OSDeploy runs on a Windows 11 workstation or server (amd64 or arm64) and uses th
 | Microsoft Deployment Toolkit | Legacy MDT integration workflows                             | Optional              | `Install-OSDeploySoftware` |
 | Hyper-V                      | Local VM creation for testing boot media                     | Optional              | `Install-OSDeploySoftware` |
 | Git for Windows              | Source control for scripts and configurations                | Optional              | `Install-OSDeploySoftware` |
-| Visual Studio Code           | Script authoring and editing                                 | Optional              | `Install-OSDeploySoftware` |
-
+| Visual Studio Code           | Script authoring and editing                                 | Optional              | `Install-OSDeploySoftware` || 7-Zip                        | Archive tool for extracting driver packs; injected into WinPE as a utility  | Optional              | `Install-OSDeploySoftware` |
 {% hint style="info" %}
 All components except PowerShell 7 and the PowerShell modules can be installed or downloaded using a single function: `Install-OSDeploySoftware`. Run it without parameters to list all available components and the command to install each one.
 {% endhint %}
@@ -31,3 +30,4 @@ All components except PowerShell 7 and the PowerShell modules can be installed o
 * [WinPE Drivers](winpe-drivers/) — Download vendor driver packs for injection into WinPE boot images
 * [Windows Components](windows-components/) — Enable optional Windows features such as Hyper-V
 * [Developer Tools](developer-tools/) — Optional tools for authoring and customizing OSDeploy workflows
+* [Utilities](utilities/) — Additional tools such as 7-Zip used by OSDeploy during boot image creation

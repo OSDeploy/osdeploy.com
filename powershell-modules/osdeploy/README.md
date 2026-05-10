@@ -14,6 +14,8 @@ The **OSDeploy** module is used on **Windows 11 25H2** to create WinPE boot imag
 Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 ```
 
+See the [Functions](functions.md) page for the full list of available commands, or navigate directly to any function reference page in the sidebar.
+
 ***
 
 ## OSDCloud

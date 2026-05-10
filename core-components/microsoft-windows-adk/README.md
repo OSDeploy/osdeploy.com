@@ -8,7 +8,7 @@ The Windows ADK is Microsoft's toolkit for creating and customizing Windows Prei
 | Current version | 10.1.26100.x (Windows 11 26H1) |
 | Architecture | amd64 / arm64 |
 | Platform | Windows 11 |
-| Required by | `Build-OSDeployBootMedia`, `Update-OSDeployBootMedia` |
+| Required by | `Build-OSDeployBootMedia`, `Update-OSDeployISO` |
 
 {% embed url="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install" %}
 {% endembed %}

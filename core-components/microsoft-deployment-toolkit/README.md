@@ -15,7 +15,7 @@ Microsoft Deployment Toolkit has been officially retired by Microsoft. Install i
 | Architecture | x64 |
 | Platform | Windows |
 | Status | Retired — no new releases |
-| Required by | `Enable-OSDeployMDT`, `Invoke-OSDeployMDTHook` (OSDeployMDT workflows) |
+| Required by | `Install-OSDeployMDT`, `Invoke-OSDeployMDT` |
 
 {% embed url="https://learn.microsoft.com/en-us/intune/configmgr/mdt/" %}
 {% endembed %}
@@ -28,8 +28,8 @@ OSDeploy's OSDeployMDT integration targets shops that already run MDT deployment
 
 ## Why OSDeploy Requires MDT
 
-- `Enable-OSDeployMDT` configures and extends an existing MDT deployment share
-- `Invoke-OSDeployMDTHook` calls MDT task sequence steps from within OSDeploy workflows
+- `Install-OSDeployMDT` configures and extends an existing MDT deployment share
+- `Invoke-OSDeployMDT` runs automatically as the MDT LiteTouchPE exit script on every Update Deployment Share
 - MDT's `Microsoft.BDD.TaskSequencer` COM objects are used for task sequence orchestration
 - Required only for MDT integration features — not needed for standalone WinPE or OSDCloud deployments
 
