@@ -32,7 +32,6 @@
 
 * [About](powershell-modules/about.md)
 * [OSDeploy Module](powershell-modules/osdeploy/README.md)
-  * [Functions](powershell-modules/osdeploy/functions.md)
   * [Build-OSDeployBootMedia](powershell-modules/osdeploy/Build-OSDeployBootMedia.md)
   * [Invoke-OSDeployHydration](powershell-modules/osdeploy/Invoke-OSDeployHydration.md)
   * [New-OSDeployUSB](powershell-modules/osdeploy/New-OSDeployUSB.md)

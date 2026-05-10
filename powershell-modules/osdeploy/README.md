@@ -18,24 +18,55 @@ See the [Functions](functions.md) page for the full list of available commands, 
 
 ***
 
-## OSDCloud
+## Functions
 
-The **OSDCloud** module is used **in WinPE** to deploy Windows 11 to a device. This is the current, recommended module for all OSDCloud deployments.
+The OSDeploy module (version 26.5.1.1) exports 14 public functions across six functional areas.
 
-```powershell
-Install-Module -Name OSDCloud -Force -SkipPublisherCheck
-```
+### Module Utilities
 
-***
+| Function | Description |
+|---|---|
+| [Get-OSDeployModulePath](Get-OSDeployModulePath.md) | Returns the file system path to the OSDeploy module root directory |
+| [Get-OSDeployModuleVersion](Get-OSDeployModuleVersion.md) | Returns the currently loaded OSDeploy module version |
 
-## OSD
+### BootMedia
 
-The **OSD** module is used **in WinPE** to deploy Windows 11. It also supports the older OSDCloud implementation, known as OSDCloud v1 (legacy).
+| Function | Description |
+|---|---|
+| [Build-OSDeployBootMedia](Build-OSDeployBootMedia.md) | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
+| [Invoke-OSDeployHydration](Invoke-OSDeployHydration.md) | Runs the full OSDeploy hydration workflow end-to-end |
+| [Update-OSDeployISO](Update-OSDeployISO.md) | Rebuilds bootable ISO files for an existing BootImage build |
+| [Import-OSDeployOS](Import-OSDeployOS.md) | Imports Windows OS images from mounted installation media to OSDeployCore |
 
-```powershell
-Install-Module -Name OSD -Force -SkipPublisherCheck
-```
+### MDT Integration
 
-{% hint style="warning" %}
-For OSDCloud functionality, use the **OSDCloud** module instead of OSD. The OSDCloud module supersedes the OSDCloud v1 implementation that existed in OSD. The OSD module is maintained, but the OSDCloud module is preferred.
-{% endhint %}
+| Function | Description |
+|---|---|
+| [Install-OSDeployMDT](Install-OSDeployMDT.md) | Initializes an MDT Deployment Share for OSDeploy |
+| [Invoke-OSDeployMDT](Invoke-OSDeployMDT.md) | MDT LiteTouchPE exit script — runs on every Update Deployment Share |
+
+### Software Installation
+
+| Function | Description |
+|---|---|
+| [Install-OSDeploySoftware](Install-OSDeploySoftware.md) | Installs OS deployment prerequisite software on Windows |
+
+### USB
+
+| Function | Description |
+|---|---|
+| [New-OSDeployUSB](New-OSDeployUSB.md) | Creates a new bootable OSDeploy USB drive |
+| [Update-OSDeployUSB](Update-OSDeployUSB.md) | Updates an existing OSDeploy USB drive with new BootMedia |
+
+### Virtual Machines
+
+| Function | Description |
+|---|---|
+| [New-OSDeployHyperVM](New-OSDeployHyperVM.md) | Creates a Hyper-V VM pre-configured for OSDeploy testing |
+
+### WinPE Drivers
+
+| Function | Description |
+|---|---|
+| [Get-OSDeployWinPEDrivers](Get-OSDeployWinPEDrivers.md) | Returns WinPE driver folders from the OSDeployCore library |
+| [Update-OSDeployWinPEDrivers](Update-OSDeployWinPEDrivers.md) | Downloads and expands WinPE driver packages into OSDeployCore |
