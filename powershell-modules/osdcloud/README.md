@@ -1,4 +1,4 @@
-# OSDCloud Module
+# OSDeploy PowerShell Module
 
 The OSDCloud module is the current, recommended PowerShell module for deploying Windows 11 from WinPE using cloud-based OS images and vendor driver packs.
 
@@ -43,3 +43,48 @@ Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 * [OSDCloud on PowerShell Gallery](https://www.powershellgallery.com/packages/OSDCloud/)
 * [OSD Module](osd-module.md) — Legacy module; OSDCloud v1
 * [OSDeploy Module](osdeploy/) — Boot image creation on Windows 11
+
+***
+
+## Functions
+
+The OSDCloud module exports public functions across two environments: the full Windows OS and WinPE.
+
+### Module Utilities
+
+| Function | Description |
+|---|---|
+| [Get-OSDCloudModulePath](Get-OSDCloudModulePath.md) | Returns the file system path to the OSDCloud module root directory |
+| [Get-OSDCloudModuleVersion](Get-OSDCloudModuleVersion.md) | Returns the currently loaded OSDCloud module version |
+
+### Deployment
+
+| Function | Description |
+|---|---|
+| [Deploy-OSDCloud](Deploy-OSDCloud.md) | Starts an OSDCloud OS deployment — launches the graphical UX or runs the CLI workflow immediately |
+
+### Device Information
+
+| Function | Description |
+|---|---|
+| [Show-OSDCloudDeviceInfo](Show-OSDCloudDeviceInfo.md) | Displays comprehensive WinPE device and hardware information during OS deployment startup |
+
+### Tools
+
+| Function | Description |
+|---|---|
+| [Start-OSDCloudExplorer](Start-OSDCloudExplorer.md) | Opens a graphical file browser for WinPE and WinRE environments |
+
+### WinPE Startup
+
+These functions run only inside WinPE (`SystemDrive == X:`).
+
+| Function | Description |
+|---|---|
+| [Invoke-WinPEStartup](Invoke-WinPEStartup.md) | Runs the full OSDCloud WinPE startup workflow from a single entry point |
+| [Invoke-WinPEStartupManager](Invoke-WinPEStartupManager.md) | Invokes a WinPE startup utility action by Id |
+| [Show-WinPEStartupDeviceErrors](Show-WinPEStartupDeviceErrors.md) | Displays WinPE Plug and Play devices with non-OK status |
+| [Show-WinPEStartupDevices](Show-WinPEStartupDevices.md) | Displays the full WinPE Plug and Play device inventory |
+| [Show-WinPEStartupIpconfig](Show-WinPEStartupIpconfig.md) | Displays IP configuration details in WinPE |
+| [Show-WinPEStartupWifi](Show-WinPEStartupWifi.md) | Establishes and validates Wi-Fi connectivity in WinPE |
+| [Update-WinPEStartupModule](Update-WinPEStartupModule.md) | Installs or updates a PowerShell module from the PowerShell Gallery in WinPE |

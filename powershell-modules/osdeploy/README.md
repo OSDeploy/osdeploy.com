@@ -1,20 +1,35 @@
-# PowerShell Modules
-
-The following PowerShell modules are published to the [PowerShell Gallery](https://www.powershellgallery.com/) and are required for OSDeploy workflows. Install them before proceeding with any OSDeploy, OSDCloud, or MDT-based tasks.
-
-Always use `-SkipPublisherCheck` when installing these modules. `-Force` allows reinstall or upgrade without a confirmation prompt.
-
-***
-
-## OSDeploy
+# OSDeploy PowerShell Module
 
 The **OSDeploy** module is used on **Windows 11 25H2** to create WinPE boot images. It runs in a full Windows OS environment — not in WinPE.
+
+| Property     | Value                                                                                           |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| Publisher    | Community / David Segura                                                                        |
+| Gallery      | [powershellgallery.com/packages/OSDeploy](https://www.powershellgallery.com/packages/OSDeploy/) |
+| Platform     | Windows 11 25H2                                                                                 |
+| Architecture | amd64 / arm64                                                                                   |
+| Status       | Current / Recommended                                                                           |
+| Required by  | OSDeploy deployment workflows                                                                   |
+
+{% embed url="https://www.powershellgallery.com/packages/OSDeploy/" %}
+
+## Overview
+
+The OSDeploy module is the build-time counterpart to OSDCloud. It runs on a full **Windows 11 25H2 or later** installation — not inside WinPE — and is responsible for creating and customizing WinPE boot images. The module automates the entire boot image pipeline: pulling in Windows ADK optional components and language packs, injecting WinPE drivers, embedding the OSDCloud PowerShell module, adding WinPE apps and console configuration, and generating bootable ISO files and USB drives.
+
+Use `Invoke-OSDeployHydration` for a fully automated end-to-end build, or use `Build-OSDeployBootMedia` directly for fine-grained control over individual boot image builds.
+
+## Install
 
 ```powershell
 Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 ```
 
-See the [Functions](functions.md) page for the full list of available commands, or navigate directly to any function reference page in the sidebar.
+***
+
+## Related
+
+* [OSDeploy on PowerShell Gallery](https://www.powershellgallery.com/packages/OSDeploy/)
 
 ***
 

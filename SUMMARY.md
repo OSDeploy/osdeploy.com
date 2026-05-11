@@ -46,8 +46,20 @@
   * [Update-OSDeployISO](powershell-modules/osdeploy/Update-OSDeployISO.md)
   * [Update-OSDeployUSB](powershell-modules/osdeploy/Update-OSDeployUSB.md)
   * [Update-OSDeployWinPEDrivers](powershell-modules/osdeploy/Update-OSDeployWinPEDrivers.md)
-* [OSDCloud Module](powershell-modules/osdcloud-module.md)
-* [OSD Module](powershell-modules/osd-module.md)
+* [OSDCloud Module](powershell-modules/osdcloud/README.md)
+  * [Deploy-OSDCloud](powershell-modules/osdcloud/Deploy-OSDCloud.md)
+  * [Get-OSDCloudModulePath](powershell-modules/osdcloud/Get-OSDCloudModulePath.md)
+  * [Get-OSDCloudModuleVersion](powershell-modules/osdcloud/Get-OSDCloudModuleVersion.md)
+  * [Show-OSDCloudDeviceInfo](powershell-modules/osdcloud/Show-OSDCloudDeviceInfo.md)
+  * [Start-OSDCloudExplorer](powershell-modules/osdcloud/Start-OSDCloudExplorer.md)
+  * [Invoke-WinPEStartup](powershell-modules/osdcloud/Invoke-WinPEStartup.md)
+  * [Invoke-WinPEStartupManager](powershell-modules/osdcloud/Invoke-WinPEStartupManager.md)
+  * [Show-WinPEStartupDeviceErrors](powershell-modules/osdcloud/Show-WinPEStartupDeviceErrors.md)
+  * [Show-WinPEStartupDevices](powershell-modules/osdcloud/Show-WinPEStartupDevices.md)
+  * [Show-WinPEStartupIpconfig](powershell-modules/osdcloud/Show-WinPEStartupIpconfig.md)
+  * [Show-WinPEStartupWifi](powershell-modules/osdcloud/Show-WinPEStartupWifi.md)
+  * [Update-WinPEStartupModule](powershell-modules/osdcloud/Update-WinPEStartupModule.md)
+* [OSD Module](powershell-modules/osd/README.md)
 
 ## OSDeploy MDT Integration
 
