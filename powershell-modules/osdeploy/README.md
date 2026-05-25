@@ -17,7 +17,7 @@ The **OSDeploy** module is used on **Windows 11 25H2** to create WinPE boot imag
 
 The OSDeploy module is the build-time counterpart to OSDCloud. It runs on a full **Windows 11 25H2 or later** installation — not inside WinPE — and is responsible for creating and customizing WinPE boot images. The module automates the entire boot image pipeline: pulling in Windows ADK optional components and language packs, injecting WinPE drivers, embedding the OSDCloud PowerShell module, adding WinPE apps and console configuration, and generating bootable ISO files and USB drives.
 
-Use `Invoke-OSDeployHydration` for a fully automated end-to-end build, or use `Build-OSDeployBootMedia` directly for fine-grained control over individual boot image builds.
+Use `Invoke-OSDeployHydration` for a fully automated end-to-end build, or use `Build-OSDeployBoot` directly for fine-grained control over individual boot image builds.
 
 ## Install
 
@@ -35,7 +35,7 @@ Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 
 ## Functions
 
-The OSDeploy module (version 26.5.1.1) exports 14 public functions across six functional areas.
+The OSDeploy module (version 26.5.1.1) exports 17 public functions across seven functional areas.
 
 ### Module Utilities
 
@@ -44,14 +44,22 @@ The OSDeploy module (version 26.5.1.1) exports 14 public functions across six fu
 | [Get-OSDeployModulePath](Get-OSDeployModulePath.md) | Returns the file system path to the OSDeploy module root directory |
 | [Get-OSDeployModuleVersion](Get-OSDeployModuleVersion.md) | Returns the currently loaded OSDeploy module version |
 
+### OSDeployCore
+
+| Function | Description |
+|---|---|
+| [Update-OSDeployCore](Update-OSDeployCore.md) | Updates all OSDeployCore assets: ESD files, OS images, and WinPE driver packages |
+| [Update-OSDeployCoreESD](Update-OSDeployCoreESD.md) | Downloads Windows Enterprise ESD files from the latest OSDeploy OS catalog |
+| [Update-OSDeployCoreOS](Update-OSDeployCoreOS.md) | Imports Windows OS images from cached Enterprise ESD files to OSDeployCore |
+
 ### BootMedia
 
 | Function | Description |
 |---|---|
-| [Build-OSDeployBootMedia](Build-OSDeployBootMedia.md) | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
+| [Build-OSDeployBoot](Build-OSDeployBoot.md) | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
 | [Invoke-OSDeployHydration](Invoke-OSDeployHydration.md) | Runs the full OSDeploy hydration workflow end-to-end |
-| [Update-OSDeployISO](Update-OSDeployISO.md) | Rebuilds bootable ISO files for an existing BootImage build |
-| [Import-OSDeployOS](Import-OSDeployOS.md) | Imports Windows OS images from mounted installation media to OSDeployCore |
+| [Update-OSDeployBootISO](Update-OSDeployBootISO.md) | Rebuilds bootable ISO files for an existing BootImage build |
+| [Import-OSDeployCoreOS](Import-OSDeployCoreOS.md) | Imports Windows OS images from mounted installation media to OSDeployCore |
 
 ### MDT Integration
 
@@ -70,8 +78,8 @@ The OSDeploy module (version 26.5.1.1) exports 14 public functions across six fu
 
 | Function | Description |
 |---|---|
-| [New-OSDeployUSB](New-OSDeployUSB.md) | Creates a new bootable OSDeploy USB drive |
-| [Update-OSDeployUSB](Update-OSDeployUSB.md) | Updates an existing OSDeploy USB drive with new BootMedia |
+| [New-OSDeployBootUSB](New-OSDeployBootUSB.md) | Creates a new bootable OSDeploy USB drive |
+| [Update-OSDeployBootUSB](Update-OSDeployBootUSB.md) | Updates an existing OSDeploy USB drive with new BootMedia |
 
 ### Virtual Machines
 
@@ -83,5 +91,5 @@ The OSDeploy module (version 26.5.1.1) exports 14 public functions across six fu
 
 | Function | Description |
 |---|---|
-| [Get-OSDeployWinPEDrivers](Get-OSDeployWinPEDrivers.md) | Returns WinPE driver folders from the OSDeployCore library |
-| [Update-OSDeployWinPEDrivers](Update-OSDeployWinPEDrivers.md) | Downloads and expands WinPE driver packages into OSDeployCore |
+| [Get-OSDeployCoreDrivers](Get-OSDeployCoreDrivers.md) | Returns WinPE driver folders from the OSDeployCore library |
+| [Update-OSDeployCoreDrivers](Update-OSDeployCoreDrivers.md) | Downloads and expands WinPE driver packages into OSDeployCore |

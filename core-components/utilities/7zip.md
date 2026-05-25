@@ -3,7 +3,7 @@
 7-Zip is an open-source archive utility used by OSDeploy in two roles: it is installed on the Windows 11 build machine via winget, and a standalone executable (`7zr.exe`) is injected directly into WinPE so that it is available at deployment time.
 
 {% hint style="info" %}
-7-Zip is optional for standalone `Build-OSDeployBootMedia` workflows but is injected into WinPE automatically when running `Invoke-OSDeployMDT` at the `WIM` stage.
+7-Zip is optional for standalone `Build-OSDeployBoot` workflows but is injected into WinPE automatically when running `Invoke-OSDeployMDT` at the `WIM` stage.
 {% endhint %}
 
 | Property     | Value                                                        |

@@ -6,7 +6,7 @@ WinPE driver packs are vendor-provided archives of hardware drivers that OSDeplo
 |---|---|
 | Architecture | amd64 (all vendor packs) |
 | Platform | WinPE |
-| Required by | `Build-OSDeployBootMedia`, `Update-OSDeployBootMedia` |
+| Required by | `Build-OSDeployBoot`, `Update-OSDeployBoot` |
 | Managed by | `Update-OSDeployWinPEDrivers` |
 
 ## Overview
@@ -19,7 +19,7 @@ All vendor-provided WinPE driver packs target the **amd64** architecture. WiFi d
 
 - WinPE boots without NIC or storage drivers on most modern hardware without vendor packs
 - `Update-OSDeployWinPEDrivers` downloads and expands driver packs into the OSDeployCore repository
-- `Build-OSDeployBootMedia` injects drivers from the repository into the WinPE image at build time
+- `Build-OSDeployBoot` injects drivers from the repository into the WinPE image at build time
 - `Get-OSDeployWinPEDrivers` returns the set of driver folders currently in the library
 
 {% hint style="info" %}
@@ -33,4 +33,3 @@ WiFi drivers are excluded automatically when no imported OS sources are present.
 - [Lenovo](lenovo.md) — Lenovo WinPE driver pack (amd64)
 - [Intel Ethernet](intel-ethernet.md) — Intel Ethernet adapter complete driver pack (amd64)
 - [Intel Wireless](intel-wireless.md) — Intel ProSet Wireless IT administrator driver pack (amd64)
-- [Microsoft Features](microsoft-features.md) — Microsoft Windows Client LOF Packages ISO: Ethernet and WiFi drivers (amd64)

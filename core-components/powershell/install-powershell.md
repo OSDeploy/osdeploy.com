@@ -21,7 +21,7 @@ Use the **MSI package** for all system and enterprise deployment scenarios.
 
 ## Download the MSI
 
-The following snippet detects the system architecture, creates the download directory, and saves the installer to `$env:ProgramData\OSDeployCore\Software\Microsoft.PowerShell`.
+The following snippet detects the system architecture, creates the download directory, and saves the installer to `$env:ProgramData\OSDeployCore\software\Microsoft.PowerShell`.
 
 `curl.exe` is used for downloads — it is faster and more reliable than `Invoke-WebRequest` in Windows system contexts.
 
@@ -32,7 +32,7 @@ $Version        = '7.6.1'
 $Arch           = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'arm64' } else { 'x64' }
 $MsiFileName    = "PowerShell-$Version-win-$Arch.msi"
 $MsiUrl         = "https://github.com/PowerShell/PowerShell/releases/download/v$Version/$MsiFileName"
-$DownloadFolder = "$env:ProgramData\OSDeployCore\Software\Microsoft.PowerShell"
+$DownloadFolder = "$env:ProgramData\OSDeployCore\software\Microsoft.PowerShell"
 $MsiPath        = Join-Path $DownloadFolder $MsiFileName
 
 if (-not (Test-Path $DownloadFolder)) {
@@ -50,7 +50,7 @@ The following snippet silently installs the MSI with all recommended options ena
 # Update $Version to match the version you downloaded
 $Version  = '7.6.1'
 $Arch     = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'arm64' } else { 'x64' }
-$MsiPath  = "$env:ProgramData\OSDeployCore\Software\Microsoft.PowerShell\PowerShell-$Version-win-$Arch.msi"
+$MsiPath  = "$env:ProgramData\OSDeployCore\software\Microsoft.PowerShell\PowerShell-$Version-win-$Arch.msi"
 
 $msiParams = @(
     "/package `"$MsiPath`""

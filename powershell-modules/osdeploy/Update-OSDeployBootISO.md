@@ -1,4 +1,4 @@
-# Update-OSDeployISO
+# Update-OSDeployBootISO
 
 Rebuilds the bootable ISO files for a selected OSDeployCore BootImage build.
 
@@ -10,7 +10,7 @@ Rebuilds the bootable ISO files for a selected OSDeployCore BootImage build.
 
 ## Description
 
-Regenerates the ISO files (`bootmedia.iso` and optionally `bootmedia_ca2023.iso`) for a selected completed BootImage from `%ProgramData%\OSDeployCore\boot-media`. The existing `bootmedia` directory content is used as-is — no DISM mount or WIM modification is performed.
+Regenerates the ISO files (`bootmedia.iso` and optionally `bootmedia_ca2023.iso`) for a selected completed BootImage from `%ProgramData%\OSDeployCore\boot`. The existing `bootmedia` directory content is used as-is — no DISM mount or WIM modification is performed.
 
 The function:
 
@@ -19,12 +19,12 @@ The function:
 - Uses the installed ADK's `oscdimg.exe` to rebuild the ISO(s)
 - Places the resulting ISOs in the BootImage's root directory
 
-Use this function when you need to regenerate an ISO from existing bootmedia files without rebuilding the entire WinPE image. Use `Build-OSDeployBootMedia` to perform a full rebuild.
+Use this function when you need to regenerate an ISO from existing bootmedia files without rebuilding the entire WinPE image. Use `Build-OSDeployBoot` to perform a full rebuild.
 
 ## Syntax
 
 ```powershell
-Update-OSDeployISO
+Update-OSDeployBootISO
 ```
 
 ## Parameters
@@ -35,5 +35,5 @@ This function has no parameters. The BootImage selection is made via an interact
 
 ```powershell
 # Prompt for a BootImage build selection and rebuild its ISO files
-Update-OSDeployISO
+Update-OSDeployBootISO
 ```

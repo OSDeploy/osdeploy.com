@@ -9,7 +9,7 @@ Installs the Windows Assessment and Deployment Kit version **10.1.26100.2454** (
 | Platform | Windows 11 |
 | ADK setup | `https://go.microsoft.com/fwlink/?linkid=2289980` |
 | WinPE add-on setup | `https://go.microsoft.com/fwlink/?linkid=2289981` |
-| Cache path | `C:\ProgramData\OSDeployCore\Software\Microsoft.WindowsADK_10.1.26100.2454\` |
+| Cache path | `C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454\` |
 
 {% embed url="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install" %}
 {% endembed %}
@@ -42,7 +42,7 @@ Install-OSDeploySoftware -Name 'adk-25h2' -Force
 Install-OSDeploySoftware -Name 'adk-25h2' -DownloadOnly -Force
 ```
 
-Installers are cached to `C:\ProgramData\OSDeployCore\Software\Microsoft.WindowsADK_10.1.26100.2454\` and reused on subsequent runs.
+Installers are cached to `C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454\` and reused on subsequent runs.
 
 {% hint style="info" %}
 Requires PowerShell 7.6 or later running as Administrator. `curl.exe` must be available in `PATH` (included with Windows 10 1803 and later). `winget` is not used for ADK installation.
@@ -57,7 +57,7 @@ To install the ADK manually, download both setup executables and run them silent
 **Download ADK setup and WinPE add-on setup:**
 
 ```powershell
-$DownloadPath = "$env:ProgramData\OSDeployCore\Software\Microsoft.WindowsADK_10.1.26100.2454"
+$DownloadPath = "$env:ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454"
 New-Item -Path $DownloadPath -ItemType Directory -Force | Out-Null
 
 curl.exe --location --output "$DownloadPath\adksetup.exe" --url 'https://go.microsoft.com/fwlink/?linkid=2289980'

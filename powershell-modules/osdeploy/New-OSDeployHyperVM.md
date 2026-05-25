@@ -11,7 +11,7 @@ Creates a Hyper-V virtual machine pre-configured for OSDeploy testing.
 
 ## Description
 
-Creates a new Hyper-V VM with configurable generation, memory, processor count, virtual disk size, display resolution, virtual switch, and Secure Boot template. If `-ISO` is provided, the ISO is mounted to the VM's DVD drive. If `-ISO` is omitted, the function searches for the latest `bootmedia.iso` under `$env:ProgramData\OSDeployCore\boot-media\` and mounts it automatically. If no ISO is found, the VM is created with an empty DVD drive.
+Creates a new Hyper-V VM with configurable generation, memory, processor count, virtual disk size, display resolution, virtual switch, and Secure Boot template. If `-ISO` is provided, the ISO is mounted to the VM's DVD drive. If `-ISO` is omitted, the function searches for the latest `bootmedia.iso` under `$env:ProgramData\OSDeployCore\boot\` and mounts it automatically. If no ISO is found, the VM is created with an empty DVD drive.
 
 ## Syntax
 

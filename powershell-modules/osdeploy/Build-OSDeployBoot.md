@@ -1,4 +1,4 @@
-# Build-OSDeployBootMedia
+# Build-OSDeployBoot
 
 Builds a customized WinPE boot image from a WinRE or ADK WinPE source.
 
@@ -7,11 +7,11 @@ Builds a customized WinPE boot image from a WinRE or ADK WinPE source.
 | Module       | OSDeploy                                                                     |
 | Platform     | Windows 11 25H2+ (amd64 / arm64)                                            |
 | Requires     | PowerShell 7.6, Windows ADK, OSDCloud module 26.4.17.1+, Run as Administrator |
-| Output path  | `%ProgramData%\OSDeployCore\boot-media`                                      |
+| Output path  | `%ProgramData%\OSDeployCore\boot`                                      |
 
 ## Description
 
-Creates a bootable WinPE image from an imported WinRE image or the Windows ADK WinPE. The function applies ADK optional components, WinPE drivers, PowerShell module updates, WinPE applications, console settings, wallpaper, and user scripts. Output is written to `%ProgramData%\OSDeployCore\boot-media`.
+Creates a bootable WinPE image from an imported WinRE image or the Windows ADK WinPE. The function applies ADK optional components, WinPE drivers, PowerShell module updates, WinPE applications, console settings, wallpaper, and user scripts. Output is written to `%ProgramData%\OSDeployCore\boot`.
 
 By default the function selects an imported WinRE source. Use `-UseAdkWinPE` to build from the ADK WinPE instead.
 
@@ -19,12 +19,12 @@ By default the function selects an imported WinRE source. Use `-UseAdkWinPE` to 
 
 ```powershell
 # Default parameter set — uses an imported WinRE source
-Build-OSDeployBootMedia -Name <String> [-Architecture <String>]
+Build-OSDeployBoot -Name <String> [-Architecture <String>]
     [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
     [-SetTimeZone <String>] [-SkipAdkPackages] [-UpdateUSB] [-WhatIf] [-Confirm]
 
 # ADK parameter set — uses the Windows ADK winpe.wim
-Build-OSDeployBootMedia -Name <String> -Architecture <String>
+Build-OSDeployBoot -Name <String> -Architecture <String>
     [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
     [-SetTimeZone <String>] [-SkipAdkPackages] [-UseAdkWinPE] [-UpdateUSB]
     [-WhatIf] [-Confirm]
@@ -48,15 +48,15 @@ Build-OSDeployBootMedia -Name <String> -Architecture <String>
 
 ```powershell
 # Build from an imported WinRE source with the default name
-Build-OSDeployBootMedia -Name 'MyPE'
+Build-OSDeployBoot -Name 'MyPE'
 ```
 
 ```powershell
 # Build from the ADK WinPE for amd64, skipping optional components
-Build-OSDeployBootMedia -Name 'TestBuild' -Architecture 'amd64' -UseAdkWinPE -SkipAdkPackages
+Build-OSDeployBoot -Name 'TestBuild' -Architecture 'amd64' -UseAdkWinPE -SkipAdkPackages
 ```
 
 ```powershell
 # Build for arm64 and copy to any connected USB-WinPE drive
-Build-OSDeployBootMedia -Name 'ARM64-PE' -Architecture 'arm64' -UpdateUSB
+Build-OSDeployBoot -Name 'ARM64-PE' -Architecture 'arm64' -UpdateUSB
 ```

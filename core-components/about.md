@@ -4,7 +4,7 @@ Core Components are the software tools and Windows features that must be in plac
 
 ## Overview
 
-OSDeploy runs on a Windows 11 workstation or server (amd64 or arm64) and uses these components at build time — not inside WinPE at deployment time. Some components are required for every workflow; others are needed only for specific tasks such as MDT integration, virtual machine testing, or script development. Use `Install-OSDeploySoftware` to install and manage all supported components from a single PowerShell command.
+OSDeploy runs on a Windows 11 workstation or server (amd64 or arm64) and uses these components at build time — not inside WinPE at deployment time. Some components are required for every workflow; others are needed only for specific tasks such as MDT integration, virtual machine testing, or script development. Use `Install-OSDeploySoftware` to install and manage all supported components from a single PowerShell command. Once the OSDeploy module is installed, run `Update-OSDeployCore` to download and cache all OSDeployCore assets — Windows Enterprise ESD files, OS images, and WinPE driver packages — before building boot images.
 
 | Component                    | Purpose                                                      | Required              | Install Method             |
 | ---------------------------- | ------------------------------------------------------------ | --------------------- | -------------------------- |

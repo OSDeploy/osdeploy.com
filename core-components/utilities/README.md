@@ -12,7 +12,7 @@ Use `Install-OSDeploySoftware` to install utilities. Run it without parameters t
 
 ## Overview
 
-Utilities complement the core ADK and driver workflows. Some utilities run only on the build machine (for example, to extract driver packs); others are injected into the WinPE image so they are available at deployment time. OSDeploy manages utility downloads and WinPE injection automatically during `Build-OSDeployBootMedia` and `Invoke-OSDeployMDT`.
+Utilities complement the core ADK and driver workflows. Some utilities run only on the build machine (for example, to extract driver packs); others are injected into the WinPE image so they are available at deployment time. OSDeploy manages utility downloads and WinPE injection automatically during `Build-OSDeployBoot` and `Invoke-OSDeployMDT`.
 
 ## In This Section
 

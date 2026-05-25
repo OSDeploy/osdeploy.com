@@ -1,13 +1,12 @@
-# Import-OSDeployOS
+# Import-OSDeployCoreOS
 
 Imports Windows OS images from mounted Windows installation media to OSDeployCore.
 
 | Property | Value                                                                                   |
 |----------|-----------------------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                                |
-| Platform | Windows 10 or later (amd64 / arm64)                                                    |
+| Platform | Windows 11 (amd64 / arm64)                                                             |
 | Requires | PowerShell 7.6, Run as Administrator, a mounted Windows installation ISO                |
-| Output   | `System.IO.DirectoryInfo`                                                               |
 
 ## Description
 
@@ -32,7 +31,7 @@ Mount the Windows installation ISO via File Explorer before running this functio
 ## Syntax
 
 ```powershell
-Import-OSDeployOS [-WhatIf] [-Confirm]
+Import-OSDeployCoreOS [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
@@ -43,10 +42,10 @@ This function has no named parameters. All selections are made via interactive O
 
 ```powershell
 # Scan for mounted Windows ISOs and import via interactive selection
-Import-OSDeployOS
+Import-OSDeployCoreOS
 ```
 
 ```powershell
 # Import with detailed verbose output showing each extraction step
-Import-OSDeployOS -Verbose
+Import-OSDeployCoreOS -Verbose
 ```

@@ -15,7 +15,7 @@ The **OSDeploy** module runs on a full Windows 11 OS to create WinPE boot images
 
 ## Why OSDeploy Requires These Modules
 
-* `OSDeploy` provides `Build-OSDeployBootMedia`, `Update-OSDeployBootMedia`, and all boot image build commands
+* `OSDeploy` provides `Build-OSDeployBoot`, `Update-OSDeployBoot`, and all boot image build commands
 * `OSDCloud` provides the current, recommended OSDCloud deployment commands used inside WinPE
 * `OSD` is maintained for existing environments that depend on OSDCloud v1; not required for new workflows
 

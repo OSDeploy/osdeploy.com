@@ -17,7 +17,7 @@ Lenovo provides WinPE driver packs for injecting Lenovo hardware drivers into Wi
 Lenovo publishes WinPE driver packs for ThinkPad, ThinkCentre, ThinkStation, and IdeaPad device families. Driver packs are distributed as self-extracting executables and target the WinPE environment for network and storage enablement.
 
 {% hint style="info" %}
-Lenovo WinPE drivers are available for manual download from the Lenovo support site. Automated download and injection via `Update-OSDeployWinPEDrivers` is not yet available for Lenovo. Download the pack manually and place the extracted drivers in a folder that `Build-OSDeployBootMedia` can reference.
+Lenovo WinPE drivers are not automatically downloaded by `Update-OSDeployCoreDrivers`. Download the pack manually from the Lenovo support site and extract the drivers to `C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers`. Once placed there, `Build-OSDeployBoot` will inject them automatically and `Get-OSDeployCoreDrivers` will include them in its output.
 {% endhint %}
 
 ---
@@ -28,10 +28,10 @@ Visit the Lenovo WinPE Driver Pack support page and download the pack for your t
 
 [https://support.lenovo.com/solutions/ht074984](https://support.lenovo.com/solutions/ht074984)
 
-Extract the downloaded package to your driver staging folder:
+Extract the downloaded package directly into the OSDRepo driver library:
 
 ```powershell
-$DestinationPath = 'C:\WinPEDrivers\Lenovo'
+$DestinationPath = 'C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\lenovo'
 New-Item -Path $DestinationPath -ItemType Directory -Force | Out-Null
 # Run the downloaded self-extractor with the extraction path argument
 & "$env:USERPROFILE\Downloads\LenovoWinPEDriverPack.exe" /VERYSILENT /DIR=$DestinationPath
@@ -41,10 +41,16 @@ New-Item -Path $DestinationPath -ItemType Directory -Force | Out-Null
 The extraction command varies by package. Check the Lenovo support page for the exact switches for the pack you downloaded.
 {% endhint %}
 
+Verify the drivers are visible to OSDeploy:
+
+```powershell
+Get-OSDeployCoreDrivers -Architecture amd64
+```
+
 ---
 
 ## Related
 
 - [Lenovo WinPE Driver Packs](https://support.lenovo.com/solutions/ht074984)
 - [WinPE Drivers overview](README.md)
-- [Get-OSDeployWinPEDrivers](https://docs.osdeploy.com)
+- [Get-OSDeployCoreDrivers](https://docs.osdeploy.com)

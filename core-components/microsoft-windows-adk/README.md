@@ -8,7 +8,7 @@ The Windows ADK is Microsoft's toolkit for creating and customizing Windows Prei
 | Current version | 10.1.26100.x (Windows 11 26H1) |
 | Architecture | amd64 / arm64 |
 | Platform | Windows 11 |
-| Required by | `Build-OSDeployBootMedia`, `Update-OSDeployISO` |
+| Required by | `Build-OSDeployBoot`, `Update-OSDeployBootISO` |
 
 {% embed url="https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install" %}
 {% endembed %}
@@ -27,7 +27,7 @@ OSDeploy supports the two most recent ADK releases that align with Windows 11 25
 - Required on the Windows 11 build machine — not used at deployment time in WinPE
 
 {% hint style="info" %}
-The ADK and its WinPE add-on must be the same version. Install them on the Windows 11 machine where you run `Build-OSDeployBootMedia` — not in WinPE itself.
+The ADK and its WinPE add-on must be the same version. Install them on the Windows 11 machine where you run `Build-OSDeployBoot` — not in WinPE itself.
 {% endhint %}
 
 ## In This Section

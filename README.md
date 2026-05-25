@@ -66,7 +66,7 @@ Import-OSDeployOS
 Build a fully customized WinPE boot image: ADK optional components, OSDCloud module, WinPE apps (AzCopy, 7-Zip, curl, Sysinternals), wallpaper, console settings, and an exportable ISO — all in one command.
 
 ```powershell
-Build-OSDeployBootMedia
+Build-OSDeployBoot
 ```
 {% endstep %}
 
@@ -107,7 +107,7 @@ Deploy-OSDCloud
 
 ### Boot Image Building
 
-`Build-OSDeployBootMedia` orchestrates a multi-phase WinPE image build:
+`Build-OSDeployBoot` orchestrates a multi-phase WinPE image build:
 
 * Mounts a WinRE or ADK WinPE source image
 * Injects **22 ADK optional components** (PowerShell, .NET, WMI, DISM, Secure Boot cmdlets, and more)
@@ -177,8 +177,8 @@ The OSDeploy module (v0.1.0 preview) exports 15 public functions across six area
 
 | Function                  | Description                                                           |
 | ------------------------- | --------------------------------------------------------------------- |
-| `Build-OSDeployBootMedia` | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
-| `Update-OSDeployISO`      | Rebuilds bootable ISO files for an existing BootImage build           |
+| `Build-OSDeployBoot` | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
+| `Update-OSDeployBootISO`      | Rebuilds bootable ISO files for an existing BootImage build           |
 | `Import-OSDeployOS`       | Imports Windows OS images from installation media into OSDeployCore   |
 | `New-OSDeployUSB`         | Creates a new bootable OSDeploy USB drive                             |
 | `Update-OSDeployUSB`      | Updates an existing OSDeploy USB drive with new BootMedia             |
@@ -218,7 +218,7 @@ The OSDeploy module (v0.1.0 preview) exports 15 public functions across six area
 * **Core:** `Get-OSDeployModulePath`, `Get-OSDeployModuleVersion`
 * **Software:** `Install-OSDeploySoftware` — ADK 25H2/26H1, MDT, pwsh, Git, VS Code, Hyper-V
 * **WinPE Drivers:** `Get-OSDeployWinPEDrivers`, `Update-OSDeployWinPEDrivers`
-* **Boot Media:** `Import-OSDeployOS`, `Build-OSDeployBootMedia`, `New-OSDeployUSB`, `Update-OSDeployISO`, `Update-OSDeployUSB`
+* **Boot Media:** `Import-OSDeployOS`, `Build-OSDeployBoot`, `New-OSDeployUSB`, `Update-OSDeployBootISO`, `Update-OSDeployUSB`
 * **MDT:** `Install-OSDeployMDT`, `Invoke-OSDeployMDT`
 * **Hyper-V:** `New-OSDeployHyperVM`
 * MAML help, PlatyPS docs, `PSDefaultParameterValues` two-layer configuration system
