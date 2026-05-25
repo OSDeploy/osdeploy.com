@@ -19,30 +19,24 @@ HP distributes its WinPE driver pack as a SoftPaq self-extracting executable. Th
 
 ## Download with OSDeploy
 
-Use `Update-OSDeployWinPEDrivers` to refresh the HP driver catalog and download the driver pack.
+Use `Update-OSDeployCoreDrivers` to refresh the HP driver catalog and download the driver pack.
 
-**Preview and select packages interactively (Out-GridView picker):**
-
-```powershell
-Update-OSDeployWinPEDrivers -Name 'hp'
-```
-
-**Download all HP packages without prompting:**
+**Download HP packages:**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'hp' -NonInteractive
+Update-OSDeployCoreDrivers -Name 'hp'
 ```
 
 **Download only (skip expansion):**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'hp' -DownloadOnly
+Update-OSDeployCoreDrivers -Name 'hp' -DownloadOnly
 ```
 
 **View downloaded HP driver folders in the library:**
 
 ```powershell
-Get-OSDeployWinPEDrivers -Architecture amd64
+Get-OSDeployCoreDrivers -Architecture amd64
 ```
 
 ---
@@ -66,6 +60,6 @@ New-Item -Path $DestinationPath -ItemType Directory -Force | Out-Null
 ## Related
 
 - [HP WinPE Driver Pack](https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HP_WinPE_DriverPack.html)
-- [Update-OSDeployWinPEDrivers](https://docs.osdeploy.com)
-- [Get-OSDeployWinPEDrivers](https://docs.osdeploy.com)
+- [Update-OSDeployCoreDrivers](https://docs.osdeploy.com)
+- [Get-OSDeployCoreDrivers](https://docs.osdeploy.com)
 - [WinPE Drivers overview](README.md)

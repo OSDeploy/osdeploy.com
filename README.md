@@ -43,10 +43,10 @@ Install-OSDeploySoftware
 {% step %}
 #### Update WinPE Drivers
 
-Pull in the latest WinPE driver packs for Dell, HP, Intel Ethernet, Intel Wi-Fi, and Microsoft Windows 25H2 features. Drivers are cached locally under `%ProgramData%\OSDeployCore`.
+Pull in the latest WinPE driver packs for Dell, HP, Intel Ethernet, and Intel Wi-Fi. Drivers are cached locally under `%ProgramData%\OSDeployCore`.
 
 ```powershell
-Update-OSDeployWinPEDrivers
+Update-OSDeployCoreDrivers
 ```
 {% endstep %}
 
@@ -56,7 +56,7 @@ Update-OSDeployWinPEDrivers
 Mount a Windows 11 ISO or installation media and import the OS image into OSDeployCore. The imported image is used as the WinRE source for your boot image build.
 
 ```powershell
-Import-OSDeployOS
+Import-OSDeployCoreOS
 ```
 {% endstep %}
 
@@ -97,13 +97,12 @@ Deploy-OSDCloud
 
 ### WinPE Driver Library
 
-`Update-OSDeployWinPEDrivers` and `Get-OSDeployWinPEDrivers` manage a local library of WinPE-compatible driver packs:
+`Update-OSDeployCoreDrivers` and `Get-OSDeployCoreDrivers` manage a local library of WinPE-compatible driver packs:
 
 * **Dell** and **HP** WinPE driver packs
 * **Intel Ethernet** and **Intel Wi-Fi** drivers
-* **Microsoft Windows 25H2** Ethernet and Wi-Fi feature packages (driver store injection)
 * **VMware** guest tools (arm64 supported)
-* Interactive picker for manual selection, or full batch mode for automation
+* Full batch mode — all matching packages are downloaded automatically
 
 ### Boot Image Building
 
@@ -163,7 +162,7 @@ Install-Module -Name OSD -Force -SkipPublisherCheck
 
 ## OSDeploy Function Reference
 
-The OSDeploy module (v0.1.0 preview) exports 15 public functions across six areas.
+The OSDeploy module (v0.1.0 preview) exports 17 public functions across seven areas.
 
 ### Module Utilities
 
@@ -179,16 +178,16 @@ The OSDeploy module (v0.1.0 preview) exports 15 public functions across six area
 | ------------------------- | --------------------------------------------------------------------- |
 | `Build-OSDeployBoot` | Builds a customized WinPE boot image from a WinRE or ADK WinPE source |
 | `Update-OSDeployBootISO`      | Rebuilds bootable ISO files for an existing BootImage build           |
-| `Import-OSDeployOS`       | Imports Windows OS images from installation media into OSDeployCore   |
-| `New-OSDeployUSB`         | Creates a new bootable OSDeploy USB drive                             |
-| `Update-OSDeployUSB`      | Updates an existing OSDeploy USB drive with new BootMedia             |
+| `Import-OSDeployCoreOS`     | Imports Windows OS images from installation media into OSDeployCore   |
+| `New-OSDeployBootUSB`       | Creates a new bootable OSDeploy USB drive                             |
+| `Update-OSDeployBootUSB`    | Updates an existing OSDeploy USB drive with new BootMedia             |
 
 ### WinPE Drivers
 
 | Function                      | Description                                                    |
 | ----------------------------- | -------------------------------------------------------------- |
-| `Get-OSDeployWinPEDrivers`    | Lists available WinPE driver packs in the local driver library |
-| `Update-OSDeployWinPEDrivers` | Downloads and caches the latest WinPE driver packs             |
+| `Get-OSDeployCoreDrivers`    | Lists available WinPE driver packs in the local driver library |
+| `Update-OSDeployCoreDrivers` | Downloads and caches the latest WinPE driver packs             |
 
 ### Software Installation
 
@@ -217,8 +216,8 @@ The OSDeploy module (v0.1.0 preview) exports 15 public functions across six area
 
 * **Core:** `Get-OSDeployModulePath`, `Get-OSDeployModuleVersion`
 * **Software:** `Install-OSDeploySoftware` — ADK 25H2/26H1, MDT, pwsh, Git, VS Code, Hyper-V
-* **WinPE Drivers:** `Get-OSDeployWinPEDrivers`, `Update-OSDeployWinPEDrivers`
-* **Boot Media:** `Import-OSDeployOS`, `Build-OSDeployBoot`, `New-OSDeployUSB`, `Update-OSDeployBootISO`, `Update-OSDeployUSB`
+* **WinPE Drivers:** `Get-OSDeployCoreDrivers`, `Update-OSDeployCoreDrivers`
+* **Boot Media:** `Import-OSDeployCoreOS`, `Build-OSDeployBoot`, `New-OSDeployBootUSB`, `Update-OSDeployBootISO`, `Update-OSDeployBootUSB`
 * **MDT:** `Install-OSDeployMDT`, `Invoke-OSDeployMDT`
 * **Hyper-V:** `New-OSDeployHyperVM`
 * MAML help, PlatyPS docs, `PSDefaultParameterValues` two-layer configuration system

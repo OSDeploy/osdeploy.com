@@ -19,30 +19,24 @@ The Dell WinPE 11 driver pack is a self-contained cabinet (`.cab`) archive that 
 
 ## Download with OSDeploy
 
-Use `Update-OSDeployWinPEDrivers` to refresh the Dell driver catalog and download the driver pack.
+Use `Update-OSDeployCoreDrivers` to refresh the Dell driver catalog and download the driver pack.
 
-**Preview and select packages interactively (Out-GridView picker):**
-
-```powershell
-Update-OSDeployWinPEDrivers -Name 'dell'
-```
-
-**Download all Dell packages without prompting:**
+**Download Dell packages:**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'dell' -NonInteractive
+Update-OSDeployCoreDrivers -Name 'dell'
 ```
 
 **Download only (skip expansion):**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'dell' -DownloadOnly
+Update-OSDeployCoreDrivers -Name 'dell' -DownloadOnly
 ```
 
 **View downloaded Dell driver folders in the library:**
 
 ```powershell
-Get-OSDeployWinPEDrivers -Architecture amd64
+Get-OSDeployCoreDrivers -Architecture amd64
 ```
 
 ---
@@ -66,6 +60,6 @@ expand.exe "$env:USERPROFILE\Downloads\Dell-WinPE-Drivers.cab" -F:* $Destination
 ## Related
 
 - [Dell WinPE 11 Driver Pack](https://www.dell.com/support/kbdoc/en-us/000211541/winpe-11-driver-pack)
-- [Update-OSDeployWinPEDrivers](https://docs.osdeploy.com)
-- [Get-OSDeployWinPEDrivers](https://docs.osdeploy.com)
+- [Update-OSDeployCoreDrivers](https://docs.osdeploy.com)
+- [Get-OSDeployCoreDrivers](https://docs.osdeploy.com)
 - [WinPE Drivers overview](README.md)

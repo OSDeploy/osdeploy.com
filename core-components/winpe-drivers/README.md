@@ -6,8 +6,8 @@ WinPE driver packs are vendor-provided archives of hardware drivers that OSDeplo
 |---|---|
 | Architecture | amd64 (all vendor packs) |
 | Platform | WinPE |
-| Required by | `Build-OSDeployBoot`, `Update-OSDeployBoot` |
-| Managed by | `Update-OSDeployWinPEDrivers` |
+| Required by | `Build-OSDeployBoot` |
+| Managed by | `Update-OSDeployCoreDrivers` |
 
 ## Overview
 
@@ -18,9 +18,9 @@ All vendor-provided WinPE driver packs target the **amd64** architecture. WiFi d
 ## Why OSDeploy Requires WinPE Drivers
 
 - WinPE boots without NIC or storage drivers on most modern hardware without vendor packs
-- `Update-OSDeployWinPEDrivers` downloads and expands driver packs into the OSDeployCore repository
+- `Update-OSDeployCoreDrivers` downloads and expands driver packs into the OSDeployCore repository
 - `Build-OSDeployBoot` injects drivers from the repository into the WinPE image at build time
-- `Get-OSDeployWinPEDrivers` returns the set of driver folders currently in the library
+- `Get-OSDeployCoreDrivers` returns the set of driver folders currently in the library
 
 {% hint style="info" %}
 WiFi drivers are excluded automatically when no imported OS sources are present. ADK WinPE does not support wireless hardware — WiFi drivers are only needed for WinRE-based boot images.

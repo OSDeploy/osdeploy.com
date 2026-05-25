@@ -19,30 +19,24 @@ The Intel Ethernet Adapter Complete Driver Pack is a ZIP archive containing `.in
 
 ## Download with OSDeploy
 
-Use `Update-OSDeployWinPEDrivers` to refresh the Intel Ethernet catalog and download the driver pack.
+Use `Update-OSDeployCoreDrivers` to refresh the Intel Ethernet catalog and download the driver pack.
 
-**Preview and select packages interactively (Out-GridView picker):**
-
-```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-ethernet'
-```
-
-**Download all Intel Ethernet packages without prompting:**
+**Download Intel Ethernet packages:**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-ethernet' -NonInteractive
+Update-OSDeployCoreDrivers -Name 'intel-ethernet'
 ```
 
 **Download only (skip expansion):**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-ethernet' -DownloadOnly
+Update-OSDeployCoreDrivers -Name 'intel-ethernet' -DownloadOnly
 ```
 
 **View downloaded Intel Ethernet driver folders in the library:**
 
 ```powershell
-Get-OSDeployWinPEDrivers -Architecture amd64
+Get-OSDeployCoreDrivers -Architecture amd64
 ```
 
 ---
@@ -65,6 +59,6 @@ Expand-Archive -Path "$env:USERPROFILE\Downloads\Intel-EthernetDriverPack.zip" -
 ## Related
 
 - [Intel Ethernet Adapter Complete Driver Pack](https://www.intel.com/content/www/us/en/download/15084/intel-ethernet-adapter-complete-driver-pack.html)
-- [Update-OSDeployWinPEDrivers](https://docs.osdeploy.com)
-- [Get-OSDeployWinPEDrivers](https://docs.osdeploy.com)
+- [Update-OSDeployCoreDrivers](https://docs.osdeploy.com)
+- [Get-OSDeployCoreDrivers](https://docs.osdeploy.com)
 - [WinPE Drivers overview](README.md)

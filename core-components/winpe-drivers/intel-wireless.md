@@ -18,41 +18,35 @@ Intel provides an IT administrator wireless driver pack for injecting Intel Wi-F
 The Intel ProSet/Wireless IT administrator pack is a ZIP archive containing `.inf`-based drivers for Intel Wi-Fi 6, Wi-Fi 6E, and Wi-Fi 7 adapters. OSDeploy downloads the pack, extracts it using `Expand-Archive`, and injects drivers into the WinPE image at build time.
 
 {% hint style="warning" %}
-WiFi drivers are only needed for **WinRE-based boot images**. ADK-generated WinPE does not support wireless hardware. When no imported OS sources are present, `Update-OSDeployWinPEDrivers` excludes Wi-Fi packages automatically.
+WiFi drivers are only needed for **WinRE-based boot images**. ADK-generated WinPE does not support wireless hardware. When no imported OS sources are present, `Update-OSDeployCoreDrivers` excludes Wi-Fi packages automatically.
 {% endhint %}
 
 ## Download with OSDeploy
 
-Use `Update-OSDeployWinPEDrivers` to refresh the Intel Wireless catalog and download the driver pack. Pass `-SkipWifiDrivers` to exclude wireless packages when building a WinPE-only image.
+Use `Update-OSDeployCoreDrivers` to refresh the Intel Wireless catalog and download the driver pack. Pass `-SkipWifiDrivers` to exclude wireless packages when building a WinPE-only image.
 
-**Preview and select packages interactively (Out-GridView picker):**
-
-```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-wifi'
-```
-
-**Download all Intel Wireless packages without prompting:**
+**Download Intel Wireless packages:**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-wifi' -NonInteractive
+Update-OSDeployCoreDrivers -Name 'intel-wifi'
 ```
 
 **Download only (skip expansion):**
 
 ```powershell
-Update-OSDeployWinPEDrivers -Name 'intel-wifi' -DownloadOnly
+Update-OSDeployCoreDrivers -Name 'intel-wifi' -DownloadOnly
 ```
 
 **View downloaded Intel Wireless driver folders in the library:**
 
 ```powershell
-Get-OSDeployWinPEDrivers -Architecture amd64
+Get-OSDeployCoreDrivers -Architecture amd64
 ```
 
 **Exclude Wi-Fi drivers when building a WinPE-only image:**
 
 ```powershell
-Update-OSDeployWinPEDrivers -SkipWifiDrivers
+Update-OSDeployCoreDrivers -SkipWifiDrivers
 ```
 
 ---
@@ -75,6 +69,6 @@ Expand-Archive -Path "$env:USERPROFILE\Downloads\Intel-WirelessDriverPack.zip" -
 ## Related
 
 - [Intel ProSet/Wireless Software for IT Administrators](https://www.intel.com/content/www/us/en/download/18231/intel-proset-wireless-software-and-wi-fi-drivers-for-it-administrators.html)
-- [Update-OSDeployWinPEDrivers](https://docs.osdeploy.com)
-- [Get-OSDeployWinPEDrivers](https://docs.osdeploy.com)
+- [Update-OSDeployCoreDrivers](https://docs.osdeploy.com)
+- [Get-OSDeployCoreDrivers](https://docs.osdeploy.com)
 - [WinPE Drivers overview](README.md)
