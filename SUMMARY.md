@@ -66,8 +66,8 @@
 ## OSDeploy MDT Integration
 
 * [About](osdeploy-mdt-integration/about.md)
-* [Enable-OSDeployMDT](osdeploy-mdt-integration/enable-osdeploymdt.md)
-* [Build-OSDeployMDT](osdeploy-mdt-integration/build-osdeploymdt.md)
+* [Install-OSDeployMDT](osdeploy-mdt-integration/install-osdeploymdt.md)
+* [Invoke-OSDeployMDT](osdeploy-mdt-integration/invoke-osdeploymdt.md)
 
 ## Links
 
