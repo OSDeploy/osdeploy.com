@@ -17,27 +17,21 @@ Use this function to bring a new build machine up to date or to ensure all cache
 ## Syntax
 
 ```powershell
-Update-OSDeployCore [-Force] [-WhatIf] [-Confirm]
+Update-OSDeployCore [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
 
-| Parameter  | Type     | Required | Description                                                                                                                            |
-|------------|----------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `-Force`   | `Switch` | No       | Passes `-Force` to `Update-OSDeployCoreESD` and `Update-OSDeployCoreDrivers`, re-downloading all files even when a cached copy exists. |
-| `-WhatIf`  | `Switch` | No       | Shows what each sub-function would do without performing any downloads.                                                                |
-| `-Confirm` | `Switch` | No       | Prompts for confirmation before running.                                                                                               |
+| Parameter  | Type     | Required | Description                                                              |
+|------------|----------|----------|--------------------------------------------------------------------------|
+| `-WhatIf`  | `Switch` | No       | Shows what each sub-function would do without performing any downloads.  |
+| `-Confirm` | `Switch` | No       | Prompts for confirmation before running.                                 |
 
 ## Examples
 
 ```powershell
 # Download any missing ESD files, OS images, and WinPE driver packages
 Update-OSDeployCore
-```
-
-```powershell
-# Re-download all assets regardless of what is already cached
-Update-OSDeployCore -Force
 ```
 
 ```powershell

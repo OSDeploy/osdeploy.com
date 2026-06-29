@@ -23,16 +23,17 @@ SHA256 verification is performed after every download. A terminating error is th
 ## Syntax
 
 ```powershell
-Update-OSDeployCoreESD [-Force] [-WhatIf] [-Confirm]
+Update-OSDeployCoreESD [-Force] [[-Architecture] <String>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
 
-| Parameter  | Type     | Required | Description                                                                                             |
-|------------|----------|----------|---------------------------------------------------------------------------------------------------------|
-| `-Force`   | `Switch` | No       | Re-downloads each ESD file even when it already exists in the cache with a matching SHA256 checksum.    |
-| `-WhatIf`  | `Switch` | No       | Shows which ESD files would be downloaded without performing any transfers.                             |
-| `-Confirm` | `Switch` | No       | Prompts for confirmation before each download.                                                          |
+| Parameter        | Type     | Required | Description                                                                                             |
+|------------------|----------|----------|---------------------------------------------------------------------------------------------------------|
+| `-Force`         | `Switch` | No       | Re-downloads each ESD file even when it already exists in the cache with a matching SHA256 checksum.    |
+| `-Architecture`  | `String` | No       | Limits downloads to a single architecture: `amd64` or `arm64`. When omitted, both architectures are downloaded. |
+| `-WhatIf`        | `Switch` | No       | Shows which ESD files would be downloaded without performing any transfers.                             |
+| `-Confirm`       | `Switch` | No       | Prompts for confirmation before each download.                                                          |
 
 ## Examples
 

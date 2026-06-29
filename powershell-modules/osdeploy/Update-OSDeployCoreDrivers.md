@@ -22,7 +22,7 @@ After downloading, drivers are injected into WinPE at build time by `Build-OSDep
 ## Syntax
 
 ```powershell
-Update-OSDeployCoreDrivers [[-Name] <String[]>] [-Force] [-SkipWifiDrivers] [-DownloadOnly] [-WhatIf] [-Confirm]
+Update-OSDeployCoreDrivers [[-Name] <String[]>] [-Force] [-SkipWifiDrivers] [-DownloadOnly] [[-Architecture] <String>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
@@ -33,6 +33,7 @@ Update-OSDeployCoreDrivers [[-Name] <String[]>] [-Force] [-SkipWifiDrivers] [-Do
 | `-Force`           | `Switch`   | No       | Re-downloads driver packages even when a matching cached file already exists.                                            |
 | `-SkipWifiDrivers` | `Switch`   | No       | Excludes Wi-Fi driver packages (`intel-wifi`, `microsoft-windows-wifi`). Enforced automatically when no imported OS sources exist. |
 | `-DownloadOnly`    | `Switch`   | No       | Downloads packages to the cache without expanding them. No `package.json` metadata is written.                          |
+| `-Architecture`    | `String`   | No       | Limits driver downloads to a single architecture: `amd64` or `arm64`. When omitted, all architectures are processed.   |
 
 ## Examples
 

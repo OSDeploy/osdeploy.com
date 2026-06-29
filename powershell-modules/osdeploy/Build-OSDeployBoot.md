@@ -6,7 +6,7 @@ Builds a customized WinPE boot image from a WinRE or ADK WinPE source.
 |--------------|------------------------------------------------------------------------------|
 | Module       | OSDeploy                                                                     |
 | Platform     | Windows 11 25H2+ (amd64 / arm64)                                            |
-| Requires     | PowerShell 7.6, Windows ADK, OSDCloud module 26.4.17.1+, Run as Administrator |
+| Requires     | PowerShell 7.6, Windows ADK, OSDCloud module 26.5.24.1+, Run as Administrator |
 | Output path  | `%ProgramData%\OSDeployCore\boot`                                      |
 
 ## Description
@@ -21,7 +21,7 @@ By default the function selects an imported WinRE source. Use `-UseAdkWinPE` to 
 # Default parameter set — uses an imported WinRE source
 Build-OSDeployBoot -Name <String> [-Architecture <String>]
     [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
-    [-SetTimeZone <String>] [-SkipAdkPackages] [-UpdateUSB] [-WhatIf] [-Confirm]
+    [-SetTimeZone <String>] [-SkipAdkPackages] [-Auto] [-UpdateUSB] [-WhatIf] [-Confirm]
 
 # ADK parameter set — uses the Windows ADK winpe.wim
 Build-OSDeployBoot -Name <String> -Architecture <String>
@@ -43,6 +43,7 @@ Build-OSDeployBoot -Name <String> -Architecture <String>
 | `-SkipAdkPackages`| `Switch`   | No                     | Skips adding ADK optional component packages. Useful for quick testing.                               |
 | `-UseAdkWinPE`    | `Switch`   | Yes (ADK set)          | Uses the ADK `winpe.wim` instead of an imported WinRE source. Requires `-Architecture`.               |
 | `-UpdateUSB`      | `Switch`   | No                     | Copies the completed media to any connected USB partition labeled `USB-WinPE` after the build.        |
+| `-Auto`           | `Switch`   | No (Default set only)  | Automatically detects the host architecture and selects the latest available WinRE source without prompting. Skips build profile selection. |
 
 ## Examples
 

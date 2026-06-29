@@ -10,7 +10,7 @@ Imports Windows OS images from cached Enterprise ESD files to OSDeployCore.
 
 ## Description
 
-Builds a complete Windows OS image layout from the Enterprise ESD files downloaded by `Update-OSDeployCoreESD`. The function first calls `Update-OSDeployCoreESD` to ensure the latest ESD files are present, then for each available architecture (amd64 and ARM64):
+Builds a complete Windows OS image layout from the Enterprise ESD files downloaded by `Update-OSDeployCoreESD`. For each available architecture (amd64 and ARM64), or for the specified architecture when `-Architecture` is provided, the function:
 
 1. Expands ESD Index 1 (Windows Setup Media) to create the `WinOS-Media` layout
 2. Exports ESD Index 2 (WinPE) to `.wim\winpe.wim`
@@ -25,21 +25,21 @@ Imported images are stored under `$env:ProgramData\OSDeployCore` with a naming c
 ## Syntax
 
 ```powershell
-Update-OSDeployCoreOS [-Force] [-WhatIf] [-Confirm]
+Update-OSDeployCoreOS [[-Architecture] <String>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
 
-| Parameter  | Type     | Required | Description                                                                                                                              |
-|------------|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------|
-| `-Force`   | `Switch` | No       | Re-downloads ESD files via `Update-OSDeployCoreESD` and re-imports all architectures even when the destination directories already exist. |
-| `-WhatIf`  | `Switch` | No       | Shows which OS image directories would be created without performing any work.                                                           |
-| `-Confirm` | `Switch` | No       | Prompts for confirmation before running.                                                                                                 |
+| Parameter        | Type     | Required | Description                                                                                          |
+|------------------|----------|----------|------------------------------------------------------------------------------------------------------|
+| `-Architecture`  | `String` | No       | Limits processing to a single architecture: `amd64` or `arm64`. When omitted, all available ESD files are imported. |
+| `-WhatIf`        | `Switch` | No       | Shows which OS image directories would be created without performing any work.                       |
+| `-Confirm`       | `Switch` | No       | Prompts for confirmation before running.                                                             |
 
 ## Examples
 
 ```powershell
-# Ensure ESD files are cached, then import all available architectures
+# Import all available OS image architectures from cached ESD files
 Update-OSDeployCoreOS
 ```
 
@@ -49,8 +49,8 @@ Update-OSDeployCoreOS -Verbose
 ```
 
 ```powershell
-# Re-download ESD files and re-import all architectures
-Update-OSDeployCoreOS -Force
+# Import only amd64 OS images
+Update-OSDeployCoreOS -Architecture amd64
 ```
 
 ```powershell
