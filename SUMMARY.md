@@ -3,6 +3,13 @@
 * [OSDeploy Home](README.md)
 * [Events](events.md)
 
+## Workstation Setup
+
+* [Overview](workstation-setup/overview.md)
+* [System Requirements](workstation-setup/system-requirements.md)
+* [PowerShell Modules](workstation-setup/powershell-modules.md)
+* [Registration](workstation-setup/registration.md)
+
 ## Core Components
 
 * [About](core-components/about.md)
@@ -503,7 +510,3 @@
     * [Windows 10 from ESD](archive/blog/2018/windows-10-from-esd.md)
     * [Windows 10 1809 Appx Issues](archive/blog/2018/windows-10-1809-appx-issues.md)
     * [Mount-WindowsImage -Optimize](archive/blog/2018/mount-windowsimage-optimize.md)
-
-
-
-
