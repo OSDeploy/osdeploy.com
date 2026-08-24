@@ -24,11 +24,11 @@
 * [Update Windows 11 ESD](osdeploy-core/update-windows-11-esd/README.md)
   * [Insider: The Windows ESD Catalog](osdeploy-core/update-windows-11-esd/insider-the-windows-esd-catalog.md)
 * [Update Windows 11 OS](osdeploy-core/update-windows-11-os/README.md)
-  * [Insider: Building an OS from an ESD](osdeploy-core/update-windows-11-os/insider-building-an-os-from-an-esd.md)
-  * [Insider: Exporting Windows RE](osdeploy-core/update-windows-11-os/insider-exporting-windows-re.md)
-  * [Insider: Exporting WinPE Drivers from an OS](osdeploy-core/update-windows-11-os/insider-exporting-winpe-drivers-from-an-os.md)
+  * [Insider: Export Windows 11](osdeploy-core/update-windows-11-os/insider-export-windows-11.md)
+  * [Insider: Export Windows RE](osdeploy-core/update-windows-11-os/insider-export-windows-re.md)
+  * [Insider: Export WinPE Drivers](osdeploy-core/update-windows-11-os/export-winpe-drivers.md)
 * [Update WinPE Drivers](osdeploy-core/update-winpe-drivers/README.md)
-  * [How To: Driver Cleanup](osdeploy-core/update-winpe-drivers/how-to-driver-cleanup.md)
+  * [How To: Cleanup Old Drivers](osdeploy-core/update-winpe-drivers/how-to-cleanup-old-drivers.md)
 
 ## Core Components
 
