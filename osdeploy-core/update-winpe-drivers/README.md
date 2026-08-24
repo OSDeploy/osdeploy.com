@@ -2,7 +2,7 @@
 description: Download and prepare WinPE driver packages for OSDeploy Core boot images.
 ---
 
-# Download WinPE Drivers
+# Update WinPE Drivers
 
 {% hint style="info" %}
 **TLDR:** Run `Update-OSDeployCoreDrivers` to refresh all active driver catalogs, download the matching packages, and expand them into the OSDeploy Core library. Use `-Name` to process specific sources.
@@ -26,12 +26,12 @@ Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 
 
 The active source names are defined by the installed OSDeploy module. The current sources are:
 
-| Name | Package | Architecture |
-| --- | --- | --- |
-| `dell` | Dell WinPE 11 driver pack | amd64 |
-| `hp` | HP WinPE driver pack | amd64 |
-| `intel-ethernet` | Intel Ethernet adapter driver pack | amd64 |
-| `intel-wifi` | Intel wireless IT administrator driver pack | amd64 |
+| Name             | Package                                     | Architecture |
+| ---------------- | ------------------------------------------- | ------------ |
+| `dell`           | Dell WinPE 11 driver pack                   | amd64        |
+| `hp`             | HP WinPE driver pack                        | amd64        |
+| `intel-ethernet` | Intel Ethernet adapter driver pack          | amd64        |
+| `intel-wifi`     | Intel wireless IT administrator driver pack | amd64        |
 
 Use tab completion after `-Name` to view the active sources in the installed module:
 
@@ -108,7 +108,7 @@ Update-OSDeployCoreDrivers -Name 'dell' -DownloadOnly
 
 Raw downloads are stored below a vendor-specific folder:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\downloads\<vendor>\
 ```
 
@@ -118,7 +118,7 @@ In download-only mode, the command does not create the expanded driver folder or
 
 During normal processing, expanded drivers and package metadata are stored in versioned folders:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\<architecture>\<name>-<version>\
 ```
 
@@ -181,10 +181,10 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 ## Related
 
-- [Update-OSDeployCoreDrivers command reference](../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
-- [WinPE Drivers overview](../core-components/winpe-drivers/README.md)
-- [Dell WinPE Drivers](../core-components/winpe-drivers/dell.md)
-- [HP WinPE Drivers](../core-components/winpe-drivers/hp.md)
-- [Intel Ethernet Drivers](../core-components/winpe-drivers/intel-ethernet.md)
-- [Intel Wireless Drivers](../core-components/winpe-drivers/intel-wireless.md)
-- [System Requirements](../workstation-prerequisites/system-requirements.md)
+* [Update-OSDeployCoreDrivers command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
+* [WinPE Drivers overview](../../core-components/winpe-drivers/)
+* [Dell WinPE Drivers](../../core-components/winpe-drivers/dell.md)
+* [HP WinPE Drivers](../../core-components/winpe-drivers/hp.md)
+* [Intel Ethernet Drivers](../../core-components/winpe-drivers/intel-ethernet.md)
+* [Intel Wireless Drivers](../../core-components/winpe-drivers/intel-wireless.md)
+* [System Requirements](../../workstation-prerequisites/system-requirements.md)

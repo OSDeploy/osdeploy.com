@@ -2,7 +2,7 @@
 description: Download and verify Windows 11 25H2 Enterprise ESD files for OSDeploy Core.
 ---
 
-# Download Windows 11
+# Update Windows 11 ESD
 
 {% hint style="info" %}
 **TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 25H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` to download only one architecture.
@@ -27,9 +27,9 @@ Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 
 The architectures offered by default depend on the workstation architecture.
 
 | Workstation | Default ESD selection |
-| --- | --- |
-| AMD64 | x64 first, then ARM64 |
-| ARM64 | ARM64 only |
+| ----------- | --------------------- |
+| AMD64       | x64 first, then ARM64 |
+| ARM64       | ARM64 only            |
 
 Download only the x64 ESD on an AMD64 workstation:
 
@@ -65,7 +65,7 @@ For each ESD that is not already cached, the command:
 
 Downloads are saved in the version-specific folder:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
 ```
 
@@ -79,9 +79,9 @@ Each ESD is several gigabytes. The confirmation prompt estimates a download time
 
 The command verifies an existing ESD before deciding whether another download is needed.
 
-- If the current ESD exists and its SHA256 checksum matches, the file is returned without being downloaded again.
-- If a verified ESD from an older catalog exists, the command offers a choice between keeping that file and downloading the newer version.
-- If an existing file does not match the expected checksum, the command offers to move it to the Recycle Bin and download it again.
+* If the current ESD exists and its SHA256 checksum matches, the file is returned without being downloaded again.
+* If a verified ESD from an older catalog exists, the command offers a choice between keeping that file and downloading the newer version.
+* If an existing file does not match the expected checksum, the command offers to move it to the Recycle Bin and download it again.
 
 Use `-Force` to download the selected ESD files again even when the current files are already cached and verified:
 
@@ -132,6 +132,6 @@ Update-OSDeployCoreOS -Architecture amd64
 
 ## Related
 
-- [Update-OSDeployCoreESD command reference](../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
-- [Update-OSDeployCoreOS command reference](../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-- [System Requirements](../workstation-prerequisites/system-requirements.md)
+* [Update-OSDeployCoreESD command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
+* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [System Requirements](../../workstation-prerequisites/system-requirements.md)

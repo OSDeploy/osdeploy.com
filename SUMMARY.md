@@ -21,9 +21,14 @@
   * [VS Code Insiders](osdeploy-core/install-software/vs-code-insiders.md)
   * [Microsoft Hyper-V](osdeploy-core/install-software/microsoft-hyper-v.md)
   * [7-Zip](osdeploy-core/install-software/7-zip.md)
-* [Download Windows 11](osdeploy-core/download-windows-11.md)
-* [Export Windows RE](osdeploy-core/export-windows-re.md)
-* [Download WinPE Drivers](osdeploy-core/download-winpe-drivers.md)
+* [Update Windows 11 ESD](osdeploy-core/update-windows-11-esd/README.md)
+  * [Insider: The Windows ESD Catalog](osdeploy-core/update-windows-11-esd/insider-the-windows-esd-catalog.md)
+* [Update Windows 11 OS](osdeploy-core/update-windows-11-os/README.md)
+  * [Insider: Building an OS from an ESD](osdeploy-core/update-windows-11-os/insider-building-an-os-from-an-esd.md)
+  * [Insider: Exporting Windows RE](osdeploy-core/update-windows-11-os/insider-exporting-windows-re.md)
+  * [Insider: Exporting WinPE Drivers from an OS](osdeploy-core/update-windows-11-os/insider-exporting-winpe-drivers-from-an-os.md)
+* [Update WinPE Drivers](osdeploy-core/update-winpe-drivers/README.md)
+  * [How To: Driver Cleanup](osdeploy-core/update-winpe-drivers/how-to-driver-cleanup.md)
 
 ## Core Components
 
