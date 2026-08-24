@@ -28,7 +28,7 @@
   * [Insider: Export Windows RE](osdeploy-core/update-windows-11-os/insider-export-windows-re.md)
   * [Insider: Export WinPE Drivers](osdeploy-core/update-windows-11-os/export-winpe-drivers.md)
 * [Update WinPE Drivers](osdeploy-core/update-winpe-drivers/README.md)
-  * [How To: Cleanup Old Drivers](osdeploy-core/update-winpe-drivers/how-to-cleanup-old-drivers.md)
+  * [How To: Driver Cleanup](osdeploy-core/update-winpe-drivers/how-to-cleanup-old-drivers.md)
 
 ## Core Components
 
