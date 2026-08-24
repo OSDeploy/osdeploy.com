@@ -12,7 +12,14 @@
 
 ## OSDeploy Core
 
-* [Install Software](osdeploy-core/install-software.md)
+* [Install Software](osdeploy-core/install-software/README.md)
+  * [Windows ADK 25H2](osdeploy-core/install-software/windows-adk-25h2.md)
+  * [Microsoft MDT](osdeploy-core/install-software/microsoft-mdt.md)
+  * [Git for Windows](osdeploy-core/install-software/git-for-windows.md)
+  * [VS Code (Stable)](osdeploy-core/install-software/vs-code-stable.md)
+  * [VS Code Insiders](osdeploy-core/install-software/vs-code-insiders.md)
+  * [Microsoft Hyper-V](osdeploy-core/install-software/microsoft-hyper-v.md)
+  * [7-Zip](osdeploy-core/install-software/7-zip.md)
 * [Download Windows 11](osdeploy-core/download-windows-11.md)
 * [Export Windows RE](osdeploy-core/export-windows-re.md)
 * [Download WinPE Drivers](osdeploy-core/download-winpe-drivers.md)

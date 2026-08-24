@@ -1,5 +1,7 @@
 ---
-description: Preview, download, and install the software used by an OSDeploy Core workstation.
+description: >-
+  Preview, download, and install the software used by an OSDeploy Core
+  workstation.
 ---
 
 # Install Software
@@ -23,15 +25,15 @@ Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 
 
 ## Supported Software
 
-| Name | Software | Method | Download only |
-| --- | --- | --- | --- |
-| `adk-25h2` | Windows ADK 10.1.26100.2454 and WinPE add-on | `curl.exe` and vendor setup | Yes |
-| `mdt` | Microsoft Deployment Toolkit 6.3.8456.1000 | Verified MSI | Yes |
-| `git` | Git for Windows | WinGet | No |
-| `code` | Visual Studio Code | WinGet | No |
-| `code-insiders` | Visual Studio Code Insiders | WinGet | No |
-| `hyperv` | Hyper-V | Windows optional feature | No |
-| `7zip` | 7-Zip and the 7-Zip WinPE files | WinGet and GitHub | Yes |
+| Name            | Software                                     | Method                      | Download only |
+| --------------- | -------------------------------------------- | --------------------------- | ------------- |
+| `adk-25h2`      | Windows ADK 10.1.26100.2454 and WinPE add-on | `curl.exe` and vendor setup | Yes           |
+| `mdt`           | Microsoft Deployment Toolkit 6.3.8456.1000   | Verified MSI                | Yes           |
+| `git`           | Git for Windows                              | WinGet                      | No            |
+| `code`          | Visual Studio Code                           | WinGet                      | No            |
+| `code-insiders` | Visual Studio Code Insiders                  | WinGet                      | No            |
+| `hyperv`        | Hyper-V                                      | Windows optional feature    | No            |
+| `7zip`          | 7-Zip and the 7-Zip WinPE files              | WinGet and GitHub           | Yes           |
 
 {% hint style="warning" %}
 Microsoft has retired MDT. Install it only for an existing workflow that depends on it. See the [MDT retirement notice](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/mdt/mdt-retirement).
@@ -91,13 +93,13 @@ Install-OSDeploySoftware -Name 'mdt', '7zip' -DownloadOnly
 
 Downloaded software is stored below:
 
-```text
+```
 C:\ProgramData\OSDeployCore\software\
 ```
 
 The 7-Zip operation also populates the versioned WinPE application cache below:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\
 ```
 
@@ -116,11 +118,11 @@ Install and download operations return a status object for each requested compon
 
 ## Related
 
-- [Install-OSDeploySoftware command reference](../powershell-modules/osdeploy/Install-OSDeploySoftware.md)
-- [System Requirements](../workstation-prerequisites/system-requirements.md)
-- [Install Windows ADK 25H2](../core-components/microsoft-windows-adk/install-25h2.md)
-- [Install Microsoft Deployment Toolkit](../core-components/microsoft-deployment-toolkit/install-mdt.md)
-- [Git for Windows](../core-components/developer-tools/git.md)
-- [Visual Studio Code](../core-components/developer-tools/vscode.md)
-- [Hyper-V](../core-components/windows-components/hyper-v.md)
-- [7-Zip](../core-components/utilities/7zip.md)
+* [Install-OSDeploySoftware command reference](../../powershell-modules/osdeploy/Install-OSDeploySoftware.md)
+* [System Requirements](../../workstation-prerequisites/system-requirements.md)
+* [Install Windows ADK 25H2](../../core-components/microsoft-windows-adk/install-25h2.md)
+* [Install Microsoft Deployment Toolkit](../../core-components/microsoft-deployment-toolkit/install-mdt.md)
+* [Git for Windows](../../core-components/developer-tools/git.md)
+* [Visual Studio Code](../../core-components/developer-tools/vscode.md)
+* [Hyper-V](../../core-components/windows-components/hyper-v.md)
+* [7-Zip](../../core-components/utilities/7zip.md)
