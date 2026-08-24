@@ -26,5 +26,5 @@ For new OSDCloud deployments, use the **OSDCloud** module. The OSDCloud function
 ## In This Section
 
 * [OSDeploy Module](osdeploy/) — Install the OSDeploy, OSDCloud, and OSD modules
-* [OSDCloud Module](osdcloud-module.md) — Current, recommended module for OSDCloud deployments in WinPE
-* [OSD Module](osd-module.md) — Legacy module; maintains OSDCloud v1 and WinPE deployment support
+* [OSDCloud Module](https://github.com/OSDeploy/osdeploy.com/blob/main/powershell-modules/osdcloud-module.md) — Current, recommended module for OSDCloud deployments in WinPE
+* [OSD Module](https://github.com/OSDeploy/osdeploy.com/blob/main/powershell-modules/osd-module.md) — Legacy module; maintains OSDCloud v1 and WinPE deployment support

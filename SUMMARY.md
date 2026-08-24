@@ -3,12 +3,19 @@
 * [OSDeploy Home](README.md)
 * [Events](events.md)
 
-## Workstation Setup
+## Workstation Prerequisites
 
-* [Overview](workstation-setup/overview.md)
-* [System Requirements](workstation-setup/system-requirements.md)
-* [PowerShell Modules](workstation-setup/powershell-modules.md)
-* [Registration](workstation-setup/registration.md)
+* [Overview](workstation-prerequisites/overview.md)
+* [System Requirements](workstation-prerequisites/system-requirements.md)
+* [PowerShell Modules](workstation-prerequisites/powershell-modules.md)
+* [Registration](workstation-prerequisites/registration.md)
+
+## OSDeploy Core
+
+* [Install Software](osdeploy-core/install-software.md)
+* [Download Windows 11](osdeploy-core/download-windows-11.md)
+* [Export Windows RE](osdeploy-core/export-windows-re.md)
+* [Download WinPE Drivers](osdeploy-core/download-winpe-drivers.md)
 
 ## Core Components
 
