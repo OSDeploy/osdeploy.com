@@ -1,128 +1,106 @@
 ---
 description: >-
-  Preview, download, and install the software used by an OSDeploy Core
-  workstation.
+  Use Install-OSDeploySoftware to prepare a Windows workstation and populate
+  OSDeployCore with reusable software content.
 ---
 
 # Install Software
 
+`Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy workstation. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
+
 {% hint style="info" %}
-**TLDR:** Run `Install-OSDeploySoftware` to list available software. Specify `-Name` to preview a component, add `-Force` to install it, or add `-DownloadOnly` to download supported installers without installing them.
+Only Windows ADK 25H2 and 7-Zip are required for OSDeploy and OSDCloud. All other components are optional and should be installed only when the workstation or workflow needs them.
+{% endhint %}
+
+{% hint style="info" %}
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. These requirements are checked before list, preview, download, and install operations.
+{% endhint %}
+
+## How the Function Works
+
+Run the function without `-Name` to list the available components:
 
 ```powershell
 Install-OSDeploySoftware
-Install-OSDeploySoftware -Name 'adk-25h2'
-Install-OSDeploySoftware -Name 'adk-25h2' -Force
-Install-OSDeploySoftware -Name 'adk-25h2' -DownloadOnly
 ```
-{% endhint %}
 
-Use `Install-OSDeploySoftware` to prepare an OSDeploy Core workstation. The command can list supported components, preview an operation, download supported installers for later use, or install one or more components.
+Specify a name to preview its source, documentation links, and install command without making changes:
 
-{% hint style="info" %}
-Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. These checks run for list and preview operations as well as installations.
-{% endhint %}
+```powershell
+Install-OSDeploySoftware -Name 'adk-25h2'
+```
 
-## Supported Software
+Add `-Force` to install a component. Multiple components are processed in the order specified.
 
-| Name            | Software                                     | Method                      | Download only |
-| --------------- | -------------------------------------------- | --------------------------- | ------------- |
-| `adk-25h2`      | Windows ADK 10.1.26100.2454 and WinPE add-on | `curl.exe` and vendor setup | Yes           |
-| `mdt`           | Microsoft Deployment Toolkit 6.3.8456.1000   | Verified MSI                | Yes           |
-| `git`           | Git for Windows                              | WinGet                      | No            |
-| `code`          | Visual Studio Code                           | WinGet                      | No            |
-| `code-insiders` | Visual Studio Code Insiders                  | WinGet                      | No            |
-| `hyperv`        | Hyper-V                                      | Windows optional feature    | No            |
-| `7zip`          | 7-Zip and the 7-Zip WinPE files              | WinGet and GitHub           | Yes           |
+```powershell
+Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
+```
+
+Use `-DownloadOnly` to download supported content without installing it on the workstation.
+
+```powershell
+Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -DownloadOnly
+```
+
+## Software
+
+| Name            | Software                                     | Use case    | Method                      | Download only |
+| --------------- | -------------------------------------------- | ----------- | --------------------------- | ------------- |
+| `adk-25h2`      | Windows ADK 10.1.26100.2454 and WinPE add-on | Required    | `curl.exe` and vendor setup | Yes           |
+| `7zip`          | 7-Zip and the 7-Zip WinPE files              | Required    | WinGet and GitHub           | Yes           |
+| `adk-26h1`      | Windows ADK 10.1.28000.1 and WinPE add-on    | Special use | `curl.exe` and vendor setup | Yes           |
+| `mdt`           | Microsoft Deployment Toolkit 6.3.8456.1000   | Special use | Verified MSI                | Yes           |
+| `git`           | Git for Windows                              | Optional    | WinGet                      | No            |
+| `code`          | Visual Studio Code                           | Optional    | WinGet                      | No            |
+| `code-insiders` | Visual Studio Code Insiders                  | Optional    | WinGet                      | No            |
+| `hyperv`        | Hyper-V                                      | Optional    | Windows optional feature    | No            |
 
 {% hint style="warning" %}
-Microsoft has retired MDT. Install it only for an existing workflow that depends on it. See the [MDT retirement notice](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/mdt/mdt-retirement).
+Windows ADK 26H1 is a special-use component. Do not install it unless the workstation is running Windows 11 26H1. Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow.
 {% endhint %}
 
-## List Available Software
-
-Run the command without `-Name` to list every supported component and its preview command. This operation does not install software.
-
-```powershell
-Install-OSDeploySoftware
-```
-
-## Preview an Installation
-
-Specify a component without `-Force` to return its source, documentation, details, and install command. Use this preview to review the operation before making changes.
-
-```powershell
-Install-OSDeploySoftware -Name 'adk-25h2'
-```
-
-Preview several components in one command:
-
-```powershell
-Install-OSDeploySoftware -Name 'git', 'code', '7zip'
-```
-
-## Install Software
-
-Add `-Force` to perform the installation. Components are processed in the order provided.
-
-```powershell
-Install-OSDeploySoftware -Name 'adk-25h2' -Force
-```
-
-Install several components in sequence:
-
-```powershell
-Install-OSDeploySoftware -Name 'git', 'code', 'code-insiders', '7zip' -Force
-```
-
-{% hint style="info" %}
-Installing Git may prompt for the global `user.email` and `user.name` values. Hyper-V is skipped when OSDeploy detects that the workstation is a virtual machine. A restart may be required after enabling Hyper-V.
+{% hint style="warning" %}
+Microsoft no longer supports MDT. Its installer is provided only as a convenience for existing workflows that still require it. Do not install MDT unless there is a specific need. See the [MDT retirement notice](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/mdt/mdt-retirement).
 {% endhint %}
 
-## Download Without Installing
+## OSDeployCore
 
-Use `-DownloadOnly` with an ADK release, MDT, or 7-Zip to populate the OSDeploy Core software cache without installing the component.
+The function keeps reusable installers and WinPE application files in `C:\ProgramData\OSDeployCore`. This allows later OSDeploy operations to reuse the downloaded content.
 
-```powershell
-Install-OSDeploySoftware -Name 'adk-25h2' -DownloadOnly
+```text
+C:\ProgramData\OSDeployCore\
+|-- software\
+|   |-- Microsoft.WindowsADK_10.1.26100.2454\
+|   |   |-- adk\
+|   |   `-- adkwinpe\
+|   |-- Microsoft.WindowsADK_10.1.28000.1\
+|   |-- Microsoft.DeploymentToolkit_6.3.8456.1000\
+|   `-- 7zip.7zip\
+|       |-- amd64\
+|       `-- arm64\
+`-- cache\
+  `-- winpe-apps\
+    `-- 7zip\
+      `-- <version>\
 ```
 
-```powershell
-Install-OSDeploySoftware -Name 'mdt', '7zip' -DownloadOnly
-```
+| Component | Content added to OSDeployCore |
+| --------- | ----------------------------- |
+| Windows ADK 25H2 | Saves `adksetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adk` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adkwinpe`. A full installation also downloads each offline layout into these folders. |
+| Windows ADK 26H1 | Saves `adksetup.exe` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.28000.1`. |
+| Microsoft Deployment Toolkit | Saves the verified `MicrosoftDeploymentToolkit_x64.msi` below `software\Microsoft.DeploymentToolkit_6.3.8456.1000`. |
+| 7-Zip | Downloads amd64 and arm64 installers below `software\7zip.7zip`, then prepares versioned `7zr.exe` and 7-Zip Extra files below `cache\winpe-apps\7zip`. |
+| Git, Visual Studio Code, Visual Studio Code Insiders, Hyper-V | Does not add reusable content to OSDeployCore. WinGet manages the application downloads, and Hyper-V is a Windows optional feature. |
 
-Downloaded software is stored below:
+`-DownloadOnly` is supported for both ADK releases, MDT, and 7-Zip. It is not supported for Git, either Visual Studio Code channel, or Hyper-V.
 
-```
-C:\ProgramData\OSDeployCore\software\
-```
+## Component Guides
 
-The 7-Zip operation also populates the versioned WinPE application cache below:
-
-```
-C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\
-```
-
-`-DownloadOnly` is not supported for `git`, `code`, `code-insiders`, or `hyperv`. The command returns a `NotSupported` result for those components without changing the system.
-
-## Review Results
-
-List and preview operations return objects that can be filtered, formatted, or exported like other PowerShell output.
-
-```powershell
-Install-OSDeploySoftware -Name 'adk-25h2', '7zip' |
-	Format-Table Name, Component, Source, Command -AutoSize
-```
-
-Install and download operations return a status object for each requested component. Use `-Verbose` for additional diagnostic output.
-
-## Related
-
-* [Install-OSDeploySoftware command reference](../../powershell-modules/osdeploy/Install-OSDeploySoftware.md)
-* [System Requirements](../../workstation-prerequisites/system-requirements.md)
-* [Install Windows ADK 25H2](../../core-components/microsoft-windows-adk/install-25h2.md)
-* [Install Microsoft Deployment Toolkit](../../core-components/microsoft-deployment-toolkit/install-mdt.md)
-* [Git for Windows](../../core-components/developer-tools/git.md)
-* [Visual Studio Code](../../core-components/developer-tools/vscode.md)
-* [Hyper-V](../../core-components/windows-components/hyper-v.md)
-* [7-Zip](../../core-components/utilities/7zip.md)
+* [Windows ADK 25H2](windows-adk-25h2.md)
+* [Windows ADK 26H1](windows-adk-26h1.md)
+* [Microsoft Deployment Toolkit](microsoft-mdt.md)
+* [Git for Windows](git-for-windows.md)
+* [Visual Studio Code](vs-code-stable.md)
+* [Visual Studio Code Insiders](vs-code-insiders.md)
+* [Microsoft Hyper-V](microsoft-hyper-v.md)
+* [7-Zip](7-zip.md)
