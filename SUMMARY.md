@@ -14,6 +14,7 @@
 
 * [Install Software](osdeploy-core/install-software/README.md)
   * [Windows ADK 25H2](osdeploy-core/install-software/windows-adk-25h2.md)
+  * [Windows ADK 26H1](osdeploy-core/install-software/windows-adk-26h1.md)
   * [Microsoft MDT](osdeploy-core/install-software/microsoft-mdt.md)
   * [Git for Windows](osdeploy-core/install-software/git-for-windows.md)
   * [VS Code (Stable)](osdeploy-core/install-software/vs-code-stable.md)
