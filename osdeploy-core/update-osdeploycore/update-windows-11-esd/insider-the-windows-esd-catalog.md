@@ -163,7 +163,7 @@ $entry = $allFiles | Where-Object {
 | `-Architecture amd64` | `x64`         |
 | `-Architecture arm64` | `ARM64`       |
 
-The catalog can contain both architectures; the workstation and `-Architecture` parameter control which records are eligible for selection.
+The catalog can contain both architectures; the OSDeploy PC and `-Architecture` parameter control which records are eligible for selection.
 
 Only the first matching record is selected for each architecture. If no matching Enterprise en-US record exists, the command writes a warning and skips that architecture.
 

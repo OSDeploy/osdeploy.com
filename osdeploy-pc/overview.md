@@ -4,10 +4,10 @@ OSDeploy provides IT administrators with a repeatable way to create and maintain
 
 Without OSDeploy, an administrator must assemble and service these components manually with DISM and other ADK tools. OSDeploy organizes the source files under `$env:ProgramData\OSDeployCore`, applies the selected customizations, and produces consistent boot media under `$env:ProgramData\OSDeployCore\boot`.
 
-OSDeploy creates the boot image on the workstation. OSDCloud runs from that image on the target device and performs the Windows deployment.
+OSDeploy creates the boot image on the OSDeploy PC. OSDCloud runs from that image on the target device and performs the Windows deployment.
 
 {% hint style="info" %}
-Use the workstation for boot-image creation and maintenance. Do not use these instructions as a guide for running OSDCloud on a target device.
+The OSDeploy PC is the PC where you run OSDeploy for boot-image creation and maintenance. Do not use these instructions as a guide for running OSDCloud on a target device.
 {% endhint %}
 
 ## Why Use OSDeploy?
@@ -40,13 +40,13 @@ Adding Wi-Fi drivers to an ADK WinPE image does not enable wireless networking. 
 
 ## Use a Dedicated Build Environment
 
-Use a standalone workstation or a dedicated virtual machine as the OSDeploy Core Workstation. A dedicated environment keeps the Windows ADK, PowerShell, modules, drivers, cached operating systems, and build configuration isolated from normal administrative work.
+Use a standalone PC or a dedicated virtual machine as the OSDeploy PC. A dedicated environment keeps the Windows ADK, PowerShell, modules, drivers, cached operating systems, and build configuration isolated from normal administrative work.
 
-This reduces unexpected changes between builds and makes the resulting boot images easier to reproduce. Keep the workstation updated, but control changes to its deployment toolchain.
+This reduces unexpected changes between builds and makes the resulting boot images easier to reproduce. Keep the OSDeploy PC updated, but control changes to its deployment toolchain.
 
-## Workstation Baseline
+## OSDeploy PC Baseline
 
-Configure the workstation with the following baseline:
+Configure the OSDeploy PC with the following baseline:
 
 | Requirement        | Baseline                                                                                                         |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
@@ -57,13 +57,13 @@ Configure the workstation with the following baseline:
 | Network            | Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and hardware-vendor download services |
 | PowerShell modules | OSDeploy and OSDCloud; OSD is optional                                                                           |
 | Registration       | Recast Software Community License (optional)                                                                     |
-| Environment        | Standalone workstation or dedicated virtual machine                                                              |
+| Environment        | Standalone PC or dedicated virtual machine                                                                       |
 
 Windows 11 on arm64 can potentially be used, but this configuration is not fully tested. Other Windows client versions and Windows Server are unsupported.
 
 ## Setup Sequence
 
-Complete the workstation setup in this order:
+Complete the OSDeploy PC setup in this order:
 
 1. Review the [system requirements](system-requirements.md) and install current Windows updates.
 2. Complete the required [Windows 11 configuration](windows-11-configuration.md).

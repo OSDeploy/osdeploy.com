@@ -21,7 +21,7 @@ Use the **MSI package** for all system and enterprise deployment scenarios.
 
 ## Download the Latest MSI
 
-This script reads the latest stable PowerShell release from GitHub, detects the workstation architecture, and downloads the matching MSI package to the OSDeploy Core software cache.
+This script reads the latest stable PowerShell release from GitHub, detects the OSDeploy PC architecture, and downloads the matching MSI package to the OSDeploy Core software cache.
 
 ```powershell
 $Release = Invoke-RestMethod -Uri 'https://api.github.com/repos/PowerShell/PowerShell/releases/latest'

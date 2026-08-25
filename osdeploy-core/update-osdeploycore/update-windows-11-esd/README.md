@@ -5,7 +5,9 @@ description: Download and verify Windows 11 25H2 Enterprise ESD files for OSDepl
 # Update Windows 11 ESD
 
 {% hint style="info" %}
-**TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 25H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` to download only one architecture.
+`Update-OSDeployCoreESD` is the first public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the Windows ESD source files need updating.
+
+**TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 25H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` only when one architecture is needed.
 
 ```powershell
 Update-OSDeployCoreESD
@@ -26,14 +28,14 @@ Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 
 
 ## Select an Architecture
 
-The architectures offered by default depend on the workstation architecture.
+The architectures offered by default depend on the OSDeploy PC architecture.
 
-| Workstation | Default ESD selection |
+| OSDeploy PC | Default ESD selection |
 | ----------- | --------------------- |
 | AMD64       | x64 first, then ARM64 |
 | ARM64       | ARM64 only            |
 
-Download only the x64 ESD on an AMD64 workstation:
+Download only the x64 ESD on an AMD64 OSDeploy PC:
 
 ```powershell
 Update-OSDeployCoreESD -Architecture amd64
@@ -45,7 +47,7 @@ Download only the ARM64 ESD:
 Update-OSDeployCoreESD -Architecture arm64
 ```
 
-When `-Architecture` is omitted, the command processes every architecture supported by the current workstation. Each ESD is confirmed separately before downloading.
+When `-Architecture` is omitted, the command processes every architecture supported by the current OSDeploy PC. Each ESD is confirmed separately before downloading.
 
 ## Download the ESD Files
 
@@ -134,6 +136,8 @@ Update-OSDeployCoreOS -Architecture amd64
 
 ## Related
 
+* [Complete OSDeploy Core update](../README.md)
 * [Update-OSDeployCoreESD command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
 * [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Insider: The Windows ESD Catalog](insider-the-windows-esd-catalog.md)
 * [System Requirements](../../../osdeploy-pc/system-requirements.md)

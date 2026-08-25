@@ -1,10 +1,10 @@
 # Install PowerShell Modules
 
-Install the Recast OSDeploy and Recast OSDCloud modules on the OSDeploy Core Workstation. Install the OSD module only when a workflow requires its legacy commands.
+Install the Recast OSDeploy and Recast OSDCloud modules on the OSDeploy PC. Install the OSD module only when a workflow requires its legacy commands.
 
 | Module          | Purpose                                                                                | Requirement |
 | --------------- | -------------------------------------------------------------------------------------- | ----------- |
-| Recast OSDeploy | Creates and maintains OSDeploy Core and builds OSDCloud boot images on the workstation | Required    |
+| Recast OSDeploy | Creates and maintains OSDeploy Core and builds OSDCloud boot images on the OSDeploy PC | Required    |
 | Recast OSDCloud | Provides the current OSDCloud deployment commands used in Windows PE                   | Required    |
 | OSD             | Provides legacy OSD and OSDCloud v1 commands                                           | Optional    |
 

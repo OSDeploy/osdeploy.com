@@ -5,7 +5,9 @@ description: Download and prepare WinPE driver packages for OSDeploy Core boot i
 # Update WinPE Drivers
 
 {% hint style="info" %}
-**TLDR:** Run `Update-OSDeployCoreDrivers` to refresh all active driver catalogs, download the matching packages, and expand them into the OSDeploy Core library. Use `-Name` to process specific sources.
+`Update-OSDeployCoreDrivers` is the third public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the WinPE driver library needs updating.
+
+**TLDR:** Run `Update-OSDeployCoreDrivers` to update all active driver sources. Use `-Name` only when specific sources are needed.
 
 ```powershell
 Update-OSDeployCoreDrivers
@@ -183,6 +185,7 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 ## Related
 
+* [Complete OSDeploy Core update](../README.md)
 * [Update-OSDeployCoreDrivers command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
 * [WinPE Drivers overview](../../../core-components/winpe-drivers/)
 * [Dell WinPE Drivers](../../../core-components/winpe-drivers/dell.md)

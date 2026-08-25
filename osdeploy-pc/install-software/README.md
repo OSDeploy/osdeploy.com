@@ -1,17 +1,17 @@
 ---
 description: >-
-  Use Install-OSDeploySoftware to prepare a Windows workstation and populate
+  Use Install-OSDeploySoftware to prepare an OSDeploy PC and populate
   OSDeployCore with reusable software content.
 ---
 
 # Install Software
 
-`Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy workstation. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
+`Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy PC. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
 
 <figure><img src="../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-Only Windows ADK 25H2 and 7-Zip are required for OSDeploy and OSDCloud. All other components are optional and should be installed only when the workstation or workflow needs them.
+Only Windows ADK 25H2 and 7-Zip are required for OSDeploy and OSDCloud. All other components are optional and should be installed only when the OSDeploy PC or workflow needs them.
 {% endhint %}
 
 {% hint style="info" %}
@@ -38,7 +38,7 @@ Add `-Force` to install a component. Multiple components are processed in the or
 Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
 ```
 
-Use `-DownloadOnly` to download supported content without installing it on the workstation.
+Use `-DownloadOnly` to download supported content without installing it on the OSDeploy PC.
 
 ```powershell
 Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -DownloadOnly
@@ -58,7 +58,7 @@ Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -DownloadOnly
 | `hyperv`        | Hyper-V                                      | Optional    | Windows optional feature    | No            |
 
 {% hint style="warning" %}
-Windows ADK 26H1 is a special-use component. Do not install it unless the workstation is running Windows 11 26H1. Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow.
+Windows ADK 26H1 is a special-use component. Do not install it unless the OSDeploy PC is running Windows 11 26H1. Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow.
 {% endhint %}
 
 {% hint style="warning" %}

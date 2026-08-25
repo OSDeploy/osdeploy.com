@@ -1,6 +1,6 @@
 # System Requirements
 
-Use a fully updated Windows 11 25H2 amd64 computer for the OSDeploy Core Workstation.
+Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
 
 ## Supported Configuration
 
@@ -17,9 +17,9 @@ Use a fully updated Windows 11 25H2 amd64 computer for the OSDeploy Core Worksta
 Windows 11 on arm64 can potentially be used, but it is not fully tested. Other Windows client versions and all Windows Server versions are unsupported.
 {% endhint %}
 
-The OSDeploy module manages the Windows ADK components required by its boot-image workflow. Do not install the ADK as part of this workstation setup.
+The OSDeploy module manages the Windows ADK components required by its boot-image workflow. Do not install the ADK as part of this OSDeploy PC setup.
 
-## Check the Workstation
+## Check the OSDeploy PC
 
 Open Windows PowerShell or PowerShell as an administrator, then run the following commands:
 
@@ -44,7 +44,7 @@ Confirm that the output reports Windows 11 25H2, build 26200 or later, `AMD64`, 
 
 ## Update Windows
 
-The workstation must have the latest cumulative updates before OSDeploy creates or services boot images.
+The OSDeploy PC must have the latest cumulative updates before OSDeploy creates or services boot images.
 
 Open Windows Update from PowerShell:
 
@@ -52,11 +52,11 @@ Open Windows Update from PowerShell:
 Start-Process 'ms-settings:windowsupdate'
 ```
 
-Select **Check for updates**, install all available cumulative updates, and restart Windows when prompted. Repeat the process until Windows Update reports that the workstation is current.
+Select **Check for updates**, install all available cumulative updates, and restart Windows when prompted. Repeat the process until Windows Update reports that the OSDeploy PC is current.
 
 ## Internet Access
 
-Allow outbound HTTPS access to the services used by the workstation. These include:
+Allow outbound HTTPS access to the services used by the OSDeploy PC. These include:
 
 * Microsoft download and update services
 * GitHub release and content services
