@@ -10,7 +10,7 @@
 * [Windows 11 Configuration](workstation-setup/windows-11-configuration.md)
 * [Install PowerShell 7](workstation-setup/install-powershell-7.md)
 * [Install PowerShell Modules](workstation-setup/powershell-modules.md)
-* [Community Registration](workstation-setup/community-registration.md)
+* [Registration](workstation-setup/community-registration.md)
 
 ## OSDeploy Core
 
@@ -45,7 +45,6 @@
 
 * [About](core-components/about.md)
 * [PowerShell](core-components/powershell/README.md)
-  * [Install PowerShell 7](core-components/powershell/install-powershell.md)
 * [Microsoft Windows ADK](core-components/microsoft-windows-adk/README.md)
   * [Install 25H2](core-components/microsoft-windows-adk/install-25h2.md)
   * [Install 26H1](core-components/microsoft-windows-adk/install-26h1.md)
@@ -57,8 +56,6 @@
   * [Lenovo](core-components/winpe-drivers/lenovo.md)
   * [Intel Ethernet](core-components/winpe-drivers/intel-ethernet.md)
   * [Intel Wireless](core-components/winpe-drivers/intel-wireless.md)
-* [Windows Components](core-components/windows-components/README.md)
-  * [Hyper-V](core-components/windows-components/hyper-v.md)
 * [Developer Tools](core-components/developer-tools/README.md)
   * [Git for Windows](core-components/developer-tools/git.md)
   * [Visual Studio Code](core-components/developer-tools/vscode.md)

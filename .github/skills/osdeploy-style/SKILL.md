@@ -144,5 +144,5 @@ For retired tools, insert a `{% hint style="warning" %}` block immediately after
 These existing pages in the `osdeploy.com` repo demonstrate correct style and can be used as reference:
 
 - [`core-components/microsoft-deployment-toolkit/install-mdt.md`](../../core-components/microsoft-deployment-toolkit/install-mdt.md) — best example of hint blocks, property tables, and Related section
-- [`core-components/powershell/install-powershell.md`](../../core-components/powershell/install-powershell.md) — embed shortcode + code block style + architecture-aware scripting
+- [`workstation-setup/install-powershell-7.md`](../../../workstation-setup/install-powershell-7.md) — embed shortcode + code block style + architecture-aware scripting
 - [`core-components/powershell-modules/psmodules.md`](../../core-components/powershell-modules/psmodules.md) — H2-per-topic pattern with install blocks
