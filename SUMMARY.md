@@ -3,15 +3,18 @@
 * [OSDeploy Home](README.md)
 * [Events](events.md)
 
-## Workstation Prerequisites
+## Workstation Setup
 
-* [Overview](workstation-prerequisites/overview.md)
-* [System Requirements](workstation-prerequisites/system-requirements.md)
-* [PowerShell Modules](workstation-prerequisites/powershell-modules.md)
-* [Registration](workstation-prerequisites/registration.md)
+* [Overview](workstation-setup/overview.md)
+* [System Requirements](workstation-setup/system-requirements.md)
+* [Windows 11 Configuration](workstation-setup/windows-11-configuration.md)
+* [Install PowerShell 7](workstation-setup/install-powershell-7.md)
+* [Install PowerShell Modules](workstation-setup/powershell-modules.md)
+* [Community Registration](workstation-setup/community-registration.md)
 
 ## OSDeploy Core
 
+* [Overview](osdeploy-core/overview.md)
 * [Install Software](osdeploy-core/install-software/README.md)
   * [Windows ADK 25H2](osdeploy-core/install-software/windows-adk-25h2.md)
   * [Windows ADK 26H1](osdeploy-core/install-software/windows-adk-26h1.md)
@@ -29,6 +32,14 @@
   * [Insider: Export WinPE Drivers](osdeploy-core/update-windows-11-os/export-winpe-drivers.md)
 * [Update WinPE Drivers](osdeploy-core/update-winpe-drivers/README.md)
   * [How To: Driver Cleanup](osdeploy-core/update-winpe-drivers/how-to-cleanup-old-drivers.md)
+
+## OSDeploy Boot
+
+* [Overview](osdeploy-boot/overview.md)
+
+## OSDeploy Hydration
+
+* [Overview](osdeploy-hydration/overview.md)
 
 ## Core Components
 

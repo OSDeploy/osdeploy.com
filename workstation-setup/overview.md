@@ -1,4 +1,4 @@
-# OSDeploy Core Workstation
+# Overview
 
 OSDeploy provides IT administrators with a repeatable way to create and maintain OSDCloud boot images. It builds on the Windows Assessment and Deployment Kit (ADK), combining the ADK deployment tools and optional components with the PowerShell modules, drivers, applications, scripts, and settings required by OSDCloud.
 
@@ -27,9 +27,9 @@ This gives IT administrators a stable method for updating boot images as Windows
 
 The image source determines whether wireless networking can be supported:
 
-| Image source | Wireless support |
-| --- | --- |
-| Windows ADK WinPE | Wireless hardware is not supported. OSDeploy excludes Wi-Fi drivers from these builds. |
+| Image source              | Wireless support                                                                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Windows ADK WinPE         | Wireless hardware is not supported. OSDeploy excludes Wi-Fi drivers from these builds.                                               |
 | Imported Windows 11 WinRE | Wireless networking can be supported when the image contains the required Windows components and compatible Wi-Fi drivers are added. |
 
 Use a WinRE-based OSDCloud boot image when target devices must connect without wired Ethernet. OSDeploy can maintain Microsoft and vendor wireless drivers in OSDeploy Core and add selected drivers during the build.
@@ -48,16 +48,16 @@ This reduces unexpected changes between builds and makes the resulting boot imag
 
 Configure the workstation with the following baseline:
 
-| Requirement | Baseline |
-| --- | --- |
-| Operating system | Windows 11 25H2 amd64 |
-| PowerShell | Latest PowerShell 7 installed from the MSI package |
-| Permissions | Local administrative rights |
-| Storage | At least 50 GB of free space on the system volume |
-| Network | Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and hardware-vendor download services |
-| PowerShell modules | OSDeploy and OSDCloud; OSD is optional |
-| Registration | Recast Software Community License |
-| Environment | Standalone workstation or dedicated virtual machine |
+| Requirement        | Baseline                                                                                                         |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Operating system   | Windows 11 25H2 amd64                                                                                            |
+| PowerShell         | Latest PowerShell 7 installed from the MSI package                                                               |
+| Permissions        | Local administrative rights                                                                                      |
+| Storage            | At least 50 GB of free space on the system volume                                                                |
+| Network            | Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and hardware-vendor download services |
+| PowerShell modules | OSDeploy and OSDCloud; OSD is optional                                                                           |
+| Registration       | Recast Software Community License                                                                                |
+| Environment        | Standalone workstation or dedicated virtual machine                                                              |
 
 Windows 11 on arm64 can potentially be used, but this configuration is not fully tested. Other Windows client versions and Windows Server are unsupported.
 
@@ -67,6 +67,6 @@ Complete the workstation setup in this order:
 
 1. Review the [system requirements](system-requirements.md), install current Windows updates, and install the latest PowerShell 7 MSI package.
 2. Install the required [PowerShell modules](powershell-modules.md).
-3. Obtain and install the [Recast Software Community License](registration.md).
+3. Obtain and install the [Recast Software Community License](community-registration.md).
 
 After completing these steps, use the OSDeploy module to populate OSDeploy Core and create OSDCloud boot images.

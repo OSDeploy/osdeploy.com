@@ -134,4 +134,4 @@ Update-OSDeployCoreOS -Architecture amd64
 
 * [Update-OSDeployCoreESD command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
 * [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-* [System Requirements](../../workstation-prerequisites/system-requirements.md)
+* [System Requirements](../../workstation-setup/system-requirements.md)
