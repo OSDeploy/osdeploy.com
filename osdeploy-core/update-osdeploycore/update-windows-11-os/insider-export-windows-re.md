@@ -1,8 +1,10 @@
 ---
-description: Follow how Update-OSDeployCoreOS extracts Windows RE and creates a separate recovery-image cache.
+description: >-
+  Follow how Update-OSDeployCoreOS extracts Windows RE and creates a separate
+  recovery-image cache.
 ---
 
-# Insider: Exporting Windows RE
+# Insider: Export Windows RE
 
 This article follows the Windows RE path inside `Update-OSDeployCoreOS`. The function extracts the recovery image from the Enterprise operating system and creates a separate cache that preserves its relationship to the source Windows build.
 
@@ -21,16 +23,16 @@ This keeps one copy of the full setup media under `windows-os` and a smaller rec
 
 The function mounts the exported Enterprise image and looks in the standard recovery directory:
 
-```text
+```
 Windows\System32\Recovery\
 ```
 
 It tests for two files independently:
 
-| Source file | OSDeploy destination | Purpose |
-| --- | --- | --- |
+| Source file   | OSDeploy destination   | Purpose                                   |
+| ------------- | ---------------------- | ----------------------------------------- |
 | `ReAgent.xml` | `.temp\os-reagent.xml` | Recovery configuration from the source OS |
-| `winre.wim` | `.wim\winre.wim` | Windows Recovery Environment image |
+| `winre.wim`   | `.wim\winre.wim`       | Windows Recovery Environment image        |
 
 The relevant code does not assume either file exists:
 
@@ -53,11 +55,11 @@ If `ReAgent.xml` is missing, the recovery image can still be copied. If `winre.w
 
 After copying `winre.wim`, the function opens index 1 with `Get-WindowsImage` and writes three metadata files under the Windows OS `.core` directory:
 
-| File | Content |
-| --- | --- |
-| `winre-windowsimage.json` | JSON representation of the image properties |
-| `winre-windowsimage.xml` | CLIXML representation of the image properties |
-| `winre-windowsimagecontent.txt` | File listing from `Get-WindowsImageContent` |
+| File                            | Content                                       |
+| ------------------------------- | --------------------------------------------- |
+| `winre-windowsimage.json`       | JSON representation of the image properties   |
+| `winre-windowsimage.xml`        | CLIXML representation of the image properties |
+| `winre-windowsimagecontent.txt` | File listing from `Get-WindowsImageContent`   |
 
 These files describe the recovery WIM before the separate recovery directory is built. They travel with the copied `.core` content into that directory.
 
@@ -65,24 +67,24 @@ These files describe the recovery WIM before the separate recovery directory is 
 
 The Windows OS import and Windows RE import use the same destination ID:
 
-```text
+```
 26200.8653-amd64-enterprise-en-us
 ```
 
 Their roots are different:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\windows-os\26200.8653-amd64-enterprise-en-us\
 C:\ProgramData\OSDeployCore\cache\windows-re\26200.8653-amd64-enterprise-en-us\
 ```
 
 The function creates the recovery cache with three robocopy operations:
 
-| Windows OS source | Windows RE destination | Included content |
-| --- | --- | --- |
-| `.core\` | `.core\` | Core files except OS image data and WinPE/WinSetup metadata |
-| `.temp\` | `.temp\` | Extracted temporary content except logs |
-| `.wim\` | `.wim\` | `winre.wim` only |
+| Windows OS source | Windows RE destination | Included content                                            |
+| ----------------- | ---------------------- | ----------------------------------------------------------- |
+| `.core\`          | `.core\`               | Core files except OS image data and WinPE/WinSetup metadata |
+| `.temp\`          | `.temp\`               | Extracted temporary content except logs                     |
+| `.wim\`           | `.wim\`                | `winre.wim` only                                            |
 
 The exclusions are deliberate:
 
@@ -106,11 +108,11 @@ The function reads the copied recovery WIM from its final location and creates `
 
 The file combines two kinds of data:
 
-| Property group | Examples | Source |
-| --- | --- | --- |
-| Recovery image identity | `Version`, `Architecture`, `Languages`, `ImageSize`, `FileCount` | `winre.wim` index 1 |
-| Source OS identity | `OSImageName`, `OSEditionId`, `OSVersion`, `OSCreatedTime` | Exported Enterprise `install.wim` |
-| Cache location | `Path`, `ImagePath`, `ImageIndex` | Final `windows-re` directory |
+| Property group          | Examples                                                         | Source                            |
+| ----------------------- | ---------------------------------------------------------------- | --------------------------------- |
+| Recovery image identity | `Version`, `Architecture`, `Languages`, `ImageSize`, `FileCount` | `winre.wim` index 1               |
+| Source OS identity      | `OSImageName`, `OSEditionId`, `OSVersion`, `OSCreatedTime`       | Exported Enterprise `install.wim` |
+| Cache location          | `Path`, `ImagePath`, `ImageIndex`                                | Final `windows-re` directory      |
 
 This allows a consumer to inspect the recovery image and confirm which Windows OS image supplied it without reopening both WIM files.
 
@@ -162,8 +164,8 @@ Get-WindowsImage -ImagePath $WinREWim -Index 1
 
 ## Related
 
-* [Update Windows 11 OS](README.md)
+* [Update Windows 11 OS](./)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-* [Build-OSDeployBoot command reference](../../powershell-modules/osdeploy/Build-OSDeployBoot.md)
+* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Build-OSDeployBoot command reference](../../../powershell-modules/osdeploy/Build-OSDeployBoot.md)

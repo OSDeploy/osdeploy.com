@@ -16,14 +16,14 @@ Keep the newest known-working version of each driver family and architecture. Do
 
 Expanded driver folders are stored by architecture:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\amd64\
 C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\arm64\
 ```
 
 A folder name contains the driver family and version. For example:
 
-```text
+```
 dell-A09
 dell-A10
 hp-3.30
@@ -119,5 +119,5 @@ Replace `dell` with `hp`, `intel-ethernet`, or `intel-wifi` as required. The com
 
 ## Related
 
-* [Update WinPE Drivers](README.md)
-* [Update-OSDeployCoreDrivers command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
+* [Update WinPE Drivers](./)
+* [Update-OSDeployCoreDrivers command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)

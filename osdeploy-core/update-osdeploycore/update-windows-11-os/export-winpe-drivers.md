@@ -1,8 +1,10 @@
 ---
-description: Follow how Update-OSDeployCoreOS discovers and caches Microsoft inbox Ethernet and Wi-Fi drivers for WinPE.
+description: >-
+  Follow how Update-OSDeployCoreOS discovers and caches Microsoft inbox Ethernet
+  and Wi-Fi drivers for WinPE.
 ---
 
-# Insider: Exporting WinPE Drivers from an OS
+# Insider: Export WinPE Drivers
 
 This article follows the network-driver extraction path in `Update-OSDeployCoreOS`. While the exported Enterprise image is mounted read-only, OSDeploy identifies Microsoft inbox Ethernet and Wi-Fi packages and copies their DriverStore content into the WinPE driver repository.
 
@@ -29,7 +31,7 @@ The two passes differ only in their package-name pattern and destination family.
 
 The read-only Windows mount supplies two source directories:
 
-```text
+```
 Windows\servicing\Packages\
 Windows\System32\DriverStore\FileRepository\
 ```
@@ -38,10 +40,10 @@ The servicing directory contains `.mum` manifests that describe Windows packages
 
 OSDeploy searches for these manifest patterns:
 
-| Driver family | Manifest pattern |
-| --- | --- |
-| Ethernet | `Microsoft-Windows-Ethernet-Client-*.mum` |
-| Wi-Fi | `Microsoft-Windows-Wifi-Client-*.mum` |
+| Driver family | Manifest pattern                          |
+| ------------- | ----------------------------------------- |
+| Ethernet      | `Microsoft-Windows-Ethernet-Client-*.mum` |
+| Wi-Fi         | `Microsoft-Windows-Wifi-Client-*.mum`     |
 
 If the servicing directory does not exist or no matching manifests are found, the function writes verbose diagnostics and continues.
 
@@ -60,12 +62,12 @@ $DriverInf = $MumXml.Root.Descendants($ns + 'inf') |
 
 OSDeploy extracts four values:
 
-| Value | XML source | Use |
-| --- | --- | --- |
-| Name | `assemblyIdentity` `name` attribute | Logical driver name |
-| Version | `assemblyIdentity` `version` attribute | Version comparison and destination path |
-| Architecture | `assemblyIdentity` `processorArchitecture` attribute | Architecture repository |
-| INF file | First `inf` element | DriverStore folder lookup |
+| Value        | XML source                                           | Use                                     |
+| ------------ | ---------------------------------------------------- | --------------------------------------- |
+| Name         | `assemblyIdentity` `name` attribute                  | Logical driver name                     |
+| Version      | `assemblyIdentity` `version` attribute               | Version comparison and destination path |
+| Architecture | `assemblyIdentity` `processorArchitecture` attribute | Architecture repository                 |
+| INF file     | First `inf` element                                  | DriverStore folder lookup               |
 
 The package prefix and `-FOD-Package` suffix are removed from the logical name. For example, an Ethernet package name is normalized by:
 
@@ -126,13 +128,13 @@ If no matching directory is found, the function writes a verbose message and mov
 
 Driver packages are stored under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\
 ```
 
 The complete path is organized by architecture, family and version, and normalized driver name:
 
-```text
+```
 winpe-drivers\
 └── amd64\
 	├── microsoft-windows-ethernet-<version>\
@@ -143,11 +145,11 @@ winpe-drivers\
 
 ARM64 packages use the parallel `arm64` directory when the servicing metadata reports that architecture.
 
-| Path segment | Source |
-| --- | --- |
-| `amd64` or `arm64` | `processorArchitecture` from the package identity |
-| `microsoft-windows-ethernet-*` or `microsoft-windows-wifi-*` | Driver family and package version |
-| Final directory | Normalized package name |
+| Path segment                                                 | Source                                            |
+| ------------------------------------------------------------ | ------------------------------------------------- |
+| `amd64` or `arm64`                                           | `processorArchitecture` from the package identity |
+| `microsoft-windows-ethernet-*` or `microsoft-windows-wifi-*` | Driver family and package version                 |
+| Final directory                                              | Normalized package name                           |
 
 ## Copy or Reuse the Package
 
@@ -198,8 +200,8 @@ A missing driver directory does not necessarily mean the OS import failed. Manif
 
 ## Related
 
-* [Update Windows 11 OS](README.md)
+* [Update Windows 11 OS](./)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
-* [Update WinPE Drivers](../update-winpe-drivers/README.md)
-* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Update WinPE Drivers](../update-winpe-drivers/)
+* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)

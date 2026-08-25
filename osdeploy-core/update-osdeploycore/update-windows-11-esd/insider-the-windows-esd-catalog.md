@@ -1,5 +1,7 @@
 ---
-description: Understand how OSDeploy uses the Windows ESD catalog to select, download, cache, and verify Windows 11 media.
+description: >-
+  Understand how OSDeploy uses the Windows ESD catalog to select, download,
+  cache, and verify Windows 11 media.
 ---
 
 # Insider: The Windows ESD Catalog
@@ -14,21 +16,21 @@ The bundled catalog may not contain the newest Windows release available from Mi
 
 The catalog is included with the OSDeploy module under:
 
-```text
+```
 OSDeploy\core\operatingsystems\
 ```
 
 Each XML file describes one Windows release. The catalog file name contains the Windows build and release:
 
-```text
+```
 26200.8653-win11-25h2.xml
 ```
 
-| File name segment | Meaning |
-| --- | --- |
-| `26200.8653` | Windows build and revision |
-| `win11` | Windows 11 |
-| `25h2` | Windows 11, version 25H2 |
+| File name segment | Meaning                    |
+| ----------------- | -------------------------- |
+| `26200.8653`      | Windows build and revision |
+| `win11`           | Windows 11                 |
+| `25h2`            | Windows 11, version 25H2   |
 
 Catalog names change when newer media is tested and added to OSDeploy. The function sorts the bundled catalog files by name and selects the first one.
 
@@ -71,7 +73,7 @@ $allFiles = $catalog.MCT.Catalogs.Catalog.PublishedMedia.Files.File
 
 The XML hierarchy leads to a collection of `File` elements:
 
-```text
+```
 MCT
 └── Catalogs
 	└── Catalog
@@ -82,16 +84,16 @@ MCT
 
 Each `File` element is a logical media record. The fields used by OSDeploy are:
 
-| Element | Purpose |
-| --- | --- |
-| `FileName` | Name used for the cached ESD |
+| Element        | Purpose                                      |
+| -------------- | -------------------------------------------- |
+| `FileName`     | Name used for the cached ESD                 |
 | `LanguageCode` | Windows language and region, such as `en-us` |
-| `Language` | Display name for the language |
-| `Edition` | Windows edition represented by the record |
-| `Architecture` | Media architecture: `x64` or `ARM64` |
-| `Size` | File size in bytes |
-| `Sha256` | SHA256 checksum used to verify the ESD |
-| `FilePath` | Microsoft Content Delivery Network URL |
+| `Language`     | Display name for the language                |
+| `Edition`      | Windows edition represented by the record    |
+| `Architecture` | Media architecture: `x64` or `ARM64`         |
+| `Size`         | File size in bytes                           |
+| `Sha256`       | SHA256 checksum used to verify the ESD       |
+| `FilePath`     | Microsoft Content Delivery Network URL       |
 
 An abbreviated Enterprise record looks like this:
 
@@ -156,10 +158,10 @@ $entry = $allFiles | Where-Object {
 
 `Select-Object -First 1` matters because one physical ESD can be represented by several logical edition records. The function needs one matching Enterprise record per requested architecture, not every record that refers to the same media.
 
-| OSDeploy parameter | Catalog value |
-| --- | --- |
-| `-Architecture amd64` | `x64` |
-| `-Architecture arm64` | `ARM64` |
+| OSDeploy parameter    | Catalog value |
+| --------------------- | ------------- |
+| `-Architecture amd64` | `x64`         |
+| `-Architecture arm64` | `ARM64`       |
 
 The catalog can contain both architectures; the workstation and `-Architecture` parameter control which records are eligible for selection.
 
@@ -182,7 +184,7 @@ $downloadDir = Join-Path $script:OSDeployCorePath 'OSDCloud' 'OS' $osFolderName
 
 For `26200.8653-win11-25h2.xml`, the capture groups contain `11` and `25h2`, producing:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
 ```
 
@@ -192,13 +194,13 @@ The build revision is intentionally absent from the directory. New tested media 
 
 The first processing loop does not immediately download anything. It classifies every resolved entry into one of these outcomes:
 
-| Condition | Result |
-| --- | --- |
-| Current file exists and SHA256 matches | Add it directly to `$results` |
-| Current file exists and SHA256 differs | Offer to recycle it and continue |
-| Verified older file exists | Offer to keep it or use the newer catalog entry |
-| URL cannot be reached | Warn and skip the entry |
-| URL is reachable | Add the entry to `$pendingEntries` |
+| Condition                              | Result                                          |
+| -------------------------------------- | ----------------------------------------------- |
+| Current file exists and SHA256 matches | Add it directly to `$results`                   |
+| Current file exists and SHA256 differs | Offer to recycle it and continue                |
+| Verified older file exists             | Offer to keep it or use the newer catalog entry |
+| URL cannot be reached                  | Warn and skip the entry                         |
+| URL is reachable                       | Add the entry to `$pendingEntries`              |
 
 The expected hash is normalized before comparison:
 
@@ -263,12 +265,12 @@ $curlArgs = @(
 
 Around curl's own retry behavior, the function has an outer retry loop with three automatic attempts. Each attempt is classified as one of four failures:
 
-| Failure | Code condition |
-| --- | --- |
-| `DownloadFailed` | `curl.exe` returns a nonzero exit code |
-| `DownloadMissing` | curl returns success but no output file exists |
+| Failure              | Code condition                                    |
+| -------------------- | ------------------------------------------------- |
+| `DownloadFailed`     | `curl.exe` returns a nonzero exit code            |
+| `DownloadMissing`    | curl returns success but no output file exists    |
 | `DownloadIncomplete` | resumable local length is below the remote length |
-| `ChecksumMismatch` | local SHA256 differs from the catalog |
+| `ChecksumMismatch`   | local SHA256 differs from the catalog             |
 
 A matching SHA256 sets `$downloadSucceeded` to `$true`. Only then is the `FileInfo` added to `$results`. After automatic attempts are exhausted, the function reports the relevant details and offers a manual retry.
 
@@ -335,7 +337,6 @@ Updating the OSDeploy module can therefore update the available Windows media wi
 
 ## Related
 
-* [Update Windows 11 ESD](README.md)
-* [Update-OSDeployCoreESD command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
-* [Update Windows 11 OS](../update-windows-11-os/README.md)
-
+* [Update Windows 11 ESD](./)
+* [Update-OSDeployCoreESD command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
+* [Update Windows 11 OS](../update-windows-11-os/)

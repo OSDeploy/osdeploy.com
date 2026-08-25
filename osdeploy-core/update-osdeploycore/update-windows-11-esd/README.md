@@ -18,7 +18,7 @@ Update-OSDeployCoreESD -Architecture arm64
 
 This command downloads and caches the source ESD files. It does not install Windows or import the ESD contents into OSDeploy Core.
 
-<figure><img src="../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
@@ -134,6 +134,6 @@ Update-OSDeployCoreOS -Architecture amd64
 
 ## Related
 
-* [Update-OSDeployCoreESD command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
-* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-* [System Requirements](../../workstation-setup/system-requirements.md)
+* [Update-OSDeployCoreESD command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
+* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [System Requirements](../../../osdeploy-pc/system-requirements.md)

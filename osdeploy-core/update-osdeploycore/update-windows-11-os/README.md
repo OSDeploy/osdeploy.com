@@ -20,7 +20,7 @@ Update-OSDeployCoreOS -Architecture arm64
 
 The command does not download Windows. Run `Update-OSDeployCoreESD` first so the required ESD files are available in the local cache.
 
-<figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
@@ -149,5 +149,5 @@ Build-OSDeployBoot
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-* [Build-OSDeployBoot command reference](../../powershell-modules/osdeploy/Build-OSDeployBoot.md)
+* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Build-OSDeployBoot command reference](../../../powershell-modules/osdeploy/Build-OSDeployBoot.md)

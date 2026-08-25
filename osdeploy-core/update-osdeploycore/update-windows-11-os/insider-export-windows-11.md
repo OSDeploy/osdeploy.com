@@ -1,8 +1,10 @@
 ---
-description: Follow how Update-OSDeployCoreOS turns a verified Enterprise ESD into Windows setup media and OSDeploy Core metadata.
+description: >-
+  Follow how Update-OSDeployCoreOS turns a verified Enterprise ESD into Windows
+  setup media and OSDeploy Core metadata.
 ---
 
-# Insider: Building an OS from an ESD
+# Insider: Export Windows 11
 
 This article follows the main code path in `Update-OSDeployCoreOS` as it transforms a verified Enterprise ESD into a complete Windows setup-media directory.
 
@@ -35,15 +37,15 @@ if ($Architecture -and $esdFiles) {
 
 The command does not calculate the Windows identity from image metadata at this point. It first parses the build and architecture from the ESD file name:
 
-| ESD file-name segment | OSDeploy value |
-| --- | --- |
-| Leading `26200.8653` | Build and revision |
-| `_x64FRE_` | `amd64` |
-| `_A64FRE_` | `arm64` |
+| ESD file-name segment | OSDeploy value     |
+| --------------------- | ------------------ |
+| Leading `26200.8653`  | Build and revision |
+| `_x64FRE_`            | `amd64`            |
+| `_A64FRE_`            | `arm64`            |
 
 These values form a destination ID such as:
 
-```text
+```
 26200.8653-amd64-enterprise-en-us
 ```
 
@@ -53,18 +55,18 @@ If the build or architecture cannot be parsed, the function warns and skips that
 
 The Windows OS cache uses this root:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\windows-os\
 ```
 
 For each destination ID, the function creates four working areas:
 
-| Directory | Purpose |
-| --- | --- |
-| `.core\` | Image metadata, boot files, and selected operating-system files |
-| `.temp\` | Temporary exports, registry hives, and operation logs |
-| `.wim\` | Separate WinPE, Windows Setup, and Windows RE images |
-| `WinOS-Media\` | Bootable Windows setup-media layout |
+| Directory      | Purpose                                                         |
+| -------------- | --------------------------------------------------------------- |
+| `.core\`       | Image metadata, boot files, and selected operating-system files |
+| `.temp\`       | Temporary exports, registry hives, and operation logs           |
+| `.wim\`        | Separate WinPE, Windows Setup, and Windows RE images            |
+| `WinOS-Media\` | Bootable Windows setup-media layout                             |
 
 It also writes `.core\id.json` so downstream functions can identify the directory without parsing its path.
 
@@ -74,12 +76,12 @@ If matching directories already exist in both the `windows-os` and `windows-re` 
 
 The first three ESD indexes have fixed setup roles. Windows editions begin at later indexes.
 
-| ESD index | Role | Destination |
-| --- | --- | --- |
-| 1 | Windows Setup Media | Expanded into `WinOS-Media\` |
-| 2 | Microsoft Windows PE | `.wim\winpe.wim` and `boot.wim` index 1 |
-| 3 | Microsoft Windows Setup | `.wim\winse.wim` and `boot.wim` index 2 |
-| 4 and later | Windows editions | Enterprise non-N exported to `install.wim` |
+| ESD index   | Role                    | Destination                                |
+| ----------- | ----------------------- | ------------------------------------------ |
+| 1           | Windows Setup Media     | Expanded into `WinOS-Media\`               |
+| 2           | Microsoft Windows PE    | `.wim\winpe.wim` and `boot.wim` index 1    |
+| 3           | Microsoft Windows Setup | `.wim\winse.wim` and `boot.wim` index 2    |
+| 4 and later | Windows editions        | Enterprise non-N exported to `install.wim` |
 
 The first index is applied as a directory tree instead of exported as another WIM:
 
@@ -97,7 +99,7 @@ Expand-WindowsImage `
 
 Indexes 2 and 3 are first exported into separate files:
 
-```text
+```
 .wim\winpe.wim
 .wim\winse.wim
 ```
@@ -109,10 +111,10 @@ For each file, the function records:
 
 The existing `WinOS-Media\sources\boot.wim` is then removed. The function exports `winpe.wim` into a new `boot.wim` and appends `winse.wim`:
 
-| Final index | Image |
-| --- | --- |
-| 1 | Microsoft Windows PE |
-| 2 | Microsoft Windows Setup |
+| Final index | Image                   |
+| ----------- | ----------------------- |
+| 1           | Microsoft Windows PE    |
+| 2           | Microsoft Windows Setup |
 
 This restores the standard two-index boot image expected by Windows setup media.
 
@@ -131,7 +133,7 @@ $enterpriseEntry = Get-WindowsImage -ImagePath $esdPath |
 
 That index is exported to:
 
-```text
+```
 WinOS-Media\sources\install.wim
 ```
 
@@ -143,10 +145,10 @@ The exported image is always index 1 in the new `install.wim`. Its `Get-WindowsI
 
 The `.core` directory contains three representations for each WinPE, Windows Setup, Windows OS, and Windows RE image:
 
-| File suffix | Source |
-| --- | --- |
-| `-windowsimage.json` | JSON serialization of `Get-WindowsImage` |
-| `-windowsimage.xml` | CLIXML serialization of `Get-WindowsImage` |
+| File suffix                | Source                                      |
+| -------------------------- | ------------------------------------------- |
+| `-windowsimage.json`       | JSON serialization of `Get-WindowsImage`    |
+| `-windowsimage.xml`        | CLIXML serialization of `Get-WindowsImage`  |
 | `-windowsimagecontent.txt` | File listing from `Get-WindowsImageContent` |
 
 The root `properties.json` is a smaller index for downstream OSDeploy commands. It includes the image ID, paths, architecture, languages, edition, version, image size, and file and directory counts.
@@ -162,14 +164,14 @@ Mount-WindowsImage -ImagePath $DestinationImagePath -Index 1 -Path $MountPath -R
 
 The function uses that mount to collect content without servicing or committing changes to the WIM:
 
-| Content | Cached location |
-| --- | --- |
-| `SOFTWARE` and `SYSTEM` registry hives | `.temp\os-software.hive` and `.temp\os-system.hive` |
-| `Windows\Boot` | `.core\os-boot\` |
-| Selected System32 executables, DLLs, and related files | `.core\os-files\Windows\System32\` |
-| Windows PowerShell modules | `.core\os-files\Program Files\WindowsPowerShell\` |
-| Windows RE image and metadata | `.wim\winre.wim` and `.core\winre-*` |
-| Inbox Ethernet and Wi-Fi drivers | `OSDRepo\winpe-drivers\` |
+| Content                                                | Cached location                                     |
+| ------------------------------------------------------ | --------------------------------------------------- |
+| `SOFTWARE` and `SYSTEM` registry hives                 | `.temp\os-software.hive` and `.temp\os-system.hive` |
+| `Windows\Boot`                                         | `.core\os-boot\`                                    |
+| Selected System32 executables, DLLs, and related files | `.core\os-files\Windows\System32\`                  |
+| Windows PowerShell modules                             | `.core\os-files\Program Files\WindowsPowerShell\`   |
+| Windows RE image and metadata                          | `.wim\winre.wim` and `.core\winre-*`                |
+| Inbox Ethernet and Wi-Fi drivers                       | `OSDRepo\winpe-drivers\`                            |
 
 The selected operating-system files include tools and dependencies that can supplement a boot image, such as `curl.exe`, `makecab.exe`, `tar.exe`, `systeminfo.exe`, and Windows PowerShell modules. OSDeploy copies only the patterns defined by the function rather than the entire installed operating system.
 
@@ -210,8 +212,8 @@ Get-WindowsImage -ImagePath $BootWim |
 
 ## Related
 
-* [Update Windows 11 OS](README.md)
+* [Update Windows 11 OS](./)
 * [Insider: The Windows ESD Catalog](../update-windows-11-esd/insider-the-windows-esd-catalog.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)

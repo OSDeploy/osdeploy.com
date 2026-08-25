@@ -3,7 +3,6 @@
 Configure the Windows optional features required by the OSDeploy workflows that will run on the workstation. These changes require local administrative rights and may require a restart.
 
 {% embed url="https://learn.microsoft.com/en-us/windows/client-management/client-tools/add-remove-hide-features" %}
-{% endembed %}
 
 ## Hyper-V
 
@@ -57,7 +56,7 @@ Confirm that `State` is `Enabled`.
 
 ## Related
 
-* [Microsoft Hyper-V](../osdeploy-core/install-software/microsoft-hyper-v.md)
+* [Microsoft Hyper-V](install-software/microsoft-hyper-v.md)
 * [New-OSDeployHyperVM](../powershell-modules/osdeploy/New-OSDeployHyperVM.md)
 
 Continue to [Install PowerShell 7](install-powershell-7.md).
