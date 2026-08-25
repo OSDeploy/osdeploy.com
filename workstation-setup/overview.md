@@ -56,7 +56,7 @@ Configure the workstation with the following baseline:
 | Storage            | At least 50 GB of free space on the system volume                                                                |
 | Network            | Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and hardware-vendor download services |
 | PowerShell modules | OSDeploy and OSDCloud; OSD is optional                                                                           |
-| Registration       | Recast Software Community License                                                                                |
+| Registration       | Recast Software Community License (optional)                                                                     |
 | Environment        | Standalone workstation or dedicated virtual machine                                                              |
 
 Windows 11 on arm64 can potentially be used, but this configuration is not fully tested. Other Windows client versions and Windows Server are unsupported.
@@ -65,8 +65,10 @@ Windows 11 on arm64 can potentially be used, but this configuration is not fully
 
 Complete the workstation setup in this order:
 
-1. Review the [system requirements](system-requirements.md), install current Windows updates, and install the latest PowerShell 7 MSI package.
-2. Install the required [PowerShell modules](powershell-modules.md).
-3. Obtain and install the [Recast Software Community License](community-registration.md).
+1. Review the [system requirements](system-requirements.md) and install current Windows updates.
+2. Complete the required [Windows 11 configuration](windows-11-configuration.md).
+3. Install the latest [PowerShell 7 MSI package](install-powershell-7.md).
+4. Install the required [PowerShell modules](powershell-modules.md).
+5. Optionally obtain and install the [Recast Software Community License](community-registration.md).
 
 After completing these steps, use the OSDeploy module to populate OSDeploy Core and create OSDCloud boot images.
