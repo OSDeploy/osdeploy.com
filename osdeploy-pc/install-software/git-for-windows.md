@@ -7,7 +7,7 @@ description: Install Git for Windows with Install-OSDeploySoftware.
 Git for Windows provides the source-control tools used to clone and maintain OSDeploy repositories. `Install-OSDeploySoftware` installs the `Git.Git` WinGet package when `git` is not already available.
 
 {% hint style="info" %}
-Git for Windows is optional. Install it only when the workstation will clone or maintain Git repositories.
+Git for Windows is optional. Install it only when the OSDeploy PC will clone or maintain Git repositories.
 {% endhint %}
 
 ## Preview

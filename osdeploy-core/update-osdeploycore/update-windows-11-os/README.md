@@ -7,7 +7,9 @@ description: >-
 # Update Windows 11 OS
 
 {% hint style="info" %}
-**TLDR:** Run `Update-OSDeployCoreOS` after downloading the Windows ESD files. Use `-Architecture` to import only one architecture.
+`Update-OSDeployCoreOS` is the second public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. It uses the ESD files from stage one to prepare Windows setup media and Windows Recovery Environment (WinRE) content. Run it independently when only this prepared content needs updating.
+
+**TLDR:** Run `Update-OSDeployCoreOS` after downloading the Windows ESD files. Use `-Architecture` only when one architecture is needed.
 
 ```powershell
 Update-OSDeployCoreOS
@@ -28,7 +30,7 @@ Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 
 
 ## Select an Architecture
 
-When `-Architecture` is omitted, the command imports every verified ESD returned by the OSDeploy Core cache. On an AMD64 workstation, this can include both AMD64 and ARM64 media. On an ARM64 workstation, the ESD download workflow provides ARM64 media.
+When `-Architecture` is omitted, the command imports every verified ESD returned by the OSDeploy Core cache. On an AMD64 OSDeploy PC, this can include both AMD64 and ARM64 media. On an ARM64 OSDeploy PC, the ESD download workflow provides ARM64 media.
 
 Import only the AMD64 ESD:
 
@@ -145,6 +147,7 @@ Build-OSDeployBoot
 
 ## Related
 
+* [Complete OSDeploy Core update](../README.md)
 * [Update Windows 11 ESD](../update-windows-11-esd/)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)

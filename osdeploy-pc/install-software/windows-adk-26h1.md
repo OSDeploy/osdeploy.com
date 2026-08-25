@@ -7,7 +7,7 @@ description: Install Windows ADK 26H1 and its Windows PE add-on with Install-OSD
 Windows ADK 26H1 provides the Deployment Tools, Windows Configuration Designer, and Windows PE files used to create OSDeploy boot images. `Install-OSDeploySoftware` installs ADK version `10.1.28000.1` and its matching Windows PE add-on.
 
 {% hint style="warning" %}
-Windows ADK 26H1 is a special-use component. Do not install it unless the workstation is running Windows 11 26H1. Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow.
+Windows ADK 26H1 is a special-use component. Do not install it unless the OSDeploy PC is running Windows 11 26H1. Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow.
 {% endhint %}
 
 ## Preview

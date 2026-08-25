@@ -1,8 +1,8 @@
 # Registration
 
-Registration is optional. OSDeploy and OSDCloud can be used without registering the OSDeploy Core Workstation.
+Registration is optional. OSDeploy and OSDCloud can be used without registering the OSDeploy PC.
 
-Register the workstation with a free Recast Software Community License to enable features reserved for registered use.
+Register the OSDeploy PC with a free Recast Software Community License to enable features reserved for registered use.
 
 {% hint style="info" %}
 Some OSDeploy and OSDCloud features are enabled only when a valid Recast Software Community License is detected. The available features can change as the modules are updated.
@@ -61,4 +61,4 @@ if (-not (Test-Path -Path $LicensePath -PathType Leaf)) {
 Get-ChildItem -Path $LicensePath | Select-Object Name, DirectoryName, LastWriteTime
 ```
 
-The OSDeploy Core Workstation is now registered and ready for OSDeploy Core initialization and OSDCloud boot-image creation. If registration is skipped, continue with the workstation setup using the features available for unregistered use.
+The OSDeploy PC is now registered and ready for OSDeploy Core initialization and OSDCloud boot-image creation. If registration is skipped, continue with the OSDeploy PC setup using the features available for unregistered use.

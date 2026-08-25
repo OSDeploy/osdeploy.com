@@ -1,6 +1,6 @@
 # Windows 11 Configuration
 
-Configure the Windows optional features required by the OSDeploy workflows that will run on the workstation. These changes require local administrative rights and may require a restart.
+Configure the Windows optional features required by the OSDeploy workflows that will run on the OSDeploy PC. These changes require local administrative rights and may require a restart.
 
 {% embed url="https://learn.microsoft.com/en-us/windows/client-management/client-tools/add-remove-hide-features" %}
 
@@ -8,10 +8,10 @@ Configure the Windows optional features required by the OSDeploy workflows that 
 
 Hyper-V provides the local virtualization platform used by `New-OSDeployHyperVM` to create test virtual machines that boot from OSDeploy WinPE images. Use it to validate boot images and test OSDCloud deployments without physical hardware.
 
-Hyper-V is available in Windows 11 Pro, Enterprise, and Education. It is optional for boot-image creation and OSDCloud deployment, and is required only when the workstation will run local test virtual machines.
+Hyper-V is available in Windows 11 Pro, Enterprise, and Education. It is optional for boot-image creation and OSDCloud deployment, and is required only when the OSDeploy PC will run local test virtual machines.
 
 {% hint style="warning" %}
-Enabling Hyper-V requires a physical workstation with hardware virtualization enabled. Restart Windows after enabling the feature before creating or starting virtual machines.
+Enabling Hyper-V requires a physical OSDeploy PC with hardware virtualization enabled. Restart Windows after enabling the feature before creating or starting virtual machines.
 {% endhint %}
 
 ### Enable Hyper-V with OSDeploy
@@ -28,7 +28,7 @@ Enable Hyper-V:
 Install-OSDeploySoftware -Name 'hyperv' -Force
 ```
 
-OSDeploy skips Hyper-V when it detects that the workstation is a virtual machine. The component does not add files to OSDeploy Core and does not support `-DownloadOnly`.
+OSDeploy skips Hyper-V when it detects that the OSDeploy PC is a virtual machine. The component does not add files to OSDeploy Core and does not support `-DownloadOnly`.
 
 ### Enable Hyper-V Manually
 

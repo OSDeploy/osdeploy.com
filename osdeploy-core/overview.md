@@ -17,7 +17,7 @@ A boot image is assembled from several independent sources. Depending on the sel
 OSDeploy Core organizes these sources before the build starts. `Build-OSDeployBoot` can then select the appropriate content, apply it to the chosen WinPE or WinRE source, and write the completed boot image and related media back to the OSDeploy Core workspace.
 
 {% hint style="info" %}
-OSDeploy creates and maintains the boot image on the OSDeploy Core Workstation. OSDCloud runs from that image on the target device and performs the Windows deployment.
+OSDeploy creates and maintains the boot image on the OSDeploy PC. OSDCloud runs from that image on the target device and performs the Windows deployment.
 {% endhint %}
 
 ## Core Content
