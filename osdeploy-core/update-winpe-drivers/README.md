@@ -18,6 +18,8 @@ Update-OSDeployCoreDrivers -Name 'intel-ethernet' -DownloadOnly
 
 All matching packages are processed automatically. The command does not display a package picker or ask for confirmation unless `-Confirm` is specified.
 
+<figure><img src="../../.gitbook/assets/image (424).png" alt=""><figcaption></figcaption></figure>
+
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 {% endhint %}

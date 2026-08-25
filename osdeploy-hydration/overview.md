@@ -1,5 +1,7 @@
 ---
-description: Understand how Invoke-OSDeployHydration prepares an OSDeploy Core Workstation and creates OSDCloud BootMedia.
+description: >-
+  Understand how Invoke-OSDeployHydration prepares an OSDeploy Core Workstation
+  and creates OSDCloud BootMedia.
 ---
 
 # Overview
@@ -7,6 +9,8 @@ description: Understand how Invoke-OSDeployHydration prepares an OSDeploy Core W
 OSDeploy Hydration is the end-to-end workstation preparation workflow provided by the `Invoke-OSDeployHydration` function. It installs the required build tools, downloads the current Windows and driver content, and creates OSDCloud BootMedia in a single coordinated process.
 
 Use Hydration to prepare a new OSDeploy Core Workstation or refresh the core content needed to build a current boot image. The function detects the workstation architecture and runs each stage in the required order.
+
+<figure><img src="../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Hydration prepares the workstation and creates BootMedia. OSDCloud runs from that media on the target device and performs the Windows deployment.

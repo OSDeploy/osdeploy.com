@@ -1,5 +1,7 @@
 ---
-description: Build Windows 11 setup media, Windows RE content, and WinPE driver sources from cached Enterprise ESD files.
+description: >-
+  Build Windows 11 setup media, Windows RE content, and WinPE driver sources
+  from cached Enterprise ESD files.
 ---
 
 # Update Windows 11 OS
@@ -17,6 +19,8 @@ Update-OSDeployCoreOS -Architecture arm64
 `Update-OSDeployCoreOS` transforms verified Windows 11 Enterprise ESD files into the Windows setup media, Windows RE cache, image metadata, and network driver sources used by OSDeploy Core.
 
 The command does not download Windows. Run `Update-OSDeployCoreESD` first so the required ESD files are available in the local cache.
+
+<figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
@@ -60,7 +64,7 @@ For each ESD, the command:
 
 The destination name combines the build, architecture, edition, and language:
 
-```text
+```
 26200.8653-amd64-enterprise-en-us
 ```
 
@@ -72,29 +76,29 @@ Image expansion, export, mounting, and content inspection can take several minut
 
 Windows setup media and its supporting files are written under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\windows-os\<destination-name>\
 ```
 
 The primary directory contains:
 
-| Path | Content |
-| --- | --- |
-| `WinOS-Media\` | Windows setup media with `sources\boot.wim` and `sources\install.wim` |
-| `.wim\` | Individual `winpe.wim`, `winse.wim`, and `winre.wim` files |
-| `.core\` | Image metadata, boot files, and selected Windows files |
-| `.temp\` | Registry hives, `ReAgent.xml`, and operation logs |
-| `properties.json` | Windows OS identity and image properties |
+| Path              | Content                                                               |
+| ----------------- | --------------------------------------------------------------------- |
+| `WinOS-Media\`    | Windows setup media with `sources\boot.wim` and `sources\install.wim` |
+| `.wim\`           | Individual `winpe.wim`, `winse.wim`, and `winre.wim` files            |
+| `.core\`          | Image metadata, boot files, and selected Windows files                |
+| `.temp\`          | Registry hives, `ReAgent.xml`, and operation logs                     |
+| `properties.json` | Windows OS identity and image properties                              |
 
 The parallel Windows RE cache is written under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\cache\windows-re\<destination-name>\
 ```
 
 Microsoft inbox network drivers are staged by architecture under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\
 ```
 
@@ -141,7 +145,7 @@ Build-OSDeployBoot
 
 ## Related
 
-* [Update Windows 11 ESD](../update-windows-11-esd/README.md)
+* [Update Windows 11 ESD](../update-windows-11-esd/)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)

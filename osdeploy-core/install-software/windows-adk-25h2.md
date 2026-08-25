@@ -1,10 +1,14 @@
 ---
-description: Install Windows ADK 25H2 and its Windows PE add-on with Install-OSDeploySoftware.
+description: >-
+  Install Windows ADK 25H2 and its Windows PE add-on with
+  Install-OSDeploySoftware.
 ---
 
 # Windows ADK 25H2
 
 Windows ADK 25H2 provides the Deployment Tools, Windows Configuration Designer, and Windows PE files used to create OSDeploy boot images. `Install-OSDeploySoftware` installs ADK version `10.1.26100.2454` and its matching Windows PE add-on.
+
+<figure><img src="../../.gitbook/assets/image (190).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Windows ADK 25H2 is required for the standard OSDeploy and OSDCloud workflow.
@@ -34,7 +38,7 @@ The function downloads offline layouts and silently installs these ADK features:
 
 The downloaded content is retained in:
 
-```text
+```
 C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454\
 ```
 
@@ -56,5 +60,5 @@ This saves `adksetup.exe` in the `adk` subfolder and `adkwinpesetup.exe` in the 
 
 ## Related
 
-* [Install Software](README.md)
+* [Install Software](./)
 * [Windows ADK 25H2 reference](../../core-components/microsoft-windows-adk/install-25h2.md)

@@ -8,6 +8,8 @@ description: >-
 
 `Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy workstation. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
 
+<figure><img src="../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
+
 {% hint style="info" %}
 Only Windows ADK 25H2 and 7-Zip are required for OSDeploy and OSDCloud. All other components are optional and should be installed only when the workstation or workflow needs them.
 {% endhint %}
@@ -67,7 +69,7 @@ Microsoft no longer supports MDT. Its installer is provided only as a convenienc
 
 The function keeps reusable installers and WinPE application files in `C:\ProgramData\OSDeployCore`. This allows later OSDeploy operations to reuse the downloaded content.
 
-```text
+```
 C:\ProgramData\OSDeployCore\
 |-- software\
 |   |-- Microsoft.WindowsADK_10.1.26100.2454\
@@ -84,13 +86,13 @@ C:\ProgramData\OSDeployCore\
       `-- <version>\
 ```
 
-| Component | Content added to OSDeployCore |
-| --------- | ----------------------------- |
-| Windows ADK 25H2 | Saves `adksetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adk` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adkwinpe`. A full installation also downloads each offline layout into these folders. |
-| Windows ADK 26H1 | Saves `adksetup.exe` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.28000.1`. |
-| Microsoft Deployment Toolkit | Saves the verified `MicrosoftDeploymentToolkit_x64.msi` below `software\Microsoft.DeploymentToolkit_6.3.8456.1000`. |
-| 7-Zip | Downloads amd64 and arm64 installers below `software\7zip.7zip`, then prepares versioned `7zr.exe` and 7-Zip Extra files below `cache\winpe-apps\7zip`. |
-| Git, Visual Studio Code, Visual Studio Code Insiders, Hyper-V | Does not add reusable content to OSDeployCore. WinGet manages the application downloads, and Hyper-V is a Windows optional feature. |
+| Component                                                     | Content added to OSDeployCore                                                                                                                                                                                                                     |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows ADK 25H2                                              | Saves `adksetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adk` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.26100.2454\adkwinpe`. A full installation also downloads each offline layout into these folders. |
+| Windows ADK 26H1                                              | Saves `adksetup.exe` and `adkwinpesetup.exe` below `software\Microsoft.WindowsADK_10.1.28000.1`.                                                                                                                                                  |
+| Microsoft Deployment Toolkit                                  | Saves the verified `MicrosoftDeploymentToolkit_x64.msi` below `software\Microsoft.DeploymentToolkit_6.3.8456.1000`.                                                                                                                               |
+| 7-Zip                                                         | Downloads amd64 and arm64 installers below `software\7zip.7zip`, then prepares versioned `7zr.exe` and 7-Zip Extra files below `cache\winpe-apps\7zip`.                                                                                           |
+| Git, Visual Studio Code, Visual Studio Code Insiders, Hyper-V | Does not add reusable content to OSDeployCore. WinGet manages the application downloads, and Hyper-V is a Windows optional feature.                                                                                                               |
 
 `-DownloadOnly` is supported for both ADK releases, MDT, and 7-Zip. It is not supported for Git, either Visual Studio Code channel, or Hyper-V.
 
