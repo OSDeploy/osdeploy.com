@@ -8,8 +8,6 @@ description: >-
 
 `Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy PC. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
 
-<figure><img src="../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
-
 {% hint style="info" %}
 Only Windows ADK 25H2 and 7-Zip are required for OSDeploy and OSDCloud. All other components are optional and should be installed only when the OSDeploy PC or workflow needs them.
 {% endhint %}

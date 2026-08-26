@@ -8,8 +8,9 @@
 * [Overview](osdeploy-pc/overview.md)
 * [System Requirements](osdeploy-pc/system-requirements.md)
 * [Windows 11 Configuration](osdeploy-pc/windows-11-configuration.md)
-* [Install PowerShell 7](osdeploy-pc/install-powershell-7.md)
-* [Install PowerShell Modules](osdeploy-pc/powershell-modules.md)
+* [PowerShell 7](osdeploy-pc/powershell-7.md)
+* [PowerShell Modules](osdeploy-pc/powershell-modules.md)
+* [Registration](osdeploy-pc/community-registration.md)
 * [Install Software](osdeploy-pc/install-software/README.md)
   * [Windows ADK 25H2](osdeploy-pc/install-software/windows-adk-25h2.md)
   * [Windows ADK 26H1](osdeploy-pc/install-software/windows-adk-26h1.md)
@@ -19,7 +20,6 @@
   * [Visual Studio Code Insiders](osdeploy-pc/install-software/vs-code-insiders.md)
   * [Microsoft Hyper-V](osdeploy-pc/install-software/microsoft-hyper-v.md)
   * [7-Zip](osdeploy-pc/install-software/7-zip.md)
-* [Registration](osdeploy-pc/community-registration.md)
 
 ## OSDeploy Core
 

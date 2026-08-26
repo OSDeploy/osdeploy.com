@@ -67,7 +67,7 @@ Complete the OSDeploy PC setup in this order:
 
 1. Review the [system requirements](system-requirements.md) and install current Windows updates.
 2. Complete the required [Windows 11 configuration](windows-11-configuration.md).
-3. Install the latest [PowerShell 7 MSI package](install-powershell-7.md).
+3. Install the latest [PowerShell 7 MSI package](powershell-7.md).
 4. Install the required [PowerShell modules](powershell-modules.md).
 5. Optionally obtain and install the [Recast Software Community License](community-registration.md).
 

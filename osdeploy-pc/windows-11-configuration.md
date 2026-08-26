@@ -59,4 +59,4 @@ Confirm that `State` is `Enabled`.
 * [Microsoft Hyper-V](install-software/microsoft-hyper-v.md)
 * [New-OSDeployHyperVM](../powershell-modules/osdeploy/New-OSDeployHyperVM.md)
 
-Continue to [Install PowerShell 7](install-powershell-7.md).
+Continue to [Install PowerShell 7](powershell-7.md).
