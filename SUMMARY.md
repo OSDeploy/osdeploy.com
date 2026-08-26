@@ -1,16 +1,16 @@
 # Table of contents
 
 * [OSDeploy Home](README.md)
+* [Support](support.md)
 * [Events](events.md)
 
 ## OSDeploy PC
 
 * [Overview](osdeploy-pc/overview.md)
-* [Windows 11 OS](osdeploy-pc/windows-11-os.md)
-* [Windows 11 Optional](osdeploy-pc/windows-11-optional.md)
+* [Windows 11](osdeploy-pc/windows-11-os.md)
 * [PowerShell 7](osdeploy-pc/powershell-7.md)
 * [PowerShell Modules](osdeploy-pc/powershell-modules.md)
-* [Registration](osdeploy-pc/community-registration.md)
+* [Community Registration](osdeploy-pc/community-registration.md)
 * [Install Software](osdeploy-pc/install-software/README.md)
   * [Windows ADK 25H2](osdeploy-pc/install-software/windows-adk-25h2.md)
   * [Windows ADK 26H1](osdeploy-pc/install-software/windows-adk-26h1.md)

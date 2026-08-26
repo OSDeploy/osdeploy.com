@@ -1,64 +1,65 @@
-# Registration
+---
+description: Register an OSDeploy PC with a free Recast Software Community License.
+---
 
-Registration is optional. OSDeploy and OSDCloud can be used without registering the OSDeploy PC.
+# Community Registration
 
 Register the OSDeploy PC with a free Recast Software Community License to enable features reserved for registered use.
 
 {% hint style="info" %}
-Some OSDeploy and OSDCloud features are enabled only when a valid Recast Software Community License is detected. The available features can change as the modules are updated.
+Registration is optional. OSDeploy and OSDCloud work without a Community License, but some features are available only when a valid license is detected. Licensed features can change as the modules are updated.
 {% endhint %}
 
-## Obtain a Community License
+## Register the OSDeploy PC
+
+{% stepper %}
+{% step %}
+### Download the Community License
 
 1. Open the [Recast Software Community Portal](https://portal.recastsoftware.com/).
-2. Register for an account or sign in with an existing account.
+2. Create an account or sign in.
 3. Download the license ZIP for **Right Click Tools Community Edition**.
+4. Extract the ZIP and locate the file with the `.license2` extension.
+{% endstep %}
 
-The ZIP contains a file with the `.license2` extension. OSDeploy discovers Community License files in `$env:ProgramData\Recast Software\Licenses`.
+{% step %}
+### Install the License
 
-## Install the License
-
-Open PowerShell 7 as an administrator. Set `$LicenseZip` to the full path of the ZIP downloaded from the Community Portal, then run the following commands:
+Open PowerShell 7 as an administrator. Set `$LicenseFile` to the extracted `.license2` file, then run the following commands:
 
 ```powershell
-$LicenseZip = 'C:\Path\To\DownloadedLicense.zip'
-$LicenseDirectory = Join-Path $env:ProgramData 'Recast Software\Licenses'
-$ExtractDirectory = Join-Path $env:TEMP 'RecastCommunityLicense'
+$LicenseFile = 'C:\Path\To\CommunityLicense.license2'
+$LicenseDirectory = Join-Path -Path $env:ProgramData -ChildPath 'Recast Software\Licenses'
 
-if (-not (Test-Path -Path $LicenseZip -PathType Leaf)) {
-	throw "The license ZIP was not found at $LicenseZip."
+if (-not (Test-Path -LiteralPath $LicenseFile -PathType Leaf)) {
+	throw "The license file was not found at $LicenseFile."
 }
 
-Remove-Item -Path $ExtractDirectory -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -Path $LicenseDirectory -ItemType Directory -Force | Out-Null
-New-Item -Path $ExtractDirectory -ItemType Directory -Force | Out-Null
-Expand-Archive -Path $LicenseZip -DestinationPath $ExtractDirectory -Force
-
-$LicenseFiles = Get-ChildItem -Path $ExtractDirectory -Filter '*.license2' -File -Recurse
-if (-not $LicenseFiles) {
-	throw 'The downloaded ZIP does not contain a .license2 file.'
-}
-
-$LicenseFiles | Copy-Item -Destination $LicenseDirectory -Force
-Remove-Item -Path $ExtractDirectory -Recurse -Force
+Copy-Item -LiteralPath $LicenseFile -Destination $LicenseDirectory -Force
 ```
 
 {% hint style="warning" %}
-Keep the `.license2` file extension unchanged. OSDeploy does not discover renamed files with a different extension.
+Keep the `.license2` extension unchanged. OSDeploy does not discover license files with a different extension.
 {% endhint %}
+{% endstep %}
 
-## Verify the License File
+{% step %}
+### Verify the License File
 
-Confirm that at least one Community License file exists in the expected directory:
+Confirm that the license file exists in the directory used by OSDeploy and OSDCloud:
 
 ```powershell
-$LicensePath = Join-Path $env:ProgramData 'Recast Software\Licenses\*.license2'
+$LicenseDirectory = Join-Path -Path $env:ProgramData -ChildPath 'Recast Software\Licenses'
+$LicenseFiles = Get-ChildItem -Path $LicenseDirectory -Filter '*.license2' -File
 
-if (-not (Test-Path -Path $LicensePath -PathType Leaf)) {
-	throw "No Community License file was found at $LicensePath."
+if (-not $LicenseFiles) {
+	throw "No Community License file was found in $LicenseDirectory."
 }
 
-Get-ChildItem -Path $LicensePath | Select-Object Name, DirectoryName, LastWriteTime
+$LicenseFiles | Select-Object Name, DirectoryName, LastWriteTime
 ```
+{% endstep %}
+{% endstepper %}
 
-The OSDeploy PC is now registered and ready for OSDeploy Core initialization and OSDCloud boot-image creation. If registration is skipped, continue with the OSDeploy PC setup using the features available for unregistered use.
+The OSDeploy PC is now registered. Continue to [Install Software](install-software/), or continue without registration using the features available for unregistered use.

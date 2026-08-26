@@ -60,4 +60,4 @@ Import-Module -Name OSDeploy -Force
 Get-OSDeployModuleVersion
 ```
 
-Continue to [Registration](community-registration.md).
+Continue to [Community Registration](community-registration.md).
