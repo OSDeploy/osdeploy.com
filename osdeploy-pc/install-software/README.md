@@ -6,6 +6,24 @@ description: >-
 
 # Install Software
 
+## Quick Setup
+
+Windows ADK 25H2 and 7-Zip are required for the standard OSDeploy and OSDCloud workflow. Run these commands from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+
+Preview the required software installation without making changes:
+
+```powershell
+Install-OSDeploySoftware -Name 'adk-25h2', '7zip'
+```
+
+Install the required software:
+
+```powershell
+Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
+```
+
+## Overview
+
 `Install-OSDeploySoftware` is the single entry point for preparing the software used by an OSDeploy PC. Use it to discover supported components, review their sources, install one or more components, and cache supported installers for later use.
 
 {% hint style="info" %}
