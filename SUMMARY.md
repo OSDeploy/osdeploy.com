@@ -1,6 +1,6 @@
 # Table of contents
 
-* [OSDeploy Home](README.md)
+* [OSDeploy Home](README.md "Home")
 * [Support](support.md)
 * [Events](events.md)
 

@@ -1,4 +1,4 @@
-# OSDeploy
+# OSDeploy Home
 
 OSDeploy is the documentation and guidance site for the [Recast OSDeploy PowerShell Module](https://github.com/OSDeploy/RecastOSDeploy). Use these guides to prepare an OSDeploy workstation, maintain deployment content, build boot media, and automate the complete setup workflow.
 
@@ -12,15 +12,17 @@ The OSDeploy PowerShell module is currently in preview, with its final release e
 Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-preview/) to be notified when new builds are released and to participate in the insider preview program.
 {% endhint %}
 
-## Module Ecosystem
+{% embed url="https://www.recastsoftware.com/?utm_source=osdeploy&utm_medium=ad&utm_campaign=web" %}
+
+## PowerShell Module Ecosystem
 
 Three modules, three execution contexts. Each module owns a distinct phase of the deployment workflow.
 
-| Module | What it does | Where it runs | Status |
-| --- | --- | --- | --- |
-| [OSDeploy](powershell-modules/osdeploy/README.md) | Builds and customizes WinPE boot images | Windows 11 (full OS) | Preview |
-| [OSDCloud](powershell-modules/osdcloud/README.md) | Deploys Windows 11 from cloud-hosted content | WinPE | Current / Recommended |
-| [OSD](powershell-modules/osd/README.md) | Provides legacy OSDCloud v1 deployment | WinPE | Maintained (legacy) |
+| Module                                   | What it does                                 | Where it runs        | Status                |
+| ---------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
+| [OSDeploy](powershell-modules/osdeploy/) | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
+| [OSDCloud](powershell-modules/osdcloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
+| [OSD](powershell-modules/osd/)           | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
 
 ## [OSDeploy PC](osdeploy-pc/overview.md)
 
