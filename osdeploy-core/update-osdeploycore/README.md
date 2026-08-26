@@ -26,11 +26,11 @@ Update-OSDeployCore
 
 The complete update runs these public sub-functions in sequence:
 
-| Stage | Public sub-function | Purpose |
-| ----- | ------------------- | ------- |
-| 1 | `Update-OSDeployCoreESD` | Downloads and verifies the Windows 11 Enterprise Electronic Software Download (ESD) source files. |
-| 2 | `Update-OSDeployCoreOS` | Uses the ESD files to prepare Windows setup media and WinRE content. |
-| 3 | `Update-OSDeployCoreDrivers` | Downloads and prepares current WinPE driver packages. |
+| Stage | Public sub-function          | Purpose                                                                                           |
+| ----- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| 1     | `Update-OSDeployCoreESD`     | Downloads and verifies the Windows 11 Enterprise Electronic Software Download (ESD) source files. |
+| 2     | `Update-OSDeployCoreOS`      | Uses the ESD files to prepare Windows setup media and WinRE content.                              |
+| 3     | `Update-OSDeployCoreDrivers` | Downloads and prepares current WinPE driver packages.                                             |
 
 Windows ESD files are large, and preparing the Windows images can take time. Follow any download prompts and leave the PowerShell window open until all three stages finish.
 
@@ -83,4 +83,4 @@ Build-OSDeployBoot
 * [OSDeploy PowerShell Module](../../powershell-modules/osdeploy/)
 * [Update-OSDeployCore command reference](../../powershell-modules/osdeploy/Update-OSDeployCore.md)
 * [Build-OSDeployBoot command reference](../../powershell-modules/osdeploy/Build-OSDeployBoot.md)
-* [System Requirements](../../osdeploy-pc/system-requirements.md)
+* [System Requirements](../../osdeploy-pc/windows-11-os.md)

@@ -185,11 +185,11 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 ## Related
 
-* [Complete OSDeploy Core update](../README.md)
+* [Complete OSDeploy Core update](../)
 * [Update-OSDeployCoreDrivers command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
 * [WinPE Drivers overview](../../../core-components/winpe-drivers/)
 * [Dell WinPE Drivers](../../../core-components/winpe-drivers/dell.md)
 * [HP WinPE Drivers](../../../core-components/winpe-drivers/hp.md)
 * [Intel Ethernet Drivers](../../../core-components/winpe-drivers/intel-ethernet.md)
 * [Intel Wireless Drivers](../../../core-components/winpe-drivers/intel-wireless.md)
-* [System Requirements](../../../osdeploy-pc/system-requirements.md)
+* [System Requirements](../../../osdeploy-pc/windows-11-os.md)

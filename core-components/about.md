@@ -30,6 +30,6 @@ All components except PowerShell 7 and the PowerShell modules can be installed o
 * [Microsoft Windows ADK](microsoft-windows-adk/) — Install the Windows Assessment and Deployment Kit and WinPE add-on
 * [Microsoft Deployment Toolkit](microsoft-deployment-toolkit/) — Install MDT for existing MDT-based deployment workflows (retired)
 * [WinPE Drivers](winpe-drivers/) — Download vendor driver packs for injection into WinPE boot images
-* [Windows 11 Configuration](../osdeploy-pc/windows-11-configuration.md) — Enable optional Windows features such as Hyper-V
+* [Windows 11 Configuration](../osdeploy-pc/windows-11-optional.md) — Enable optional Windows features such as Hyper-V
 * [Developer Tools](developer-tools/) — Optional tools for authoring and customizing OSDeploy workflows
 * [Utilities](utilities/) — Additional tools such as 7-Zip used by OSDeploy during boot image creation

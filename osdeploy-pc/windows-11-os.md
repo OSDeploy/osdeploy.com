@@ -1,17 +1,17 @@
-# System Requirements
+# Windows 11 OS
 
 Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
 
 ## Supported Configuration
 
-| Component | Requirement |
-| --- | --- |
-| Operating system | Windows 11 25H2, build 26200 or later |
-| Architecture | amd64 |
-| PowerShell | Latest stable PowerShell 7, installed from the MSI package |
-| Permissions | Local administrative rights |
-| Storage | At least 50 GB of free space on the system volume |
-| Network | Internet access |
+| Component        | Requirement                                                |
+| ---------------- | ---------------------------------------------------------- |
+| Operating system | Windows 11 25H2, build 26200 or later                      |
+| Architecture     | amd64                                                      |
+| PowerShell       | Latest stable PowerShell 7, installed from the MSI package |
+| Permissions      | Local administrative rights                                |
+| Storage          | At least 50 GB of free space on the system volume          |
+| Network          | Internet access                                            |
 
 {% hint style="warning" %}
 Windows 11 on arm64 can potentially be used, but it is not fully tested. Other Windows client versions and all Windows Server versions are unsupported.
@@ -66,4 +66,4 @@ Allow outbound HTTPS access to the services used by the OSDeploy PC. These inclu
 
 Proxy servers and TLS inspection must permit PowerShell, `curl.exe`, and OSDeploy to download content from these services.
 
-Continue to [Windows 11 Configuration](windows-11-configuration.md).
+Continue to [Windows 11 Configuration](windows-11-optional.md).

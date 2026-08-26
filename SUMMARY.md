@@ -6,8 +6,8 @@
 ## OSDeploy PC
 
 * [Overview](osdeploy-pc/overview.md)
-* [System Requirements](osdeploy-pc/system-requirements.md)
-* [Windows 11 Configuration](osdeploy-pc/windows-11-configuration.md)
+* [Windows 11 OS](osdeploy-pc/windows-11-os.md)
+* [Windows 11 Optional](osdeploy-pc/windows-11-optional.md)
 * [PowerShell 7](osdeploy-pc/powershell-7.md)
 * [PowerShell Modules](osdeploy-pc/powershell-modules.md)
 * [Registration](osdeploy-pc/community-registration.md)
