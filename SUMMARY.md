@@ -4,9 +4,9 @@
 * [Support](support.md)
 * [Events](events.md)
 
-## OSDeploy Skills
+## OSDeploy Agents
 
-* [Page 1](osdeploy-skills/page-1.md)
+* [Author a WinPE Profile JSON](osdeploy-agents/author-winpe-profile-json.md)
 
 ## OSDeploy PC
 
