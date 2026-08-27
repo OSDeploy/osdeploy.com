@@ -4,6 +4,10 @@
 * [Support](support.md)
 * [Events](events.md)
 
+## OSDeploy Skills
+
+* [Page 1](osdeploy-skills/page-1.md)
+
 ## OSDeploy PC
 
 * [Overview](osdeploy-pc/overview.md)
