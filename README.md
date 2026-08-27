@@ -18,11 +18,11 @@ Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-p
 
 Three modules, three execution contexts. Each module owns a distinct phase of the deployment workflow.
 
-| Module                                   | What it does                                 | Where it runs        | Status                |
-| ---------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
-| [OSDeploy](powershell-modules/osdeploy/) | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
-| [OSDCloud](powershell-modules/osdcloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
-| [OSD](powershell-modules/osd/)           | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
+| Module                                  | What it does                                 | Where it runs        | Status                |
+| --------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
+| [OSDeploy](command-reference/osdeploy/) | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
+| [OSDCloud](command-reference/osdcloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
+| [OSD](command-reference/osd/)           | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
 
 ## [OSDeploy PC](osdeploy-pc/overview.md)
 

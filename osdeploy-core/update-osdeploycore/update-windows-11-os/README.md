@@ -147,10 +147,10 @@ Build-OSDeployBoot
 
 ## Related
 
-* [Complete OSDeploy Core update](../README.md)
+* [Complete OSDeploy Core update](../)
 * [Update Windows 11 ESD](../update-windows-11-esd/)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
-* [Build-OSDeployBoot command reference](../../../powershell-modules/osdeploy/Build-OSDeployBoot.md)
+* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Build-OSDeployBoot command reference](../../../command-reference/osdeploy/build-osdeployboot.md)

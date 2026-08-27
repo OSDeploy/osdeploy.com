@@ -80,7 +80,7 @@ Build-OSDeployBoot
 
 ## Related
 
-* [OSDeploy PowerShell Module](../../powershell-modules/osdeploy/)
-* [Update-OSDeployCore command reference](../../powershell-modules/osdeploy/Update-OSDeployCore.md)
-* [Build-OSDeployBoot command reference](../../powershell-modules/osdeploy/Build-OSDeployBoot.md)
+* [OSDeploy PowerShell Module](../../command-reference/osdeploy/)
+* [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md)
+* [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)
 * [System Requirements](../../osdeploy-pc/windows-11-os.md)

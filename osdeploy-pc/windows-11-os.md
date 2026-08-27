@@ -125,6 +125,6 @@ Confirm that `State` is `Enabled`.
 ### Related
 
 * [Microsoft Hyper-V](install-software/microsoft-hyper-v.md)
-* [New-OSDeployHyperVM](../powershell-modules/osdeploy/New-OSDeployHyperVM.md)
+* [New-OSDeployHyperVM](../command-reference/osdeploy/new-osdeployhypervm.md)
 
 Continue to [Install PowerShell 7](powershell-7.md).

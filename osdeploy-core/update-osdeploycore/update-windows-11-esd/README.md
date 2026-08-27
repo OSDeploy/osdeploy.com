@@ -137,7 +137,7 @@ Update-OSDeployCoreOS -Architecture amd64
 ## Related
 
 * [Complete OSDeploy Core update](../)
-* [Update-OSDeployCoreESD command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreESD.md)
-* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Update-OSDeployCoreESD command reference](../../../command-reference/osdeploy/update-osdeploycoreesd.md)
+* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)
 * [Insider: The Windows ESD Catalog](insider-the-windows-esd-catalog.md)
 * [System Requirements](../../../osdeploy-pc/windows-11-os.md)

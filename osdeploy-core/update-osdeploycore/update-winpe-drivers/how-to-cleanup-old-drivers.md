@@ -120,4 +120,4 @@ Replace `dell` with `hp`, `intel-ethernet`, or `intel-wifi` as required. The com
 ## Related
 
 * [Update WinPE Drivers](./)
-* [Update-OSDeployCoreDrivers command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
+* [Update-OSDeployCoreDrivers command reference](../../../command-reference/osdeploy/update-osdeploycoredrivers.md)

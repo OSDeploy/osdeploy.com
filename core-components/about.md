@@ -26,7 +26,7 @@ All components except PowerShell 7 and the PowerShell modules can be installed o
 ## In This Section
 
 * [PowerShell](powershell/) — Learn why OSDeploy requires PowerShell 7.6 or later
-* [PowerShell Modules](../powershell-modules/about.md) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
+* [PowerShell Modules](../command-reference/about.md) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
 * [Microsoft Windows ADK](microsoft-windows-adk/) — Install the Windows Assessment and Deployment Kit and WinPE add-on
 * [Microsoft Deployment Toolkit](microsoft-deployment-toolkit/) — Install MDT for existing MDT-based deployment workflows (retired)
 * [WinPE Drivers](winpe-drivers/) — Download vendor driver packs for injection into WinPE boot images

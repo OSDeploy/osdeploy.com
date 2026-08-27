@@ -1,4 +1,4 @@
-# OSDeploy MDT Integration
+# About
 
 OSDeploy integrates with MDT through two public functions:
 
@@ -49,7 +49,7 @@ With `-Force`, it performs the following work:
 Install-OSDeployMDT -Force
 ```
 
-See [powershell-modules/osdeploy/Install-OSDeployMDT.md](../powershell-modules/osdeploy/Install-OSDeployMDT.md) for the full function reference.
+See [powershell-modules/osdeploy/Install-OSDeployMDT.md](../command-reference/osdeploy/install-osdeploymdt.md) for the full function reference.
 
 ***
 
@@ -76,12 +76,12 @@ Invoke-OSDeployMDT
 Invoke-OSDeployMDT -SetTimeZone 'Romance Standard Time'
 ```
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `-SetInputLocale` | String | Sets the default WinPE input locale. Default: `en-us`. |
-| `-SetTimeZone` | String | Sets the WinPE time zone. Default: current system time zone. |
+| Parameter         | Type   | Description                                                  |
+| ----------------- | ------ | ------------------------------------------------------------ |
+| `-SetInputLocale` | String | Sets the default WinPE input locale. Default: `en-us`.       |
+| `-SetTimeZone`    | String | Sets the WinPE time zone. Default: current system time zone. |
 
-See [powershell-modules/osdeploy/Invoke-OSDeployMDT.md](../powershell-modules/osdeploy/Invoke-OSDeployMDT.md) for the full function reference.
+See [powershell-modules/osdeploy/Invoke-OSDeployMDT.md](../command-reference/osdeploy/invoke-osdeploymdt.md) for the full function reference.
 
 ***
 

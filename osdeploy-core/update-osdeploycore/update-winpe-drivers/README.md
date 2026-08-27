@@ -186,7 +186,7 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 ## Related
 
 * [Complete OSDeploy Core update](../)
-* [Update-OSDeployCoreDrivers command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreDrivers.md)
+* [Update-OSDeployCoreDrivers command reference](../../../command-reference/osdeploy/update-osdeploycoredrivers.md)
 * [WinPE Drivers overview](../../../core-components/winpe-drivers/)
 * [Dell WinPE Drivers](../../../core-components/winpe-drivers/dell.md)
 * [HP WinPE Drivers](../../../core-components/winpe-drivers/hp.md)

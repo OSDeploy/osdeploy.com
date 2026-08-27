@@ -204,4 +204,4 @@ A missing driver directory does not necessarily mean the OS import failed. Manif
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Update WinPE Drivers](../update-winpe-drivers/)
-* [Update-OSDeployCoreOS command reference](../../../powershell-modules/osdeploy/Update-OSDeployCoreOS.md)
+* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)

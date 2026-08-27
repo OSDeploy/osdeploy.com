@@ -31,6 +31,6 @@ Do **not** install PowerShell 7 via WinGet or the Microsoft Store. Beginning wit
 ## In This Section
 
 * [Install PowerShell 7](../../osdeploy-pc/powershell-7.md) — Download and silently install the MSI package for amd64 or arm64
-* [PowerShell Modules](../../powershell-modules/osdeploy/) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
-* [OSD Module](../../powershell-modules/osd/) — Details for the OSD module (legacy OSDCloud v1 support)
-* [OSDCloud Module](../../powershell-modules/osdcloud/) — Details for the OSDCloud module (current, recommended)
+* [PowerShell Modules](../../command-reference/osdeploy/) — Install the OSDeploy, OSDCloud, and OSD modules from the PowerShell Gallery
+* [OSD Module](../../command-reference/osd/) — Details for the OSD module (legacy OSDCloud v1 support)
+* [OSDCloud Module](../../command-reference/osdcloud/) — Details for the OSDCloud module (current, recommended)
