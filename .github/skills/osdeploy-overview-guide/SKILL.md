@@ -1,6 +1,6 @@
 ---
 name: osdeploy-overview-guide
-description: Create, rewrite, or review concise OSDeploy workflow overview guides modeled on osdeploy-guide/create-a-hyper-v-vm/README.md. Use whenever an OSDeploy GitBook README or overview page must introduce a command-driven workflow, state prerequisites and defaults, summarize how it works, and direct readers to a detailed guide or command reference.
+description: Create, rewrite, or review concise, step-based OSDeploy workflow overview guides modeled on osdeploy-guide/initial-setup/registration/README.md. Use whenever an OSDeploy GitBook README or overview page must introduce a command-driven workflow, state prerequisites and defaults, summarize how it works, and direct readers to a detailed guide or command reference.
 ---
 
 # OSDeploy Overview Guide
@@ -36,16 +36,15 @@ Use this order unless the workflow clearly requires a small adjustment:
 1. YAML frontmatter with a one-sentence `description`.
 2. One H1 workflow title, usually an imperative task such as `# Create a Hyper-V VM`.
 3. A short opening paragraph naming the primary command and summarizing its end-to-end result.
-4. `## Requirements` with a brief lead-in and a compact bullet list.
-5. A warning hint for a prerequisite that commonly blocks or invalidates the workflow.
-6. `## Basic Usage` with the simplest useful command.
-7. A sentence explaining the default result, followed by a compact defaults table when several defaults matter.
-8. An info hint for important sizing or operational guidance that differs from the function default.
-9. `## How It Works` with a numbered, chronological summary of the major actions.
-10. A warning hint for a successful-but-incomplete fallback state when one exists.
-11. A final paragraph linking to the detailed guide and command reference.
+4. An info hint when the workflow is optional or needs important context before the reader starts.
+5. One H2 that states the task, followed by a `{% stepper %}` block.
+6. A `{% step %}` for each action the administrator performs, with an imperative H3 title.
+7. Requirements and blocking conditions in the first relevant step, including a warning hint when needed.
+8. The shortest useful command in its execution step, followed by defaults or automatic selections that affect the result.
+9. A final verification or next-action step when the result can be checked or requires follow-up work.
+10. A closing paragraph linking to the detailed guide and command reference.
 
-Omit a section or hint when it has no useful content. Do not add sections merely to fill the template.
+Close every `{% step %}` and the surrounding `{% stepper %}` block. Omit a step or hint when it has no useful content. Do not add steps merely to fill the template.
 
 ## Content rules
 
@@ -53,9 +52,33 @@ Omit a section or hint when it has no useful content. Do not add sections merely
 
 Keep the introduction to one short paragraph. Name the command in inline code and describe the observable outcome, including major side effects such as creating files, mounting media, starting a VM, or opening another application.
 
-### Requirements
+### Step design
 
-List only prerequisites that readers can verify or act on. Include applicable operating system, architecture, PowerShell version, module, Windows features or external tools, elevation, restart state, and resource capacity.
+Use steps for actions the administrator performs, not for background facts. Start each step with `{% step %}`, add an imperative H3 title, and close it with `{% endstep %}`. Keep the steps in execution order.
+
+```markdown
+{% stepper %}
+{% step %}
+### Confirm the Requirements
+
+List the actionable requirements.
+{% endstep %}
+
+{% step %}
+### Run the Command
+
+Run the shortest recommended command.
+{% endstep %}
+
+{% step %}
+### Verify the Result
+
+Confirm the expected output or side effect.
+{% endstep %}
+{% endstepper %}
+```
+
+List only prerequisites that readers can verify or act on. Include applicable operating system, architecture, PowerShell version, module, Windows features or external tools, elevation, restart state, and resource capacity. If requirements are informational and require no separate action, include them at the start of the first execution step instead of creating a requirements step.
 
 Link prerequisite names to existing setup pages. Put nuanced failure conditions in a nearby warning hint instead of bloating a bullet.
 
@@ -71,9 +94,9 @@ Use a two-column `Setting | Default` table when the default invocation controls 
 
 If operational guidance recommends a value different from the code default, state both explicitly. Never silently replace the actual default with the recommendation.
 
-### How it works
+### Workflow detail
 
-Use a chronological numbered list. Summarize major validation, discovery, selection, creation, configuration, security, checkpoint, output, and startup phases as applicable.
+Within the relevant steps, summarize major validation, discovery, selection, creation, configuration, security, checkpoint, output, and startup phases as applicable. Keep the sequence chronological and distinguish actions performed by the administrator from actions performed automatically by the command.
 
 Include fallback precedence when it materially changes the result. Keep parameter-by-parameter behavior, long accepted-value lists, exhaustive output schemas, and numerous examples in the detailed guide.
 
@@ -92,6 +115,7 @@ Use natural link text that names the command or workflow.
 - Use PowerShell 7.6 or later unless the page explicitly covers Windows PowerShell 5.1.
 - Use `powershell` for PowerShell code fences.
 - Prefer short paragraphs, compact tables, and concrete verbs.
+- Use one GitBook `{% stepper %}` block for the sequential workflow and imperative H3 titles for its steps.
 - Use GitBook `{% hint %}` blocks for cautions and important guidance; do not use Markdown blockquotes.
 - Format commands, parameters, paths, file names, values, and PowerShell literals as inline code.
 - Use relative links and verify every target exists.
@@ -106,11 +130,12 @@ Confirm that:
 - Requirements include the conditions that cause the function to stop.
 - Automatic selection and fallback behavior are summarized accurately.
 - Recommendations are clearly distinguished from defaults.
-- The action list follows execution order.
+- The stepper contains administrator actions in execution order.
+- Every step and stepper tag is correctly closed.
 - Advanced material is delegated to the detailed guide.
 - The detailed guide and command-reference links resolve.
 - GitBook hints and PowerShell fences are well formed.
 
 ## Canonical example
 
-Use `osdeploy-guide/create-a-hyper-v-vm/README.md` as the canonical example for scope, pacing, and section depth. Generalize its documentation pattern; do not copy Hyper-V-specific requirements or behavior into unrelated guides.
+Use `osdeploy-guide/initial-setup/registration/README.md` as the canonical example for stepper syntax, pacing, and section depth. Generalize its documentation pattern; do not copy registration-specific requirements or behavior into unrelated guides.
