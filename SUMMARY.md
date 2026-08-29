@@ -4,47 +4,49 @@
 * [Support](support.md)
 * [Events](events.md)
 
+## OSDeploy Guide
+
+* [Workstation Setup](osdeploy-guide/workstation-setup/README.md)
+  * [Windows 11](osdeploy-guide/workstation-setup/windows-11-os.md)
+  * [PowerShell 7](osdeploy-guide/workstation-setup/powershell-7.md)
+* [Module Setup](osdeploy-guide/module-setup/README.md)
+  * [Get-OSDeployModulePath](osdeploy-guide/module-setup/get-osdeploymodulepath.md)
+  * [Get-OSDeployModuleVersion](osdeploy-guide/module-setup/get-osdeploymoduleversion.md)
+* [Community Registration](osdeploy-guide/community-registration/README.md)
+  * [Show-OSDeployLicense](osdeploy-guide/community-registration/show-osdeploylicense.md)
+* [Hydration](osdeploy-guide/hydration/README.md)
+  * [Invoke-OSDeployHydration](osdeploy-guide/hydration/invoke-osdeployhydration.md)
+* [Install-OSDeploySoftware](osdeploy-guide/install-osdeploysoftware/README.md)
+  * [Windows ADK 25H2](osdeploy-guide/install-osdeploysoftware/windows-adk-25h2.md)
+  * [Windows ADK 26H1](osdeploy-guide/install-osdeploysoftware/windows-adk-26h1.md)
+  * [Microsoft MDT](osdeploy-guide/install-osdeploysoftware/microsoft-mdt.md)
+  * [Git for Windows](osdeploy-guide/install-osdeploysoftware/git-for-windows.md)
+  * [Visual Studio Code](osdeploy-guide/install-osdeploysoftware/vs-code-stable.md)
+  * [Visual Studio Code Insiders](osdeploy-guide/install-osdeploysoftware/vs-code-insiders.md)
+  * [Microsoft Hyper-V](osdeploy-guide/install-osdeploysoftware/microsoft-hyper-v.md)
+  * [7-Zip](osdeploy-guide/install-osdeploysoftware/7-zip.md)
+* [OSDeploy Core](osdeploy-guide/osdeploy-core/README.md)
+  * [Update-OSDeployCore](osdeploy-guide/osdeploy-core/update-osdeploycore/README.md)
+    * [Update-OSDeployCoreESD](osdeploy-guide/osdeploy-core/update-osdeploycore/update-osdeploycoreesd/README.md)
+      * [Insider: The Windows ESD Catalog](osdeploy-guide/osdeploy-core/update-osdeploycore/update-osdeploycoreesd/insider-the-windows-esd-catalog.md)
+    * [Update Windows 11 OS](osdeploy-guide/osdeploy-core/update-osdeploycore/update-windows-11-os/README.md)
+      * [Insider: Export Windows 11](osdeploy-guide/osdeploy-core/update-osdeploycore/update-windows-11-os/insider-export-windows-11.md)
+      * [Insider: Export Windows RE](osdeploy-guide/osdeploy-core/update-osdeploycore/update-windows-11-os/insider-export-windows-re.md)
+      * [Insider: Export WinPE Drivers](osdeploy-guide/osdeploy-core/update-osdeploycore/update-windows-11-os/export-winpe-drivers.md)
+    * [Update WinPE Drivers](osdeploy-guide/osdeploy-core/update-osdeploycore/update-winpe-drivers/README.md)
+      * [How To: Driver Cleanup](osdeploy-guide/osdeploy-core/update-osdeploycore/update-winpe-drivers/how-to-cleanup-old-drivers.md)
+* [OSDeploy Boot](osdeploy-guide/osdeploy-boot.md)
+* [Create a Hyper-V VM](osdeploy-guide/create-a-hyper-v-vm/README.md)
+  * [New-OSDeployHyperVM](osdeploy-guide/create-a-hyper-v-vm/new-osdeployhypervm.md)
+* [Update a Boot ISO](osdeploy-guide/update-a-boot-iso/README.md)
+  * [Update-OSDeployBootISO](osdeploy-guide/update-a-boot-iso/update-osdeploybootiso.md)
+* [Create an OSDCloud USB](osdeploy-guide/create-an-osdcloud-usb/README.md)
+  * [New-OSDeployBootUSB](osdeploy-guide/create-an-osdcloud-usb/new-osdeploybootusb.md)
+  * [Update-OSDeployBootUSB](osdeploy-guide/create-an-osdcloud-usb/update-osdeploybootusb.md)
+
 ## OSDeploy Agents
 
 * [Author a WinPE Profile JSON](osdeploy-agents/author-winpe-profile-json.md)
-
-## OSDeploy PC
-
-* [Overview](osdeploy-pc/overview.md)
-* [Windows 11](osdeploy-pc/windows-11-os.md)
-* [PowerShell 7](osdeploy-pc/powershell-7.md)
-* [PowerShell Modules](osdeploy-pc/powershell-modules.md)
-* [Community Registration](osdeploy-pc/community-registration.md)
-* [Install Software](osdeploy-pc/install-software/README.md)
-  * [Windows ADK 25H2](osdeploy-pc/install-software/windows-adk-25h2.md)
-  * [Windows ADK 26H1](osdeploy-pc/install-software/windows-adk-26h1.md)
-  * [Microsoft MDT](osdeploy-pc/install-software/microsoft-mdt.md)
-  * [Git for Windows](osdeploy-pc/install-software/git-for-windows.md)
-  * [Visual Studio Code](osdeploy-pc/install-software/vs-code-stable.md)
-  * [Visual Studio Code Insiders](osdeploy-pc/install-software/vs-code-insiders.md)
-  * [Microsoft Hyper-V](osdeploy-pc/install-software/microsoft-hyper-v.md)
-  * [7-Zip](osdeploy-pc/install-software/7-zip.md)
-
-## OSDeploy Core
-
-* [Overview](osdeploy-core/overview.md)
-* [Update OSDeployCore](osdeploy-core/update-osdeploycore/README.md)
-  * [Update Windows 11 ESD](osdeploy-core/update-osdeploycore/update-windows-11-esd/README.md)
-    * [Insider: The Windows ESD Catalog](osdeploy-core/update-osdeploycore/update-windows-11-esd/insider-the-windows-esd-catalog.md)
-  * [Update Windows 11 OS](osdeploy-core/update-osdeploycore/update-windows-11-os/README.md)
-    * [Insider: Export Windows 11](osdeploy-core/update-osdeploycore/update-windows-11-os/insider-export-windows-11.md)
-    * [Insider: Export Windows RE](osdeploy-core/update-osdeploycore/update-windows-11-os/insider-export-windows-re.md)
-    * [Insider: Export WinPE Drivers](osdeploy-core/update-osdeploycore/update-windows-11-os/export-winpe-drivers.md)
-  * [Update WinPE Drivers](osdeploy-core/update-osdeploycore/update-winpe-drivers/README.md)
-    * [How To: Driver Cleanup](osdeploy-core/update-osdeploycore/update-winpe-drivers/how-to-cleanup-old-drivers.md)
-
-## OSDeploy Boot
-
-* [Overview](osdeploy-boot/overview.md)
-
-## OSDeploy Hydration
-
-* [Overview](osdeploy-hydration/overview.md)
 
 ## Core Components
 
