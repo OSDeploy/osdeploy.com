@@ -83,4 +83,4 @@ Build-OSDeployBoot
 * [OSDeploy PowerShell Module](../../../command-reference/osdeploy/)
 * [Update-OSDeployCore command reference](../../../command-reference/osdeploy/update-osdeploycore.md)
 * [Build-OSDeployBoot command reference](../../../command-reference/osdeploy/build-osdeployboot.md)
-* [System Requirements](../../workstation-setup/windows-11-os.md)
+* [System Requirements](../../initial-setup/operating-system/windows-11-os.md)

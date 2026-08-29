@@ -192,4 +192,4 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 * [HP WinPE Drivers](../../../../core-components/winpe-drivers/hp.md)
 * [Intel Ethernet Drivers](../../../../core-components/winpe-drivers/intel-ethernet.md)
 * [Intel Wireless Drivers](../../../../core-components/winpe-drivers/intel-wireless.md)
-* [System Requirements](../../../workstation-setup/windows-11-os.md)
+* [System Requirements](../../../initial-setup/operating-system/windows-11-os.md)

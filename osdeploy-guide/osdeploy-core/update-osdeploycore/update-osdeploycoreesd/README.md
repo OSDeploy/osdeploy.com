@@ -140,4 +140,4 @@ Update-OSDeployCoreOS -Architecture amd64
 * [Update-OSDeployCoreESD command reference](../../../../command-reference/osdeploy/update-osdeploycoreesd.md)
 * [Update-OSDeployCoreOS command reference](../../../../command-reference/osdeploy/update-osdeploycoreos.md)
 * [Insider: The Windows ESD Catalog](insider-the-windows-esd-catalog.md)
-* [System Requirements](../../../workstation-setup/windows-11-os.md)
+* [System Requirements](../../../initial-setup/operating-system/windows-11-os.md)
