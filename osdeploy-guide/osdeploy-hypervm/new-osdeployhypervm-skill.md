@@ -1,6 +1,6 @@
 ---
 description: >-
-  Agent instructions for planning, previewing, and creating a Hyper-V virtual
+  GitBook Assistant Agent instructions for planning, previewing, and creating a Hyper-V virtual
   machine with New-OSDeployHyperVM.
 icon: server
 ---
