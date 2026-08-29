@@ -1,5 +1,7 @@
 ---
-description: Refresh boot media and optional OSDCloud content on existing OSDeploy USB volumes.
+description: >-
+  Refresh boot media and optional OSDCloud content on existing OSDeploy USB
+  volumes.
 ---
 
 # Update-OSDeployBootUSB
@@ -17,7 +19,7 @@ The workstation must also have:
 * One or more online USB volumes with the expected boot or data label.
 * A working Windows Storage provider.
 
-See [Module Setup](../module-setup/README.md) to install OSDeploy and [OSDeploy Boot](../osdeploy-boot.md) to create completed boot media.
+See [Module Setup](../module-setup/) to install OSDeploy and [OSDeploy Boot](../build-boot-image/) to create completed boot media.
 
 {% hint style="warning" %}
 The function updates every connected USB volume whose label matches `-BootLabel` or `-DataLabel`. Disconnect unrelated USB storage that uses the same labels before running the command.
@@ -29,21 +31,21 @@ Use `Update-OSDeployBootUSB` for a prepared USB drive whose partition layout doe
 
 The update copies and overwrites source files but does not mirror the source tree. Files that exist only on the destination remain in place.
 
-| Content | Matching label | Destination | Behavior |
-| --- | --- | --- | --- |
-| Selected BootMedia | `OSDEPLOY` by default | Root of every matching USB volume | Copy the complete source tree and write `BootMedia.json`. |
+| Content                | Matching label        | Destination                                      | Behavior                                                                     |
+| ---------------------- | --------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Selected BootMedia     | `OSDEPLOY` by default | Root of every matching USB volume                | Copy the complete source tree and write `BootMedia.json`.                    |
 | Local OSDCloud content | `OSDCloud` by default | `OSDCloud` directory on each matching USB volume | Check free space, prompt separately for each volume, and copy when approved. |
 
 ## Parameters
 
 All parameters are optional. The function has one parameter set and does not accept pipeline input.
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-BootLabel` | `String` | `OSDEPLOY` | Use from 0 through 11 characters. Every connected USB volume whose file-system label equals this value is updated. |
-| `-DataLabel` | `String` | `OSDCloud` | Use from 0 through 32 characters. Every matching USB volume is considered for the optional OSDCloud copy. |
-| `-WhatIf` | Common parameter | Not enabled | Perform prerequisite checks, media selection, volume discovery, and free-space checks. Change the AutoRun policy, report gated writes, and still display the OSDCloud `ShouldContinue` prompt. |
-| `-Confirm` | Common parameter | Not enabled | Request confirmation for each BootMedia copy, metadata write, and approved OSDCloud copy. It does not replace or suppress the separate OSDCloud `ShouldContinue` prompt. |
+| Parameter    | Type             | Default     | Accepted values and behavior                                                                                                                                                                   |
+| ------------ | ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters. Every connected USB volume whose file-system label equals this value is updated.                                                                             |
+| `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters. Every matching USB volume is considered for the optional OSDCloud copy.                                                                                      |
+| `-WhatIf`    | Common parameter | Not enabled | Perform prerequisite checks, media selection, volume discovery, and free-space checks. Change the AutoRun policy, report gated writes, and still display the OSDCloud `ShouldContinue` prompt. |
+| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each BootMedia copy, metadata write, and approved OSDCloud copy. It does not replace or suppress the separate OSDCloud `ShouldContinue` prompt.                       |
 
 Label comparisons use PowerShell's default case-insensitive equality. An empty string passes parameter validation, but a volume is selected only when its provider-returned label equals that value.
 
@@ -121,7 +123,7 @@ The function writes a warning and returns when no completed build exists, either
 
 After both selections, the function sets this machine-wide policy value without `ShouldProcess` protection:
 
-```text
+```
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutorun = 0xFF
 ```
 
@@ -152,13 +154,13 @@ The optional source is `C:\ProgramData\OSDeployCore\OSDCloud`. When it does not 
 
 For each matching data volume, the function recursively totals the source-file sizes and gets the volume's remaining space.
 
-| Condition | Behavior |
-| --- | --- |
-| Free space cannot be determined | Write a warning and skip this volume. |
-| Source content is larger than available space | Write the required and available sizes in a warning, then skip this volume. |
-| Source content fits | Display a `ShouldContinue` prompt containing the source, destination, file count, size, and free space. |
-| User declines the prompt | Write an informational message and skip this volume. |
-| User approves the prompt | Apply `ShouldProcess`, then copy the source tree to the volume's `OSDCloud` directory. |
+| Condition                                     | Behavior                                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Free space cannot be determined               | Write a warning and skip this volume.                                                                   |
+| Source content is larger than available space | Write the required and available sizes in a warning, then skip this volume.                             |
+| Source content fits                           | Display a `ShouldContinue` prompt containing the source, destination, file count, size, and free space. |
+| User declines the prompt                      | Write an informational message and skip this volume.                                                    |
+| User approves the prompt                      | Apply `ShouldProcess`, then copy the source tree to the volume's `OSDCloud` directory.                  |
 
 The `ShouldContinue` prompt is separate from `-Confirm` and appears once for each data volume that has determinable, sufficient free space.
 
@@ -174,4 +176,4 @@ The function returns no structured result. When a BootMedia or OSDCloud copy run
 
 No success-stream objects are returned when selection is canceled, no copy runs, all optional copies are declined or skipped, or `-WhatIf` suppresses every copy. Host messages, warnings, confirmation prompts, and `WhatIf` messages are not structured return objects.
 
-See [Create an OSDCloud USB](README.md) for the workflow overview or the [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md) for compact syntax and parameter definitions.
+See [Create an OSDCloud USB](./) for the workflow overview or the [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md) for compact syntax and parameter definitions.

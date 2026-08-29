@@ -4,13 +4,13 @@ description: >-
   WinRE or Windows ADK source.
 ---
 
-# Overview
+# Build a Boot Image
 
 OSDeploy Boot is the boot-media creation workflow provided by the `Build-OSDeployBoot` function. It assembles a customized Windows Preinstallation Environment (WinPE) image for OS deployment from either an imported Windows Recovery Environment (WinRE) image or the Windows ADK WinPE image.
 
 The build runs on the OSDeploy Core Workstation. It uses content maintained in OSDeploy Core, applies the selected configuration to `boot.wim`, and produces bootable media that can be used to start a target device.
 
-<figure><img src="../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 OSDeploy creates and maintains the boot media on the workstation. OSDCloud runs from that media on the target device and performs the Windows deployment.

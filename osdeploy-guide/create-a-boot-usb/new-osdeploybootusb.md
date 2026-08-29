@@ -1,5 +1,7 @@
 ---
-description: Create a two-partition OSDeploy USB drive from a completed OSDeploy Boot build.
+description: >-
+  Create a two-partition OSDeploy USB drive from a completed OSDeploy Boot
+  build.
 ---
 
 # New-OSDeployBootUSB
@@ -17,7 +19,7 @@ The workstation must also have:
 * An online USB disk larger than 7 GiB and smaller than 2000 GiB.
 * A working Windows Storage provider.
 
-See [Module Setup](../module-setup/README.md) to install OSDeploy and [OSDeploy Boot](../osdeploy-boot.md) to create completed boot media.
+See [Module Setup](../module-setup/) to install OSDeploy and [OSDeploy Boot](../build-boot-image/) to create completed boot media.
 
 {% hint style="danger" %}
 The function removes every partition and all data from the selected USB disk. Confirm the disk number, model, and size before continuing. Use `Update-OSDeployBootUSB` when an existing OSDeploy USB only needs refreshed media.
@@ -27,10 +29,10 @@ The function removes every partition and all data from the selected USB disk. Co
 
 The partition sizes and file systems are fixed. Only their labels can be changed.
 
-| Partition | Size | File system | Default label | Purpose |
-| --- | --- | --- | --- | --- |
-| Boot | 4 GB | FAT32, active | `OSDEPLOY` | Stores the selected `bootmedia` or `bootmedia_ca2023` tree. |
-| Data | Remaining space | NTFS | `OSDCloud` | Stores local OSDeploy Core OSDCloud content when it exists and fits. |
+| Partition | Size            | File system   | Default label | Purpose                                                              |
+| --------- | --------------- | ------------- | ------------- | -------------------------------------------------------------------- |
+| Boot      | 4 GB            | FAT32, active | `OSDEPLOY`    | Stores the selected `bootmedia` or `bootmedia_ca2023` tree.          |
+| Data      | Remaining space | NTFS          | `OSDCloud`    | Stores local OSDeploy Core OSDCloud content when it exists and fits. |
 
 Use short, recognizable labels. An empty label is valid, but it makes the partitions harder to identify in later workflows.
 
@@ -38,12 +40,12 @@ Use short, recognizable labels. An empty label is valid, but it makes the partit
 
 All parameters are optional. The function has one parameter set and does not accept pipeline input.
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-BootLabel` | `String` | `OSDEPLOY` | Use from 0 through 11 characters for the FAT32 boot-partition label. |
-| `-DataLabel` | `String` | `OSDCloud` | Use from 0 through 32 characters for the NTFS data-partition label. |
-| `-WhatIf` | Common parameter | Not enabled | Run discovery and selection, report gated disk and copy operations, and return before partition creation. The AutoRun policy change and empty-disk MBR conversion are not gated. |
-| `-Confirm` | Common parameter | Not enabled | Request confirmation for each gated clear, partition, and copy operation. The function declares `ConfirmImpact` as `High`, so the effective prompts also depend on `$ConfirmPreference`. |
+| Parameter    | Type             | Default     | Accepted values and behavior                                                                                                                                                             |
+| ------------ | ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters for the FAT32 boot-partition label.                                                                                                                     |
+| `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters for the NTFS data-partition label.                                                                                                                      |
+| `-WhatIf`    | Common parameter | Not enabled | Run discovery and selection, report gated disk and copy operations, and return before partition creation. The AutoRun policy change and empty-disk MBR conversion are not gated.         |
+| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each gated clear, partition, and copy operation. The function declares `ConfirmImpact` as `High`, so the effective prompts also depend on `$ConfirmPreference`. |
 
 ## Examples
 
@@ -138,12 +140,12 @@ When the selected boot-media source and FAT32 destination both exist, the functi
 
 The function then checks `C:\ProgramData\OSDeployCore\OSDCloud`. When that source exists, it recursively totals the source-file sizes and compares the result with free space on the NTFS partition.
 
-| Condition | Behavior |
-| --- | --- |
-| OSDCloud source does not exist | Write an informational message and skip the optional copy. |
-| Free space cannot be determined | Write a warning and skip the optional copy. |
+| Condition                                     | Behavior                                                                          |
+| --------------------------------------------- | --------------------------------------------------------------------------------- |
+| OSDCloud source does not exist                | Write an informational message and skip the optional copy.                        |
+| Free space cannot be determined               | Write a warning and skip the optional copy.                                       |
 | Source content is larger than available space | Write the required and available sizes in a warning, then skip the optional copy. |
-| Source content fits | Request approval and copy it to `OSDCloud` on the NTFS partition. |
+| Source content fits                           | Request approval and copy it to `OSDCloud` on the NTFS partition.                 |
 
 Skipped optional OSDCloud content does not make USB creation fail. Native `robocopy.exe` standard output is written to the success stream during each copy.
 
@@ -157,17 +159,17 @@ For a disk with existing partitions, the clear operation is reported but not per
 
 On normal completion, the function returns the refreshed `Microsoft.Management.Infrastructure.CimInstance` for the selected `MSFT_Disk`. `Get-OSDeployDisk` adds `MediaType` and `SizeGB` to the Storage provider properties.
 
-| Property | Description |
-| --- | --- |
-| `Number` | Windows disk number selected by the user. |
-| `FriendlyName` | Device name reported by the Windows Storage provider. |
-| `BusType` | Storage bus type; the returned disk is `USB`. |
-| `PartitionStyle` | Final partition style; successful preparation uses `MBR`. |
-| `NumberOfPartitions` | Partition count reported after preparation. |
-| `Size` | Disk capacity in bytes. |
-| `SizeGB` | Disk capacity converted to an integer number of GiB. |
-| `MediaType` | Media type enriched from the matching physical disk when available. |
+| Property             | Description                                                         |
+| -------------------- | ------------------------------------------------------------------- |
+| `Number`             | Windows disk number selected by the user.                           |
+| `FriendlyName`       | Device name reported by the Windows Storage provider.               |
+| `BusType`            | Storage bus type; the returned disk is `USB`.                       |
+| `PartitionStyle`     | Final partition style; successful preparation uses `MBR`.           |
+| `NumberOfPartitions` | Partition count reported after preparation.                         |
+| `Size`               | Disk capacity in bytes.                                             |
+| `SizeGB`             | Disk capacity converted to an integer number of GiB.                |
+| `MediaType`          | Media type enriched from the matching physical disk when available. |
 
 The success stream is heterogeneous. Before preparation, it includes a projected disk snapshot. During copies, it can also include `System.String` records from `robocopy.exe`. Early cancellation, failed clear verification, and `-WhatIf` return no final disk object.
 
-See [Create an OSDCloud USB](README.md) for the workflow overview or the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) for compact syntax and parameter definitions.
+See [Create an OSDCloud USB](./) for the workflow overview or the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) for compact syntax and parameter definitions.

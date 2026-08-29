@@ -32,10 +32,10 @@ Prepare the Windows workstation, PowerShell environment, modules, and software r
 
 Maintain the local Windows images, drivers, tools, and other source content used to build OSDeploy boot media.
 
-## [OSDeploy Boot](osdeploy-guide/osdeploy-boot.md)
+## [OSDeploy Boot](osdeploy-guide/build-boot-image/)
 
 Build customized WinPE boot images and bootable media from content maintained in OSDeploy Core.
 
-## [OSDeploy Hydration](osdeploy-guide/hydration/)
+## [OSDeploy Hydration](osdeploy-guide/osdeploy-hydration/)
 
 Prepare an OSDeploy workstation and create current OSDCloud boot media with a coordinated end-to-end workflow.

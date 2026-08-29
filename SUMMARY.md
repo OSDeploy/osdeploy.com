@@ -14,8 +14,8 @@
   * [Get-OSDeployModuleVersion](osdeploy-guide/module-setup/get-osdeploymoduleversion.md)
 * [Community Registration](osdeploy-guide/community-registration/README.md)
   * [Show-OSDeployLicense](osdeploy-guide/community-registration/show-osdeploylicense.md)
-* [Hydration](osdeploy-guide/hydration/README.md)
-  * [Invoke-OSDeployHydration](osdeploy-guide/hydration/invoke-osdeployhydration.md)
+* [OSDeploy Hydration](osdeploy-guide/osdeploy-hydration/README.md)
+  * [Invoke-OSDeployHydration](osdeploy-guide/osdeploy-hydration/invoke-osdeployhydration.md)
 * [Install-OSDeploySoftware](osdeploy-guide/install-osdeploysoftware/README.md)
   * [Windows ADK 25H2](osdeploy-guide/install-osdeploysoftware/windows-adk-25h2.md)
   * [Windows ADK 26H1](osdeploy-guide/install-osdeploysoftware/windows-adk-26h1.md)
@@ -25,7 +25,7 @@
   * [Visual Studio Code Insiders](osdeploy-guide/install-osdeploysoftware/vs-code-insiders.md)
   * [Microsoft Hyper-V](osdeploy-guide/install-osdeploysoftware/microsoft-hyper-v.md)
   * [7-Zip](osdeploy-guide/install-osdeploysoftware/7-zip.md)
-* [OSDeploy Core](osdeploy-guide/osdeploy-core/README.md)
+* [OSDeploy Core Setup](osdeploy-guide/osdeploy-core/README.md)
   * [Update-OSDeployCore](osdeploy-guide/osdeploy-core/update-osdeploycore/README.md)
     * [Update-OSDeployCoreESD](osdeploy-guide/osdeploy-core/update-osdeploycore/update-osdeploycoreesd/README.md)
       * [Insider: The Windows ESD Catalog](osdeploy-guide/osdeploy-core/update-osdeploycore/update-osdeploycoreesd/insider-the-windows-esd-catalog.md)
@@ -35,18 +35,20 @@
       * [Insider: Export WinPE Drivers](osdeploy-guide/osdeploy-core/update-osdeploycore/update-windows-11-os/export-winpe-drivers.md)
     * [Update WinPE Drivers](osdeploy-guide/osdeploy-core/update-osdeploycore/update-winpe-drivers/README.md)
       * [How To: Driver Cleanup](osdeploy-guide/osdeploy-core/update-osdeploycore/update-winpe-drivers/how-to-cleanup-old-drivers.md)
-* [OSDeploy Boot](osdeploy-guide/osdeploy-boot.md)
-* [Create a Hyper-V VM](osdeploy-guide/create-a-hyper-v-vm/README.md)
-  * [New-OSDeployHyperVM](osdeploy-guide/create-a-hyper-v-vm/new-osdeployhypervm.md)
+* [Build a Boot Image](osdeploy-guide/build-boot-image/README.md)
+  * [Build-OSDeployBoot](osdeploy-guide/build-boot-image/build-osdeployboot.md)
 * [Update a Boot ISO](osdeploy-guide/update-a-boot-iso/README.md)
   * [Update-OSDeployBootISO](osdeploy-guide/update-a-boot-iso/update-osdeploybootiso.md)
-* [Create an OSDCloud USB](osdeploy-guide/create-an-osdcloud-usb/README.md)
-  * [New-OSDeployBootUSB](osdeploy-guide/create-an-osdcloud-usb/new-osdeploybootusb.md)
-  * [Update-OSDeployBootUSB](osdeploy-guide/create-an-osdcloud-usb/update-osdeploybootusb.md)
+* [Create a Boot USB](osdeploy-guide/create-a-boot-usb/README.md)
+  * [New-OSDeployBootUSB](osdeploy-guide/create-a-boot-usb/new-osdeploybootusb.md)
+  * [Update-OSDeployBootUSB](osdeploy-guide/create-a-boot-usb/update-osdeploybootusb.md)
+* [Create a Hyper-V VM](osdeploy-guide/create-a-hyper-v-vm/README.md)
+  * [New-OSDeployHyperVM](osdeploy-guide/create-a-hyper-v-vm/new-osdeployhypervm.md)
 
-## OSDeploy Agents
+## OSDeploy Skills
 
-* [Author a WinPE Profile JSON](osdeploy-agents/author-winpe-profile-json.md)
+* [New-OSDeployHyperVM](osdeploy-skills/new-osdeployhypervm.md)
+* [Author a WinPE Profile JSON](osdeploy-skills/author-winpe-profile-json.md)
 
 ## Core Components
 
