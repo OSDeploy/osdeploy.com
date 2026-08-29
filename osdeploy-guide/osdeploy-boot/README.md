@@ -1,14 +1,10 @@
 ---
-description: >-
-  Understand how Build-OSDeployBoot creates customized WinPE boot media from a
-  WinRE or Windows ADK source.
+description: Build customized OSDeploy WinPE media from an imported WinRE image or the Windows ADK WinPE image.
 ---
 
 # Build a Boot Image
 
-OSDeploy Boot is the boot-media creation workflow provided by the `Build-OSDeployBoot` function. It assembles a customized Windows Preinstallation Environment (WinPE) image for OS deployment from either an imported Windows Recovery Environment (WinRE) image or the Windows ADK WinPE image.
-
-The build runs on the OSDeploy Core Workstation. It uses content maintained in OSDeploy Core, applies the selected configuration to `boot.wim`, and produces bootable media that can be used to start a target device.
+Use `Build-OSDeployBoot` to customize a Windows Preinstallation Environment (WinPE) image, create bootable media and ISO files, and record the build configuration and logs under OSDeploy Core.
 
 <figure><img src="../../.gitbook/assets/image (147).png" alt=""><figcaption></figcaption></figure>
 
@@ -16,36 +12,67 @@ The build runs on the OSDeploy Core Workstation. It uses content maintained in O
 OSDeploy creates and maintains the boot media on the workstation. OSDCloud runs from that media on the target device and performs the Windows deployment.
 {% endhint %}
 
-## Build Process
+## Build the Boot Media
 
-`Build-OSDeployBoot` performs the following major steps:
+{% stepper %}
+{% step %}
+### Confirm the Requirements
 
-1. **Validate the build environment.** The function verifies Windows, PowerShell, administrator access, the OSDCloud module, and the Windows ADK before making changes.
-2. **Select the source image.** The build uses either an imported WinRE image or the Windows ADK WinPE image for the selected AMD64 or ARM64 architecture.
-3. **Load the build configuration.** OSDeploy loads or creates a build profile containing the selected drivers, scripts, startup profiles, languages, regional settings, and wallpaper.
-4. **Create the media workspace.** The function creates the build directories, copies the Windows ADK media files, prepares `boot.wim`, and mounts the image for servicing.
-5. **Customize the image.** The build adds ADK optional components, PowerShell updates, OSDeploy and OSDCloud modules, applications, drivers, scripts, startup settings, console settings, environment variables, and branding.
-6. **Finalize the image.** OSDeploy saves and dismounts the serviced image, exports build information, and creates the bootable media and ISO output.
-7. **Write supporting output.** The function records the build profile, build context, image properties, package information, and logs. When requested, it also copies the completed media to a USB partition labeled `USB-WinPE`.
+Run the function on a workstation that meets these requirements:
 
-## Completed BootMedia
+* Windows 11 25H2 build 26200 or later
+* PowerShell 7.6 or later installed from the MSI package
+* Current [OSDeploy module](../initial-setup/osdeploy-psmodule/)
+* Configured [OSDeploy Core](../osdeploy-core/)
+* [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
+* OSDCloud module version `26.7.25.2` or later
+* Administrator rights
+* `curl.exe` available in `PATH`
 
-Completed builds are written under:
+{% hint style="warning" %}
+The function stops before source selection when Windows, PowerShell, `curl.exe`, administrator access, OSDCloud, or Windows ADK requirements are not met. The Windows ADK is required even when the build source is an imported WinRE image.
+{% endhint %}
+{% endstep %}
+
+{% step %}
+### Run the Build
+
+Open an elevated PowerShell 7.6 session and provide a name for the build:
 
 ```powershell
-$env:ProgramData\OSDeployCore\boot
+Build-OSDeployBoot -Name 'MyPE'
 ```
 
-Each build has its own folder named from the Windows build version, architecture, and name supplied to `Build-OSDeployBoot`. For example:
+Select an imported WinRE image, a saved profile or shared content, and a wallpaper when prompted. The default workflow uses these settings:
 
-```
-C:\ProgramData\OSDeployCore\boot\26200.1234-amd64-MyPE
+| Setting          | Default                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| Source image     | Selected WinRE image, with Windows ADK WinPE fallback          |
+| Architecture     | Selected WinRE architecture, or host architecture on fallback |
+| Timezone         | Current system timezone                                        |
+| ADK packages     | Installed                                                      |
+| USB update       | Disabled                                                       |
+| Existing folder  | Add a numeric suffix instead of overwriting                    |
+
+The function validates the environment, loads or creates a build profile, prepares and mounts `boot.wim`, adds the selected packages and content, saves the image, and creates the bootable media and ISO files. When compatible Secure Boot files exist in the selected WinRE source, it also creates CA 2023 media. ADK-sourced builds do not create the additional CA 2023 media.
+{% endstep %}
+
+{% step %}
+### Verify the Build
+
+Find the newest completed build and inspect its media and ISO output:
+
+```powershell
+$Build = Get-ChildItem -Path "$env:ProgramData\OSDeployCore\boot" -Directory |
+	Sort-Object -Property LastWriteTime -Descending |
+	Select-Object -First 1
+
+Get-ChildItem -LiteralPath $Build.FullName
+Get-Item -LiteralPath (Join-Path $Build.FullName 'bootmedia\sources\boot.wim')
 ```
 
-The completed BootMedia file structure is located in the `bootmedia` subfolder:
+The build folder name contains the Windows build, architecture, and value supplied to `-Name`, such as `26200.1234-amd64-MyPE`. The folder contains `bootmedia`, `bootmedia.iso`, metadata, and logs. A WinRE build can also contain `bootmedia_ca2023` and `bootmedia_ca2023.iso`.
+{% endstep %}
+{% endstepper %}
 
-```
-C:\ProgramData\OSDeployCore\boot\26200.1234-amd64-MyPE\bootmedia
-```
-
-The serviced WinPE image is located at `bootmedia\sources\boot.wim`. The build folder also contains metadata and logs that describe how the media was created. If a folder with the same build name already exists, OSDeploy appends a numeric suffix such as `-001` rather than overwriting it.
+For source selection, profiles, customization, `WhatIf`, and advanced examples, see [Build-OSDeployBoot](build-osdeployboot.md). For compact syntax and parameter definitions, see the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md).

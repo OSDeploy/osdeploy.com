@@ -1,63 +1,83 @@
-# OSDeploy PSModule
+---
+description: Install and verify the PowerShell modules required for current OSDeploy and OSDCloud workflows.
+---
 
-Install the Recast OSDeploy and Recast OSDCloud modules on the OSDeploy PC. Install the OSD module only when a workflow requires its legacy commands.
+# Install the OSDeploy PowerShell Modules
 
-| Module          | Purpose                                                                                | Requirement |
-| --------------- | -------------------------------------------------------------------------------------- | ----------- |
-| Recast OSDeploy | Creates and maintains OSDeploy Core and builds OSDCloud boot images on the OSDeploy PC | Required    |
-| Recast OSDCloud | Provides the current OSDCloud deployment commands used in Windows PE                   | Required    |
-| OSD             | Provides legacy OSD and OSDCloud v1 commands                                           | Optional    |
+Install `OSDeploy` and `OSDCloud` from PowerShell Gallery on the OSDeploy PC, then verify that PowerShell can discover both modules and load the current OSDeploy commands.
 
 {% hint style="info" %}
-Run all commands on this page from an elevated PowerShell 7 session. Confirm that `$PSVersionTable.PSEdition` returns `Core` before continuing.
+Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands. Use the `OSDCloud` module for current OSDCloud deployments.
 {% endhint %}
 
-## Install the Required Modules
+## Install the Modules
 
-Install the latest Recast OSDeploy and Recast OSDCloud releases from PowerShell Gallery:
+{% stepper %}
+{% step %}
+### Confirm the Requirements
+
+Run the commands on a Windows 11 OSDeploy PC from an elevated PowerShell 7.6 or later session. Confirm that the current session uses PowerShell Core:
+
+```powershell
+$PSVersionTable | Select-Object PSEdition, PSVersion
+```
+
+Confirm that `PSEdition` is `Core` and `PSVersion` is `7.6` or later before continuing.
+{% endstep %}
+
+{% step %}
+### Install the Required Modules
+
+Install the latest `OSDeploy` and `OSDCloud` releases from PowerShell Gallery:
 
 ```powershell
 Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 ```
 
-The commands also update an existing installation when a newer release is available.
+`OSDeploy` creates and maintains OSDeploy Core and builds OSDCloud boot images on the OSDeploy PC. `OSDCloud` provides the current deployment commands used in Windows PE. The commands also update an existing installation when PowerShell Gallery contains a newer release.
+{% endstep %}
 
-## Install the Optional OSD Module
+{% step %}
+### Install the Optional Legacy Module
 
-Install OSD only when a deployment workflow requires commands that are not included in the current OSDCloud module:
+Install `OSD` only when a deployment workflow requires commands that are not included in the current `OSDCloud` module:
 
 ```powershell
 Install-Module -Name OSD -Force -SkipPublisherCheck
 ```
+{% endstep %}
 
-For current OSDCloud deployments, use the OSDCloud module instead of the legacy OSDCloud v1 implementation in OSD.
+{% step %}
+### Verify the Installation
 
-## Verify the Modules
-
-Confirm that the required modules are available and display the newest installed version of each module:
+Confirm that PowerShell can discover the required modules and display the newest installed version of each module:
 
 ```powershell
 $RequiredModules = 'OSDeploy', 'OSDCloud'
 
 foreach ($ModuleName in $RequiredModules) {
 	$InstalledModule = Get-Module -Name $ModuleName -ListAvailable |
-		Sort-Object Version -Descending |
+		Sort-Object -Property Version -Descending |
 		Select-Object -First 1
 
 	if (-not $InstalledModule) {
 		throw "The required $ModuleName module is not installed."
 	}
 
-	$InstalledModule | Select-Object Name, Version, Path
+	$InstalledModule | Select-Object -Property Name, Version, Path
 }
 ```
 
-Import OSDeploy and confirm that its version command is available:
+Import the newest installed OSDeploy module and return its loaded version:
 
 ```powershell
 Import-Module -Name OSDeploy -Force
 Get-OSDeployModuleVersion
 ```
 
-Continue to [Community Registration](../registration/).
+`Get-OSDeployModuleVersion` returns the version loaded in the current session. It does not search for a newer installed or Gallery version.
+{% endstep %}
+{% endstepper %}
+
+See the detailed guides for [Get-OSDeployModulePath](get-osdeploymodulepath.md) and [Get-OSDeployModuleVersion](get-osdeploymoduleversion.md), or use their compact [path](../../../command-reference/osdeploy/get-osdeploymodulepath.md) and [version](../../../command-reference/osdeploy/get-osdeploymoduleversion.md) command references. Continue to [Community Registration](../registration/).
