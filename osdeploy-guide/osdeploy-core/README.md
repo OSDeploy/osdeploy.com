@@ -39,4 +39,4 @@ The Windows ADK supplies the basic tools for servicing Windows images, but it do
 
 OSDeploy Core gives OSDeploy a predictable location for that material. This makes builds easier to maintain and reproduce, reduces repeated downloads, and preserves prepared content between module updates. It also keeps source content and build output separate from the module installation itself.
 
-Use the guides in this section to [install required software](../initial-setup/software/), [prepare Windows 11 content](update-osdeploycore/update-windows-11-os/), and [maintain WinPE drivers](update-osdeploycore/update-winpe-drivers/) before creating a boot image.
+Use the guides in this section to [install required software](../software/), [prepare Windows 11 content](update-osdeploycore/update-windows-11-os/), and [maintain WinPE drivers](update-osdeploycore/update-winpe-drivers/) before creating a boot image.

@@ -16,8 +16,8 @@ Run the function on a physical computer that meets these requirements:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../initial-setup/osdeploy-psmodule/)
-* [Microsoft Hyper-V](../initial-setup/software/microsoft-hyper-v.md) and the Hyper-V PowerShell tools
+* Current [OSDeploy module](../requirements/powershell-modules/)
+* [Microsoft Hyper-V](../software/microsoft-hyper-v.md) and the Hyper-V PowerShell tools
 * Administrator rights
 * `curl.exe` available in `PATH`
 * Enough processor, memory, and storage capacity for the VM

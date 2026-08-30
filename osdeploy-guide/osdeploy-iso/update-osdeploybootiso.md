@@ -16,7 +16,7 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 
 The workstation must also have:
 
-* The [OSDeploy module](../initial-setup/osdeploy-psmodule/).
+* The [OSDeploy module](../requirements/powershell-modules/).
 * The [Windows ADK Deployment Tools](../../core-components/microsoft-windows-adk/), including `oscdimg.exe`.
 * `Out-GridView` for selecting a completed build.
 * A completed OSDeploy Boot build under `C:\ProgramData\OSDeployCore\boot` with a `bootmedia` directory.

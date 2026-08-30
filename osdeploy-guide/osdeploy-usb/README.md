@@ -20,7 +20,7 @@ Run the function on a workstation that meets these requirements:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../initial-setup/osdeploy-psmodule/)
+* Current [OSDeploy module](../requirements/powershell-modules/)
 * Administrator rights
 * `curl.exe` available in `PATH`
 * `Out-GridView` for selecting the build and media folder

@@ -20,7 +20,7 @@ Run the function on a computer that meets these requirements:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../initial-setup/osdeploy-psmodule/)
+* Current [OSDeploy module](../requirements/powershell-modules/)
 * [Windows ADK Deployment Tools](../../core-components/microsoft-windows-adk/)
 * `Out-GridView` available for interactive build selection
 * Administrator rights

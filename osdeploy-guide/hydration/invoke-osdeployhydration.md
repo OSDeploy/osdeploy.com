@@ -2,6 +2,7 @@
 description: >-
   Prepare an OSDeploy workstation, refresh Windows and driver content, build
   Hydra boot media, and optionally test it in Hyper-V.
+icon: rectangle-terminal
 ---
 
 # Invoke-OSDeployHydration
@@ -12,7 +13,7 @@ description: >-
 
 Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
-Install the [OSDeploy module](../initial-setup/osdeploy-psmodule/) and OSDCloud module version `26.5.24.1` or later before starting hydration:
+Install the [OSDeploy module](../requirements/powershell-modules/) and OSDCloud module version `26.5.24.1` or later before starting hydration:
 
 ```powershell
 Install-Module -Name OSDeploy -Force -SkipPublisherCheck

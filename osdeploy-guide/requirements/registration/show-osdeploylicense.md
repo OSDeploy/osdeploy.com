@@ -2,6 +2,7 @@
 description: >-
   Discover, inspect, and validate the Recast Software license candidate selected
   for OSDeploy.
+icon: code
 ---
 
 # Show-OSDeployLicense
@@ -12,7 +13,7 @@ When no parseable candidate is available, the function writes a warning and disp
 
 ## Requirements
 
-Run the function from PowerShell 7.6 or later on Windows with the current [OSDeploy module](../osdeploy-psmodule/) installed.
+Run the function from PowerShell 7.6 or later on Windows with the current [OSDeploy module](../powershell-modules/) installed.
 
 The function searches this directory:
 

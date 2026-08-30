@@ -1,13 +1,11 @@
 # OSDeploy Home
 
-OSDeploy is the documentation and guidance site for the [Recast OSDeploy PowerShell Module](https://github.com/OSDeploy/RecastOSDeploy). Use these guides to prepare an OSDeploy workstation, maintain deployment content, build boot media, and automate the complete setup workflow.
+OSDeploy is the dedicated site for the [Recast OSDeploy PowerShell Module](https://github.com/OSDeploy/RecastOSDeploy), which is used to install software requirements, maintain Windows RE sources, manage WinPE Drivers,  and to create Boot Media used for OSDCloud.
 
-OSDeploy supports creating OSDCloud boot images with the OSDeploy and OSDCloud PowerShell modules. The OSDeploy module builds and customizes the boot image on Windows, while the OSDCloud module runs from that image in WinPE to deploy Windows.
-
-The OSDeploy PowerShell module is currently in preview, with its final release expected at Workplace Ninja Summit 2026 in Baden, Switzerland.
+The OSDeploy PowerShell module is currently in preview, with its final release expected mid-September at Workplace Ninja Summit 2026 in Baden, Switzerland.
 
 {% hint style="info" %}
-**OSDeploy and OSDCloud are releasing new modules. Register for preview updates.**
+**Register for preview updates at Recast Software**
 
 Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-preview/) to be notified when new builds are released and to participate in the insider preview program.
 {% endhint %}
@@ -16,7 +14,7 @@ Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-p
 
 ## PowerShell Module Ecosystem
 
-Three modules, three execution contexts. Each module owns a distinct phase of the deployment workflow.
+OSDeploy is one of three PowerShell modules, with each module owns a distinct phase of the deployment workflow. This is the recommended starting point if you are new to OSDCloud or creating Boot Media.
 
 | Module                                  | What it does                                 | Where it runs        | Status                |
 | --------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
@@ -24,18 +22,3 @@ Three modules, three execution contexts. Each module owns a distinct phase of th
 | [OSDCloud](command-reference/osdcloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
 | [OSD](command-reference/osd/)           | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
 
-## [OSDeploy PC](osdeploy-guide/initial-setup/operating-system/)
-
-Prepare the Windows workstation, PowerShell environment, modules, and software required to run OSDeploy.
-
-## [OSDeploy Core](osdeploy-guide/osdeploy-core/)
-
-Maintain the local Windows images, drivers, tools, and other source content used to build OSDeploy boot media.
-
-## [OSDeploy Boot](osdeploy-guide/osdeploy-boot/)
-
-Build customized WinPE boot images and bootable media from content maintained in OSDeploy Core.
-
-## [OSDeploy Hydration](osdeploy-guide/hydration/)
-
-Prepare an OSDeploy workstation and create current OSDCloud boot media with a coordinated end-to-end workflow.

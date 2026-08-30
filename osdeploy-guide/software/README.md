@@ -1,10 +1,8 @@
 ---
-description: >-
-  Use Install-OSDeploySoftware to prepare an OSDeploy PC and populate
-  OSDeployCore with reusable software content.
+description: Install-OSDeploySoftware
 ---
 
-# Install Software
+# Software Installation
 
 ## Quick Setup
 

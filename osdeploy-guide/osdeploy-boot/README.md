@@ -1,8 +1,10 @@
 ---
-description: Build customized OSDeploy WinPE media from an imported WinRE image or the Windows ADK WinPE image.
+description: >-
+  Build customized OSDeploy WinPE media from an imported WinRE image or the
+  Windows ADK WinPE image.
 ---
 
-# Build a Boot Image
+# OSDeploy Boot
 
 Use `Build-OSDeployBoot` to customize a Windows Preinstallation Environment (WinPE) image, create bootable media and ISO files, and record the build configuration and logs under OSDeploy Core.
 
@@ -22,7 +24,7 @@ Run the function on a workstation that meets these requirements:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../initial-setup/osdeploy-psmodule/)
+* Current [OSDeploy module](../requirements/powershell-modules/)
 * Configured [OSDeploy Core](../osdeploy-core/)
 * [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
 * OSDCloud module version `26.7.25.2` or later
@@ -45,14 +47,14 @@ Build-OSDeployBoot -Name 'MyPE'
 
 Select an imported WinRE image, a saved profile or shared content, and a wallpaper when prompted. The default workflow uses these settings:
 
-| Setting          | Default                                                        |
-| ---------------- | -------------------------------------------------------------- |
-| Source image     | Selected WinRE image, with Windows ADK WinPE fallback          |
-| Architecture     | Selected WinRE architecture, or host architecture on fallback |
-| Timezone         | Current system timezone                                        |
-| ADK packages     | Installed                                                      |
-| USB update       | Disabled                                                       |
-| Existing folder  | Add a numeric suffix instead of overwriting                    |
+| Setting         | Default                                                       |
+| --------------- | ------------------------------------------------------------- |
+| Source image    | Selected WinRE image, with Windows ADK WinPE fallback         |
+| Architecture    | Selected WinRE architecture, or host architecture on fallback |
+| Timezone        | Current system timezone                                       |
+| ADK packages    | Installed                                                     |
+| USB update      | Disabled                                                      |
+| Existing folder | Add a numeric suffix instead of overwriting                   |
 
 The function validates the environment, loads or creates a build profile, prepares and mounts `boot.wim`, adds the selected packages and content, saves the image, and creates the bootable media and ISO files. When compatible Secure Boot files exist in the selected WinRE source, it also creates CA 2023 media. ADK-sourced builds do not create the additional CA 2023 media.
 {% endstep %}

@@ -43,4 +43,4 @@ Hyper-V is a Windows optional feature. This component does not add files to OSDe
 ## Related
 
 * [Install Software](./)
-* [Windows 11](../operating-system/windows-11-os.md)
+* [Windows 11](../requirements/windows-11-os.md)

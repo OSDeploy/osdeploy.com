@@ -4,8 +4,6 @@ description: Register an OSDeploy PC with a free Recast Software Community Licen
 
 # Community Registration
 
-Register the OSDeploy PC with a free Recast Software Community License to enable features reserved for registered use.
-
 {% hint style="info" %}
 Registration is optional. OSDeploy and OSDCloud work without a Community License, but some features are available only when a valid license is detected. Licensed features can change as the modules are updated.
 {% endhint %}
@@ -62,4 +60,4 @@ $LicenseFiles | Select-Object Name, DirectoryName, LastWriteTime
 {% endstep %}
 {% endstepper %}
 
-The OSDeploy PC is now registered. Continue to [Install Software](../software/), or continue without registration using the features available for unregistered use.
+The OSDeploy PC is now registered. Continue to [Install Software](../../software/), or continue without registration using the features available for unregistered use.

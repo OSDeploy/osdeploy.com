@@ -1,5 +1,6 @@
 ---
 description: Return and use the root path of the currently loaded OSDeploy module.
+icon: code
 ---
 
 # Get-OSDeployModulePath

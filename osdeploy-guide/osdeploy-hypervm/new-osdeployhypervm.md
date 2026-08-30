@@ -1,5 +1,6 @@
 ---
 description: Configure and create an OSDeploy Hyper-V virtual machine.
+icon: rectangle-terminal
 ---
 
 # New-OSDeployHyperVM
@@ -10,7 +11,7 @@ description: Configure and create an OSDeploy Hyper-V virtual machine.
 
 Run the function from an elevated PowerShell 7.6 or later session on a physical Windows 11 25H2 build 26200 or later host. PowerShell must be installed from the MSI package, `curl.exe` must be available in `PATH`, and Hyper-V and its PowerShell tools must be enabled.
 
-See [Module Setup](../initial-setup/osdeploy-psmodule/) to install OSDeploy and [Microsoft Hyper-V](../initial-setup/software/microsoft-hyper-v.md) to enable Hyper-V.
+See [Module Setup](../requirements/powershell-modules/) to install OSDeploy and [Microsoft Hyper-V](../software/microsoft-hyper-v.md) to enable Hyper-V.
 
 {% hint style="warning" %}
 Restart the host after enabling Hyper-V. The function stops when Hyper-V is pending a restart. Nested virtualization is not supported because the function must run on a physical host.

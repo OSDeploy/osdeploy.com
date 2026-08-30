@@ -14,7 +14,7 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 
 Install and configure these components before starting a build:
 
-* [OSDeploy module](../initial-setup/osdeploy-psmodule/)
+* [OSDeploy module](../requirements/powershell-modules/)
 * [OSDeploy Core](../osdeploy-core/)
 * [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
 * OSDCloud module version `26.7.25.2` or later

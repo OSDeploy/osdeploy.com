@@ -2,6 +2,7 @@
 description: >-
   Return, compare, and format the version of the currently loaded OSDeploy
   module.
+icon: code
 ---
 
 # Get-OSDeployModuleVersion
