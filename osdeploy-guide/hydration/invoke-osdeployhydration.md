@@ -201,7 +201,7 @@ C:\ProgramData\OSDeployCore\boot\{Windows build}.{revision}-{architecture}-Hydra
 
 If that directory exists, the builder adds `-001`, `-002`, or a later suffix instead of overwriting it. The standard ISO is `bootmedia.iso` in the final build directory.
 
-See [Build-OSDeployBoot](../osdeploy-boot/build-osdeployboot.md) for source, profile, content, and media behavior.
+See [Build-OSDeployBoot](../advanced-usage/build-osdeployboot.md) for source, profile, content, and media behavior.
 
 ## Hyper-V Test
 
@@ -220,7 +220,7 @@ The VM command uses its own defaults for name, generation, memory, processors, d
 
 The test is skipped when the workstation is a VM, Hyper-V is not enabled, or the ISO does not exist. Use `-Verbose` to distinguish the Hyper-V and ISO conditions on a physical host.
 
-See [New-OSDeployHyperVM](../osdeploy-hypervm/new-osdeployhypervm.md) for VM defaults and host requirements.
+See [New-OSDeployHyperVM](../advanced-usage/new-osdeployhypervm.md) for VM defaults and host requirements.
 
 ## Force Behavior
 
