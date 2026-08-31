@@ -17,7 +17,7 @@
 * [Quickstart](osdeploy-guide/hydration/README.md)
   * [Invoke-OSDeployHydration](osdeploy-guide/hydration/invoke-osdeployhydration.md)
 * [Basic Setup](osdeploy-guide/basic/README.md)
-  * [Required Software](osdeploy-guide/basic/software.md)
+  * [Install Required Software](osdeploy-guide/basic/software.md)
   * [Create OSDeployCore](osdeploy-guide/basic/osdeploy-core.md)
   * [Build an OSDeploy Boot Image](osdeploy-guide/basic/osdeploy-boot.md)
   * [Create a new OSDeploy USB](osdeploy-guide/basic/osdeploy-usb.md)

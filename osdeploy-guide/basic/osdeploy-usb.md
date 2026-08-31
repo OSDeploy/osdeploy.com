@@ -25,7 +25,7 @@ Run the function on a workstation that meets these requirements:
 * `curl.exe` available in `PATH`
 * `Out-GridView` for selecting the build and media folder
 * A completed [OSDeploy Boot](osdeploy-boot.md) build under `C:\ProgramData\OSDeployCore\boot`
-* An online USB disk larger than 7 GiB and smaller than 2000 GiB
+* An online USB disk larger than 7 GB and smaller than 2000 GB
 
 {% hint style="danger" %}
 `New-OSDeployBootUSB` removes every partition and all data from the selected USB disk. Verify the disk number, model, and size before approving the clear operation. Use `Update-OSDeployBootUSB` when an existing OSDeploy USB only needs refreshed content.
