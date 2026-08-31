@@ -17,7 +17,7 @@ The workstation must also have:
 * One or more online USB volumes with the expected boot or data label.
 * A working Windows Storage provider.
 
-See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-boot.md) to create completed boot media.
+See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-osdeployboot.md) to create completed boot media.
 
 {% hint style="warning" %}
 The function updates every connected USB volume whose label matches `-BootLabel` or `-DataLabel`. Disconnect unrelated USB storage that uses the same labels before running the command.

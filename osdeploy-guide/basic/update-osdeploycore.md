@@ -52,7 +52,7 @@ Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\windows-re" -Directory
 Get-ChildItem -Path "$env:ProgramData\OSDeployCore\repository\build-winpedrivers" -Directory
 ```
 
-Confirm that the commands return prepared content, then continue to [Build an OSDeploy Boot Image](build-boot.md).
+Confirm that the commands return prepared content, then continue to [Build an OSDeploy Boot Image](build-osdeployboot.md).
 {% endstep %}
 {% endstepper %}
 

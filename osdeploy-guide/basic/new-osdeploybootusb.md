@@ -24,7 +24,7 @@ Run the function on a workstation that meets these requirements:
 * Administrator rights
 * `curl.exe` available in `PATH`
 * `Out-GridView` for selecting the build and media folder
-* A completed [OSDeploy Boot](build-boot.md) build under `C:\ProgramData\OSDeployCore\boot`
+* A completed [OSDeploy Boot](build-osdeployboot.md) build under `C:\ProgramData\OSDeployCore\boot`
 * An online USB disk larger than 7 GB and smaller than 2000 GB
 
 {% hint style="danger" %}

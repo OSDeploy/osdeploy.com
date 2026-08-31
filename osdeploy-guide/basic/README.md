@@ -32,7 +32,7 @@ Update-OSDeployCore
 {% endstep %}
 
 {% step %}
-### [Build an OSDeploy Boot Image](build-boot.md)
+### [Build an OSDeploy Boot Image](build-osdeployboot.md)
 
 Create customized WinPE media and ISO files:
 

@@ -16,7 +16,7 @@
 * [Basic Setup](osdeploy-guide/basic/README.md)
   * [Install Required Software](osdeploy-guide/basic/install-osdeploysoftware.md)
   * [Update Core Content](osdeploy-guide/basic/update-osdeploycore.md)
-  * [Build a Boot Image](osdeploy-guide/basic/build-boot.md)
+  * [Build a Boot Image](osdeploy-guide/basic/build-osdeployboot.md)
   * [Test a Boot ISO](osdeploy-guide/basic/new-osdeployhypervm.md)
   * [Create an Boot USB](osdeploy-guide/basic/new-osdeploybootusb.md)
 * [Advanced Usage](osdeploy-guide/advanced/README.md)

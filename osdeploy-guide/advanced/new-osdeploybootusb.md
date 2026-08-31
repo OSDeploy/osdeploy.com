@@ -19,7 +19,7 @@ The workstation must also have:
 * An online USB disk larger than 7 GiB and smaller than 2000 GiB.
 * A working Windows Storage provider.
 
-See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-boot.md) to create completed boot media.
+See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-osdeployboot.md) to create completed boot media.
 
 {% hint style="danger" %}
 The function removes every partition and all data from the selected USB disk. Confirm the disk number, model, and size before continuing. Use `Update-OSDeployBootUSB` when an existing OSDeploy USB only needs refreshed media.

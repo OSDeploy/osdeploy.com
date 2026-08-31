@@ -290,4 +290,4 @@ The stable output includes:
 
 The function populates `$global:BuildMedia` for its build steps and leaves that process-wide state available for inspection. It contains paths, architecture, source type, profile settings, selected content, installed applications, and mounted-image state, but it is not a supported pipeline return object.
 
-See [Build a Boot Image](../basic/build-boot.md) for the workflow overview or the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md) for compact syntax and parameter definitions.
+See [Build a Boot Image](../basic/build-osdeployboot.md) for the workflow overview or the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md) for compact syntax and parameter definitions.
