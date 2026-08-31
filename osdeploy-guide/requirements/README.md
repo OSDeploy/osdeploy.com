@@ -1,32 +1,75 @@
-# PC Requirements
+---
+description: Prepare a Windows 11 PC with the software required to build OSDeploy boot media.
+---
 
-The OSDeploy PC is the Windows 11 workstation where you prepare OSDeploy Core and create boot media, while OSDCloud runs from that WinPE media on the target device, and performs the Windows 11 deployment.
+# Prepare the OSDeploy PC
 
-{% hint style="info" %}
-Use a dedicated physical PC or virtual machine to keep the OSDeploy tools, source content, configuration, and build output isolated and reproducible.
+Prepare a Windows 11 workstation with PowerShell 7, Hyper-V, and the modules required to create and test OSDeploy boot media.
+
+{% hint style="warning" %}
+Do not use the default WinGet command to install PowerShell. Beginning with PowerShell 7.6.0, WinGet installs the unsupported MSIX package by default. Install PowerShell from the MSI package.
 {% endhint %}
 
-## Baseline
+## Complete the Setup
 
-Configure the OSDeploy PC with the following baseline:
+{% stepper %}
+{% step %}
+### Confirm the Requirements
 
-| Requirement        | Baseline                                                                                                         |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Environment        | Dedicated physical PC or virtual machine                                                                         |
-| Operating system   | Windows 11 25H2 amd64                                                                                            |
-| Permissions        | Local administrative rights                                                                                      |
-| Storage            | At least 50 GB of free space on the system volume                                                                |
-| Network            | Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and hardware-vendor download services |
-| PowerShell         | Latest PowerShell 7 installed from the MSI package                                                               |
-| PowerShell modules | OSDeploy and OSDCloud; OSD is optional                                                                           |
+Use a PC with:
 
-Windows 11 on arm64 can potentially be used, but this configuration is not fully tested. Other Windows client versions and Windows Server are unsupported.
+* Windows 11 25H2, build 26200 or later
+* amd64 architecture
+* Local administrative rights
+* At least 50 GB of free space on the system volume
+* Internet access
 
-## Setup
+Windows 11 on arm64 can potentially be used, but it is not fully tested. Other Windows client versions and Windows Server are unsupported.
+{% endstep %}
 
-Complete the OSDeploy PC setup in this order:
+{% step %}
+### Update Windows and Enable Hyper-V
 
-1. [Configure Windows 11](windows-11-os.md) and install current updates.
-2. Install the latest [PowerShell 7 MSI package](powershell-7.md).
-3. Install the required [PowerShell modules](powershell-modules.md).
-4. Optionally complete [Community Registration](../registration/).
+Open Windows PowerShell as an administrator, open Windows Update, and install all available cumulative updates:
+
+```powershell
+Start-Process 'ms-settings:windowsupdate'
+```
+
+On a physical Windows 11 Pro, Enterprise, or Education PC with hardware virtualization enabled, enable Hyper-V:
+
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All' -All -NoRestart
+```
+
+Restart Windows before continuing.
+{% endstep %}
+
+{% step %}
+### Install PowerShell 7
+
+Download the latest stable amd64 or arm64 `.msi` from [PowerShell releases](https://github.com/PowerShell/PowerShell/releases/latest). Run the MSI and enable the recommended installation options, including adding PowerShell to `PATH` and enabling Microsoft Update.
+
+Open PowerShell 7 as an administrator by running `pwsh`. Confirm that the session uses PowerShell Core 7.6 or later and that `$PSHOME` is under `$env:ProgramFiles\PowerShell\7`:
+
+```powershell
+$PSVersionTable | Select-Object PSEdition, PSVersion
+$PSHOME
+```
+{% endstep %}
+
+{% step %}
+### Install the Required Modules
+
+Install `OSDeploy` and `OSDCloud` from the elevated PowerShell 7 session:
+
+```powershell
+Install-Module -Name OSDeploy -Force -SkipPublisherCheck
+Install-Module -Name OSDCloud -Force -SkipPublisherCheck
+```
+
+Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands.
+{% endstep %}
+{% endstepper %}
+
+See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](powershell-modules.md). Optionally complete [Community Registration](../registration/).

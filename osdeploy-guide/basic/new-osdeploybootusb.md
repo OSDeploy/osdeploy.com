@@ -67,25 +67,6 @@ Missing or oversized local OSDCloud content does not prevent creation of the boo
 `-WhatIf` does not provide a read-only preview. It still changes the machine-wide AutoRun policy, and an already empty RAW or GPT disk can be initialized or converted to MBR before partition creation is suppressed.
 {% endhint %}
 {% endstep %}
-
-{% step %}
-### Verify the USB Drive
-
-Set `$DiskNumber` to the selected USB disk number, then inspect its partition style, partitions, labels, and file systems:
-
-```powershell
-$DiskNumber = 3
-
-Get-Disk -Number $DiskNumber |
-	Select-Object Number, FriendlyName, PartitionStyle, NumberOfPartitions
-
-Get-Partition -DiskNumber $DiskNumber |
-	Get-Volume |
-	Select-Object DriveLetter, FileSystemLabel, FileSystem, Size, SizeRemaining
-```
-
-Confirm that the disk uses MBR and contains the `OSDEPLOY` FAT32 boot partition and `OSDCloud` NTFS data partition. Confirm that the boot partition contains the selected WinPE media.
-{% endstep %}
 {% endstepper %}
 
 For labels, selection rules, copy behavior, `WhatIf`, and returned objects, see [New-OSDeployBootUSB](../advanced/new-osdeploybootusb.md). To refresh prepared media without repartitioning, see [Update-OSDeployBootUSB](../advanced/update-osdeploybootusb.md). For compact syntax, see the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) and [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md).

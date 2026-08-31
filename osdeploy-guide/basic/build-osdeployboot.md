@@ -58,23 +58,6 @@ Select an imported WinRE image, a saved profile or shared content, and a wallpap
 
 The function validates the environment, loads or creates a build profile, prepares and mounts `boot.wim`, adds the selected packages and content, saves the image, and creates the bootable media and ISO files. When compatible Secure Boot files exist in the selected WinRE source, it also creates CA 2023 media. ADK-sourced builds do not create the additional CA 2023 media.
 {% endstep %}
-
-{% step %}
-### Verify the Build
-
-Find the newest completed build and inspect its media and ISO output:
-
-```powershell
-$Build = Get-ChildItem -Path "$env:ProgramData\OSDeployCore\boot" -Directory |
-	Sort-Object -Property LastWriteTime -Descending |
-	Select-Object -First 1
-
-Get-ChildItem -LiteralPath $Build.FullName
-Get-Item -LiteralPath (Join-Path $Build.FullName 'bootmedia\sources\boot.wim')
-```
-
-The build folder name contains the Windows build, architecture, and value supplied to `-Name`, such as `26200.1234-amd64-MyPE`. The folder contains `bootmedia`, `bootmedia.iso`, metadata, and logs. A WinRE build can also contain `bootmedia_ca2023` and `bootmedia_ca2023.iso`.
-{% endstep %}
 {% endstepper %}
 
 For source selection, profiles, customization, `WhatIf`, and advanced examples, see [Build-OSDeployBoot](../advanced/build-osdeployboot.md). For compact syntax and parameter definitions, see the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md).
