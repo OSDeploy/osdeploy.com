@@ -62,7 +62,7 @@ Get-Item -LiteralPath "$env:ProgramFiles\7-Zip\7z.exe"
 Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\winpe-apps\7zip" -Directory
 ```
 
-Continue to [Create OSDeployCore](osdeploy-core.md) after all four checks return a result.
+Continue to [Create OSDeployCore](update-osdeploycore.md) after all four checks return a result.
 {% endstep %}
 {% endstepper %}
 

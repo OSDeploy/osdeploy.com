@@ -40,5 +40,5 @@ Visual Studio Code Insiders is installed directly through WinGet. This component
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Visual Studio Code reference](../../../core-components/developer-tools/vscode.md)

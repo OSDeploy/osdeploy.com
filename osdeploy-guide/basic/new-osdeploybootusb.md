@@ -2,7 +2,7 @@
 description: Create a two-partition OSDCloud USB drive from completed OSDeploy Boot media.
 ---
 
-# Create a new OSDeploy USB
+# Create an Boot USB
 
 Use `New-OSDeployBootUSB` to prepare a USB disk from a completed OSDeploy Boot build. The function clears the selected disk, creates boot and data partitions, copies the selected WinPE media, and adds local OSDCloud content when it is available and fits.
 
@@ -24,7 +24,7 @@ Run the function on a workstation that meets these requirements:
 * Administrator rights
 * `curl.exe` available in `PATH`
 * `Out-GridView` for selecting the build and media folder
-* A completed [OSDeploy Boot](osdeploy-boot.md) build under `C:\ProgramData\OSDeployCore\boot`
+* A completed [OSDeploy Boot](build-boot.md) build under `C:\ProgramData\OSDeployCore\boot`
 * An online USB disk larger than 7 GB and smaller than 2000 GB
 
 {% hint style="danger" %}

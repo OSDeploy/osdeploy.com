@@ -44,5 +44,5 @@ Install-OSDeploySoftware -Name '7zip' -DownloadOnly
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [7-Zip reference](../../../core-components/utilities/7zip.md)

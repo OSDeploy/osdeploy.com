@@ -1,5 +1,7 @@
 ---
-description: Prepare an OSDeploy workstation, build boot media, and test the completed environment.
+description: >-
+  Prepare an OSDeploy workstation, build boot media, and test the completed
+  environment.
 ---
 
 # Basic Setup
@@ -10,7 +12,7 @@ Use these steps to quickly prepare a Windows 11 workstation, build OSDeploy boot
 
 {% stepper %}
 {% step %}
-### [Install Required Software](software.md)
+### [Install Required Software](install-osdeploysoftware.md)
 
 Install Windows ADK 25H2, its WinPE add-on, and 7-Zip:
 
@@ -20,7 +22,7 @@ Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
 {% endstep %}
 
 {% step %}
-### [Create OSDeployCore](osdeploy-core.md)
+### [Create OSDeployCore](update-osdeploycore.md)
 
 Download and prepare the Windows, recovery, and driver content used by OSDeploy:
 
@@ -30,7 +32,7 @@ Update-OSDeployCore
 {% endstep %}
 
 {% step %}
-### [Build an OSDeploy Boot Image](osdeploy-boot.md)
+### [Build an OSDeploy Boot Image](build-boot.md)
 
 Create customized WinPE media and ISO files:
 
@@ -40,7 +42,7 @@ Build-OSDeployBoot -Name 'MyPE'
 {% endstep %}
 
 {% step %}
-### [Create a new OSDeploy USB](osdeploy-usb.md)
+### [Create a new OSDeploy USB](new-osdeploybootusb.md)
 
 Create a bootable USB drive from a completed build:
 
@@ -54,7 +56,7 @@ This command removes every partition and all data from the selected USB disk. Ve
 {% endstep %}
 
 {% step %}
-### [Test OSDeploy Boot in Hyper-V](osdeploy-hypervm.md)
+### [Test OSDeploy Boot in Hyper-V](new-osdeployhypervm.md)
 
 Create and start a Hyper-V virtual machine from the newest OSDeploy boot ISO:
 

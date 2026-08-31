@@ -42,5 +42,5 @@ Visual Studio Code is installed directly through WinGet. This component does not
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Visual Studio Code reference](../../../core-components/developer-tools/vscode.md)

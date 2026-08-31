@@ -15,7 +15,7 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 Install and configure these components before starting a build:
 
 * [OSDeploy module](../requirements/powershell-modules.md)
-* [OSDeploy Core](../basic-setup/osdeploy-core.md)
+* [OSDeploy Core](../basic/update-osdeploycore.md)
 * [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
 * OSDCloud module version `26.7.25.2` or later
 
@@ -290,4 +290,4 @@ The stable output includes:
 
 The function populates `$global:BuildMedia` for its build steps and leaves that process-wide state available for inspection. It contains paths, architecture, source type, profile settings, selected content, installed applications, and mounted-image state, but it is not a supported pipeline return object.
 
-See [Build a Boot Image](../basic-setup/osdeploy-boot.md) for the workflow overview or the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md) for compact syntax and parameter definitions.
+See [Build a Boot Image](../basic/build-boot.md) for the workflow overview or the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md) for compact syntax and parameter definitions.

@@ -58,5 +58,5 @@ This saves `adksetup.exe` and `adkwinpesetup.exe` in the versioned OSDeployCore 
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Windows ADK 26H1 reference](../../../core-components/microsoft-windows-adk/install-26h1.md)

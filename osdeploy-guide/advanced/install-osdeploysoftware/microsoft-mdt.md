@@ -48,5 +48,5 @@ Install-OSDeploySoftware -Name 'mdt' -DownloadOnly
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Microsoft Deployment Toolkit reference](../../../core-components/microsoft-deployment-toolkit/install-mdt.md)

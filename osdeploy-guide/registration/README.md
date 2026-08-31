@@ -60,4 +60,4 @@ $LicenseFiles | Select-Object Name, DirectoryName, LastWriteTime
 {% endstep %}
 {% endstepper %}
 
-The OSDeploy PC is now registered. Continue to [Install Software](../basic-setup/software.md), or continue without registration using the features available for unregistered use.
+The OSDeploy PC is now registered. Continue to [Install Software](../basic/install-osdeploysoftware.md), or continue without registration using the features available for unregistered use.

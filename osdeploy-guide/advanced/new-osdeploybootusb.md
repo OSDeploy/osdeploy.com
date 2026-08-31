@@ -19,7 +19,7 @@ The workstation must also have:
 * An online USB disk larger than 7 GiB and smaller than 2000 GiB.
 * A working Windows Storage provider.
 
-See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic-setup/osdeploy-boot.md) to create completed boot media.
+See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-boot.md) to create completed boot media.
 
 {% hint style="danger" %}
 The function removes every partition and all data from the selected USB disk. Confirm the disk number, model, and size before continuing. Use `Update-OSDeployBootUSB` when an existing OSDeploy USB only needs refreshed media.
@@ -172,4 +172,4 @@ On normal completion, the function returns the refreshed `Microsoft.Management.I
 
 The success stream is heterogeneous. Before preparation, it includes a projected disk snapshot. During copies, it can also include `System.String` records from `robocopy.exe`. Early cancellation, failed clear verification, and `-WhatIf` return no final disk object.
 
-See [Create an OSDCloud USB](../basic-setup/osdeploy-usb.md) for the workflow overview or the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) for compact syntax and parameter definitions.
+See [Create an OSDCloud USB](../basic/new-osdeploybootusb.md) for the workflow overview or the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) for compact syntax and parameter definitions.

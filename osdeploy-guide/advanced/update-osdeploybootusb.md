@@ -17,7 +17,7 @@ The workstation must also have:
 * One or more online USB volumes with the expected boot or data label.
 * A working Windows Storage provider.
 
-See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic-setup/osdeploy-boot.md) to create completed boot media.
+See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-boot.md) to create completed boot media.
 
 {% hint style="warning" %}
 The function updates every connected USB volume whose label matches `-BootLabel` or `-DataLabel`. Disconnect unrelated USB storage that uses the same labels before running the command.
@@ -174,4 +174,4 @@ The function returns no structured result. When a BootMedia or OSDCloud copy run
 
 No success-stream objects are returned when selection is canceled, no copy runs, all optional copies are declined or skipped, or `-WhatIf` suppresses every copy. Host messages, warnings, confirmation prompts, and `WhatIf` messages are not structured return objects.
 
-See [Create an OSDCloud USB](../basic-setup/osdeploy-usb.md) for the workflow overview or the [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md) for compact syntax and parameter definitions.
+See [Create an OSDCloud USB](../basic/new-osdeploybootusb.md) for the workflow overview or the [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md) for compact syntax and parameter definitions.

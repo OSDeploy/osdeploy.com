@@ -41,5 +41,5 @@ Git is installed directly through WinGet. This component does not add files to O
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Git for Windows reference](../../../core-components/developer-tools/git.md)

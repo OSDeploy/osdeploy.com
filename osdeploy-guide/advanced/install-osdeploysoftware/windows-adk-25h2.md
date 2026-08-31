@@ -60,5 +60,5 @@ This saves `adksetup.exe` in the `adk` subfolder and `adkwinpesetup.exe` in the 
 
 ## Related
 
-* [Install Software](../../basic-setup/software.md)
+* [Install Software](../../basic/install-osdeploysoftware.md)
 * [Windows ADK 25H2 reference](../../../core-components/microsoft-windows-adk/install-25h2.md)

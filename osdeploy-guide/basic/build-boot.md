@@ -4,7 +4,7 @@ description: >-
   Windows ADK WinPE image.
 ---
 
-# Build an OSDeploy Boot Image
+# Build a Boot Image
 
 Use `Build-OSDeployBoot` to customize a Windows Preinstallation Environment (WinPE) image, create bootable media and ISO files, and record the build configuration and logs under OSDeploy Core.
 
@@ -25,7 +25,7 @@ Run the function on a workstation that meets these requirements:
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
-* Configured [OSDeploy Core](osdeploy-core.md)
+* Configured [OSDeploy Core](update-osdeploycore.md)
 * [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
 * OSDCloud module version `26.7.25.2` or later
 * Administrator rights

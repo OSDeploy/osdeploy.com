@@ -273,4 +273,4 @@ After successful creation, the function returns a `System.Management.Automation.
 
 A `-WhatIf` result omits `DisplayResolution` and sets all four action-status properties to `$false` because no VM actions occurred.
 
-See [Create a Hyper-V VM](../basic-setup/osdeploy-hypervm.md) for the basic workflow or the [New-OSDeployHyperVM command reference](../../command-reference/osdeploy/new-osdeployhypervm.md) for compact syntax and parameter definitions.
+See [Create a Hyper-V VM](../basic/new-osdeployhypervm.md) for the basic workflow or the [New-OSDeployHyperVM command reference](../../command-reference/osdeploy/new-osdeployhypervm.md) for compact syntax and parameter definitions.

@@ -4,7 +4,7 @@ description: >-
   OSDeploy.
 ---
 
-# Create OSDeployCore
+# Update Core Content
 
 Use `Update-OSDeployCore` to prepare the local content library used to build OSDeploy boot images. The command downloads current Windows source files, prepares Windows and Windows Recovery Environment (WinRE) content, and updates Windows Preinstallation Environment (WinPE) drivers under `$env:ProgramData\OSDeployCore`.
 
@@ -19,7 +19,7 @@ Run the function on a workstation that meets these requirements:
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
-* [Required software](software.md)
+* [Required software](install-osdeploysoftware.md)
 * Administrator rights
 * `curl.exe` available in `PATH`
 * Internet access and enough storage for Windows source files and drivers
@@ -52,7 +52,7 @@ Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\windows-re" -Directory
 Get-ChildItem -Path "$env:ProgramData\OSDeployCore\repository\build-winpedrivers" -Directory
 ```
 
-Confirm that the commands return prepared content, then continue to [Build an OSDeploy Boot Image](osdeploy-boot.md).
+Confirm that the commands return prepared content, then continue to [Build an OSDeploy Boot Image](build-boot.md).
 {% endstep %}
 {% endstepper %}
 
