@@ -1,4 +1,4 @@
-# Requirements
+# PC Requirements
 
 The OSDeploy PC is the Windows 11 workstation where you prepare OSDeploy Core and create boot media, while OSDCloud runs from that WinPE media on the target device, and performs the Windows 11 deployment.
 
@@ -28,5 +28,5 @@ Complete the OSDeploy PC setup in this order:
 
 1. [Configure Windows 11](windows-11-os.md) and install current updates.
 2. Install the latest [PowerShell 7 MSI package](powershell-7.md).
-3. Install the required [PowerShell modules](powershell-modules/).
-4. Optionally complete [Community Registration](registration/).
+3. Install the required [PowerShell modules](powershell-modules.md).
+4. Optionally complete [Community Registration](../registration/).

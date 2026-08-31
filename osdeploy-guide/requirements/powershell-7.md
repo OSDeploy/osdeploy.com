@@ -73,4 +73,4 @@ $PSVersionTable | Select-Object PSVersion, PSEdition, OS
 
 Confirm that `PSEdition` is `Core` and that the reported version is the stable release downloaded above. Restart Windows if `msiexec.exe` returned exit code `3010`.
 
-Continue to [Install PowerShell Modules](powershell-modules/).
+Continue to [Install PowerShell Modules](powershell-modules.md).
