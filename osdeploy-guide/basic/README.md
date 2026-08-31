@@ -42,6 +42,16 @@ Build-OSDeployBoot -Name 'MyPE'
 {% endstep %}
 
 {% step %}
+### [Test OSDeploy Boot in Hyper-V](new-osdeployhypervm.md)
+
+Create and start a Hyper-V virtual machine from the newest OSDeploy boot ISO:
+
+```powershell
+New-OSDeployHyperVM
+```
+{% endstep %}
+
+{% step %}
 ### [Create a new OSDeploy USB](new-osdeploybootusb.md)
 
 Create a bootable USB drive from a completed build:
@@ -53,15 +63,5 @@ New-OSDeployBootUSB
 {% hint style="danger" %}
 This command removes every partition and all data from the selected USB disk. Verify the disk number, model, and size before approving the clear operation.
 {% endhint %}
-{% endstep %}
-
-{% step %}
-### [Test OSDeploy Boot in Hyper-V](new-osdeployhypervm.md)
-
-Create and start a Hyper-V virtual machine from the newest OSDeploy boot ISO:
-
-```powershell
-New-OSDeployHyperVM
-```
 {% endstep %}
 {% endstepper %}

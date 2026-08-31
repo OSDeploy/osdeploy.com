@@ -1,12 +1,12 @@
 ---
 description: >-
-  Install and verify the PowerShell modules required for current OSDeploy and
-  OSDCloud workflows.
+	Install the PowerShell modules required for current OSDeploy and OSDCloud
+	workflows.
 ---
 
 # PowerShell Modules
 
-Install `OSDeploy` and `OSDCloud` from PowerShell Gallery on the OSDeploy PC, then verify that PowerShell can discover both modules and load the current OSDeploy commands.
+Install `OSDeploy` and `OSDCloud` from PowerShell Gallery on the OSDeploy PC.
 
 {% hint style="info" %}
 Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands. Use the `OSDCloud` module for current OSDCloud deployments.
@@ -48,37 +48,6 @@ Install `OSD` only when a deployment workflow requires commands that are not inc
 ```powershell
 Install-Module -Name OSD -Force -SkipPublisherCheck
 ```
-{% endstep %}
-
-{% step %}
-### Verify the Installation
-
-Confirm that PowerShell can discover the required modules and display the newest installed version of each module:
-
-```powershell
-$RequiredModules = 'OSDeploy', 'OSDCloud'
-
-foreach ($ModuleName in $RequiredModules) {
-	$InstalledModule = Get-Module -Name $ModuleName -ListAvailable |
-		Sort-Object -Property Version -Descending |
-		Select-Object -First 1
-
-	if (-not $InstalledModule) {
-		throw "The required $ModuleName module is not installed."
-	}
-
-	$InstalledModule | Select-Object -Property Name, Version, Path
-}
-```
-
-Import the newest installed OSDeploy module and return its loaded version:
-
-```powershell
-Import-Module -Name OSDeploy -Force
-Get-OSDeployModuleVersion
-```
-
-`Get-OSDeployModuleVersion` returns the version loaded in the current session. It does not search for a newer installed or Gallery version.
 {% endstep %}
 {% endstepper %}
 

@@ -49,21 +49,6 @@ Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
 
 The function downloads and installs Windows ADK 25H2 and its matching WinPE add-on. It also installs 7-Zip and prepares the amd64 and arm64 7-Zip files used in OSDeploy boot images.
 {% endstep %}
-
-{% step %}
-### Verify the Installation
-
-Confirm that the ADK Deployment Tools, WinPE files, 7-Zip, and cached WinPE application files exist:
-
-```powershell
-Get-Item -LiteralPath (Join-Path ${env:ProgramFiles(x86)} 'Windows Kits\10\Assessment and Deployment Kit\Deployment Tools')
-Get-Item -LiteralPath (Join-Path ${env:ProgramFiles(x86)} 'Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment')
-Get-Item -LiteralPath "$env:ProgramFiles\7-Zip\7z.exe"
-Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\winpe-apps\7zip" -Directory
-```
-
-Continue to [Create OSDeployCore](update-osdeploycore.md) after all four checks return a result.
-{% endstep %}
 {% endstepper %}
 
 For installation and download behavior, see [Windows ADK 25H2](../advanced/install-osdeploysoftware/windows-adk-25h2.md) and [7-Zip](../advanced/install-osdeploysoftware/7-zip.md).

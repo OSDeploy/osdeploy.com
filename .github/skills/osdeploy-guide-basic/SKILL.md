@@ -1,6 +1,6 @@
 ---
 name: osdeploy-guide-basic
-description: Create, rewrite, or review executable, step-based OSDeploy task guides in osdeploy-guide/basic. Use for basic setup and common OSDeploy tasks that need concise prerequisites, the shortest working commands, clear steps, and a simple result check without unnecessary parameter detail. Do not use for section landing pages or conceptual overviews.
+description: Create, rewrite, or review executable, step-based OSDeploy task guides in osdeploy-guide/basic. Use for basic setup and common OSDeploy tasks that need concise prerequisites, the shortest working commands, and clear steps without unnecessary parameter detail. Do not use for section landing pages or conceptual overviews.
 ---
 
 # OSDeploy Guide Basic
@@ -27,7 +27,7 @@ Treat current implementation behavior as authoritative. Do not infer requirement
 
 ## Reader Goal
 
-Write for an administrator who needs to understand the task, run the recommended command, and confirm that it worked.
+Write for an administrator who needs to understand the task and run the recommended command.
 
 Keep the page focused on the basic path. Move advanced configuration, alternative scenarios, complete parameter coverage, and implementation detail to advanced guides or command references.
 
@@ -41,10 +41,10 @@ Use this order:
 4. Add an important warning or context hint only when the reader needs it before starting.
 5. Add one H2 task heading followed by a `{% stepper %}` block.
 6. Add one `{% step %}` for each action, using an imperative H3 title.
-7. End with a step that verifies the result or identifies the next action when useful.
+7. Add a final verification or next-action step only when it provides useful information beyond the expected result of the command.
 8. Link to advanced guidance or a command reference only when it adds useful detail.
 
-Do not add sections or steps merely to fill the structure.
+Do not require a separate verification step. State the expected result in the command step when that is sufficient, and do not add sections or steps merely to fill the structure.
 
 ## Write Simple Steps
 
@@ -69,16 +69,10 @@ Verb-OSDeployNoun
 
 Describe prompts and the expected result.
 {% endstep %}
-
-{% step %}
-### Verify the Result
-
-Give the shortest practical verification.
-{% endstep %}
 {% endstepper %}
 ````
 
-Close every `{% step %}` and `{% stepper %}` tag. Use steps for actions the administrator performs, not for background explanation.
+Close every `{% step %}` and `{% stepper %}` tag. Use steps for actions the administrator performs, not for background explanation. Add a verification step only when the result is not already clear or an additional check materially helps the reader.
 
 ## Keep Commands Basic
 
@@ -88,7 +82,7 @@ Close every `{% step %}` and `{% stepper %}` tag. Use steps for actions the admi
 - Explain interactive prompts in plain language instead of reproducing every option.
 - Do not add parameter tables, syntax listings, accepted-value lists, or multiple variations to a basic guide.
 - Mention defaults or automatic selection only when they materially affect what the reader receives.
-- Keep verification commands short and directly tied to the result.
+- When a separate verification command is useful, keep it short and directly tied to the result.
 
 ## Content Rules
 
@@ -117,7 +111,7 @@ Confirm that:
 - The shortest working command appears first.
 - Parameters are omitted unless they are necessary for the basic task.
 - Requirements, warnings, prompts, and visible results are accurate.
-- The final step verifies the result or gives the next action when needed.
+- Any separate verification or next-action step adds information that is not already clear from the command result.
 - Every GitBook step and stepper tag is correctly closed.
 - PowerShell fences and relative links are valid.
 - Advanced detail is left to the appropriate guide or command reference.

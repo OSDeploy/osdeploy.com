@@ -1,27 +1,36 @@
-# Windows 11
+---
+description: Prepare a supported Windows 11 workstation for OSDeploy.
+---
+
+# Prepare Windows 11
 
 Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
 
-## Supported Configuration
+## Prepare the OSDeploy PC
 
-| Component        | Requirement                                                |
-| ---------------- | ---------------------------------------------------------- |
-| Operating system | Windows 11 25H2, build 26200 or later                      |
-| Architecture     | amd64                                                      |
-| PowerShell       | Latest stable PowerShell 7, installed from the MSI package |
-| Permissions      | Local administrative rights                                |
-| Storage          | At least 50 GB of free space on the system volume          |
-| Network          | Internet access                                            |
+{% stepper %}
+{% step %}
+### Confirm the Requirements
+
+Use a workstation that meets these requirements:
+
+* Windows 11 25H2, build 26200 or later
+* amd64 architecture
+* Local administrative rights
+* At least 50 GB of free space on the system volume
+* Internet access to Microsoft, GitHub, PowerShell Gallery, Recast Software, and required hardware-vendor download services
+
+Proxy servers and TLS inspection must permit PowerShell, `curl.exe`, and OSDeploy to download content from these services.
 
 {% hint style="warning" %}
 Windows 11 on arm64 can potentially be used, but it is not fully tested. Other Windows client versions and all Windows Server versions are unsupported.
 {% endhint %}
+{% endstep %}
 
-The OSDeploy module manages the Windows ADK components required by its boot-image workflow. Do not install the ADK as part of this OSDeploy PC setup.
+{% step %}
+### Check the OSDeploy PC
 
-## Check the OSDeploy PC
-
-Open Windows PowerShell or PowerShell as an administrator, then run the following commands:
+Open PowerShell as an administrator and run:
 
 ```powershell
 $OperatingSystem = Get-CimInstance -ClassName Win32_OperatingSystem
@@ -41,90 +50,31 @@ $IsAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wi
 ```
 
 Confirm that the output reports Windows 11 25H2, build 26200 or later, `AMD64`, administrative rights, and at least 50 GB of free space. `ARM64` is possible but not fully tested.
+{% endstep %}
 
-## Update Windows
+{% step %}
+### Update Windows
 
-The OSDeploy PC must have the latest cumulative updates before OSDeploy creates or services boot images.
-
-Open Windows Update from PowerShell:
+Open Windows Update:
 
 ```powershell
 Start-Process 'ms-settings:windowsupdate'
 ```
 
 Select **Check for updates**, install all available cumulative updates, and restart Windows when prompted. Repeat the process until Windows Update reports that the OSDeploy PC is current.
+{% endstep %}
 
-## Internet Access
+{% step %}
+### Enable Hyper-V
 
-Allow outbound HTTPS access to the services used by the OSDeploy PC. These include:
-
-* Microsoft download and update services
-* GitHub release and content services
-* PowerShell Gallery
-* Recast Software Community Portal
-* Dell, HP, Lenovo, Intel, Microsoft Surface, and other hardware-vendor download services used for drivers
-
-Proxy servers and TLS inspection must permit PowerShell, `curl.exe`, and OSDeploy to download content from these services.
-
-## Optional Features
-
-Enable only the Windows optional features required by the OSDeploy workflows that will run on this PC. These changes require local administrative rights and may require a restart.
-
-{% embed url="https://learn.microsoft.com/en-us/windows/client-management/client-tools/add-remove-hide-features" %}
-
-### Hyper-V
-
-Hyper-V provides the local virtualization platform used by `New-OSDeployHyperVM` to create test virtual machines that boot from OSDeploy WinPE images. Use it to validate boot images and test OSDCloud deployments without physical hardware.
-
-Hyper-V is available in Windows 11 Pro, Enterprise, and Education. It is optional for boot-image creation and OSDCloud deployment, and is required only when the OSDeploy PC will run local test virtual machines.
-
-{% hint style="warning" %}
-Enabling Hyper-V requires a physical OSDeploy PC with hardware virtualization enabled. Restart Windows after enabling the feature before creating or starting virtual machines.
-{% endhint %}
-
-#### Enable Hyper-V with OSDeploy
-
-Run the following command from an elevated PowerShell 7 session to preview the change:
-
-```powershell
-Install-OSDeploySoftware -Name 'hyperv'
-```
-
-Enable Hyper-V:
-
-```powershell
-Install-OSDeploySoftware -Name 'hyperv' -Force
-```
-
-OSDeploy skips Hyper-V when it detects that the OSDeploy PC is a virtual machine. The component does not add files to OSDeploy Core and does not support `-DownloadOnly`.
-
-#### Enable Hyper-V Manually
-
-Run the following command from an elevated PowerShell session:
+Enable Hyper-V now so its required restart is complete before building and testing OSDeploy boot media. Run this command on a physical Windows 11 Pro, Enterprise, or Education PC with hardware virtualization enabled:
 
 ```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All' -All -NoRestart
 ```
 
-Alternatively, enable Hyper-V from Windows Features:
-
-1. Open **Control Panel** > **Programs** > **Turn Windows features on or off**.
-2. Expand **Hyper-V** and select all subfeatures.
-3. Select **OK**, then restart Windows.
-
-#### Verify Hyper-V
-
-After restarting Windows, confirm that the feature is enabled:
-
-```powershell
-Get-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All'
-```
-
-Confirm that `State` is `Enabled`.
-
-### Related
-
-* [Microsoft Hyper-V](../advanced/install-osdeploysoftware/microsoft-hyper-v.md)
-* [New-OSDeployHyperVM](../../command-reference/osdeploy/new-osdeployhypervm.md)
+Restart Windows after the command completes. See [Microsoft Hyper-V](../advanced/install-osdeploysoftware/microsoft-hyper-v.md) for requirements and additional installation options.
+{% endstep %}
+{% endstepper %}
 
 Continue to [Install PowerShell 7](powershell-7.md).

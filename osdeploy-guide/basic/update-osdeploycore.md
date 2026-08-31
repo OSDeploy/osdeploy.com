@@ -40,20 +40,6 @@ Update-OSDeployCore
 
 Follow the confirmation prompts to download the Windows source files, prepare the Windows and WinRE content, and update the WinPE drivers. Existing verified content can be reused.
 {% endstep %}
-
-{% step %}
-### Verify OSDeployCore
-
-Inspect the prepared Windows, WinRE, and driver content:
-
-```powershell
-Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\windows-os" -Directory
-Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\windows-re" -Directory
-Get-ChildItem -Path "$env:ProgramData\OSDeployCore\repository\build-winpedrivers" -Directory
-```
-
-Confirm that the commands return prepared content, then continue to [Build an OSDeploy Boot Image](build-osdeployboot.md).
-{% endstep %}
 {% endstepper %}
 
 For update behavior and advanced examples, see [Update-OSDeployCore](../advanced/osdeploycore/update-osdeploycore.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).

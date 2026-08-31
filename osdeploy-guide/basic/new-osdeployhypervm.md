@@ -58,25 +58,6 @@ The function selects the newest `bootmedia.iso` under `C:\ProgramData\OSDeployCo
 A VM created with an empty DVD drive does not have OSDeploy boot media to start. Attach an ISO before starting or restarting the VM.
 {% endhint %}
 {% endstep %}
-
-{% step %}
-### Verify the VM
-
-Inspect the newest OSDeploy VM, its mounted media, and its initial checkpoint:
-
-```powershell
-$VM = Get-VM |
-	Where-Object Name -Like '* OSDeploy' |
-	Sort-Object -Property CreationTime -Descending |
-	Select-Object -First 1
-
-$VM | Select-Object Name, State, Generation, ProcessorCount, MemoryStartup
-$VM | Get-VMDvdDrive | Select-Object Path
-$VM | Get-VMSnapshot | Select-Object Name, CreationTime
-```
-
-Confirm that the VM is running and that the DVD drive contains the expected OSDeploy ISO. If the DVD path is empty, attach boot media before restarting the VM.
-{% endstep %}
 {% endstepper %}
 
 For sizing, media, networking, firmware, checkpoint, and startup examples, see [New-OSDeployHyperVM](../advanced/new-osdeployhypervm.md). For compact syntax and parameter definitions, see the [command reference](../../command-reference/osdeploy/new-osdeployhypervm.md).
