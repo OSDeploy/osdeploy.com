@@ -1,5 +1,5 @@
 ---
-description: >-
+description:
 	Install the PowerShell modules required for current OSDeploy and OSDCloud
 	workflows.
 ---
