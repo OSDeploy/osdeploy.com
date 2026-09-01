@@ -2,7 +2,7 @@
 description: Rebuild bootable ISO files from an existing OSDeploy Boot media tree.
 ---
 
-# OSDeploy ISO
+# Update-OSDeployBootISO
 
 Use `Update-OSDeployBootISO` to select a completed OSDeploy Boot build and recreate its bootable ISO files from the existing media directories. The function rebuilds the standard ISO and, when available, the CA 2023 ISO without mounting or servicing `boot.wim`.
 
@@ -75,4 +75,4 @@ Confirm that `bootmedia.iso` has a current modified time. When the selected buil
 {% endstep %}
 {% endstepper %}
 
-For confirmation, `WhatIf`, media selection, profile handling, and ISO creation details, see [Update-OSDeployBootISO](update-osdeploybootiso.md). For compact syntax and parameter definitions, see the [command reference](../../command-reference/osdeploy/update-osdeploybootiso.md).
+For confirmation, `WhatIf`, media selection, profile handling, and ISO creation details, see [Update-OSDeployBootISO](../inside-osdeploy/update-osdeploybootiso.md). For compact syntax and parameter definitions, see the [command reference](../../command-reference/osdeploy/update-osdeploybootiso.md).

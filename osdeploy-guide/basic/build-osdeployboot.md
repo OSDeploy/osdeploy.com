@@ -60,4 +60,4 @@ The function validates the environment, loads or creates a build profile, prepar
 {% endstep %}
 {% endstepper %}
 
-For source selection, profiles, customization, `WhatIf`, and advanced examples, see [Build-OSDeployBoot](../advanced/build-osdeployboot.md). For compact syntax and parameter definitions, see the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md).
+For source selection, profiles, customization, `WhatIf`, and advanced examples, see [Build-OSDeployBoot](../cmdlets/build-osdeployboot.md). For compact syntax and parameter definitions, see the [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md).

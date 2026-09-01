@@ -42,4 +42,4 @@ Follow the confirmation prompts to download the Windows source files, prepare th
 {% endstep %}
 {% endstepper %}
 
-For update behavior and advanced examples, see [Update-OSDeployCore](../advanced/osdeploycore/update-osdeploycore.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).
+For update behavior and advanced examples, see [Update-OSDeployCore](../cmdlets/update-osdeploycore.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).

@@ -200,8 +200,8 @@ A missing driver directory does not necessarily mean the OS import failed. Manif
 
 ## Related
 
-* [Update Windows 11 OS](./)
+* [Update Windows 11 OS](../cmdlets/update-osdeploycoreos.md)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
-* [Update WinPE Drivers](../update-osdeploycoredrivers/)
-* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update WinPE Drivers](../cmdlets/update-osdeploycoredrivers.md)
+* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)

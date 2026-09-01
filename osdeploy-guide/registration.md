@@ -63,8 +63,8 @@ if (-not $License.IsValid) {
 $License | Select-Object FileName, Organization, Email, LicenseType, Expiration, ActivationExpiration
 ```
 
-Confirm that the expiration dates have not passed. For detailed discovery and validation behavior, see [Show-OSDeployLicense](show-osdeploylicense.md).
+Confirm that the expiration dates have not passed. For detailed discovery and validation behavior, see [Show-OSDeployLicense](cmdlets/show-osdeploylicense.md).
 {% endstep %}
 {% endstepper %}
 
-Continue to [Install Required Software](../basic/install-osdeploysoftware.md), or continue without registration using the features available for unregistered use.
+Continue to [Install Required Software](basic/install-osdeploysoftware.md), or continue without registration using the features available for unregistered use.

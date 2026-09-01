@@ -164,8 +164,8 @@ Get-WindowsImage -ImagePath $WinREWim -Index 1
 
 ## Related
 
-* [Update Windows 11 OS](./)
+* [Update Windows 11 OS](../cmdlets/update-osdeploycoreos.md)
 * [Insider: Building an OS from an ESD](insider-export-windows-11.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../../../command-reference/osdeploy/update-osdeploycoreos.md)
-* [Build-OSDeployBoot command reference](../../../../command-reference/osdeploy/build-osdeployboot.md)
+* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)

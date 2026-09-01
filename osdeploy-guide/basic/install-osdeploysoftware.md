@@ -51,4 +51,4 @@ The function downloads and installs Windows ADK 25H2 and its matching WinPE add-
 {% endstep %}
 {% endstepper %}
 
-For installation and download behavior, see [Windows ADK 25H2](../advanced/install-osdeploysoftware/windows-adk-25h2.md) and [7-Zip](../advanced/install-osdeploysoftware/7-zip.md).
+For installation and download behavior, see [Windows ADK 25H2](../cmdlets/install-osdeploysoftware/windows-adk-25h2.md) and [7-Zip](../cmdlets/install-osdeploysoftware/7-zip.md).

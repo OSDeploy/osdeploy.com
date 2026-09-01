@@ -1,5 +1,7 @@
 ---
-description: Install the PowerShell modules required for current OSDeploy and OSDCloud workflows.
+description: >-
+  Install the PowerShell modules required for current OSDeploy and OSDCloud
+  workflows.
 ---
 
 # PowerShell Modules
@@ -49,4 +51,4 @@ Install-Module -Name OSD -Force -SkipPublisherCheck
 {% endstep %}
 {% endstepper %}
 
-See the detailed guides for [Get-OSDeployModulePath](../advanced/get-osdeploymodulepath.md) and [Get-OSDeployModuleVersion](../advanced/get-osdeploymoduleversion.md), or use their compact [path](../../command-reference/osdeploy/get-osdeploymodulepath.md) and [version](../../command-reference/osdeploy/get-osdeploymoduleversion.md) command references. Continue to [Community Registration](../registration/).
+See the detailed guides for [Get-OSDeployModulePath](../cmdlets/get-osdeploymodulepath.md) and [Get-OSDeployModuleVersion](../cmdlets/get-osdeploymoduleversion.md), or use their compact [path](../../command-reference/osdeploy/get-osdeploymodulepath.md) and [version](../../command-reference/osdeploy/get-osdeploymoduleversion.md) command references. Continue to [Community Registration](../registration.md).

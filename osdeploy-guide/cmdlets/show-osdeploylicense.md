@@ -26,7 +26,7 @@ A license file is not required to run the command. When the directory does not e
 Install Community License files with the `.license2` extension unchanged. Files with another extension are not discovered. Administrator rights can be required to create the ProgramData directory or copy a license into it.
 {% endhint %}
 
-See [Community Registration](./) to download and install a free Recast Software Community License.
+See [Community Registration](../registration.md) to download and install a free Recast Software Community License.
 
 ## Parameters
 
@@ -229,4 +229,4 @@ When a candidate is selected, the command returns a `System.Management.Automatio
 
 When no candidate is selected, the function returns no object and an assignment receives `$null`.
 
-See [Community Registration](./) to download, install, and verify a Community License.
+See [Community Registration](../registration.md) to download, install, and verify a Community License.

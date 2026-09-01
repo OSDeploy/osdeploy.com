@@ -22,7 +22,7 @@ The workstation must also have:
 * A completed OSDeploy Boot build under `C:\ProgramData\OSDeployCore\boot` with a `bootmedia` directory.
 
 {% hint style="warning" %}
-The function stops when a host requirement is not met, no build is selected, the Windows ADK is unavailable, or the selected build does not contain `bootmedia`. Use [Build-OSDeployBoot](build-osdeployboot.md) to create a new media tree or service `boot.wim`.
+The function stops when a host requirement is not met, no build is selected, the Windows ADK is unavailable, or the selected build does not contain `bootmedia`. Use [Build-OSDeployBoot](../cmdlets/build-osdeployboot.md) to create a new media tree or service `boot.wim`.
 {% endhint %}
 
 ## Parameters
@@ -195,4 +195,4 @@ The state is populated before `ShouldProcess`, so it is available after `-WhatIf
 
 Inspect `bootmedia.iso` and the optional `bootmedia_ca2023.iso` in `$global:BuildMedia.MediaRootPath` to verify completion. Errors from missing ADK tools, missing boot-sector files, or a nonzero `oscdimg.exe` exit code are written to the error stream.
 
-See [Update a Boot ISO](osdeploy-iso.md) for the workflow overview or the [Update-OSDeployBootISO command reference](../../command-reference/osdeploy/update-osdeploybootiso.md) for compact syntax and parameter definitions.
+See [Update a Boot ISO](../cmdlets/update-osdeploybootiso.md) for the workflow overview or the [Update-OSDeployBootISO command reference](../../command-reference/osdeploy/update-osdeploybootiso.md) for compact syntax and parameter definitions.

@@ -212,8 +212,8 @@ Get-WindowsImage -ImagePath $BootWim |
 
 ## Related
 
-* [Update Windows 11 OS](./)
-* [Insider: The Windows ESD Catalog](../update-osdeploycoreesd/insider-the-windows-esd-catalog.md)
+* [Update Windows 11 OS](../cmdlets/update-osdeploycoreos.md)
+* [Insider: The Windows ESD Catalog](insider-the-windows-esd-catalog.md)
 * [Insider: Exporting Windows RE](insider-export-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)

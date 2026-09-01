@@ -1,8 +1,10 @@
 ---
-description: Prepare a Windows 11 PC with the software required to build OSDeploy boot media.
+description: >-
+  Prepare a Windows 11 PC with the software required to build OSDeploy boot
+  media.
 ---
 
-# Prepare the OSDeploy PC
+# PC Requirements
 
 Prepare a Windows 11 workstation with PowerShell 7, Hyper-V, and the modules required to create and test OSDeploy boot media.
 
@@ -72,4 +74,4 @@ Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands.
 {% endstep %}
 {% endstepper %}
 
-See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](powershell-modules.md). Optionally complete [Community Registration](../registration/).
+See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](powershell-modules.md). Optionally complete [Community Registration](../registration.md).

@@ -2,7 +2,7 @@
 description: Create a Hyper-V virtual machine for testing OSDeploy boot media.
 ---
 
-# Test OSDeploy Boot in Hyper-V
+# Test a Boot ISO
 
 Use `New-OSDeployHyperVM` to create and start a Hyper-V virtual machine for testing OSDeploy boot media. The function creates the virtual disk, attaches the newest OSDeploy boot ISO, configures the VM, creates an initial checkpoint, and opens the Hyper-V console when VMConnect is available.
 
@@ -17,7 +17,7 @@ Run the function on a physical computer that meets these requirements:
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
-* [Microsoft Hyper-V](../advanced/install-osdeploysoftware/microsoft-hyper-v.md) and the Hyper-V PowerShell tools
+* [Microsoft Hyper-V](../cmdlets/install-osdeploysoftware/microsoft-hyper-v.md) and the Hyper-V PowerShell tools
 * Administrator rights
 * `curl.exe` available in `PATH`
 * Enough processor, memory, and storage capacity for the VM
@@ -60,4 +60,4 @@ A VM created with an empty DVD drive does not have OSDeploy boot media to start.
 {% endstep %}
 {% endstepper %}
 
-For sizing, media, networking, firmware, checkpoint, and startup examples, see [New-OSDeployHyperVM](../advanced/new-osdeployhypervm.md). For compact syntax and parameter definitions, see the [command reference](../../command-reference/osdeploy/new-osdeployhypervm.md).
+For sizing, media, networking, firmware, checkpoint, and startup examples, see [New-OSDeployHyperVM](../cmdlets/new-osdeployhypervm.md). For compact syntax and parameter definitions, see the [command reference](../../command-reference/osdeploy/new-osdeployhypervm.md).

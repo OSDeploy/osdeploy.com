@@ -4,7 +4,7 @@ description: >-
   from cached Enterprise ESD files.
 ---
 
-# Core OS and WinRE
+# Update-OSDeployCoreOS
 
 {% hint style="info" %}
 `Update-OSDeployCoreOS` is the second public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. It uses the ESD files from stage one to prepare Windows setup media and Windows Recovery Environment (WinRE) content. Run it independently when only this prepared content needs updating.
@@ -22,7 +22,7 @@ Update-OSDeployCoreOS -Architecture arm64
 
 The command does not download Windows. Run `Update-OSDeployCoreESD` first so the required ESD files are available in the local cache.
 
-<figure><img src="../../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
@@ -147,10 +147,10 @@ Build-OSDeployBoot
 
 ## Related
 
-* [Complete OSDeploy Core update](../osdeploycore/update-osdeploycore.md)
-* [Update Windows 11 ESD](../update-osdeploycoreesd/)
-* [Insider: Building an OS from an ESD](insider-export-windows-11.md)
-* [Insider: Exporting Windows RE](insider-export-windows-re.md)
-* [Insider: Exporting WinPE Drivers from an OS](export-winpe-drivers.md)
-* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)
-* [Build-OSDeployBoot command reference](../../../command-reference/osdeploy/build-osdeployboot.md)
+* [Complete OSDeploy Core update](update-osdeploycore.md)
+* [Update Windows 11 ESD](update-osdeploycoreesd.md)
+* [Insider: Building an OS from an ESD](../inside-osdeploy/insider-export-windows-11.md)
+* [Insider: Exporting Windows RE](../inside-osdeploy/insider-export-windows-re.md)
+* [Insider: Exporting WinPE Drivers from an OS](../inside-osdeploy/export-winpe-drivers.md)
+* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)

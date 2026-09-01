@@ -2,7 +2,7 @@
 description: Download and verify Windows 11 25H2 Enterprise ESD files for OSDeploy Core.
 ---
 
-# Core ESD
+# Update-OSDeployCoreESD
 
 {% hint style="info" %}
 `Update-OSDeployCoreESD` is the first public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the Windows ESD source files need updating.
@@ -20,7 +20,7 @@ Update-OSDeployCoreESD -Architecture arm64
 
 This command downloads and caches the source ESD files. It does not install Windows or import the ESD contents into OSDeploy Core.
 
-<figure><img src="../../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
@@ -136,8 +136,8 @@ Update-OSDeployCoreOS -Architecture amd64
 
 ## Related
 
-* [Complete OSDeploy Core update](../osdeploycore/update-osdeploycore.md)
-* [Update-OSDeployCoreESD command reference](../../../command-reference/osdeploy/update-osdeploycoreesd.md)
-* [Update-OSDeployCoreOS command reference](../../../command-reference/osdeploy/update-osdeploycoreos.md)
-* [Insider: The Windows ESD Catalog](insider-the-windows-esd-catalog.md)
-* [System Requirements](../../requirements/windows-11-os.md)
+* [Complete OSDeploy Core update](update-osdeploycore.md)
+* [Update-OSDeployCoreESD command reference](../../command-reference/osdeploy/update-osdeploycoreesd.md)
+* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Insider: The Windows ESD Catalog](../inside-osdeploy/insider-the-windows-esd-catalog.md)
+* [System Requirements](../requirements/windows-11-os.md)

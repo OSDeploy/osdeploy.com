@@ -251,4 +251,4 @@ Get-VM -Name '<planned VM name>' -ErrorAction SilentlyContinue
 Test-Path -LiteralPath '<planned VHDX path>'
 ```
 
-Do not remove either object without explicit user approval. For prerequisite failures, direct the user to [Create a Hyper-V VM](../osdeploy-guide/basic/new-osdeployhypervm.md). For complete behavior and parameter examples, use the [detailed New-OSDeployHyperVM guide](../osdeploy-guide/advanced/new-osdeployhypervm.md) or the [command reference](../command-reference/osdeploy/new-osdeployhypervm.md).
+Do not remove either object without explicit user approval. For prerequisite failures, direct the user to [Create a Hyper-V VM](../osdeploy-guide/basic/new-osdeployhypervm.md). For complete behavior and parameter examples, use the [detailed New-OSDeployHyperVM guide](../osdeploy-guide/cmdlets/new-osdeployhypervm.md) or the [command reference](../command-reference/osdeploy/new-osdeployhypervm.md).

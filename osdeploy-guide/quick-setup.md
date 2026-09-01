@@ -1,6 +1,7 @@
 ---
 description: >-
-  Prepare an OSDeploy workstation and create Hydra boot media with Invoke-OSDeployHydration.
+  Prepare an OSDeploy workstation and create Hydra boot media with
+  Invoke-OSDeployHydration.
 ---
 
 # Quick Setup
@@ -46,4 +47,4 @@ Complete any content and wallpaper selections. Hydration detects the workstation
 {% endstep %}
 {% endstepper %}
 
-For `-Force`, `-WhatIf`, workflow details, and returned objects, see [Invoke-OSDeployHydration](advanced/invoke-osdeployhydration.md). For compact syntax and parameter definitions, see the [Invoke-OSDeployHydration command reference](../command-reference/osdeploy/invoke-osdeployhydration.md).
+For `-Force`, `-WhatIf`, workflow details, and returned objects, see [Invoke-OSDeployHydration](cmdlets/invoke-osdeployhydration.md). For compact syntax and parameter definitions, see the [Invoke-OSDeployHydration command reference](../command-reference/osdeploy/invoke-osdeployhydration.md).

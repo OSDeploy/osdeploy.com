@@ -2,7 +2,7 @@
 description: Update all Windows, recovery, and driver content used by OSDeploy Core.
 ---
 
-# Update OSDeployCore
+# Update-OSDeployCore
 
 `Update-OSDeployCore` is the complete OSDeploy Core update function in the OSDeploy PowerShell module. Run it to download current Windows source files, prepare Windows and Windows Recovery Environment (WinRE) content, and update Windows Preinstallation Environment (WinPE) drivers.
 
@@ -74,13 +74,13 @@ Build-OSDeployBoot
 
 ## In This Section
 
-* [Update Windows 11 ESD](../update-osdeploycoreesd/) - Run stage one independently and manage the Windows ESD downloads.
-* [Update Windows 11 OS](../update-osdeploycoreos/) - Run stage two independently and prepare Windows and WinRE content.
-* [Update WinPE Drivers](../update-osdeploycoredrivers/) - Run stage three independently and manage WinPE drivers.
+* [Update Windows 11 ESD](update-osdeploycoreesd.md) - Run stage one independently and manage the Windows ESD downloads.
+* [Update Windows 11 OS](update-osdeploycoreos.md) - Run stage two independently and prepare Windows and WinRE content.
+* [Update WinPE Drivers](update-osdeploycoredrivers.md) - Run stage three independently and manage WinPE drivers.
 
 ## Related
 
-* [OSDeploy PowerShell Module](../../../command-reference/osdeploy/)
-* [Update-OSDeployCore command reference](../../../command-reference/osdeploy/update-osdeploycore.md)
-* [Build-OSDeployBoot command reference](../../../command-reference/osdeploy/build-osdeployboot.md)
-* [System Requirements](../../requirements/windows-11-os.md)
+* [OSDeploy PowerShell Module](../../command-reference/osdeploy/)
+* [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md)
+* [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)
+* [System Requirements](../requirements/windows-11-os.md)

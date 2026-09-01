@@ -69,4 +69,4 @@ Missing or oversized local OSDCloud content does not prevent creation of the boo
 {% endstep %}
 {% endstepper %}
 
-For labels, selection rules, copy behavior, `WhatIf`, and returned objects, see [New-OSDeployBootUSB](../advanced/new-osdeploybootusb.md). To refresh prepared media without repartitioning, see [Update-OSDeployBootUSB](../advanced/update-osdeploybootusb.md). For compact syntax, see the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) and [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md).
+For labels, selection rules, copy behavior, `WhatIf`, and returned objects, see [New-OSDeployBootUSB](../cmdlets/new-osdeploybootusb.md). To refresh prepared media without repartitioning, see [Update-OSDeployBootUSB](../cmdlets/update-osdeploybootusb.md). For compact syntax, see the [New-OSDeployBootUSB command reference](../../command-reference/osdeploy/new-osdeploybootusb.md) and [Update-OSDeployBootUSB command reference](../../command-reference/osdeploy/update-osdeploybootusb.md).

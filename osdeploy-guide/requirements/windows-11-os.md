@@ -2,7 +2,7 @@
 description: Prepare a supported Windows 11 workstation for OSDeploy.
 ---
 
-# Prepare Windows 11
+# Windows 11
 
 Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
 
@@ -73,7 +73,7 @@ Enable Hyper-V now so its required restart is complete before building and testi
 Enable-WindowsOptionalFeature -Online -FeatureName 'Microsoft-Hyper-V-All' -All -NoRestart
 ```
 
-Restart Windows after the command completes. See [Microsoft Hyper-V](../advanced/install-osdeploysoftware/microsoft-hyper-v.md) for requirements and additional installation options.
+Restart Windows after the command completes. See [Microsoft Hyper-V](../cmdlets/install-osdeploysoftware/microsoft-hyper-v.md) for requirements and additional installation options.
 {% endstep %}
 {% endstepper %}
 
