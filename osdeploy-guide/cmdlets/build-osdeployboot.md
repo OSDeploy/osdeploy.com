@@ -217,7 +217,7 @@ An exact `-Name` match loads the saved profile automatically; no profile picker 
 | `${{ OSDCloudModulePath }}` | Loaded OSDCloud module base    |
 | `${{ OSDModulePath }}`      | Loaded OSD module base         |
 
-When `-Name` does not match a saved profile, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. It then writes a persistent profile to:
+When `-Name` does not match a saved profile, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Module-managed drivers are selected from `%ProgramData%\OSDeployCore\cache\winpedrivers-{Architecture}`. User-managed drivers are selected from `%ProgramData%\OSDeployCore\repository\winpedrivers-{Architecture}`. It then writes a persistent profile to:
 
 ```
 %ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{Name}-{Architecture}\osdeployboot.json
@@ -236,7 +236,7 @@ Keep portable content beside `osdeployboot.json` to include it without storing a
 |-- osdeployboot.json
 |-- build-mediascript\
 |-- build-winpeapp\
-|-- build-winpedrivers\
+|-- winpedrivers-{Architecture}\
 |-- build-winpescript\
 |-- build-winpewallpaper\
 `-- WinPEStartup\
@@ -251,7 +251,7 @@ The build applies profile content as follows:
 | WinPE app scripts     | Run explicit profile paths first, then sorted `*.ps1` files from `build-winpeapp` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                         |
 | WinPE scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `build-winpescript` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                      |
 | Media scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `build-mediascript` and its immediate subdirectories after the image is dismounted. Duplicate paths are ignored case-insensitively.                                                                        |
-| WinPE drivers         | Add explicit paths first. When recursive `*.inf` files exist under local `build-winpedrivers`, append that directory once and let DISM add its drivers recursively.                                                                                                         |
+| WinPE drivers         | Add explicit paths first. When recursive `*.inf` files exist under the architecture-matched local `winpedrivers-amd64` or `winpedrivers-arm64` directory, append that directory once and let DISM add its drivers recursively.                                                            |
 | WinPEStartup profiles | Copy explicit JSON files first, then sorted root-level JSON files from `WinPEStartup\Profiles`. A local file with the same destination name replaces the explicit file.                                                                                                     |
 | WinPEStartup scripts  | Copy all content under `WinPEStartup\Scripts` recursively with overwrite. These paths are not stored in `osdeployboot.json`.                                                                                                                                                |
 | Wallpaper             | Use the first JPG sorted by full path in `build-winpewallpaper`, then legacy `{profile}\wallpaper.jpg`, then the bundled default. When neither profile location contains a wallpaper, a shared wallpaper can be selected and saved as `build-winpewallpaper\wallpaper.jpg`. |

@@ -144,23 +144,20 @@ In download-only mode, the command does not create the expanded driver folder or
 
 ## Driver Library
 
-During normal processing, expanded drivers and package metadata are stored in versioned folders:
+During normal processing, expanded drivers and package metadata are stored in the architecture-specific module-managed cache:
 
 ```
-C:\ProgramData\OSDeployCore\repository\build-winpedrivers\<architecture>\<name>-<version>\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-<architecture>\<name>-<version>\
 ```
 
-List the available driver folders after processing:
+List the module-managed driver folders after processing:
 
 ```powershell
-Get-OSDeployCoreDrivers
+Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\winpedrivers-*\*" -Directory |
+	Select-Object Name, Parent, LastWriteTime, FullName
 ```
 
-Limit the results to amd64 and exclude Wi-Fi folders:
-
-```powershell
-Get-OSDeployCoreDrivers -Architecture amd64 -SkipWifiDrivers
-```
+User-managed drivers remain separate under `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` and `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64`. `Update-OSDeployCoreDrivers` does not add, update, or remove content in those repository folders.
 
 ## Refresh Cached Packages
 

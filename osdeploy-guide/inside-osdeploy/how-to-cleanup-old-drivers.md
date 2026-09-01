@@ -9,7 +9,7 @@ description: Remove obsolete WinPE driver versions from the OSDeploy Core librar
 Remove obsolete versions to reduce disk usage and keep the driver selection list in `Build-OSDeployBoot` easy to identify.
 
 {% hint style="warning" %}
-Keep the newest known-working version of each driver family and architecture. Do not delete the `amd64` or `arm64` architecture folders. A newer version number is usually the current release, but verify the version you use before deleting an older folder.
+Keep the newest known-working version of each driver family and architecture. Do not delete the `winpedrivers-amd64` or `winpedrivers-arm64` roots. A newer version number is usually the current release, but verify the version you use before deleting an older folder.
 {% endhint %}
 
 ## Driver Folder Location
@@ -17,9 +17,11 @@ Keep the newest known-working version of each driver family and architecture. Do
 Expanded driver folders are stored by architecture:
 
 ```
-C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\amd64\
-C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\arm64\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-amd64\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-arm64\
 ```
+
+These roots contain module-managed packages. User-managed drivers are stored separately under `C:\ProgramData\OSDeployCore\repository\winpedrivers-amd64` and `C:\ProgramData\OSDeployCore\repository\winpedrivers-arm64`; maintain those folders according to your own repository workflow.
 
 A folder name contains the driver family and version. For example:
 
@@ -41,9 +43,9 @@ Close any active OSDeploy build, then open an elevated PowerShell 7 session.
 List the expanded folders for both architectures:
 
 ```powershell
-$DriverRoot = "$env:ProgramData\OSDeployCore\OSDRepo\winpe-drivers"
+$DriverRoots = Get-Item "$env:ProgramData\OSDeployCore\cache\winpedrivers-*"
 
-Get-ChildItem -Path "$DriverRoot\*\*" -Directory -ErrorAction SilentlyContinue |
+Get-ChildItem -Path $DriverRoots.FullName -Directory -ErrorAction SilentlyContinue |
 	Select-Object Name, Parent, LastWriteTime, FullName |
 	Format-Table -AutoSize
 ```
@@ -55,9 +57,9 @@ Compare folders belonging to the same driver family. Use the version in the fold
 Use `Out-GridView` to select only the obsolete versioned folders. Hold **Ctrl** to select multiple rows, then select **OK**.
 
 ```powershell
-$OldDrivers = Get-ChildItem -Path "$DriverRoot\*\*" -Directory -ErrorAction SilentlyContinue |
+$OldDrivers = Get-ChildItem -Path $DriverRoots.FullName -Directory -ErrorAction SilentlyContinue |
 	Select-Object Name,
-		@{Name = 'Architecture'; Expression = { $_.Parent.Name } },
+		@{Name = 'Architecture'; Expression = { $_.Parent.Name -replace '^winpedrivers-', '' } },
 		LastWriteTime,
 		FullName |
 	Out-GridView -Title 'Select old WinPE driver folders to remove' -PassThru
@@ -89,7 +91,7 @@ Remove the selected folders and confirm each deletion:
 $OldDrivers.FullName | Remove-Item -Recurse -Force -Confirm
 ```
 
-The command deletes only the selected expanded folders. It does not remove the `amd64` or `arm64` parent folders.
+The command deletes only the selected expanded folders. It does not remove the `winpedrivers-amd64` or `winpedrivers-arm64` roots.
 
 {% hint style="info" %}
 Downloaded package archives are stored separately below `C:\ProgramData\OSDeployCore\cache\downloads`. Removing an expanded driver folder does not remove its downloaded archive. When the current catalog still references that package, rerunning `Update-OSDeployCoreDrivers` can restore the expanded folder from the cached archive.
@@ -100,7 +102,7 @@ Downloaded package archives are stored separately below `C:\ProgramData\OSDeploy
 List the remaining folders:
 
 ```powershell
-Get-ChildItem -Path "$DriverRoot\*\*" -Directory -ErrorAction SilentlyContinue |
+Get-ChildItem -Path $DriverRoots.FullName -Directory -ErrorAction SilentlyContinue |
 	Select-Object Name, Parent, FullName |
 	Format-Table -AutoSize
 ```

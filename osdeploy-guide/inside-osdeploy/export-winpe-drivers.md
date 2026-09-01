@@ -6,7 +6,7 @@ description: >-
 
 # Insider: Export WinPE Drivers
 
-This article follows the network-driver extraction path in `Update-OSDeployCoreOS`. While the exported Enterprise image is mounted read-only, OSDeploy identifies Microsoft inbox Ethernet and Wi-Fi packages and copies their DriverStore content into the WinPE driver repository.
+This article follows the network-driver extraction path in `Update-OSDeployCoreOS`. While the exported Enterprise image is mounted read-only, OSDeploy identifies Microsoft inbox Ethernet and Wi-Fi packages and copies their DriverStore content into the module-managed WinPE driver cache.
 
 This is a targeted export. It does not enumerate every installed driver and it does not collect OEM driver packs.
 
@@ -23,7 +23,7 @@ Ethernet and Wi-Fi use the same processing pipeline:
 3. Remove incomplete records.
 4. Keep the highest package version for each driver name.
 5. Locate the matching package in DriverStore.
-6. Copy it into the architecture-specific OSDeploy repository.
+6. Copy it into the architecture-specific OSDeploy Core cache.
 
 The two passes differ only in their package-name pattern and destination family.
 
@@ -66,7 +66,7 @@ OSDeploy extracts four values:
 | ------------ | ---------------------------------------------------- | --------------------------------------- |
 | Name         | `assemblyIdentity` `name` attribute                  | Logical driver name                     |
 | Version      | `assemblyIdentity` `version` attribute               | Version comparison and destination path |
-| Architecture | `assemblyIdentity` `processorArchitecture` attribute | Architecture repository                 |
+| Architecture | `assemblyIdentity` `processorArchitecture` attribute | Architecture-specific cache root        |
 | INF file     | First `inf` element                                  | DriverStore folder lookup               |
 
 The package prefix and `-FOD-Package` suffix are removed from the logical name. For example, an Ethernet package name is normalized by:
@@ -124,30 +124,30 @@ A typical DriverStore directory appends architecture and content identifiers to 
 
 If no matching directory is found, the function writes a verbose message and moves to the next record. It does not create an empty destination.
 
-## Build the Repository Path
+## Build the Cache Path
 
 Driver packages are stored under:
 
 ```
-C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-amd64\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-arm64\
 ```
 
-The complete path is organized by architecture, family and version, and normalized driver name:
+The architecture is encoded in the cache root. Each root is then organized by family and version, followed by the normalized driver name:
 
 ```
-winpe-drivers\
-└── amd64\
-	├── microsoft-windows-ethernet-<version>\
-	│   └── <driver-name>\
-	└── microsoft-windows-wifi-<version>\
-		└── <driver-name>\
+winpedrivers-amd64\
+├── microsoft-windows-ethernet-<version>\
+│   └── <driver-name>\
+└── microsoft-windows-wifi-<version>\
+	└── <driver-name>\
 ```
 
-ARM64 packages use the parallel `arm64` directory when the servicing metadata reports that architecture.
+ARM64 packages use the parallel `winpedrivers-arm64` root when the servicing metadata reports that architecture.
 
 | Path segment                                                 | Source                                            |
 | ------------------------------------------------------------ | ------------------------------------------------- |
-| `amd64` or `arm64`                                           | `processorArchitecture` from the package identity |
+| `winpedrivers-amd64` or `winpedrivers-arm64`                 | `processorArchitecture` from the package identity |
 | `microsoft-windows-ethernet-*` or `microsoft-windows-wifi-*` | Driver family and package version                 |
 | Final directory                                              | Normalized package name                           |
 
@@ -174,7 +174,7 @@ The command can process AMD64 and ARM64 ESDs in one run. Driver discovery occurs
 
 The architecture in the destination path comes from the package manifest rather than from the public `-Architecture` parameter. In normal media these values align, but using the manifest keeps each package tied to its own servicing identity.
 
-The repository path also includes the package version. A newer Windows ESD can therefore add a newer family directory without overwriting the older package set. The separate `Update-OSDeployCoreDrivers` workflow can later manage the broader WinPE driver repository.
+The cache path also includes the package version. A newer Windows ESD can therefore add a newer family directory without overwriting the older package set. The separate `Update-OSDeployCoreDrivers` workflow manages vendor packages in the same architecture-specific cache roots. User-managed drivers remain separate under `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` and `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64`.
 
 ## Review Driver Diagnostics
 
@@ -187,9 +187,9 @@ Update-OSDeployCoreOS -Architecture amd64 -Verbose
 Inspect the cached network-driver families:
 
 ```powershell
-$DriverRoot = 'C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers'
+$DriverRoots = Get-Item 'C:\ProgramData\OSDeployCore\cache\winpedrivers-*'
 
-Get-ChildItem -Path $DriverRoot -Directory -Recurse |
+Get-ChildItem -Path $DriverRoots.FullName -Directory -Recurse |
 	Where-Object Name -Like 'microsoft-windows-*' |
 	Select-Object FullName
 ```

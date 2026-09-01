@@ -85,7 +85,10 @@ The update stages can then change these primary locations:
 | `%ProgramData%\OSDeployCore\cache\windows-re` | Recovery images and metadata derived from the matching Windows OS imports. |
 | `%ProgramData%\OSDeployCore\cache\config\winpedrivers.json` | Merged local WinPE driver catalog. |
 | `%ProgramData%\OSDeployCore\cache\downloads` | Cached vendor driver package archives. |
-| `%ProgramData%\OSDeployCore\repository\build-winpedrivers` | Expanded vendor packages and Microsoft inbox network drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\cache\winpedrivers-amd64` | Module-managed AMD64 vendor packages and Microsoft inbox network drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\cache\winpedrivers-arm64` | Module-managed ARM64 vendor packages and Microsoft inbox network drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` | User-managed AMD64 drivers available to boot builds. |
+| `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64` | User-managed ARM64 drivers available to boot builds. |
 
 Existing valid content is reused by default. See the stage guides for checksum fallback, duplicate-import, catalog-merge, force, and expansion behavior.
 
