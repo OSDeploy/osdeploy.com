@@ -1,20 +1,20 @@
 ---
-description: >-
-  Install the stable release of Visual Studio Code with
-  Install-OSDeploySoftware.
+description: Install the stable Visual Studio Code channel with WinGet and OSDeploy.
 ---
 
 # Visual Studio Code
 
-Visual Studio Code provides the editor used to work with OSDeploy PowerShell scripts and repositories. `Install-OSDeploySoftware` installs the stable `Microsoft.VisualStudioCode` WinGet package when the `code` command is not already available.
+Use the exact name `code` to install the stable `Microsoft.VisualStudioCode` WinGet package. Visual Studio Code is optional, but it provides an editor for OSDeploy PowerShell scripts and repository content.
 
-{% hint style="info" %}
-Visual Studio Code is optional. It is not required to run OSDeploy or OSDCloud.
-{% endhint %}
+## Requirements
+
+Run the command from an elevated PowerShell 7.6 or later MSI installation on Windows 11 25H2 build 26200 or later.
+
+The command requires the current OSDeploy module, `curl.exe`, `winget.exe`, and internet access. The helper does not pass an architecture argument to WinGet.
 
 ## Preview
 
-Review the package source and install command without making changes:
+Return the WinGet package ID, documentation links, and install command without installing Visual Studio Code:
 
 ```powershell
 Install-OSDeploySoftware -Name 'code'
@@ -22,25 +22,46 @@ Install-OSDeploySoftware -Name 'code'
 
 ## Install
 
-Run the installation from an elevated PowerShell 7.6 or later session:
+Install Visual Studio Code when the `code` command cannot be found:
 
 ```powershell
 Install-OSDeploySoftware -Name 'code' -Force
 ```
 
-The silent installation adds file and folder context-menu commands, associates supported files, and adds the `code` command to `PATH`. It does not start Visual Studio Code automatically.
+The helper first searches `PATH`, the standard per-user path under `%LOCALAPPDATA%`, and the standard per-machine path under `%ProgramFiles%`. When no command is found, WinGet runs a silent installation that:
+
+* Adds file and folder Explorer context-menu commands.
+* Associates supported files.
+* Adds the `code` command to `PATH`.
+* Does not start Visual Studio Code after installation.
+
+The command refreshes the current process environment and searches for `code` again. It stops on a nonzero WinGet exit code or when the installed command still cannot be found.
+
+## Download Only
+
+Visual Studio Code does not support the parent command's download-only mode:
+
+```powershell
+Install-OSDeploySoftware -Name 'code' -DownloadOnly
+```
+
+This returns `Action` set to `DownloadOnly`, `Status` set to `NotSupported`, and a note. It does not invoke WinGet.
+
+## WhatIf and Result
+
+Use `-Force -WhatIf` to report the installation action without invoking the Visual Studio Code helper.
+
+A completed `-Force` action returns `Component` set to `Visual Studio Code` and `Status` set to `Installed`. The parent result does not include the detected version, command path, or whether the package was newly installed. The installer does not request a restart.
+
+## Verify
 
 Verify the installation:
 
 ```powershell
-code --version
+Get-Command 'code'
+code --version | Select-Object -First 1
 ```
 
-{% hint style="info" %}
-Visual Studio Code is installed directly through WinGet. This component does not add files to OSDeployCore and does not support `-DownloadOnly`.
-{% endhint %}
+## Next Step
 
-## Related
-
-* [Install Software](../../basic/install-osdeploysoftware.md)
-* [Visual Studio Code reference](../../../core-components/developer-tools/vscode.md)
+Open the OSDeploy repository or scripts in Visual Studio Code. See the [Visual Studio Code reference](../../../core-components/developer-tools/vscode.md) for related editor setup.

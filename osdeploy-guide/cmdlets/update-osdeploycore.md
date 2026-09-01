@@ -1,86 +1,120 @@
 ---
-description: Update all Windows, recovery, and driver content used by OSDeploy Core.
+description: Refresh Windows ESD, Windows OS and recovery, and WinPE driver content in the required order.
 ---
 
 # Update-OSDeployCore
 
-`Update-OSDeployCore` is the complete OSDeploy Core update function in the OSDeploy PowerShell module. Run it to download current Windows source files, prepare Windows and Windows Recovery Environment (WinRE) content, and update Windows Preinstallation Environment (WinPE) drivers.
+`Update-OSDeployCore` runs the complete OSDeploy Core content refresh. It downloads and verifies catalog-selected Windows Enterprise ESD files, imports those files as Windows OS and Windows Recovery Environment (WinRE) sources, and then refreshes the WinPE driver catalog and packages.
 
-{% hint style="info" %}
-**TLDR:** Open PowerShell 7 as an administrator, then run:
+Use the individual stage commands when you need architecture, source, force, or download-only controls. The orchestrator has no stage-specific parameters.
 
-```powershell
-Update-OSDeployCore
-```
+## Requirements
 
-The function runs all three OSDeploy Core update stages in the correct order.
+Run the command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+
+Install or update the [OSDeploy module](../requirements/powershell-modules.md) before refreshing Core content. Internet access is required for uncached ESD files, driver catalog discovery, and uncached driver packages. Allow substantial free space under `%ProgramData%\OSDeployCore` for source ESDs, expanded setup media, recovery images, and drivers.
+
+{% hint style="warning" %}
+The command stops before the first update stage when a Windows version, PowerShell, MSI installation, `curl.exe`, or administrator check fails.
 {% endhint %}
 
-## Run the Complete Update
+## Parameters
 
-Run the following command:
+`Update-OSDeployCore` has no command-specific parameters. It supports common parameters, including `-Verbose`, and the following `SupportsShouldProcess` parameters:
+
+| Parameter | Type | Default | Accepted values and behavior |
+| --- | --- | --- | --- |
+| `-WhatIf` | Common parameter | Not enabled | Passes preview behavior to all three stage commands. Requirement checks, Core path initialization, cache inspection, prompts, and network discovery can still occur. |
+| `-Confirm` | Common parameter | Not enabled | Flows the confirmation preference to the stage commands. The orchestrator does not present one confirmation for the complete workflow. |
+
+## Examples
+
+### Refresh all Core content
+
+Run all three update stages in dependency order:
 
 ```powershell
 Update-OSDeployCore
 ```
 
-The complete update runs these public sub-functions in sequence:
+Follow the per-file ESD prompts. Driver packages are processed automatically unless confirmation is requested through a common preference.
 
-| Stage | Public sub-function          | Purpose                                                                                           |
-| ----- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
-| 1     | `Update-OSDeployCoreESD`     | Downloads and verifies the Windows 11 Enterprise Electronic Software Download (ESD) source files. |
-| 2     | `Update-OSDeployCoreOS`      | Uses the ESD files to prepare Windows setup media and WinRE content.                              |
-| 3     | `Update-OSDeployCoreDrivers` | Downloads and prepares current WinPE driver packages.                                             |
+### Preview the complete workflow
 
-Windows ESD files are large, and preparing the Windows images can take time. Follow any download prompts and leave the PowerShell window open until all three stages finish.
-
-Preview the complete update without downloading or importing content:
+Run requirement checks, selection, cache inspection, and discovery while suppressing operations protected by `ShouldProcess`:
 
 ```powershell
 Update-OSDeployCore -WhatIf
 ```
 
-## Update One Stage
+This is not a read-only preview. See [WhatIf and Confirmation](#whatif-and-confirmation) for the operations that occur before a `ShouldProcess` boundary.
 
-Each stage is also a public function in the OSDeploy PowerShell module. Run a sub-function directly when only that part of OSDeploy Core needs updating.
+### Capture all returned objects
 
-Update only the Windows ESD source files:
-
-```powershell
-Update-OSDeployCoreESD
-```
-
-Update only the prepared Windows and WinRE content:
+Capture verified ESD files, newly imported OS directories, and processed driver package files in invocation order:
 
 ```powershell
-Update-OSDeployCoreOS
+$CoreResults = Update-OSDeployCore
+$CoreResults | Select-Object FullName, PSIsContainer
 ```
 
-Update only the WinPE drivers:
+## Orchestration Order
 
-```powershell
-Update-OSDeployCoreDrivers
-```
+The command initializes the OSDeploy Core paths, then invokes these public commands synchronously:
 
-The sub-functions provide additional options for selecting an architecture, driver source, or download behavior. Use the stage guides for those options.
+| Stage | Command | Behavior |
+| --- | --- | --- |
+| 1 | `Update-OSDeployCoreESD` | Selects the newest bundled OS catalog, resolves host-supported en-US Enterprise ESD entries, reuses verified cache files, and prompts before each required download. |
+| 2 | `Update-OSDeployCoreOS` | Reads only ESDs that match the newest catalog checksum, imports Windows setup and WinRE content, and stages Microsoft inbox network drivers. |
+| 3 | `Update-OSDeployCoreDrivers` | Refreshes all active WinPE driver sources, then downloads and expands all matching packages. Wi-Fi packages are excluded automatically when no valid imported WinRE source exists. |
 
-## Next Step
+The order is fixed. Stage two does not download a missing ESD itself, so stage one must complete first. Stage three runs after OS import so a newly created WinRE source can make Wi-Fi packages eligible.
 
-After OSDeploy Core is updated, build the boot image:
+The orchestrator does not catch stage errors. A terminating error stops the workflow and later stages do not run. Declined, unavailable, or unsuccessful individual ESD downloads are normally omitted rather than treated as terminating errors; stage two then imports whichever current-catalog ESDs are verified in the cache.
 
-```powershell
-Build-OSDeployBoot
-```
+## File Effects
 
-## In This Section
+Before the stages run, Core path initialization can create the standard cache and repository directory tree under `%ProgramData%\OSDeployCore`. It can also migrate legacy repository folders and build profiles, normalize profile names and properties, and rewrite persisted paths that refer to legacy locations.
 
-* [Update Windows 11 ESD](update-osdeploycoreesd.md) - Run stage one independently and manage the Windows ESD downloads.
-* [Update Windows 11 OS](update-osdeploycoreos.md) - Run stage two independently and prepare Windows and WinRE content.
-* [Update WinPE Drivers](update-osdeploycoredrivers.md) - Run stage three independently and manage WinPE drivers.
+The update stages can then change these primary locations:
 
-## Related
+| Location | Content |
+| --- | --- |
+| `%ProgramData%\OSDeployCore\OSDCloud\OS\<Windows release>` | Downloaded Enterprise ESD files selected from the bundled catalog. |
+| `%ProgramData%\OSDeployCore\cache\windows-os` | Imported Windows setup media, WIM files, metadata, supporting files, and logs. |
+| `%ProgramData%\OSDeployCore\cache\windows-re` | Recovery images and metadata derived from the matching Windows OS imports. |
+| `%ProgramData%\OSDeployCore\cache\config\winpedrivers.json` | Merged local WinPE driver catalog. |
+| `%ProgramData%\OSDeployCore\cache\downloads` | Cached vendor driver package archives. |
+| `%ProgramData%\OSDeployCore\repository\build-winpedrivers` | Expanded vendor packages and Microsoft inbox network drivers used by boot builds. |
 
-* [OSDeploy PowerShell Module](../../command-reference/osdeploy/)
-* [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md)
-* [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)
-* [System Requirements](../requirements/windows-11-os.md)
+Existing valid content is reused by default. See the stage guides for checksum fallback, duplicate-import, catalog-merge, force, and expansion behavior.
+
+## WhatIf and Confirmation
+
+`Update-OSDeployCore` declares `SupportsShouldProcess`, but it does not call `ShouldProcess` itself. PowerShell preference variables carry `-WhatIf` and `-Confirm` into the three stage commands, where each operation defines its own boundary.
+
+With `-WhatIf`:
+
+* Core path initialization still runs and is not protected by `ShouldProcess`.
+* ESD catalog parsing, cache hashing, older-cache lookup, URL reachability tests, and `ShouldContinue` prompts can still occur. Verified cached ESD files can still be returned.
+* OS source discovery and checksum verification still occur, but each import is skipped at its destination-level `ShouldProcess` call.
+* Driver source discovery can contact vendor endpoints. The driver catalog directory can be created, but the catalog write, package download, and expansion are skipped.
+
+With `-Confirm`, there is no single all-stages approval. ESD uses its own Yes/No prompts and `ShouldProcess` calls, OS import confirms per destination, and the driver stage confirms its combined catalog-and-package operation. The driver stage suppresses additional confirmation prompts in its child commands.
+
+{% hint style="warning" %}
+Do not use `-WhatIf` as a guarantee that the local Core tree and saved build profiles remain unchanged. Run it only after reviewing the initialization effects above.
+{% endhint %}
+
+## Output
+
+The function passes pipeline output from each child command through in stage order. A run can return a mixed collection:
+
+| Type | Source and meaning |
+| --- | --- |
+| `System.IO.FileInfo` | Current-catalog ESD files that were downloaded or verified, an older verified ESD retained after declining an upgrade, and driver package archives processed successfully. |
+| `System.IO.DirectoryInfo` | Windows OS destination directories created by completed imports. |
+
+Existing OS imports, declined or failed downloads, unmatched driver sources, and skipped packages produce no result object. Host, warning, verbose, and `WhatIf` messages are not pipeline output.
+
+See [Update Core Content](../basic/update-osdeploycore.md) for the shortest workflow, or continue with the stage guides for [ESD downloads](update-osdeploycoreesd.md), [OS import](update-osdeploycoreos.md), and [WinPE drivers](update-osdeploycoredrivers.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).

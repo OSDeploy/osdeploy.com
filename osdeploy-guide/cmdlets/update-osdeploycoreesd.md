@@ -22,9 +22,22 @@ This command downloads and caches the source ESD files. It does not install Wind
 
 <figure><img src="../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
 
-{% hint style="info" %}
-Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+## Requirements
+
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Internet access is required for URL tests and uncached downloads.
+
+{% hint style="warning" %}
+The command stops before catalog selection when a Windows version, PowerShell, MSI installation, `curl.exe`, or administrator check fails. It also stops when no catalog XML exists or the newest catalog file name does not match the expected `<build>-win<version>-<release>.xml` format.
 {% endhint %}
+
+## Parameters
+
+| Parameter | Type | Default | Accepted values and behavior |
+| --- | --- | --- | --- |
+| `-Force` | `Switch` | Not enabled | Bypasses current and older verified cache reuse and queues a fresh download. It does not bypass the Yes/No download prompt. |
+| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. Omission uses host-based targets: AMD64 hosts consider x64 then ARM64; ARM64 hosts consider ARM64 only. `amd64` on an ARM64 host leaves no eligible target. |
+| `-WhatIf` | Common parameter | Not enabled | Suppresses operations gated by `ShouldProcess`, including cache-directory creation, deletion, download, retry, and failed-file cleanup. Initialization, catalog and cache reads, hashing, URL tests, and Yes/No prompts can still occur. |
+| `-Confirm` | Common parameter | Not enabled | Adds PowerShell confirmation at each `ShouldProcess` boundary. Independent `ShouldContinue` Yes/No prompts still appear. |
 
 ## Select an Architecture
 
@@ -73,7 +86,7 @@ Downloads are saved in the version-specific folder:
 C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
 ```
 
-The exact ESD file name can change when the OSDeploy catalog is updated to a newer Windows build.
+The exact release folder is derived from the newest catalog file name, and the ESD file name can change when the module catalog is updated to a newer Windows build. Core path initialization occurs before catalog processing and can create directories or migrate legacy repository content and profiles.
 
 {% hint style="warning" %}
 Each ESD is several gigabytes. The confirmation prompt estimates a download time of 5 to 30 minutes, but the actual time depends on the internet connection.
@@ -84,7 +97,7 @@ Each ESD is several gigabytes. The confirmation prompt estimates a download time
 The command verifies an existing ESD before deciding whether another download is needed.
 
 * If the current ESD exists and its SHA256 checksum matches, the file is returned without being downloaded again.
-* If a verified ESD from an older catalog exists, the command offers a choice between keeping that file and downloading the newer version.
+* If a differently named ESD from an older catalog exists in the current release folder and matches its own catalog checksum, the command offers a choice between returning that file and downloading the newer version. Older catalogs are cache lookup metadata, not fallback download sources.
 * If an existing file does not match the expected checksum, the command offers to move it to the Recycle Bin and download it again.
 
 Use `-Force` to download the selected ESD files again even when the current files are already cached and verified:
@@ -101,11 +114,11 @@ Use `-WhatIf` to prevent directory creation and downloads:
 Update-OSDeployCoreESD -Architecture amd64 -WhatIf
 ```
 
-The command can still inspect cached files, test download URLs, and display confirmation prompts while processing `-WhatIf`. No ESD transfer is started unless `ShouldProcess` approves the operation.
+The command can still initialize Core paths, inspect and hash cached files, test download URLs, and display `ShouldContinue` prompts while processing `-WhatIf`. A verified current cache file, or an older verified file retained after declining the newer download, can still be returned. No ESD transfer starts unless both the Yes/No prompt and `ShouldProcess` approve it.
 
 ## Download Recovery
 
-Downloads use `curl.exe` with resume support. When a transfer fails, produces no file, is incomplete, or fails SHA256 verification, the command makes up to two automatic retries after the initial attempt.
+Downloads use `curl.exe` with resume support. When a transfer fails, produces no file, is incomplete, or fails SHA256 verification, the command makes up to two automatic retries after the initial attempt. URL reachability is tested for every pending entry before any per-file download confirmations are collected.
 
 If all automatic attempts fail, the command displays the failure details and asks whether to retry again. Failed checksum files are moved to the Recycle Bin before a clean retry. If the final retry is declined, the failed file can also be moved to the Recycle Bin.
 

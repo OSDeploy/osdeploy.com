@@ -1,8 +1,8 @@
 ---
-description: Update-OSDeployUSB
+description: Refresh existing OSDeploy USB volumes from a selected standard or CA 2023 boot-media tree.
 ---
 
-# Update an OSDeploy Boot USB
+# Update-OSDeployBootUSB
 
 `Update-OSDeployBootUSB` copies a selected OSDeploy Boot build to existing USB volumes without partitioning or formatting their disks. Use the command to update every connected USB boot volume with a matching label, write build metadata, and optionally refresh OSDCloud content on matching data volumes.
 
@@ -43,7 +43,7 @@ All parameters are optional. The function has one parameter set and does not acc
 | `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters. Every connected USB volume whose file-system label equals this value is updated.                                                                             |
 | `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters. Every matching USB volume is considered for the optional OSDCloud copy.                                                                                      |
 | `-WhatIf`    | Common parameter | Not enabled | Perform prerequisite checks, media selection, volume discovery, and free-space checks. Change the AutoRun policy, report gated writes, and still display the OSDCloud `ShouldContinue` prompt. |
-| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each BootMedia copy, metadata write, and approved OSDCloud copy. It does not replace or suppress the separate OSDCloud `ShouldContinue` prompt.                       |
+| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each BootMedia copy, metadata write, and approved OSDCloud copy. The function uses the default `Medium` impact, so these prompts do not appear under PowerShell's default `High` preference unless requested. It does not suppress the separate OSDCloud prompt. |
 
 Label comparisons use PowerShell's default case-insensitive equality. An empty string passes parameter validation, but a volume is selected only when its provider-returned label equals that value.
 
@@ -125,6 +125,12 @@ After both selections, the function sets this machine-wide policy value without 
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutorun = 0xFF
 ```
 
+## Media Architecture
+
+The command can copy either an `amd64` or `arm64` media tree and does not convert its architecture. Select media that matches the firmware architecture of the devices that will boot the USB.
+
+`bootmedia` is the standard media tree. `bootmedia_ca2023` contains CA 2023 Secure Boot files when the build was created from compatible imported WinRE content. The second selector chooses one tree; the function does not merge or synchronize both variants on a boot volume.
+
 ## USB Volume Matching
 
 The function uses the Windows Storage provider to get online disks whose bus type is `USB`. It excludes disks that report no media, maps their partition access paths to volumes, and filters the resulting volumes by exact file-system label.
@@ -162,11 +168,13 @@ For each matching data volume, the function recursively totals the source-file s
 
 The `ShouldContinue` prompt is separate from `-Confirm` and appears once for each data volume that has determinable, sufficient free space.
 
-## WhatIf Behavior
+## WhatIf and Confirmation
 
 `-WhatIf` still performs all prerequisite checks, opens both `Out-GridView` selectors, sets the AutoRun policy, discovers matching volumes, checks paths, totals OSDCloud source files, and checks free space.
 
 BootMedia copies and `BootMedia.json` writes are reported but suppressed. For each data volume with enough space, the function still displays the `ShouldContinue` prompt. Approving it causes `ShouldProcess` to report and suppress the OSDCloud copy; declining it skips that report. No USB content is changed by the gated operations.
+
+Without `-Confirm`, BootMedia and metadata writes proceed without a PowerShell confirmation prompt under the default confirmation preference. The OSDCloud `ShouldContinue` prompt still appears once for every eligible data volume and cannot be bypassed with `-Confirm:$false`. With `-Confirm`, approved OSDCloud copies receive both the data-volume prompt and the subsequent `ShouldProcess` prompt.
 
 ## Output
 

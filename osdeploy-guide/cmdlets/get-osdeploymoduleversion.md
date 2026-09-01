@@ -4,7 +4,7 @@ description: >-
   module.
 ---
 
-# Get the OSDeploy Module Version
+# Get-OSDeployModuleVersion
 
 `Get-OSDeployModuleVersion` returns the version of the OSDeploy module loaded in the current PowerShell session. The result is a `System.Version` object, so scripts can compare releases by version components instead of comparing version text.
 
@@ -24,7 +24,7 @@ The function returns the loaded module version, which is not necessarily the new
 
 ## Parameters
 
-This function has no function-specific parameters. It supports standard PowerShell common parameters through `CmdletBinding`, but they do not change version selection.
+`Get-OSDeployModuleVersion` has no function-specific parameters and does not accept pipeline input. It supports PowerShell common parameters through `CmdletBinding`, but they do not change version resolution.
 
 ## Examples
 
@@ -120,9 +120,7 @@ Avoid converting versions to strings before comparing them. String comparisons u
 
 ## Session Behavior
 
-The function calls the shared OSDeploy banner helper before returning the version. On its first use in a module session, the helper records that the banner has been displayed. The current helper does not write banner text and does not add output to the success pipeline.
-
-The function does not install, update, or reload OSDeploy. It does not support `-WhatIf` or `-Confirm` because it performs no resource mutation.
+The function does not search installed releases, query PowerShell Gallery, install, update, or reload OSDeploy. It does not support `-WhatIf` or `-Confirm` because it does not declare `SupportsShouldProcess`.
 
 ## Output
 

@@ -24,9 +24,21 @@ The command does not download Windows. Run `Update-OSDeployCoreESD` first so the
 
 <figure><img src="../../.gitbook/assets/image (355).png" alt=""><figcaption></figcaption></figure>
 
-{% hint style="info" %}
-Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+## Requirements
+
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. The DISM PowerShell cmdlets and `robocopy.exe` must be available, and the Core cache must contain at least one current-catalog Enterprise ESD with a matching SHA256 checksum.
+
+{% hint style="warning" %}
+This command does not download Windows media. If no verified current-catalog ESD is available after filtering, it writes a warning and returns without importing anything. Run `Update-OSDeployCoreESD` first.
 {% endhint %}
+
+## Parameters
+
+| Parameter | Type | Default | Accepted values and behavior |
+| --- | --- | --- | --- |
+| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. Omission processes every verified x64 and ARM64 ESD found for the newest bundled catalog. The filter matches `_x64FRE_` or `_A64FRE_` in the ESD file name. |
+| `-WhatIf` | Common parameter | Not enabled | Reads and hashes current-catalog ESDs and resolves destinations, then skips each import at its destination-level `ShouldProcess` call. Core path initialization occurs before that gate. |
+| `-Confirm` | Common parameter | Not enabled | Prompts separately before importing each destination that is not treated as a duplicate. |
 
 ## Select an Architecture
 
@@ -101,14 +113,16 @@ C:\ProgramData\OSDeployCore\cache\windows-re\<destination-name>\
 Microsoft inbox network drivers are staged by architecture under:
 
 ```
-C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\
+C:\ProgramData\OSDeployCore\repository\build-winpedrivers\
 ```
 
 ## Use Existing Imports
 
 Before importing an ESD, the command checks for matching destination directories in both `windows-os` and `windows-re`.
 
-If both directories exist, the import is complete and the command skips it. If only one directory exists, processing continues so an incomplete import can be rebuilt.
+If both directories exist, the command treats the import as complete and skips it without validating their contents. If only one directory exists, processing continues in the existing paths so the missing side can be built.
+
+The import is not transactional. It creates the Windows OS working directories before expanding media and locating the Enterprise non-N image. A DISM, mount, export, or copy failure can therefore leave partial content, and no rollback removes it. If no Enterprise non-N image is found, the command warns and leaves the work completed up to that point without returning a directory object.
 
 The command returns one `System.IO.DirectoryInfo` object for each Windows OS directory imported during the current run. A skipped existing import does not return another directory object.
 
@@ -125,7 +139,7 @@ Use `-WhatIf` to show the destination that would be imported without expanding o
 Update-OSDeployCoreOS -Architecture amd64 -WhatIf
 ```
 
-`ShouldProcess` evaluates each destination separately. The command can still inspect the verified ESD cache and apply the architecture filter before the import is skipped.
+`ShouldProcess` evaluates each destination separately after duplicate detection. The command can still initialize and migrate Core paths, inspect and hash the verified ESD cache, apply the architecture filter, and report existing imports before the import is skipped.
 
 ## Review Detailed Output
 

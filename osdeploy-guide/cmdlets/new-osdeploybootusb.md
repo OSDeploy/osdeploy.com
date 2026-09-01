@@ -45,7 +45,7 @@ All parameters are optional. The function has one parameter set and does not acc
 | `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters for the FAT32 boot-partition label.                                                                                                                     |
 | `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters for the NTFS data-partition label.                                                                                                                      |
 | `-WhatIf`    | Common parameter | Not enabled | Run discovery and selection, report gated disk and copy operations, and return before partition creation. The AutoRun policy change and empty-disk MBR conversion are not gated.         |
-| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each gated clear, partition, and copy operation. The function declares `ConfirmImpact` as `High`, so the effective prompts also depend on `$ConfirmPreference`. |
+| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each gated clear, partition, and copy operation. `ConfirmImpact` is `High`, so these prompts appear under PowerShell's default `High` confirmation preference even without `-Confirm`. |
 
 ## Examples
 
@@ -57,6 +57,8 @@ Select an eligible USB disk, a completed build, and one of its boot-media folder
 New-OSDeployBootUSB
 ```
 
+Confirm the disk clear when the selected disk has partitions, then confirm partition creation and each applicable copy operation.
+
 ### Use custom partition labels
 
 Use labels that distinguish the boot and data partitions from other removable media:
@@ -67,7 +69,7 @@ New-OSDeployBootUSB `
 	-DataLabel 'WinPE-Data'
 ```
 
-### Request confirmation for gated operations
+### Explicitly request confirmation for gated operations
 
 Use `-Confirm` to request approval before each operation controlled by `ShouldProcess`:
 
@@ -122,6 +124,12 @@ After selecting the USB disk, the function applies this sequence:
 
 The function writes a warning and returns when no completed build exists, either picker is canceled, or no supported boot-media folder is available. The AutoRun policy has already been changed when either media picker is canceled.
 
+## Media Architecture
+
+The function can copy either an `amd64` or `arm64` media tree and does not alter its architecture. Select media that matches the firmware architecture of the devices that will boot the USB.
+
+`bootmedia` is the standard media tree. `bootmedia_ca2023` is available only for builds created from compatible imported WinRE content with the CA 2023 Secure Boot files. Selecting one tree copies only that tree; the command does not combine both versions on the FAT32 partition.
+
 ## Disk Preparation
 
 Disk preparation occurs after all selections are complete:
@@ -149,11 +157,13 @@ The function then checks `C:\ProgramData\OSDeployCore\OSDCloud`. When that sourc
 
 Skipped optional OSDCloud content does not make USB creation fail. Native `robocopy.exe` standard output is written to the success stream during each copy.
 
-## WhatIf Behavior
+## WhatIf and Confirmation
 
 `-WhatIf` still performs the environment checks, USB disk prompt, both `Out-GridView` selections, pre-operation disk snapshot, and AutoRun policy change.
 
 For a disk with existing partitions, the clear operation is reported but not performed, and the function returns. For an already empty disk, RAW initialization or GPT-to-MBR conversion can occur before partition creation is reported and skipped. In either case, no final refreshed disk object is returned from the normal completion path.
+
+The function has separate `ShouldProcess` calls for clearing an existing layout, creating and formatting both partitions, copying BootMedia, and copying optional OSDCloud content. Under the default confirmation preference, its `High` impact prompts for each applicable operation. Declining the clear or partition operation returns immediately; declining a copy skips only that copy.
 
 ## Output
 

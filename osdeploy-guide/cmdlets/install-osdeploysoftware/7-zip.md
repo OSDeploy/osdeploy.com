@@ -1,18 +1,20 @@
 ---
-description: Install 7-Zip and prepare its WinPE files with Install-OSDeploySoftware.
+description: Install 7-Zip and prepare the amd64 and arm64 files used by OSDeploy boot images.
 ---
 
 # 7-Zip
 
-7-Zip provides archive support on the OSDeploy PC and in OSDeploy boot images. `Install-OSDeploySoftware` installs the `7zip.7zip` WinGet package and prepares the files used to add 7-Zip to WinPE.
+Use the exact name `7zip` to install the `7zip.7zip` WinGet package and prepare the 7-Zip files used in OSDeploy boot images.
 
-{% hint style="info" %}
-7-Zip is required for the standard OSDeploy and OSDCloud workflow.
-{% endhint %}
+## Requirements
+
+Run the command from an elevated PowerShell 7.6 or later MSI installation on Windows 11 25H2 build 26200 or later.
+
+The command requires the current OSDeploy module, `curl.exe`, `winget.exe`, and internet access. WinGet downloads the host installers; `curl.exe` downloads the WinPE app files when they are not cached.
 
 ## Preview
 
-Review the package source and install command without making changes:
+Return the package ID, documentation links, and install command without downloading or installing content:
 
 ```powershell
 Install-OSDeploySoftware -Name '7zip'
@@ -20,29 +22,44 @@ Install-OSDeploySoftware -Name '7zip'
 
 ## Install
 
-Run the installation from an elevated PowerShell 7.6 or later session:
+Download the installers, install 7-Zip on the workstation when needed, and prepare the WinPE cache:
 
 ```powershell
 Install-OSDeploySoftware -Name '7zip' -Force
 ```
 
-The function performs three operations:
+The action performs these operations:
 
-1. Downloads amd64 and arm64 installers to `C:\ProgramData\OSDeployCore\software\7zip.7zip`.
-2. Installs 7-Zip on the OSDeploy PC when `C:\Program Files\7-Zip\7z.exe` is not present.
-3. Downloads and extracts the versioned 7-Zip files used by OSDeploy boot images to `C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip`.
+1. Uses WinGet to download x64 and arm64 installers under `C:\ProgramData\OSDeployCore\software\7zip.7zip\amd64` and `arm64`.
+2. Installs 7-Zip silently when `C:\Program Files\7-Zip\7z.exe` is absent.
+3. Downloads `7zr.exe` and the 7-Zip Extra archive for the module's current WinPE app version, then extracts the archive under `C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\26.00`.
 
-Existing architecture-specific installer folders and the current WinPE cache are reused. Older WinPE cache versions are removed.
+An architecture installer folder containing any file is treated as cached. The current WinPE app cache is reused, and files or version directories from older WinPE cache versions are removed. A nonzero WinGet download exit code produces a warning for that architecture; a failed host installation stops the command.
 
 ## Download Only
 
-Prepare both architecture-specific installers and the WinPE app cache without installing 7-Zip on the OSDeploy PC:
+Prepare both architecture installers and the WinPE app cache without installing 7-Zip on the workstation:
 
 ```powershell
 Install-OSDeploySoftware -Name '7zip' -DownloadOnly
 ```
 
-## Related
+## WhatIf and Result
 
-* [Install Software](../../basic/install-osdeploysoftware.md)
-* [7-Zip reference](../../../core-components/utilities/7zip.md)
+Add `-WhatIf` to `-Force` or `-DownloadOnly` to report the parent action without invoking the 7-Zip helper. No installers or cache files are created in that mode.
+
+A completed `-Force` action returns `Component` set to `7-Zip` and `Status` set to `Installed`. A completed `-DownloadOnly` action sets `Status` to `Downloaded`. The parent result does not indicate whether the host application was newly installed or already present. The installer does not request a restart.
+
+## Verify
+
+Confirm the host application and both OSDeploy caches:
+
+```powershell
+& "$env:ProgramFiles\7-Zip\7z.exe" i | Select-Object -First 2
+Get-ChildItem 'C:\ProgramData\OSDeployCore\software\7zip.7zip' -Directory
+Get-ChildItem 'C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\26.00'
+```
+
+## Next Step
+
+Continue with [Build-OSDeployBoot](../build-osdeployboot.md) after installing the remaining workstation requirements. See the [7-Zip reference](../../../core-components/utilities/7zip.md) for its role in OSDeploy.
