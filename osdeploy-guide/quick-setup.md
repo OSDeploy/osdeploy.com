@@ -1,6 +1,6 @@
 ---
 description: >-
-	Prepare an OSDeploy workstation and create Hydra boot media with Invoke-OSDeployHydration.
+  Prepare an OSDeploy workstation and create Hydra boot media with Invoke-OSDeployHydration.
 ---
 
 # Quick Setup
