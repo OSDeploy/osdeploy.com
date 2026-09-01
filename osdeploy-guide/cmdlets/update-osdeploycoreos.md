@@ -113,7 +113,8 @@ C:\ProgramData\OSDeployCore\cache\windows-re\<destination-name>\
 Microsoft inbox network drivers are staged by architecture under:
 
 ```
-C:\ProgramData\OSDeployCore\repository\build-winpedrivers\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-amd64\
+C:\ProgramData\OSDeployCore\cache\winpedrivers-arm64\
 ```
 
 ## Use Existing Imports

@@ -16,7 +16,7 @@ Initialize the deployment share first with [Install-OSDeployMDT](install-osdeplo
 Do not simulate an MDT stage against an arbitrary path. The function assumes that MDT supplied a valid mounted image or ISO build tree and does not validate every environment value before changing content.
 {% endhint %}
 
-The implemented WIM app and driver paths are `amd64` oriented. AzCopy and curl download only amd64 payloads, 7-Zip copies only its x64 payload, repository driver selection reads `build-winpedrivers\amd64`, and driver log entries record `amd64`.
+The implemented WIM app and driver paths are `amd64` oriented. AzCopy and curl download only amd64 payloads, 7-Zip copies only its x64 payload, OSDeploy driver selection reads `cache\winpedrivers-amd64` and `repository\winpedrivers-amd64`, and driver log entries record `amd64`.
 
 ## Parameters
 
@@ -80,7 +80,7 @@ When `STAGE` is absent or empty, the function runs `Get-Help -Name Invoke-OSDepl
 | `ADKPath`      | Displayed for diagnostics. ADK tool paths are independently resolved from the Windows Kits registry or default installation path.         |
 | `TEMPLATE`     | Displayed for diagnostics; it does not select a code branch.                                                                              |
 | `TEMP`         | Stores DISM logs and temporary INF files.                                                                                                 |
-| `ProgramData`  | Locates OSDeploy caches for PowerShell packages, WinPE apps, and repository drivers.                                                      |
+| `ProgramData`  | Locates OSDeploy caches for PowerShell packages, WinPE apps, managed drivers, and user repository drivers.                               |
 
 For the normal MDT exit flow, `CONTENT` has these meanings:
 
@@ -138,8 +138,8 @@ The function reads `CONTENT\winpe-drivers.json` when present. Invalid JSON warns
 Driver selection then follows this order:
 
 1. Enumerate each immediate subdirectory under `DEPLOYROOT\Templates\winpe-drivers` and apply it automatically with recursive, unsigned-driver servicing unless its folder name is already logged.
-2. Enumerate unapplied immediate subdirectories under the OSDeploy repository's `build-winpedrivers\amd64` path.
-3. When repository drivers are available, open `Out-GridView` with multi-selection. Cancel the picker to skip these optional drivers.
+2. Enumerate unapplied immediate subdirectories under the OSDeploy Core `cache\winpedrivers-amd64` and `repository\winpedrivers-amd64` paths.
+3. When OSDeploy Core drivers are available, open `Out-GridView` with multi-selection. Cancel the picker to skip these optional drivers.
 
 Deduplication uses the driver folder `Name`, not the full path or file contents. Applied entries are written to `CONTENT\winpe-drivers.json` and copied to `DEPLOYROOT\Boot\winpe-drivers.json`. `Add-WindowsDriver` servicing objects can reach the success pipeline.
 
@@ -157,7 +157,7 @@ When ADK `oscdimg.exe` exists, the function starts it and waits for it to finish
 
 ## Prompts and Exit Behavior
 
-The WIM repository-driver picker appears only when unapplied repository drivers exist. Canceling it skips those drivers and continues.
+The WIM OSDeploy Core driver picker appears only when unapplied managed or user repository drivers exist. Canceling it skips those drivers and continues.
 
 After every invocation with a nonempty `STAGE`, the function waits 10 seconds. If a truthy `PauseOnExit` variable is visible in caller scope, it then prompts `Press Enter to continue`; `PauseOnExit` is not a command parameter, and its displayed value does not control the fixed 10-second wait. Invocations without `STAGE` return before this delay and prompt.
 
