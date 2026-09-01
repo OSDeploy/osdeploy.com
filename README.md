@@ -10,8 +10,6 @@ The OSDeploy PowerShell module is currently in preview, with its final release e
 Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-preview/) to be notified when new builds are released and to participate in the insider preview program.
 {% endhint %}
 
-{% embed url="https://www.recastsoftware.com/?utm_source=osdeploy&utm_medium=ad&utm_campaign=web" %}
-
 ## PowerShell Module Ecosystem
 
 OSDeploy is one of three PowerShell modules, with each module owns a distinct phase of the deployment workflow. This is the recommended starting point if you are new to OSDCloud or creating Boot Media.

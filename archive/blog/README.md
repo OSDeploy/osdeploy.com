@@ -6,12 +6,10 @@ hidden: true
 
 ## February 2022
 
-
-
 ## January 2022
 
-{% content-ref url="../../guides/pscloudscript/" %}
-[pscloudscript](../../guides/pscloudscript/)
+{% content-ref url="../pscloudscript/" %}
+[pscloudscript](../pscloudscript/)
 {% endcontent-ref %}
 
 {% content-ref url="2022/pscloudscript-basics.md" %}
