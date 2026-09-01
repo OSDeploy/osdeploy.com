@@ -1,5 +1,7 @@
 ---
-description: Install Windows ADK 26H1 and its matching Windows PE add-on for applicable OSDeploy builds.
+description: >-
+  Install Windows ADK 26H1 and its matching Windows PE add-on for applicable
+  OSDeploy builds.
 ---
 
 # Windows ADK 26H1
@@ -40,7 +42,7 @@ When no ADK is detected, the helper silently installs these features directly fr
 
 The setup programs are retained in:
 
-```text
+```
 C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.28000.1\
 ```
 
@@ -82,4 +84,4 @@ Test-Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\
 
 ## Next Step
 
-Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md) when the intended source and kit align. See the [Windows ADK 26H1 reference](../../../core-components/microsoft-windows-adk/install-26h1.md) for the broader ADK setup context.
+Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md) when the intended source and kit align. See the [Windows ADK 26H1 reference](/broken/pages/Bx8J8y9gkS8gpEo5vMqc) for the broader ADK setup context.

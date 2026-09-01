@@ -10,7 +10,7 @@ description: Apply OSDeploy customizations at MDT LiteTouchPE exit stages.
 
 Run this command through the MDT **Update Deployment Share** process on a host with MDT, the Windows ADK, the WinPE add-on, DISM, Windows PowerShell, PowerShell 7, and internet access for uncached tools and modules. The WIM stage also uses `curl.exe`, `robocopy.exe`, `reg.exe`, PowerShellGet, and Windows image servicing commands.
 
-Initialize the deployment share first with [Install-OSDeployMDT](install-osdeploymdt.md). See [Microsoft Deployment Toolkit](../../core-components/microsoft-deployment-toolkit/README.md) for the related setup.
+Initialize the deployment share first with [Install-OSDeployMDT](install-osdeploymdt.md). See [Microsoft Deployment Toolkit](/broken/pages/waD3ryEEjkQj6wqEhrGA) for the related setup.
 
 {% hint style="warning" %}
 Do not simulate an MDT stage against an arbitrary path. The function assumes that MDT supplied a valid mounted image or ISO build tree and does not validate every environment value before changing content.
@@ -20,12 +20,12 @@ The implemented WIM app and driver paths are `amd64` oriented. AzCopy and curl d
 
 ## Parameters
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-SetInputLocale` | `String` | `en-us` | Set the WinPE input locale passed to DISM. The function always sets all other international settings to `en-us`. |
-| `-SetTimeZone` | `String` | Current timezone from `tzutil /g` | Use a timezone name present in `tzutil /l`. Validation occurs before stage handling. |
-| `-WhatIf` | Common parameter | Not enabled | At `WIM` or `POSTISO`, skip that stage's customization body. Environment display, global build-context creation, the final delay, and an enabled exit prompt still occur. |
-| `-Confirm` | Common parameter | Not enabled | At `WIM` or `POSTISO`, prompt before that stage's customization body. Other recognized or unrecognized nonempty stages have no confirmation boundary. |
+| Parameter         | Type             | Default                           | Accepted values and behavior                                                                                                                                              |
+| ----------------- | ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-SetInputLocale` | `String`         | `en-us`                           | Set the WinPE input locale passed to DISM. The function always sets all other international settings to `en-us`.                                                          |
+| `-SetTimeZone`    | `String`         | Current timezone from `tzutil /g` | Use a timezone name present in `tzutil /l`. Validation occurs before stage handling.                                                                                      |
+| `-WhatIf`         | Common parameter | Not enabled                       | At `WIM` or `POSTISO`, skip that stage's customization body. Environment display, global build-context creation, the final delay, and an enabled exit prompt still occur. |
+| `-Confirm`        | Common parameter | Not enabled                       | At `WIM` or `POSTISO`, prompt before that stage's customization body. Other recognized or unrecognized nonempty stages have no confirmation boundary.                     |
 
 ## Examples
 
@@ -70,26 +70,26 @@ Invoke-OSDeployMDT -WhatIf
 
 When `STAGE` is absent or empty, the function runs `Get-Help -Name Invoke-OSDeployMDT` and returns immediately. With any nonempty value, it displays these MDT variables and replaces `$global:BuildMedia` with the current build context:
 
-| Variable | Use |
-| --- | --- |
-| `STAGE` | Selects stage behavior. Recognized values are `WIM`, `POSTWIM`, `ISO`, and `POSTISO`. |
-| `CONTENT` | Becomes the mounted image path at `WIM`; at `POSTISO`, identifies the captured ISO used to derive the temporary ISO tree and output name. |
-| `ARCHITECTURE` | Records the build architecture and selects cached app content. Current app and driver implementation is amd64 oriented. |
-| `DEPLOYROOT` | Locates `Boot\bootbins`, template drivers, driver logs, and the patched ISO output. |
-| `INSTALLDIR` | Locates MDT's `Templates\BootOrder.txt` for ISO creation. |
-| `ADKPath` | Displayed for diagnostics. ADK tool paths are independently resolved from the Windows Kits registry or default installation path. |
-| `TEMPLATE` | Displayed for diagnostics; it does not select a code branch. |
-| `TEMP` | Stores DISM logs and temporary INF files. |
-| `ProgramData` | Locates OSDeploy caches for PowerShell packages, WinPE apps, and repository drivers. |
+| Variable       | Use                                                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `STAGE`        | Selects stage behavior. Recognized values are `WIM`, `POSTWIM`, `ISO`, and `POSTISO`.                                                     |
+| `CONTENT`      | Becomes the mounted image path at `WIM`; at `POSTISO`, identifies the captured ISO used to derive the temporary ISO tree and output name. |
+| `ARCHITECTURE` | Records the build architecture and selects cached app content. Current app and driver implementation is amd64 oriented.                   |
+| `DEPLOYROOT`   | Locates `Boot\bootbins`, template drivers, driver logs, and the patched ISO output.                                                       |
+| `INSTALLDIR`   | Locates MDT's `Templates\BootOrder.txt` for ISO creation.                                                                                 |
+| `ADKPath`      | Displayed for diagnostics. ADK tool paths are independently resolved from the Windows Kits registry or default installation path.         |
+| `TEMPLATE`     | Displayed for diagnostics; it does not select a code branch.                                                                              |
+| `TEMP`         | Stores DISM logs and temporary INF files.                                                                                                 |
+| `ProgramData`  | Locates OSDeploy caches for PowerShell packages, WinPE apps, and repository drivers.                                                      |
 
 For the normal MDT exit flow, `CONTENT` has these meanings:
 
-| Stage | `CONTENT` value | Implemented action |
-| --- | --- | --- |
-| `WIM` | Mounted WinPE image directory | Apply WIM customizations. |
-| `POSTWIM` | Captured WIM file | None. |
-| `ISO` | ISO staging directory | None. |
-| `POSTISO` | Captured ISO file | Patch the sibling temporary `ISO` tree and build a CA 2023 ISO. |
+| Stage     | `CONTENT` value               | Implemented action                                              |
+| --------- | ----------------------------- | --------------------------------------------------------------- |
+| `WIM`     | Mounted WinPE image directory | Apply WIM customizations.                                       |
+| `POSTWIM` | Captured WIM file             | None.                                                           |
+| `ISO`     | ISO staging directory         | None.                                                           |
+| `POSTISO` | Captured ISO file             | Patch the sibling temporary `ISO` tree and build a CA 2023 ISO. |
 
 An unrecognized nonempty `STAGE` also performs no stage-specific action. It still replaces `$global:BuildMedia`, waits 10 seconds, and can prompt on exit.
 
@@ -147,7 +147,7 @@ Deduplication uses the driver folder `Name`, not the full path or file contents.
 
 At `STAGE=POSTISO`, one `ShouldProcess` call gates the complete patch-and-build body. The function uses the parent directory of `CONTENT` and its sibling `ISO` folder as the source tree. It derives the output base name from the captured ISO and writes:
 
-```text
+```
 DEPLOYROOT\Boot\<IsoBaseName>_uefi2023ca.iso
 ```
 
@@ -176,4 +176,4 @@ When `STAGE` is absent, the function returns the `System.Management.Automation.H
 
 The function has no single structured stage result. During `WIM`, `Add-WindowsDriver` can emit `Microsoft.Dism.Commands.BasicDriverObject` values, and delegated or native commands can emit incidental success-stream output. Host messages and `$global:BuildMedia` are not intentional pipeline results. `POSTISO` does not return the created ISO or its process exit code.
 
-See the [MDT invocation workflow](../../osdeploy-mdt-integration/invoke-osdeploymdt.md), the [Install-OSDeployMDT guide](install-osdeploymdt.md), or the [Invoke-OSDeployMDT command reference](../../command-reference/osdeploy/invoke-osdeploymdt.md).
+See the [MDT invocation workflow](../../archive-osdeploymdt/invoke-osdeploymdt.md), the [Install-OSDeployMDT guide](install-osdeploymdt.md), or the [Invoke-OSDeployMDT command reference](../../command-reference/osdeploy/invoke-osdeploymdt.md).

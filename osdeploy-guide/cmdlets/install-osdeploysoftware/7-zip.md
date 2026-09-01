@@ -1,5 +1,7 @@
 ---
-description: Install 7-Zip and prepare the amd64 and arm64 files used by OSDeploy boot images.
+description: >-
+  Install 7-Zip and prepare the amd64 and arm64 files used by OSDeploy boot
+  images.
 ---
 
 # 7-Zip
@@ -62,4 +64,4 @@ Get-ChildItem 'C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\26.00'
 
 ## Next Step
 
-Continue with [Build-OSDeployBoot](../build-osdeployboot.md) after installing the remaining workstation requirements. See the [7-Zip reference](../../../core-components/utilities/7zip.md) for its role in OSDeploy.
+Continue with [Build-OSDeployBoot](../build-osdeployboot.md) after installing the remaining workstation requirements. See the [7-Zip reference](/broken/pages/igYUxyErBDjOY7Kl365N) for its role in OSDeploy.

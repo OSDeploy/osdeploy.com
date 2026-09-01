@@ -64,4 +64,4 @@ code --version | Select-Object -First 1
 
 ## Next Step
 
-Open the OSDeploy repository or scripts in Visual Studio Code. See the [Visual Studio Code reference](../../../core-components/developer-tools/vscode.md) for related editor setup.
+Open the OSDeploy repository or scripts in Visual Studio Code. See the [Visual Studio Code reference](/broken/pages/bX8Yla26fUSdecquBoN5) for related editor setup.

@@ -64,4 +64,4 @@ git config --global user.email
 
 ## Next Step
 
-Use Git to clone or maintain the required repositories. See the [Git for Windows reference](../../../core-components/developer-tools/git.md) for the related OSDeploy setup guidance.
+Use Git to clone or maintain the required repositories. See the [Git for Windows reference](/broken/pages/E4jBLgkQxDXMcZPQxuly) for the related OSDeploy setup guidance.

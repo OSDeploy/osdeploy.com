@@ -1,5 +1,7 @@
 ---
-description: Rebuild standard and CA 2023 ISO files from an existing OSDeploy Boot media build.
+description: >-
+  Rebuild standard and CA 2023 ISO files from an existing OSDeploy Boot media
+  build.
 ---
 
 # Update-OSDeployBootISO
@@ -15,7 +17,7 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 The workstation must also have:
 
 * The [OSDeploy module](../requirements/powershell-modules.md).
-* The [Windows ADK Deployment Tools](../../core-components/microsoft-windows-adk/), including `oscdimg.exe`.
+* The [Windows ADK Deployment Tools](/broken/pages/KKnKou096GC0HYAS6jiH), including `oscdimg.exe`.
 * `Out-GridView` for selecting a completed build.
 * A completed build under `C:\ProgramData\OSDeployCore\boot` with a `bootmedia` directory.
 
@@ -27,9 +29,9 @@ The function stops when a host requirement is not met, no build is selected, the
 
 The function has no command-specific parameters and does not accept pipeline input. Build selection is always interactive.
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-WhatIf` | Common parameter | Not enabled | Run requirement checks and build selection, verify ADK and media paths, populate `$global:BuildMedia`, and report the rebuild without invoking the ISO step. |
+| Parameter  | Type             | Default     | Accepted values and behavior                                                                                                                                                           |
+| ---------- | ---------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-WhatIf`  | Common parameter | Not enabled | Run requirement checks and build selection, verify ADK and media paths, populate `$global:BuildMedia`, and report the rebuild without invoking the ISO step.                           |
 | `-Confirm` | Common parameter | Not enabled | Request confirmation before invoking the ISO step. The function declares `ConfirmImpact` as `Medium`, so it does not prompt under PowerShell's default `High` confirmation preference. |
 
 ## Examples
@@ -77,7 +79,7 @@ Get-ChildItem `
 
 The function searches immediate child directories under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\boot
 ```
 
@@ -89,9 +91,9 @@ Canceling the picker or having no eligible build writes a warning and returns. A
 
 The media paths and outputs are fixed:
 
-| Source directory | Output file | Behavior |
-| --- | --- | --- |
-| `bootmedia` | `bootmedia.iso` | Required and always processed. |
+| Source directory   | Output file            | Behavior                                                                                                                                             |
+| ------------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bootmedia`        | `bootmedia.iso`        | Required and always processed.                                                                                                                       |
 | `bootmedia_ca2023` | `bootmedia_ca2023.iso` | Processed only when the directory exists. This tree contains the updated CA 2023 Secure Boot files produced from a compatible imported WinRE source. |
 
 Both ISO files are written in the selected build root. Existing files with the same names can be replaced. The selected build directory name becomes the ISO volume label.
@@ -104,7 +106,7 @@ The resulting ISO is UEFI-only. The helper uses the first available `efisys_nopr
 
 Before creating each ISO, the shared ISO step checks:
 
-```text
+```
 C:\ProgramData\OSDeployCore\OSDCloud\Profiles
 ```
 

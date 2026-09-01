@@ -1,5 +1,7 @@
 ---
-description: Install Windows ADK 25H2 and its matching Windows PE add-on for OSDeploy boot-image creation.
+description: >-
+  Install Windows ADK 25H2 and its matching Windows PE add-on for OSDeploy
+  boot-image creation.
 ---
 
 # Windows ADK 25H2
@@ -42,7 +44,7 @@ When no ADK is detected, the helper creates offline layouts and silently install
 
 The setup programs and offline layout content are retained under:
 
-```text
+```
 C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454\
 ```
 
@@ -84,4 +86,4 @@ Test-Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\
 
 ## Next Step
 
-Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md). See the [Windows ADK 25H2 reference](../../../core-components/microsoft-windows-adk/install-25h2.md) for the broader ADK setup context.
+Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md). See the [Windows ADK 25H2 reference](/broken/pages/w6vYJXch4UG8cBz6dsyA) for the broader ADK setup context.

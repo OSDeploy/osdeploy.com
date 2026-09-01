@@ -38,7 +38,7 @@ Install-Module -Name OSD -Force -SkipPublisherCheck
 ## Related
 
 * [OSD on PowerShell Gallery](https://www.powershellgallery.com/packages/OSD/)
-* [OSDCloud Module](../osdcloud/) — Current, recommended module for OSDCloud deployments
+* [OSDCloud Module](/broken/pages/xATFEheG9Abfxu0ZXNXF) — Current, recommended module for OSDCloud deployments
 * [OSDeploy Module](../osdeploy/) — Boot image creation on Windows 11
 
 ***

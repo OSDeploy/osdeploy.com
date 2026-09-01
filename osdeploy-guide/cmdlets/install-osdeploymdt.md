@@ -10,7 +10,7 @@ description: Audit or initialize an MDT deployment share for OSDeploy customizat
 
 Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
-Install MDT on the same computer and register at least one persistent MDT deployment share. See [Microsoft Deployment Toolkit](../../core-components/microsoft-deployment-toolkit/README.md) and [Module Setup](../requirements/powershell-modules.md).
+Install MDT on the same computer and register at least one persistent MDT deployment share. See [Microsoft Deployment Toolkit](/broken/pages/waD3ryEEjkQj6wqEhrGA) and [Module Setup](../requirements/powershell-modules.md).
 
 {% hint style="warning" %}
 `-Force` overwrites deployment-share template files. Review audit output before applying changes, and preserve any custom template content that must be restored afterward.
@@ -18,11 +18,11 @@ Install MDT on the same computer and register at least one persistent MDT deploy
 
 ## Parameters
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-Force` | `SwitchParameter` | Not enabled | Create missing folders, copy or overwrite templates, and apply supported XML changes. When omitted, report applicable work without changing the selected share's templates or settings. |
-| `-WhatIf` | Common parameter | Not enabled | Perform prerequisite and deployment-share discovery, then display the top-level initialization operation without running the share audit or initialization body. |
-| `-Confirm` | Common parameter | Not enabled | Prompt before running the audit or initialization body for the selected deployment share. |
+| Parameter  | Type              | Default     | Accepted values and behavior                                                                                                                                                            |
+| ---------- | ----------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-Force`   | `SwitchParameter` | Not enabled | Create missing folders, copy or overwrite templates, and apply supported XML changes. When omitted, report applicable work without changing the selected share's templates or settings. |
+| `-WhatIf`  | Common parameter  | Not enabled | Perform prerequisite and deployment-share discovery, then display the top-level initialization operation without running the share audit or initialization body.                        |
+| `-Confirm` | Common parameter  | Not enabled | Prompt before running the audit or initialization body for the selected deployment share.                                                                                               |
 
 The function does not accept a deployment-share path. It always selects from persistent MDT drives registered on the local computer.
 
@@ -84,7 +84,7 @@ After selection, the function calls `ShouldProcess` once for the selected deploy
 
 The function creates these folders when missing:
 
-```text
+```
 DEPLOYROOT\Templates
 DEPLOYROOT\Templates\winpe-drivers
 DEPLOYROOT\Templates\winpe-extrafiles
@@ -92,13 +92,13 @@ DEPLOYROOT\Templates\winpe-extrafiles
 
 It copies these files from the MDT installation and overwrites the destinations:
 
-| Source | Destination |
-| --- | --- |
-| `INSTALLDIR\Templates\winpeshl.ini` | `DEPLOYROOT\Templates\winpeshl.ini` |
-| `INSTALLDIR\Templates\Wimscript.ini` | `DEPLOYROOT\Templates\wimscript.ini` |
+| Source                                     | Destination                                |
+| ------------------------------------------ | ------------------------------------------ |
+| `INSTALLDIR\Templates\winpeshl.ini`        | `DEPLOYROOT\Templates\winpeshl.ini`        |
+| `INSTALLDIR\Templates\Wimscript.ini`       | `DEPLOYROOT\Templates\wimscript.ini`       |
 | `INSTALLDIR\Templates\Unattend_PE_x64.xml` | `DEPLOYROOT\Templates\Unattend_PE_x64.xml` |
-| `INSTALLDIR\Templates\LiteTouchPE.xml` | `DEPLOYROOT\Templates\LiteTouchPE.xml` |
-| `INSTALLDIR\Samples\Background.bmp` | `DEPLOYROOT\Templates\background.bmp` |
+| `INSTALLDIR\Templates\LiteTouchPE.xml`     | `DEPLOYROOT\Templates\LiteTouchPE.xml`     |
+| `INSTALLDIR\Samples\Background.bmp`        | `DEPLOYROOT\Templates\background.bmp`      |
 
 Missing source files produce warnings, but the function continues with later items.
 
@@ -114,7 +114,7 @@ It then configures the `WindowsPE/Components` node:
 
 The function also adds this exit command when an exact matching entry does not already exist:
 
-```text
+```
 start /wait pwsh.exe -ExecutionPolicy Bypass -Command "Invoke-OSDeployMDT"
 ```
 
@@ -152,4 +152,4 @@ Individual missing source files and XML update failures generally warn and allow
 
 The function intentionally returns no pipeline object. Audit status, warnings, and completion guidance are written to the host or warning streams. Selection details are available with `-Verbose`.
 
-After initialization, run **Update Deployment Share** to execute OSDeploy customization. See the [MDT installation workflow](../../osdeploy-mdt-integration/install-osdeploymdt.md), the [Invoke-OSDeployMDT guide](invoke-osdeploymdt.md), or the [Install-OSDeployMDT command reference](../../command-reference/osdeploy/install-osdeploymdt.md).
+After initialization, run **Update Deployment Share** to execute OSDeploy customization. See the [MDT installation workflow](../../archive-osdeploymdt/install-osdeploymdt.md), the [Invoke-OSDeployMDT guide](invoke-osdeploymdt.md), or the [Install-OSDeployMDT command reference](../../command-reference/osdeploy/install-osdeploymdt.md).

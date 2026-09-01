@@ -56,27 +56,6 @@
 * [New-OSDeployHyperVM Skill](osdeploy-skills/new-osdeployhypervm-skill.md)
 * [Author a WinPE Profile JSON](osdeploy-skills/author-winpe-profile-json.md)
 
-## Core Components
-
-* [About](core-components/about.md)
-* [PowerShell](core-components/powershell/README.md)
-* [Microsoft Windows ADK](core-components/microsoft-windows-adk/README.md)
-  * [Install 25H2](core-components/microsoft-windows-adk/install-25h2.md)
-  * [Install 26H1](core-components/microsoft-windows-adk/install-26h1.md)
-* [Microsoft Deployment Toolkit](core-components/microsoft-deployment-toolkit/README.md)
-  * [Install MDT](core-components/microsoft-deployment-toolkit/install-mdt.md)
-* [WinPE Drivers](core-components/winpe-drivers/README.md)
-  * [Dell](core-components/winpe-drivers/dell.md)
-  * [HP](core-components/winpe-drivers/hp.md)
-  * [Lenovo](core-components/winpe-drivers/lenovo.md)
-  * [Intel Ethernet](core-components/winpe-drivers/intel-ethernet.md)
-  * [Intel Wireless](core-components/winpe-drivers/intel-wireless.md)
-* [Developer Tools](core-components/developer-tools/README.md)
-  * [Git for Windows](core-components/developer-tools/git.md)
-  * [Visual Studio Code](core-components/developer-tools/vscode.md)
-* [Utilities](core-components/utilities/README.md)
-  * [7-Zip](core-components/utilities/7zip.md)
-
 ## Command Reference
 
 * [About](command-reference/about.md)
@@ -98,19 +77,6 @@
   * [New-OSDeployHyperVM](command-reference/osdeploy/new-osdeployhypervm.md)
   * [Update-OSDeployBootISO](command-reference/osdeploy/update-osdeploybootiso.md)
   * [Update-OSDeployCoreDrivers](command-reference/osdeploy/update-osdeploycoredrivers.md)
-* [OSDCloud Module](command-reference/osdcloud/README.md)
-  * [Deploy-OSDCloud](command-reference/osdcloud/deploy-osdcloud.md)
-  * [Get-OSDCloudModulePath](command-reference/osdcloud/get-osdcloudmodulepath.md)
-  * [Get-OSDCloudModuleVersion](command-reference/osdcloud/get-osdcloudmoduleversion.md)
-  * [Show-OSDCloudDeviceInfo](command-reference/osdcloud/show-osdclouddeviceinfo.md)
-  * [Start-OSDCloudExplorer](command-reference/osdcloud/start-osdcloudexplorer.md)
-  * [Invoke-WinPEStartup](command-reference/osdcloud/invoke-winpestartup.md)
-  * [Invoke-WinPEStartupManager](command-reference/osdcloud/invoke-winpestartupmanager.md)
-  * [Show-WinPEStartupDeviceErrors](command-reference/osdcloud/show-winpestartupdeviceerrors.md)
-  * [Show-WinPEStartupDevices](command-reference/osdcloud/show-winpestartupdevices.md)
-  * [Show-WinPEStartupIpconfig](command-reference/osdcloud/show-winpestartupipconfig.md)
-  * [Show-WinPEStartupWifi](command-reference/osdcloud/show-winpestartupwifi.md)
-  * [Update-WinPEStartupModule](command-reference/osdcloud/update-winpestartupmodule.md)
 * [OSD Module](command-reference/osd/README.md)
   * [Add-7Zip2BootImage](command-reference/osd/add-7zip2bootimage.md)
   * [Add-WindowsPackageSSU](command-reference/osd/add-windowspackagessu.md)
@@ -459,11 +425,11 @@
   * [Wait-WebConnection](command-reference/osd/wait-webconnection.md)
   * [Write-CMTraceLog](command-reference/osd/write-cmtracelog.md)
 
-## OSDeploy MDT Integration
+## Archive OSDeployMDT
 
-* [About](osdeploy-mdt-integration/about.md)
-* [Install-OSDeployMDT](osdeploy-mdt-integration/install-osdeploymdt.md)
-* [Invoke-OSDeployMDT](osdeploy-mdt-integration/invoke-osdeploymdt.md)
+* [About](archive-osdeploymdt/about.md)
+* [Install-OSDeployMDT](archive-osdeploymdt/install-osdeploymdt.md)
+* [Invoke-OSDeployMDT](archive-osdeploymdt/invoke-osdeploymdt.md)
 
 ## Links
 
@@ -486,7 +452,6 @@
 * [WinPE Problems](inside-winpe/winpe-problems.md)
 * [Create a BootImage](inside-winpe/create-a-bootimage/README.md)
   * [ADK Default BootImage](inside-winpe/create-a-bootimage/adk-default-bootimage.md)
-* [WinPE Solutions](inside-winpe/winpe-solutions.md)
 
 ## Guides
 

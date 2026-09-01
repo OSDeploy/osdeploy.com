@@ -1,5 +1,7 @@
 ---
-description: Download, verify, and install the retired Microsoft Deployment Toolkit for existing workflows.
+description: >-
+  Download, verify, and install the retired Microsoft Deployment Toolkit for
+  existing workflows.
 ---
 
 # Microsoft MDT
@@ -40,7 +42,7 @@ The MSI is downloaded with `curl.exe`, validated against the SHA256 value in cur
 
 The verified MSI is retained in:
 
-```text
+```
 C:\ProgramData\OSDeployCore\software\Microsoft.DeploymentToolkit_6.3.8456.1000\
 ```
 
@@ -78,4 +80,4 @@ Get-FileHash `
 
 ## Next Step
 
-Continue with [Install-OSDeployMDT](../install-osdeploymdt.md) when an existing workflow requires OSDeploy integration. See the [Microsoft Deployment Toolkit reference](../../../core-components/microsoft-deployment-toolkit/install-mdt.md) for the broader setup context.
+Continue with [Install-OSDeployMDT](../install-osdeploymdt.md) when an existing workflow requires OSDeploy integration. See the [Microsoft Deployment Toolkit reference](/broken/pages/8QBjU6vMYXdxHlWOnpo3) for the broader setup context.

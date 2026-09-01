@@ -32,15 +32,15 @@ The command stops before driver processing when a Windows version, PowerShell, M
 
 ## Parameters
 
-| Parameter | Type | Default | Accepted values and behavior |
-| --- | --- | --- | --- |
-| `-Name` | `String[]` | Automatic | Positional parameter 0. Omission refreshes every configured source with an update or download URI, then processes every enabled resolved package. Tab completion suggests enabled refreshable sources. Unknown or nonrefreshable values are warned and skipped. |
-| `-Force` | `Switch` | Not enabled | Re-downloads matching package archives instead of reusing a valid cache file. The catalog helper accepts this switch but does not change discovery behavior. Existing nonempty Dell, HP, and Intel expanded folders are still reused. |
-| `-SkipWifiDrivers` | `Switch` | Not enabled | Excludes package names containing `wifi` or `wireless`. The command enables this automatically when no valid imported WinRE source is found. |
-| `-DownloadOnly` | `Switch` | Not enabled | Returns after saving package archives in the download cache. Expansion and `package.json` creation are skipped. |
-| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. Omission permits both. The filter applies to package processing, not catalog refresh, and packages with a blank architecture remain eligible. |
-| `-WhatIf` | Common parameter | Not enabled | Runs catalog and package discovery with child preview enabled. Protected catalog writes, downloads, and expansion are skipped, but initialization, vendor requests, catalog-directory creation, and cache reads can still occur. |
-| `-Confirm` | Common parameter | Not enabled | Prompts once before the combined catalog refresh and package-processing operation. Child confirmation prompts are suppressed. |
+| Parameter          | Type             | Default     | Accepted values and behavior                                                                                                                                                                                                                                    |
+| ------------------ | ---------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-Name`            | `String[]`       | Automatic   | Positional parameter 0. Omission refreshes every configured source with an update or download URI, then processes every enabled resolved package. Tab completion suggests enabled refreshable sources. Unknown or nonrefreshable values are warned and skipped. |
+| `-Force`           | `Switch`         | Not enabled | Re-downloads matching package archives instead of reusing a valid cache file. The catalog helper accepts this switch but does not change discovery behavior. Existing nonempty Dell, HP, and Intel expanded folders are still reused.                           |
+| `-SkipWifiDrivers` | `Switch`         | Not enabled | Excludes package names containing `wifi` or `wireless`. The command enables this automatically when no valid imported WinRE source is found.                                                                                                                    |
+| `-DownloadOnly`    | `Switch`         | Not enabled | Returns after saving package archives in the download cache. Expansion and `package.json` creation are skipped.                                                                                                                                                 |
+| `-Architecture`    | `String`         | Automatic   | Use `amd64` or `arm64`. Omission permits both. The filter applies to package processing, not catalog refresh, and packages with a blank architecture remain eligible.                                                                                           |
+| `-WhatIf`          | Common parameter | Not enabled | Runs catalog and package discovery with child preview enabled. Protected catalog writes, downloads, and expansion are skipped, but initialization, vendor requests, catalog-directory creation, and cache reads can still occur.                                |
+| `-Confirm`         | Common parameter | Not enabled | Prompts once before the combined catalog refresh and package-processing operation. Child confirmation prompts are suppressed.                                                                                                                                   |
 
 ## Driver Sources
 
@@ -215,9 +215,9 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 * [Complete OSDeploy Core update](update-osdeploycore.md)
 * [Update-OSDeployCoreDrivers command reference](../../command-reference/osdeploy/update-osdeploycoredrivers.md)
-* [WinPE Drivers overview](../../core-components/winpe-drivers/)
-* [Dell WinPE Drivers](../../core-components/winpe-drivers/dell.md)
-* [HP WinPE Drivers](../../core-components/winpe-drivers/hp.md)
-* [Intel Ethernet Drivers](../../core-components/winpe-drivers/intel-ethernet.md)
-* [Intel Wireless Drivers](../../core-components/winpe-drivers/intel-wireless.md)
+* [WinPE Drivers overview](/broken/pages/CVKBMSZoucH2as3D7VFG)
+* [Dell WinPE Drivers](/broken/pages/XTULK4EcB6qhwoPfk2nw)
+* [HP WinPE Drivers](/broken/pages/LJaCHx9QaXP2COtZ7kwA)
+* [Intel Ethernet Drivers](/broken/pages/b3NP3NTDXSeoxygsSeDN)
+* [Intel Wireless Drivers](/broken/pages/xR4uES51OgrLBs0FmKKO)
 * [System Requirements](../requirements/windows-11-os.md)

@@ -16,9 +16,9 @@ Sign up at [recastsoftware.com/osd-preview](https://www.recastsoftware.com/osd-p
 
 OSDeploy is one of three PowerShell modules, with each module owns a distinct phase of the deployment workflow. This is the recommended starting point if you are new to OSDCloud or creating Boot Media.
 
-| Module                                  | What it does                                 | Where it runs        | Status                |
-| --------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
-| [OSDeploy](command-reference/osdeploy/) | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
-| [OSDCloud](command-reference/osdcloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
-| [OSD](command-reference/osd/)           | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
+| Module                                         | What it does                                 | Where it runs        | Status                |
+| ---------------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
+| [OSDeploy](command-reference/osdeploy/)        | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
+| [OSDCloud](/broken/pages/xATFEheG9Abfxu0ZXNXF) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
+| [OSD](command-reference/osd/)                  | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |
 

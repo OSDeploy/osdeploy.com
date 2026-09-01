@@ -26,7 +26,7 @@ Run the function on a workstation that meets these requirements:
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
 * Configured [OSDeploy Core](update-osdeploycore.md)
-* [Windows ADK and WinPE add-on](../../core-components/microsoft-windows-adk/)
+* [Windows ADK and WinPE add-on](/broken/pages/KKnKou096GC0HYAS6jiH)
 * OSDCloud module version `26.7.25.2` or later
 * Administrator rights
 * `curl.exe` available in `PATH`
