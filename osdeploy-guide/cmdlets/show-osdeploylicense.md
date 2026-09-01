@@ -6,9 +6,9 @@ description: >-
 
 # Show-OSDeployLicense
 
-`Show-OSDeployLicense` searches the standard Recast Software license directory and returns one selected `.license2` candidate as a PowerShell object. Use the returned properties to inspect its source file, identity, dates, authorized-command count, and schema validation results.
+`Show-OSDeployLicense` searches the standard Recast Software license directory and returns one selected `.license2` candidate as a PowerShell object. Use the returned properties to inspect its source file, identity, dates, authorized-command count, and schema validation results. Selection does not require the candidate to be valid or unexpired.
 
-When no parseable candidate is available, the function writes a warning and displays Community License registration, installation, and verification instructions.
+When no candidate can be selected, the function writes a warning and displays Community License registration, installation, and verification instructions. That path writes host guidance and returns no object.
 
 ## Requirements
 
@@ -229,4 +229,4 @@ When a candidate is selected, the command returns a `System.Management.Automatio
 
 When no candidate is selected, the function returns no object and an assignment receives `$null`.
 
-See [Community Registration](../registration.md) to download, install, and verify a Community License.
+See [Community Registration](../registration.md) to download, install, and verify a Community License, or return to the [OSDeploy cmdlet guides](README.md) for related commands.

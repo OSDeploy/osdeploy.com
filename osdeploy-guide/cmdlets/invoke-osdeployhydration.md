@@ -1,12 +1,12 @@
 ---
 description: >-
   Prepare an OSDeploy workstation, refresh Windows and driver content, build
-  Hydra boot media, and optionally test it in Hyper-V.
+  architecture-specific Hydra boot media, and optionally test it in Hyper-V.
 ---
 
-# Invoke OSDeploy Hydration
+# Invoke-OSDeployHydration
 
-`Invoke-OSDeployHydration` coordinates the complete OSDeploy workstation setup workflow. It installs required and optional software, downloads and imports Windows content, refreshes WinPE drivers, builds Hydra boot media, and can create a Hyper-V test VM on a physical host.
+`Invoke-OSDeployHydration` coordinates the complete OSDeploy workstation setup workflow. It installs required and optional software, downloads and imports Windows content for the detected processor architecture, refreshes matching WinPE drivers, builds boot media named `Hydra-amd64` or `Hydra-arm64`, and can create a Hyper-V test VM on a physical host.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 ```
 
 {% hint style="warning" %}
-The function stops before hydration when the Windows version, PowerShell installation, `curl.exe`, administrator access, or OSDCloud requirement is not met. It does not install or upgrade these prerequisites.
+The function throws a terminating error when the Windows version, PowerShell installation, `curl.exe`, or administrator requirement is not met. A missing or outdated OSDCloud command writes warnings and returns before hydration. The function does not install or upgrade these prerequisites.
 {% endhint %}
 
 Hydration can install the remaining workstation components:
@@ -44,7 +44,7 @@ Enabling Hyper-V can require a restart. Hydration does not restart the workstati
 
 | Parameter  | Type             | Default     | Accepted values and behavior                                                                                                                                                                                                                                                   |
 | ---------- | ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `-Force`   | `Switch`         | Not enabled | Bypass hydration-level workflow, component-installation, and Hyper-V test prompts. Force ESD and driver refresh behavior. It is not forwarded as a parameter to Windows import, boot-media build, or VM creation.                                                              |
+| `-Force`   | `Switch`         | Not enabled | Bypass hydration-level workflow, component-installation, and Hyper-V test prompts. Pass `-Force` to the ESD and driver update commands. It is not passed to Windows import, boot-media build, or VM creation, and delegated ESD prompts can still appear.                         |
 | `-WhatIf`  | Common parameter | Not enabled | Decline the parent ESD/import operation and preview `ShouldProcess` operations in nested installer, driver, boot-build, and VM commands through the inherited PowerShell preference. It does not suppress `ShouldContinue` prompts or pre-gate discovery and profile handling. |
 | `-Confirm` | Common parameter | Not enabled | Request confirmation for `ShouldProcess` operations. It does not replace or suppress the separate hydration-level `ShouldContinue` prompts.                                                                                                                                    |
 
@@ -115,7 +115,7 @@ Hydration runs these stages in order:
 4. Test and optionally install required and recommended workstation software.
 5. Download and import the Windows Enterprise ESD when the parent `ShouldProcess` operation is approved.
 6. Refresh WinPE driver packages for the detected architecture.
-7. Run `Build-OSDeployBoot -Name 'Hydra' -Auto`.
+7. Run `Build-OSDeployBoot -Name "Hydra-$arch" -Auto` for the detected architecture.
 8. On a physical host, offer to create a Hyper-V VM when Hyper-V is enabled and the new `bootmedia.iso` exists.
 
 A terminating error stops later stages. Non-terminating warnings from a child command can allow the workflow to continue with cached content or skip only the affected source.
@@ -182,23 +182,23 @@ When no imported Windows source exists, the driver command automatically skips W
 
 ## Hydra Boot Media
 
-Hydration calls the boot builder with a fixed name and automatic source selection:
+Hydration calls the boot builder with an architecture-specific name and automatic source selection:
 
 ```powershell
-Build-OSDeployBoot -Name 'Hydra' -Auto
+Build-OSDeployBoot -Name "Hydra-$arch" -Auto
 ```
 
 `Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
 
-`-Auto` skips the saved-profile picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes or updates the architecture-specific `Hydra` profile and discovers profile-local content before reaching its build-directory confirmation.
+`-Auto` skips the saved-profile picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes or updates the `Hydra-amd64` or `Hydra-arm64` profile and discovers profile-local content before reaching its build-directory confirmation.
 
-Completed media is written below:
+Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name includes `Hydra-amd64` or `Hydra-arm64`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
 
 ```
-C:\ProgramData\OSDeployCore\boot\{Windows build}.{revision}-{architecture}-Hydra\
+C:\ProgramData\OSDeployCore\boot\
 ```
 
-If that directory exists, the builder adds `-001`, `-002`, or a later suffix instead of overwriting it. The standard ISO is `bootmedia.iso` in the final build directory.
+The standard ISO is `bootmedia.iso` in the final build directory.
 
 See [Build-OSDeployBoot](build-osdeployboot.md) for source, profile, content, and media behavior.
 

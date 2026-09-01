@@ -1,10 +1,10 @@
 ---
-description: Install Microsoft Deployment Toolkit with Install-OSDeploySoftware.
+description: Download, verify, and install the retired Microsoft Deployment Toolkit for existing workflows.
 ---
 
 # Microsoft MDT
 
-Microsoft Deployment Toolkit (MDT) provides deployment shares, task sequences, and scripts used by existing MDT-based workflows. `Install-OSDeploySoftware` downloads, verifies, and installs MDT version `6.3.8456.1000`.
+Use the exact name `mdt` to download, verify, or install Microsoft Deployment Toolkit `6.3.8456.1000`. The component is retained for existing MDT deployment shares and integrations.
 
 <figure><img src="../../../.gitbook/assets/image (319).png" alt=""><figcaption></figcaption></figure>
 
@@ -12,9 +12,15 @@ Microsoft Deployment Toolkit (MDT) provides deployment shares, task sequences, a
 Microsoft no longer supports MDT. This installer is provided only as a convenience for existing workflows that still require it. Do not install MDT unless there is a specific need. Review the [Microsoft retirement notice](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/mdt/mdt-retirement).
 {% endhint %}
 
+## Requirements
+
+Run the command from an elevated PowerShell 7.6 or later MSI installation on Windows 11 25H2 build 26200 or later.
+
+The command requires the current OSDeploy module, `curl.exe`, `msiexec.exe`, and internet access. It always downloads the x64 file `MicrosoftDeploymentToolkit_x64.msi`; there is no architecture selector.
+
 ## Preview
 
-Review the configured MSI source and retirement notice without making changes:
+Return the configured MSI source, retirement link, and install command without creating the cache or inspecting installed MDT versions:
 
 ```powershell
 Install-OSDeploySoftware -Name 'mdt'
@@ -22,21 +28,21 @@ Install-OSDeploySoftware -Name 'mdt'
 
 ## Install
 
-Run the installation from an elevated PowerShell 7.6 or later session:
+Download and verify the configured MSI, then install MDT when no MDT product is registered:
 
 ```powershell
 Install-OSDeploySoftware -Name 'mdt' -Force
 ```
 
-The function downloads `MicrosoftDeploymentToolkit_x64.msi`, validates its SHA256 hash against the OSDeploy module metadata, and installs it silently with no automatic restart.
+The helper checks both 64-bit and 32-bit uninstall registry locations for a product whose display name begins with `Microsoft Deployment Toolkit`. It reports a version mismatch when the registered version differs from `6.3.8456.1000` but does not replace any detected MDT installation.
+
+The MSI is downloaded with `curl.exe`, validated against the SHA256 value in current OSDeploy module metadata, and installed by `msiexec.exe` with `/qn /norestart`. A checksum mismatch or nonzero MSI exit code stops the command. The installer does not request an automatic restart.
 
 The verified MSI is retained in:
 
-```
+```text
 C:\ProgramData\OSDeployCore\software\Microsoft.DeploymentToolkit_6.3.8456.1000\
 ```
-
-If MDT is already installed, the function reports a version mismatch when applicable and does not replace the installed version.
 
 ## Download Only
 
@@ -46,7 +52,30 @@ Download and verify the MSI without installing MDT:
 Install-OSDeploySoftware -Name 'mdt' -DownloadOnly
 ```
 
-## Related
+The action reuses the cached MSI only when its SHA256 hash matches the module metadata.
 
-* [Install Software](../../basic/install-osdeploysoftware.md)
-* [Microsoft Deployment Toolkit reference](../../../core-components/microsoft-deployment-toolkit/install-mdt.md)
+## WhatIf and Result
+
+Add `-WhatIf` to `-Force` or `-DownloadOnly` to report the parent action without invoking the MDT helper. The versioned cache directory is not created in that mode.
+
+A completed `-Force` action returns `Component` set to `Microsoft Deployment Toolkit` and `Status` set to `Installed`. A completed `-DownloadOnly` action sets `Status` to `Downloaded`. The parent result does not indicate whether MDT was newly installed, skipped because a version was already present, or downloaded to a particular path.
+
+## Verify
+
+Confirm the registered product and inspect the verified installer:
+
+```powershell
+Get-ItemProperty `
+	'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*', `
+	'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*' |
+	Where-Object DisplayName -Like 'Microsoft Deployment Toolkit*' |
+	Select-Object DisplayName, DisplayVersion
+
+Get-FileHash `
+	'C:\ProgramData\OSDeployCore\software\Microsoft.DeploymentToolkit_6.3.8456.1000\MicrosoftDeploymentToolkit_x64.msi' `
+	-Algorithm SHA256
+```
+
+## Next Step
+
+Continue with [Install-OSDeployMDT](../install-osdeploymdt.md) when an existing workflow requires OSDeploy integration. See the [Microsoft Deployment Toolkit reference](../../../core-components/microsoft-deployment-toolkit/install-mdt.md) for the broader setup context.

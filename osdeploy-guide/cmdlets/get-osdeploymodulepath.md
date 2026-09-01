@@ -2,7 +2,7 @@
 description: Return and use the root path of the currently loaded OSDeploy module.
 ---
 
-# Get the OSDeploy Module Path
+# Get-OSDeployModulePath
 
 `Get-OSDeployModulePath` returns the absolute path to the root directory of the OSDeploy module loaded in the current PowerShell session. Use the returned path to locate module-relative catalogs, configuration files, templates, and other resources without assuming where PowerShell installed the module.
 
@@ -22,7 +22,7 @@ The function returns the path of the loaded OSDeploy module, which is not necess
 
 ## Parameters
 
-This function has no function-specific parameters. It supports standard PowerShell common parameters through `CmdletBinding`, but they do not change path selection.
+`Get-OSDeployModulePath` has no function-specific parameters and does not accept pipeline input. It supports PowerShell common parameters through `CmdletBinding`, but they do not change path resolution.
 
 ## Examples
 
@@ -100,9 +100,7 @@ Use `Join-Path` for child resources instead of concatenating strings. The return
 
 ## Session Behavior
 
-The function calls the shared OSDeploy banner helper before returning the path. On its first use in a module session, the helper records that the banner has been displayed. The current helper does not write banner text and does not add output to the success pipeline.
-
-The function does not modify files, install modules, or change the current location. It does not support `-WhatIf` or `-Confirm` because it performs no resource mutation.
+The function does not search installed releases, modify files, install modules, or change the current location. It does not support `-WhatIf` or `-Confirm` because it does not declare `SupportsShouldProcess`.
 
 ## Output
 

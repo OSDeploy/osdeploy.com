@@ -31,11 +31,12 @@ The function stops before source selection when Windows, PowerShell, `curl.exe`,
 
 ## Parameters
 
-`Build-OSDeployBoot` has a Default parameter set for WinRE selection with ADK fallback and an ADK parameter set for explicitly selecting the ADK WinPE image.
+`Build-OSDeployBoot` has Default and Update parameter sets for WinRE selection with ADK fallback, plus ADK and ADKUpdate parameter sets for explicitly selecting the ADK WinPE image.
 
 | Parameter          | Type             | Default                                               | Accepted values and behavior                                                                                                                                                                                                   |
 | ------------------ | ---------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `-Name`            | `String`         | Required                                              | Set the friendly name appended to the source build and architecture in the build folder name. An existing name is not overwritten; the function adds a numeric suffix.                                                         |
+| `-Name`            | `String`         | None                                                  | Load an exact saved profile name or name a new persistent profile. Canonical profile names end in `-amd64` or `-arm64`; the suffix is omitted from the friendly media name. When omitted, use `OSDeploy` and a temporary profile. |
+| `-Update`          | `String`         | None                                                  | Name an existing canonical profile to reselect its shared content and wallpaper, save it, and build it. Required in the Update and ADKUpdate sets and mutually exclusive with `-Name`.                                         |
 | `-Architecture`    | `String`         | Automatic in the Default set; required in the ADK set | Use `amd64` or `arm64`. In the Default set, the value filters the WinRE selector. A selected WinRE image determines the final architecture. With `-Auto`, an omitted value is derived from `PROCESSOR_ARCHITECTURE`.           |
 | `-Languages`       | `String[]`       | None                                                  | Add one or more validated ADK languages. Use `*` to enumerate every available language directory except `en-us`. The function processes the `en-us` base packages independently. A selected saved profile replaces this value. |
 | `-SetAllIntl`      | `String`         | None                                                  | Pass a locale to DISM `/Set-AllIntl`. The step is skipped when the value is empty. A selected saved profile replaces this value.                                                                                               |
@@ -44,9 +45,10 @@ The function stops before source selection when Windows, PowerShell, `curl.exe`,
 | `-SkipAdkPackages` | `Switch`         | Not enabled                                           | Skip ADK optional-component and language-package installation. Other image customization steps still run.                                                                                                                      |
 | `-UseAdkWinPE`     | `Switch`         | Not enabled                                           | Use the ADK `winpe.wim`. This switch and `-Architecture` are mandatory in the ADK parameter set and cannot be combined with `-Auto`.                                                                                           |
 | `-UpdateUSB`       | `Switch`         | Not enabled                                           | After ISO creation, copy the completed standard media tree to every accessible volume labeled `USB-WinPE`.                                                                                                                     |
-| `-Auto`            | `Switch`         | Not enabled                                           | In the Default parameter set, resolve the architecture when omitted, select the newest compatible imported WinRE image, and skip the saved-profile picker. Shared content and wallpaper selectors can still appear.            |
-| `-WhatIf`          | Common parameter | Not enabled                                           | Run prerequisite checks, source and content discovery, profile handling, configuration display, and the five-second delay, but stop when the function reaches creation of the build output directories.                        |
-| `-Confirm`         | Common parameter | Not enabled                                           | Prompt before creating the build output directories. Declining the operation stops the build.                                                                                                                                  |
+| `-Auto`            | `Switch`         | Not enabled                                           | In the Default or Update set, resolve an omitted architecture and select the newest compatible imported WinRE image. New and temporary profiles can still open shared-content and wallpaper selectors.                        |
+| `-Options`         | `String[]`       | None                                                  | Use `pwsh`, `dart`, or both. `pwsh` installs PowerShell 7; `dart` installs available Microsoft DaRT content. A saved profile supplies this value unless it is explicitly passed with `-Update`.                                |
+| `-WhatIf`          | Common parameter | Not enabled                                           | Run prerequisite and selection work. Normal builds stop at build-directory creation; `-Update` stops earlier at the profile overwrite. Earlier profile writes and discovery are not suppressed.                               |
+| `-Confirm`         | Common parameter | Not enabled                                           | Prompt before updating an existing profile and before creating the build output directories. The profile prompt applies only with `-Update`; declining either operation stops the command.                                   |
 
 Accepted `-Languages` values are:
 
@@ -62,7 +64,7 @@ uk-ua, zh-cn, zh-tw
 
 ### Build from an imported WinRE image
 
-Select an imported WinRE image, a saved profile or shared content, and a wallpaper, then build the media:
+Select an imported WinRE image and shared content, save a new architecture-qualified profile, and build the media:
 
 ```powershell
 Build-OSDeployBoot -Name 'MyPE'
@@ -93,13 +95,24 @@ ADK WinPE does not support wireless hardware. The function excludes selected dri
 
 ### Select the newest WinRE source automatically
 
-Resolve the architecture from the host, select the newest imported WinRE image for that architecture, and skip the saved-profile picker:
+Resolve the architecture from the host and select the newest imported WinRE image for that architecture:
 
 ```powershell
 Build-OSDeployBoot -Name 'Current-WinRE' -Auto
 ```
 
-`-Auto` does not make the complete build unattended. Shared driver, app, script, startup-profile, and wallpaper selection can still require interaction when matching content exists.
+`-Auto` does not make a new or temporary profile unattended. Shared driver, script, startup-profile, and wallpaper selection can still require interaction when matching content exists.
+
+### Update an existing profile
+
+Reselect the profile's shared content and wallpaper, preserve settings that are not explicitly replaced, set its options to PowerShell 7, save it, and build from the newest matching WinRE source:
+
+```powershell
+Build-OSDeployBoot `
+	-Update 'MyPE-amd64' `
+	-Auto `
+	-Options 'pwsh'
+```
 
 ### Add languages and regional settings
 
@@ -114,7 +127,7 @@ Build-OSDeployBoot `
 	-SetTimeZone 'Eastern Standard Time'
 ```
 
-When a saved profile is selected, its language and international settings replace the values supplied on the command line.
+When `-Name` loads a saved profile, its language and international settings replace values supplied on the command line. With `-Update`, explicitly supplied values replace the corresponding saved settings.
 
 ### Skip ADK package installation
 
@@ -170,7 +183,7 @@ Build-OSDeployBoot `
 
 ## Source Selection
 
-The Default parameter set starts with an imported WinRE source:
+The Default and Update parameter sets start with an imported WinRE source:
 
 1. With `-Auto`, derive an omitted architecture from `PROCESSOR_ARCHITECTURE`, find imported WinRE images for that architecture, sort by OS version descending, and select the newest image.
 2. With `-Architecture`, show the interactive WinRE selector filtered to that architecture.
@@ -178,7 +191,7 @@ The Default parameter set starts with an imported WinRE source:
 4. If no WinRE image is selected or available, warn and fall back to ADK WinPE. When the architecture is still unset, derive it from the host.
 5. Resolve the architecture-specific ADK paths. The function stops when the architecture or required ADK paths cannot be resolved.
 
-The ADK parameter set bypasses WinRE selection and uses the architecture-specific ADK `winpe.wim`.
+The ADK and ADKUpdate parameter sets bypass WinRE selection and use the architecture-specific ADK `winpe.wim`.
 
 The build folder name uses this format:
 
@@ -190,13 +203,13 @@ For example, a source version of `10.0.26200.1234`, AMD64 architecture, and name
 
 ## Build Profiles
 
-Saved profiles are stored under:
+Saved profiles use flat, architecture-qualified directories under:
 
 ```
-%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{architecture}\{profile}\osdeployboot.json
+%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{Name}-{Architecture}\osdeployboot.json
 ```
 
-Unless `-Auto` is used, the function offers compatible saved profiles for the selected architecture. A selected profile supplies explicit content paths, languages, international settings, and timezone. The profile selector validates configured paths and converts installed-module paths to these portable tokens when possible:
+An exact `-Name` match loads the saved profile automatically; no profile picker is displayed. The saved profile supplies its architecture, explicit content paths, languages, international settings, timezone, and options. The function rejects a conflicting `-Architecture`, validates configured paths, and converts installed-module paths to these portable tokens when possible:
 
 | Token                       | Resolved module path           |
 | --------------------------- | ------------------------------ |
@@ -204,13 +217,15 @@ Unless `-Auto` is used, the function offers compatible saved profiles for the se
 | `${{ OSDCloudModulePath }}` | Loaded OSDCloud module base    |
 | `${{ OSDModulePath }}`      | Loaded OSD module base         |
 
-When no saved profile is selected, the function presents shared selectors for compatible drivers, WinPE app scripts, WinPE scripts, media scripts, and WinPEStartup profiles. It then writes the selections and regional settings to:
+When `-Name` does not match a saved profile, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. It then writes a persistent profile to:
 
 ```
-%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{architecture}\{Name}\osdeployboot.json
+%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{Name}-{Architecture}\osdeployboot.json
 ```
 
-Shared scripts can come from the OSDeploy repository or the installed OSDeploy, OSDCloud, and OSD module roots. Architecture filtering excludes script names associated with the opposite architecture.
+When `-Name` is omitted, the same selectors create a temporary profile for the build. The function removes that profile after normal completion, cancellation, or a terminating error; generated build output remains. Shared scripts can come from the OSDeploy repository or the installed OSDeploy, OSDCloud, and OSD module roots. Architecture filtering excludes script names associated with the opposite architecture.
+
+`-Update` requires an existing canonical profile. It reselects shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Driver, script, and startup-profile selections replace their saved values; canceling those selectors clears the corresponding value. Canceling wallpaper selection preserves the existing wallpaper. Languages, international settings, timezone, and options are preserved unless explicitly passed.
 
 ## Profile-Local Content
 
@@ -255,11 +270,13 @@ When compatible updated Secure Boot files exist in an imported WinRE source, the
 
 ## WhatIf and Confirmation
 
-The function calls `ShouldProcess` once for creation of the build output directories. Before that call, it performs requirement checks, initializes OSDeploy Core state, selects the source and content, loads or writes a profile, resolves wallpaper, populates `$global:BuildMedia`, displays the configuration, and waits five seconds.
+For a normal or new-profile build, the function calls `ShouldProcess` before creating the build output directories. Before that call, it performs requirement checks, initializes OSDeploy Core state, selects the source and content, loads or writes a profile, resolves wallpaper, populates `$global:BuildMedia`, displays the configuration, and waits five seconds.
 
-With `-WhatIf`, the function stops at the directory operation. It does not create or service the build media, mount an image, create an ISO, or update USB media. Profile-related writes that occur before the gate are not suppressed.
+With `-Update`, an earlier `ShouldProcess` call gates overwriting the existing profile. `-WhatIf -Update` stops at that profile operation, before wallpaper processing, build-context creation, the five-second delay, or build-directory handling. If the profile update is approved, the later build-directory gate still applies.
 
-With `-Confirm`, the prompt appears at the same point. Declining the operation returns without creating the build output tree.
+With `-WhatIf` in the other parameter sets, the function stops at the directory operation. It does not create or service the build media, mount an image, create an ISO, or update USB media. New or temporary profile directories, profile JSON, selected wallpaper, and automatic token migration can occur before that gate.
+
+With `-Confirm`, a normal build prompts at the directory operation. An update can prompt first for the profile overwrite and again for the build directories. Declining either operation returns immediately.
 
 ## Build Output
 

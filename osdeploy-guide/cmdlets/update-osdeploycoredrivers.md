@@ -22,9 +22,25 @@ All matching packages are processed automatically. The command does not display 
 
 <figure><img src="../../.gitbook/assets/image (424).png" alt=""><figcaption></figcaption></figure>
 
-{% hint style="info" %}
-Run this command from an elevated PowerShell 7 session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+## Requirements
+
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Dynamic sources require access to their vendor metadata endpoints; uncached packages require access to their download URLs.
+
+{% hint style="warning" %}
+The command stops before driver processing when a Windows version, PowerShell, MSI installation, `curl.exe`, or administrator check fails. A failure for one catalog source or package is otherwise reported and processing continues with the remaining entries.
 {% endhint %}
+
+## Parameters
+
+| Parameter | Type | Default | Accepted values and behavior |
+| --- | --- | --- | --- |
+| `-Name` | `String[]` | Automatic | Positional parameter 0. Omission refreshes every configured source with an update or download URI, then processes every enabled resolved package. Tab completion suggests enabled refreshable sources. Unknown or nonrefreshable values are warned and skipped. |
+| `-Force` | `Switch` | Not enabled | Re-downloads matching package archives instead of reusing a valid cache file. The catalog helper accepts this switch but does not change discovery behavior. Existing nonempty Dell, HP, and Intel expanded folders are still reused. |
+| `-SkipWifiDrivers` | `Switch` | Not enabled | Excludes package names containing `wifi` or `wireless`. The command enables this automatically when no valid imported WinRE source is found. |
+| `-DownloadOnly` | `Switch` | Not enabled | Returns after saving package archives in the download cache. Expansion and `package.json` creation are skipped. |
+| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. Omission permits both. The filter applies to package processing, not catalog refresh, and packages with a blank architecture remain eligible. |
+| `-WhatIf` | Common parameter | Not enabled | Runs catalog and package discovery with child preview enabled. Protected catalog writes, downloads, and expansion are skipped, but initialization, vendor requests, catalog-directory creation, and cache reads can still occur. |
+| `-Confirm` | Common parameter | Not enabled | Prompts once before the combined catalog refresh and package-processing operation. Child confirmation prompts are suppressed. |
 
 ## Driver Sources
 
@@ -43,6 +59,14 @@ Use tab completion after `-Name` to view the active sources in the installed mod
 Update-OSDeployCoreDrivers -Name <Tab>
 ```
 
+The installed module also contains disabled source definitions that are not offered by completion and are not returned for package processing. Source availability can change with the installed OSDeploy version; the module configuration, not this table, controls the effective set.
+
+## Catalog Selection and Merge
+
+Dynamic sources use vendor-specific discovery. A source with only a download URI uses its static module metadata. The refreshed records are merged into `%ProgramData%\OSDeployCore\cache\config\winpedrivers.json` with the current catalog date.
+
+When `-Name` limits the refresh, entries for other sources are preserved. A requested source that returns no data or fails discovery also keeps its existing catalog entry. Catalog output is suppressed by `Update-OSDeployCoreDrivers`; only package files are returned.
+
 ## Download All Drivers
 
 Run the command without `-Name` to refresh every active source and process every matching package:
@@ -57,8 +81,8 @@ The command:
 2. Updates the local WinPE driver catalog.
 3. Downloads each matching package that is not already cached.
 4. Verifies a package checksum when the vendor catalog provides one.
-5. Expands the package into the OSDeploy Core driver library.
-6. Writes `package.json` metadata beside the expanded driver files.
+5. Expands the package into the OSDeploy Core driver library when its destination does not already contain files.
+6. Writes `package.json` metadata beside the expanded driver files when that metadata file does not already exist.
 
 If one source cannot be discovered or processed, the command writes a warning and continues with the remaining sources.
 
@@ -74,7 +98,7 @@ Update-OSDeployCoreDrivers -Name 'dell'
 Update-OSDeployCoreDrivers -Name 'dell', 'hp', 'intel-ethernet'
 ```
 
-Refreshing selected sources preserves the other entries already stored in the local catalog.
+Refreshing selected sources preserves the other entries already stored in the local catalog. Passing a disabled source name directly can refresh its catalog metadata when it has a URI, but disabled sources are skipped during package resolution.
 
 ## Select an Architecture
 
@@ -123,7 +147,7 @@ In download-only mode, the command does not create the expanded driver folder or
 During normal processing, expanded drivers and package metadata are stored in versioned folders:
 
 ```
-C:\ProgramData\OSDeployCore\OSDRepo\winpe-drivers\<architecture>\<name>-<version>\
+C:\ProgramData\OSDeployCore\repository\build-winpedrivers\<architecture>\<name>-<version>\
 ```
 
 List the available driver folders after processing:
@@ -140,11 +164,15 @@ Get-OSDeployCoreDrivers -Architecture amd64 -SkipWifiDrivers
 
 ## Refresh Cached Packages
 
-Existing downloads and expanded driver folders are reused when possible. Add `-Force` to refresh the selected catalog entries and re-download matching packages:
+Existing downloads and expanded driver folders are reused when possible. A package with a published SHA256 is reused only when the cache matches; a package without a checksum is reused when the expected file exists. The downloader can also copy a differently named file from the same vendor cache when its SHA256 matches the requested package.
+
+Add `-Force` to re-download matching packages:
 
 ```powershell
 Update-OSDeployCoreDrivers -Name 'dell' -Force
 ```
+
+`-Force` does not force catalog discovery to return different metadata, and it does not clear a populated Dell, HP, or Intel expansion directory. Remove an obsolete expanded package directory separately when a clean re-expansion is required.
 
 ## Preview the Operation
 
@@ -154,7 +182,7 @@ Use `-WhatIf` to show the catalog and package actions without downloading or exp
 Update-OSDeployCoreDrivers -Name 'dell', 'hp' -WhatIf
 ```
 
-The command can still contact vendor sources to discover current package metadata while processing `-WhatIf`.
+The public command takes a dedicated preview path so child commands can report their planned actions. It can still initialize and migrate Core paths, inspect imported WinRE sources, contact vendors, load the existing catalog, and create the catalog parent directory. The catalog file is not written and package handlers are not invoked because child `ShouldProcess` calls decline the mutations.
 
 Use `-Verbose` to display source discovery, catalog merge, package selection, cache, and expansion details:
 
@@ -174,7 +202,7 @@ Update-OSDeployCoreDrivers -Name 'dell'
 
 ## Review the Results
 
-The command returns a `System.IO.FileInfo` object for each package file processed successfully.
+The command returns a `System.IO.FileInfo` object for each package file processed successfully. This can be a newly downloaded file, a reused valid cache file, or a file copied from an alternate checksum-matching cache entry. `-DownloadOnly` returns the same file type. No object is returned for catalog files, unmatched packages, disabled sources, declined operations, or failed packages.
 
 ```powershell
 $DriverPackages = Update-OSDeployCoreDrivers -Name 'dell', 'hp'

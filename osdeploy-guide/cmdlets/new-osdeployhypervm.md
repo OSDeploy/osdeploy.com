@@ -37,7 +37,7 @@ All parameters are optional.
 | Parameter             | Type             | Default            | Accepted values and behavior                                                                                                                |
 | --------------------- | ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-ISO`                | `String`         | Automatic          | Use an existing `.iso` file. When omitted, the function selects the newest `bootmedia.iso` under `C:\ProgramData\OSDeployCore\boot`.        |
-| `-NamePrefix`         | `String`         | `OSDeploy`         | Append text to the timestamp at the beginning of the VM name.                                                                               |
+| `-NamePrefix`         | `String`         | `OSDeploy`         | Append text after the timestamp in the VM name. Despite the parameter name, this value is not the beginning of the final name.                |
 | `-Generation`         | `UInt16`         | `2`                | Use `1` or `2`. Secure Boot and virtual TPM configuration apply only to Generation 2.                                                       |
 | `-MemoryStartupGB`    | `UInt16`         | `8`                | Use a fixed startup-memory value from 2 through 64 GB.                                                                                      |
 | `-ProcessorCount`     | `UInt16`         | `2`                | Use from 1 through 64 virtual processors.                                                                                                   |
@@ -47,8 +47,8 @@ All parameters are optional.
 | `-SecureBootTemplate` | `String`         | `MicrosoftWindows` | Use `MicrosoftWindows`, `MicrosoftUEFICertificateAuthority`, or `OpenSourceShieldedVM` for Generation 2. Generation 1 ignores this setting. |
 | `-CheckpointVM`       | `Boolean`        | `$true`            | Create the initial `New-OSDeployHyperVM` checkpoint.                                                                                        |
 | `-StartVM`            | `Boolean`        | `$true`            | Open VMConnect when available and start the VM.                                                                                             |
-| `-WhatIf`             | Common parameter | Not enabled        | Return the planned configuration without creating the VM.                                                                                   |
-| `-Confirm`            | Common parameter | Not enabled        | Prompt before creating and configuring the VM.                                                                                              |
+| `-WhatIf`             | Common parameter | Not enabled        | Complete prerequisite, ISO, switch, and Hyper-V host discovery, then return the planned configuration without creating the VM.              |
+| `-Confirm`            | Common parameter | Not enabled        | Complete discovery, then prompt once before creating and configuring the VM.                                                                |
 
 ## Examples
 
@@ -155,7 +155,7 @@ New-OSDeployHyperVM -DisplayResolution '1920x1080'
 
 Supported values are:
 
-```
+```text
 640x480, 800x600, 1024x768, 1152x864, 1280x720, 1280x768,
 1280x800, 1280x960, 1280x1024, 1360x768, 1366x768, 1400x1050,
 1440x900, 1600x900, 1680x1050, 1920x1080, 1920x1200,
@@ -210,6 +210,8 @@ When `-ISO` is omitted, the function searches `C:\ProgramData\OSDeployCore\boot`
 
 When no matching ISO exists, the function creates an empty DVD drive. The VM is still created, but it has no OSDeploy media from which to boot. Attach an ISO before starting or restarting it.
 
+An explicit `-ISO` value must identify an existing file whose extension is `.iso`, matched without case sensitivity. Validation occurs before the function performs its host prerequisite checks.
+
 Use `-Verbose` to display the automatically selected ISO or the empty-DVD fallback:
 
 ```powershell
@@ -225,6 +227,8 @@ When `-SwitchName` is omitted, the function applies this precedence:
 3. Create the VM without a virtual switch when no switches exist.
 
 When `-SwitchName` is specified, Hyper-V must be able to resolve that switch name. The function passes the value to `New-VM` and stops if Hyper-V cannot create the connection.
+
+The `-SwitchName` argument completer lists names returned by `Get-VMSwitch`. Automatic fallback uses the first switch in the order returned by Hyper-V; it does not sort or prefer a switch type after checking for `Default Switch`.
 
 ## Generation 2 Security
 
@@ -250,6 +254,21 @@ The function also configures these settings:
 The optional initial checkpoint is separate from Hyper-V automatic checkpoints. When `-CheckpointVM` is `$true`, the function creates a checkpoint named `New-OSDeployHyperVM` after configuration and before startup.
 
 When `-StartVM` is `$true`, the function opens `vmconnect.exe` when it is available, waits 10 seconds, and then starts the VM. The VM still starts when VMConnect is unavailable.
+
+The function stops on errors from VM creation, DVD attachment, required firmware or resource configuration, checkpoint creation, startup, or final VM lookup. Because these actions are sequential and are not rolled back, an error can leave a partially configured VM, VHDX, checkpoint, or running VM.
+
+## WhatIf and Confirmation
+
+The function performs these operations before its single `ShouldProcess` call:
+
+* Validates host, PowerShell, elevation, physical-machine, Hyper-V feature, pending-restart, and required-command prerequisites.
+* Discovers the newest OSDeploy ISO when `-ISO` is omitted.
+* Enumerates virtual switches and chooses the automatic switch.
+* Reads the Hyper-V host default VHD location and generates the timestamped VM and VHDX names.
+
+`-WhatIf` therefore requires a working Hyper-V host and returns a plan only after discovery succeeds. It does not create a VM, VHDX, DVD drive, checkpoint, VMConnect process, or startup action. `-Confirm` prompts once after the same discovery and before all creation and configuration actions.
+
+Declining confirmation returns the same planned object shape as `-WhatIf`. Neither preview nor declined confirmation includes `DisplayResolution` in the returned object.
 
 ## Output
 
