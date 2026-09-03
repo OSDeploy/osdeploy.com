@@ -8,7 +8,7 @@ The **OSDeploy** module is used on **Windows 11 25H2** to create WinPE boot imag
 | Gallery      | [powershellgallery.com/packages/OSDeploy](https://www.powershellgallery.com/packages/OSDeploy/) |
 | Platform     | Windows 11 25H2                                                                                 |
 | Architecture | amd64 / arm64                                                                                   |
-| Status       | Current / Recommended                                                                           |
+| Status       | Preview                                                                                         |
 | Required by  | OSDeploy deployment workflows                                                                   |
 
 {% embed url="https://www.powershellgallery.com/packages/OSDeploy/" %}
@@ -16,6 +16,10 @@ The **OSDeploy** module is used on **Windows 11 25H2** to create WinPE boot imag
 ## Overview
 
 The OSDeploy module is the build-time counterpart to OSDCloud. It runs on a full **Windows 11 25H2 or later** installation — not inside WinPE — and is responsible for creating and customizing WinPE boot images. The module automates the entire boot image pipeline: pulling in Windows ADK optional components and language packs, injecting WinPE drivers, embedding the OSDCloud PowerShell module, adding WinPE apps and console configuration, and generating bootable ISO files and USB drives.
+
+{% hint style="warning" %}
+A valid Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](../../guide/registration.md) before running OSDeploy commands. This requirement does not apply to standalone use of the OSDCloud or legacy OSD modules.
+{% endhint %}
 
 Use `Invoke-OSDeployHydration` for a fully automated end-to-end build, or use `Build-OSDeployBoot` directly for fine-grained control over individual boot image builds.
 

@@ -51,4 +51,4 @@ Install-Module -Name OSD -Force -SkipPublisherCheck
 {% endstep %}
 {% endstepper %}
 
-See the detailed guides for [Get-OSDeployModulePath](../cmdlets/get-osdeploymodulepath.md) and [Get-OSDeployModuleVersion](../cmdlets/get-osdeploymoduleversion.md), or use their compact [path](../../command-reference/osdeploy/get-osdeploymodulepath.md) and [version](../../command-reference/osdeploy/get-osdeploymoduleversion.md) command references. Continue to [Community Registration](../registration.md).
+See the detailed guides for [Get-OSDeployModulePath](../cmdlets/get-osdeploymodulepath.md) and [Get-OSDeployModuleVersion](../cmdlets/get-osdeploymoduleversion.md), or use their compact [path](../../command-reference/osdeploy/get-osdeploymodulepath.md) and [version](../../command-reference/osdeploy/get-osdeploymoduleversion.md) command references. A valid Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](../registration.md) before running OSDeploy commands.

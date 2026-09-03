@@ -6,6 +6,10 @@ description: Use task-oriented guides for the public commands in the OSDeploy Po
 
 Use these guides to run OSDeploy commands and understand their requirements, prompts, selection behavior, side effects, and output. Start with [Basic Setup](../basic/README.md) for the shortest workstation setup workflow. Use the [OSDeploy command reference](../../command-reference/osdeploy/README.md) for compact syntax and output lookup.
 
+{% hint style="warning" %}
+A valid Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](../registration.md) before running OSDeploy commands.
+{% endhint %}
+
 ## Workstation Setup
 
 | Guide | Use it to |
