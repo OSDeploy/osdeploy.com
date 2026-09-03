@@ -4,10 +4,10 @@ description: Register an OSDeploy PC with a free Recast Software Community Licen
 
 # Community Registration
 
-Download and install a free Recast Software Community License, then use `Show-OSDeployLicense` to confirm that OSDeploy can discover and validate it.
+Download and import a free Recast Software Community License, then use `Show-OSDeployLicense` to confirm that OSDeploy can discover and validate it. Complete registration before using the OSDeploy module.
 
-{% hint style="info" %}
-Registration is optional. OSDeploy and OSDCloud work without a Community License, but some features are available only when a valid license is detected. Licensed features can change as the modules are updated.
+{% hint style="warning" %}
+A valid Recast Software Community License is required while the OSDeploy module is in preview. This requirement applies to OSDeploy on the PC used to create boot media. It does not apply to standalone use of the OSDCloud or legacy OSD modules in WinPE.
 {% endhint %}
 
 ## Register the OSDeploy PC
@@ -19,52 +19,36 @@ Registration is optional. OSDeploy and OSDCloud work without a Community License
 1. Open the [Recast Software Community Portal](https://portal.recastsoftware.com/).
 2. Create an account or sign in.
 3. Download the license ZIP for **Right Click Tools Community Edition**.
-4. Extract the ZIP and locate the file with the `.license2` extension.
 {% endstep %}
 
 {% step %}
-### Install the License
+### Import the License
 
-Open PowerShell 7.6 or later as an administrator. Set `$LicenseFile` to the extracted `.license2` file, then run the following commands:
+Open PowerShell 7.6 or later as an administrator. Set `$LicenseFile` to the downloaded ZIP or an extracted `.license2` file, then import the license:
 
 ```powershell
-$LicenseFile = 'C:\Path\To\CommunityLicense.license2'
-$LicenseDirectory = Join-Path -Path $env:ProgramData -ChildPath 'Recast Software\Licenses'
-
-if (-not (Test-Path -LiteralPath $LicenseFile -PathType Leaf)) {
-	throw "The license file was not found at $LicenseFile."
-}
-
-New-Item -Path $LicenseDirectory -ItemType Directory -Force | Out-Null
-Copy-Item -LiteralPath $LicenseFile -Destination $LicenseDirectory -Force
+$LicenseFile = 'C:\Path\To\CommunityLicense.zip'
+Import-OSDeployLicense -LicenseFile $LicenseFile
 ```
 
 {% hint style="warning" %}
-Keep the `.license2` extension unchanged. OSDeploy does not discover license files with a different extension.
+Run `Import-OSDeployLicense` as an administrator. The function requires write access to the Recast Software license directory under `ProgramData`.
 {% endhint %}
+
+For ZIP input, the function extracts the archive and selects a contained `.license2` file. It validates the selected license, displays the proposed changes, and asks for confirmation before importing it. After a successful import, it displays the installed license using `Show-OSDeployLicense`.
 {% endstep %}
 
 {% step %}
 ### Verify the License
 
-Confirm that OSDeploy discovers the license and that its schema is valid:
+Verify the installed license:
 
 ```powershell
-$License = Show-OSDeployLicense
-
-if (-not $License) {
-	throw 'OSDeploy did not find a usable Community License.'
-}
-
-if (-not $License.IsValid) {
-	throw "The Community License failed validation: $($License.ValidationErrors -join '; ')"
-}
-
-$License | Select-Object FileName, Organization, Email, LicenseType, Expiration, ActivationExpiration
+Show-OSDeployLicense
 ```
 
-Confirm that the expiration dates have not passed. For detailed discovery and validation behavior, see [Show-OSDeployLicense](cmdlets/show-osdeploylicense.md).
+For detailed discovery and validation behavior, see [Show-OSDeployLicense](cmdlets/show-osdeploylicense.md).
 {% endstep %}
 {% endstepper %}
 
-Continue to [Install Required Software](basic/install-osdeploysoftware.md), or continue without registration using the features available for unregistered use.
+After `Show-OSDeployLicense` returns a valid license, continue to [Install Required Software](basic/install-osdeploysoftware.md).

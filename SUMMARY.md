@@ -10,7 +10,7 @@
   * [Windows 11](guide/requirements/windows-11-os.md)
   * [PowerShell 7](guide/requirements/powershell-7.md)
   * [PowerShell Modules](guide/requirements/powershell-modules.md)
-* [Community Registration](guide/registration.md)
+* [Required Community Registration](guide/registration.md)
 * [Quick Setup](guide/quick-setup.md)
 * [Basic Setup](guide/basic/README.md)
   * [Install Required Software](guide/basic/install-osdeploysoftware.md)

@@ -72,6 +72,12 @@ Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 
 Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands.
 {% endstep %}
+
+{% step %}
+### Register the OSDeploy PC
+
+Complete [Community Registration](../registration.md) and confirm that `Show-OSDeployLicense` returns a valid Recast Software Community License. Registration is required while the OSDeploy module is in preview.
+{% endstep %}
 {% endstepper %}
 
-See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](../../osdeploy-guide/requirements/powershell-modules.md). Optionally complete [Community Registration](../registration.md).
+See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](../../osdeploy-guide/requirements/powershell-modules.md).
