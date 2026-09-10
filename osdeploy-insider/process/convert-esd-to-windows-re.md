@@ -1,12 +1,12 @@
 ---
 description: >-
-  Follow how Update-OSDeployCoreOS extracts Windows RE and creates a separate
+  Follow how Update-OSDeployCoreRE extracts Windows RE and creates a separate
   recovery-image cache.
 ---
 
 # Convert ESD to Windows RE
 
-This article follows the Windows RE path inside `Update-OSDeployCoreOS`. The function extracts the recovery image from the Enterprise operating system and creates a separate cache that preserves its relationship to the source Windows build.
+This article follows the Windows RE path inside `Update-OSDeployCoreRE`. The function extracts the recovery image from the Enterprise operating system and creates a separate cache that preserves its relationship to the source Windows build.
 
 Windows RE is not taken directly from a fixed ESD index. It is collected from the installed operating-system image after Enterprise has been exported to `install.wim`.
 
@@ -164,8 +164,8 @@ Get-WindowsImage -ImagePath $WinREWim -Index 1
 
 ## Related
 
-* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycoreos.md)
+* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycorere.md)
 * [Insider: Building an OS from an ESD](convert-esd-to-windows-11-os.md)
 * [Insider: Exporting WinPE Drivers from an OS](exporting-winpe-drivers-from-os-wim.md)
-* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update-OSDeployCoreRE command reference](../../command-reference/osdeploy/update-osdeploycorere.md)
 * [Build-OSDeployBoot command reference](../../command-reference/osdeploy/build-osdeployboot.md)

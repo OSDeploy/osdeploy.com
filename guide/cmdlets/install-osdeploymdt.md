@@ -10,7 +10,7 @@ description: Audit or initialize an MDT deployment share for OSDeploy customizat
 
 Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
-Install MDT on the same computer and register at least one persistent MDT deployment share. See [Microsoft Deployment Toolkit](/broken/pages/waD3ryEEjkQj6wqEhrGA) and [Module Setup](../requirements/powershell-modules.md).
+Install MDT on the same computer and register at least one persistent MDT deployment share. See [Microsoft MDT](install-osdeploysoftware/microsoft-mdt.md) and [Module Setup](../requirements/powershell-modules.md).
 
 {% hint style="warning" %}
 `-Force` overwrites deployment-share template files. Review audit output before applying changes, and preserve any custom template content that must be restored afterward.

@@ -33,7 +33,7 @@ MDT environment variables consumed: `STAGE`, `CONTENT`, `ARCHITECTURE`, `INSTALL
 ## Syntax
 
 ```powershell
-Invoke-OSDeployMDT [-SetInputLocale <String>] [-SetTimeZone <String>]
+Invoke-OSDeployMDT [-SetInputLocale <String>] [-SetTimeZone <String>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
@@ -42,6 +42,8 @@ Invoke-OSDeployMDT [-SetInputLocale <String>] [-SetTimeZone <String>]
 |--------------------|----------|----------|--------------------------------------------------------------------------------------------------|
 | `-SetInputLocale`  | `String` | No       | Sets the default input locale in WinPE. Default: `en-us`.                                        |
 | `-SetTimeZone`     | `String` | No       | Sets the WinPE time zone. Validated against `tzutil /l`. Default: the current system time zone.  |
+| `-WhatIf`          | `Switch` | No       | Preview operations guarded by `ShouldProcess`; stage discovery and other ungated work can still occur. |
+| `-Confirm`         | `Switch` | No       | Request confirmation at `ShouldProcess` boundaries. |
 
 ## Examples
 

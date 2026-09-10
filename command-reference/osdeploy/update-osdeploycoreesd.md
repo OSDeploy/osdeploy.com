@@ -6,18 +6,19 @@ Downloads Windows Enterprise ESD files from the latest OSDeploy OS catalog.
 |----------|---------------------------------------------------------|
 | Module   | OSDeploy                                                |
 | Platform | Windows 11 (amd64 / arm64)                             |
-| Requires | PowerShell 7.6, internet access                         |
+| Requires | PowerShell 7.6, Administrator rights, `curl.exe`, internet access, valid license |
+| Output   | `System.IO.FileInfo[]` for verified usable ESD files    |
 
 ## Description
 
-Locates the most recent XML catalog file in the OSDeploy operating system catalogs directory, resolves the en-US Enterprise x64 and ARM64 ESD entries, and downloads them to `C:\ProgramData\OSDeployCore\cache\windows-esd`.
+Locates the newest XML catalog in the OSDeploy module, resolves eligible en-US Enterprise ESD entries, and downloads them to the release folder under `C:\ProgramData\OSDeployCore\OSDCloud\OS`, such as `Windows 11 25H2`.
 
-Each file is skipped silently when it is already present and its SHA256 checksum matches the catalog value. For files that need downloading, the URL is first tested for reachability. All pending downloads are confirmed with the user before any transfer begins.
+Each current file is reused when its SHA256 checksum matches. A verified older-catalog file can be retained after an upgrade prompt. Pending URLs are tested before per-file confirmations and transfers begin.
 
-SHA256 verification is performed after every download. A terminating error is thrown when the checksum does not match or when `curl.exe` fails.
+SHA256 verification follows every download. Failed transfers and checksums use bounded automatic retry followed by an interactive retry decision and cleanup options.
 
 {% hint style="info" %}
-`Update-OSDeployCoreESD` is called automatically by `Update-OSDeployCoreOS` and `Update-OSDeployCore`. Run it directly only when you want to cache ESD files without importing them as OS sources.
+`Update-OSDeployCoreESD` is called automatically by `Update-OSDeployCore`. Run it directly when only the ESD cache needs updating, then use `Update-OSDeployCoreRE` to export recovery content.
 {% endhint %}
 
 ## Syntax
@@ -30,10 +31,10 @@ Update-OSDeployCoreESD [-Force] [[-Architecture] <String>] [-WhatIf] [-Confirm]
 
 | Parameter        | Type     | Required | Description                                                                                             |
 |------------------|----------|----------|---------------------------------------------------------------------------------------------------------|
-| `-Force`         | `Switch` | No       | Re-downloads each ESD file even when it already exists in the cache with a matching SHA256 checksum.    |
-| `-Architecture`  | `String` | No       | Limits downloads to a single architecture: `amd64` or `arm64`. When omitted, both architectures are downloaded. |
-| `-WhatIf`        | `Switch` | No       | Shows which ESD files would be downloaded without performing any transfers.                             |
-| `-Confirm`       | `Switch` | No       | Prompts for confirmation before each download.                                                          |
+| `-Force`         | `Switch` | No       | Bypass verified cache reuse and request fresh downloads. It does not bypass `ShouldContinue` prompts. |
+| `-Architecture`  | `String` | No       | `amd64` or `arm64`. AMD64 hosts consider x64 then ARM64 by default; ARM64 hosts consider ARM64 only. |
+| `-WhatIf`        | `Switch` | No       | Suppress gated directory, deletion, download, retry, and cleanup operations. Initialization, hashing, URL tests, and Yes/No prompts can still occur. |
+| `-Confirm`       | `Switch` | No       | Add confirmation at `ShouldProcess` boundaries; independent `ShouldContinue` prompts still appear. |
 
 ## Examples
 

@@ -18,6 +18,8 @@ Update-OSDeployCoreESD -Architecture arm64
 
 `Update-OSDeployCoreESD` downloads the current en-US Windows 11 25H2 Enterprise ESD files from the Microsoft Content Delivery Network. Download URLs, file names, sizes, and SHA256 checksums come from the operating system catalog included with the OSDeploy module.
 
+A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
+
 This command downloads and caches the source ESD files. It does not install Windows or import the ESD contents into OSDeploy Core.
 
 <figure><img src="../../.gitbook/assets/image (353).png" alt=""><figcaption></figcaption></figure>
@@ -141,16 +143,16 @@ No object is returned for an architecture when its download is unavailable, decl
 
 ## Import Windows into OSDeploy Core
 
-After the ESD files are downloaded, run `Update-OSDeployCoreOS` to create the Windows media, WIM files, Windows RE content, and driver sources used by OSDeploy Core:
+After the ESD files are downloaded, run `Update-OSDeployCoreRE` to create the Windows media, WIM files, Windows RE content, and driver sources used by OSDeploy Core:
 
 ```powershell
-Update-OSDeployCoreOS -Architecture amd64
+Update-OSDeployCoreRE -Architecture amd64
 ```
 
 ## Related
 
 * [Complete OSDeploy Core update](update-osdeploycore.md)
 * [Update-OSDeployCoreESD command reference](../../command-reference/osdeploy/update-osdeploycoreesd.md)
-* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update-OSDeployCoreRE command reference](../../command-reference/osdeploy/update-osdeploycorere.md)
 * [Insider: The Windows ESD Catalog](../../osdeploy-insider/process/windows-esd-catalogs.md)
 * [System Requirements](../requirements/windows-11-os.md)

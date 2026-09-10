@@ -85,4 +85,4 @@ The output must report `Core`, PowerShell 7.6 or later, and a `$PSHOME` under `$
 {% endstep %}
 {% endstepper %}
 
-Continue to [Install PowerShell Modules](../../osdeploy-guide/requirements/powershell-modules.md).
+Continue to [Install PowerShell Modules](powershell-modules.md).

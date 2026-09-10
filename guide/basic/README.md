@@ -41,7 +41,7 @@ Update-OSDeployCore
 Create customized WinPE media and ISO files:
 
 ```powershell
-Build-OSDeployBoot -Name 'MyPE'
+Build-OSDeployBoot
 ```
 {% endstep %}
 

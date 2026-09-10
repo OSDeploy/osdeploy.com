@@ -64,4 +64,4 @@ Get-ChildItem 'C:\ProgramData\OSDeployCore\cache\winpe-apps\7zip\26.00'
 
 ## Next Step
 
-Continue with [Build-OSDeployBoot](../build-osdeployboot.md) after installing the remaining workstation requirements. See the [7-Zip reference](/broken/pages/igYUxyErBDjOY7Kl365N) for its role in OSDeploy.
+Continue with [Build-OSDeployBoot](../build-osdeployboot.md) after installing the remaining workstation requirements.

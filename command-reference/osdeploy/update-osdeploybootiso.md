@@ -5,8 +5,8 @@ Rebuilds the bootable ISO files for a selected OSDeployCore BootImage build.
 | Property | Value                                                                              |
 |----------|------------------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                           |
-| Platform | Windows 10 or later (PowerShell Core edition)                                      |
-| Requires | Run as Administrator, Windows ADK installed, a completed BootImage build            |
+| Platform | Windows 11 25H2 build 26200 or later (amd64 / arm64)                                |
+| Requires | Valid license, Run as Administrator, Windows ADK installed, a completed BootImage build |
 
 ## Description
 
@@ -24,12 +24,17 @@ Use this function when you need to regenerate an ISO from existing bootmedia fil
 ## Syntax
 
 ```powershell
-Update-OSDeployBootISO
+Update-OSDeployBootISO [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
 
-This function has no parameters. The BootImage selection is made via an interactive Out-GridView picker.
+The BootImage selection is made with an interactive `Out-GridView` picker.
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `-WhatIf` | `Switch` | No | Preview ISO creation after selecting a build. |
+| `-Confirm` | `Switch` | No | Confirm each ISO creation operation. |
 
 ## Examples
 

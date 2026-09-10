@@ -80,4 +80,4 @@ Complete [Community Registration](../registration.md) and confirm that `Show-OSD
 {% endstep %}
 {% endstepper %}
 
-See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](../../osdeploy-guide/requirements/powershell-modules.md).
+See the detailed instructions for [Windows 11](windows-11-os.md), [PowerShell 7](powershell-7.md), and [PowerShell modules](powershell-modules.md).

@@ -115,7 +115,7 @@ Hydration runs these stages in order:
 4. Test and optionally install required and recommended workstation software.
 5. Download and import the Windows Enterprise ESD when the parent `ShouldProcess` operation is approved.
 6. Refresh WinPE driver packages for the detected architecture.
-7. Run `Build-OSDeployBoot -Name "Hydra-$arch" -Auto` for the detected architecture.
+7. Run `Build-OSDeployBoot -Auto`; the builder derives the host architecture and writes the matching recent profile snapshot.
 8. On a physical host, offer to create a Hyper-V VM when Hyper-V is enabled and the new `bootmedia.iso` exists.
 
 A terminating error stops later stages. Non-terminating warnings from a child command can allow the workflow to continue with cached content or skip only the affected source.
@@ -143,7 +143,7 @@ The Windows content stage is gated as one high-impact operation named `Download 
 
 ```powershell
 Update-OSDeployCoreESD -Architecture $arch
-Update-OSDeployCoreOS -Architecture $arch
+Update-OSDeployCoreRE -Architecture $arch
 ```
 
 `-Force`, `-WhatIf`, and `-Confirm` are forwarded to `Update-OSDeployCoreESD` through bound parameters. The Windows import receives inherited common-parameter preferences but does not receive `-Force`.
@@ -156,14 +156,14 @@ Verified ESD files are stored under:
 C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
 ```
 
-The import command creates Windows OS and Windows RE content under architecture-specific directories below:
+The export command creates Windows RE and supporting Windows OS content under architecture-specific directories below:
 
 ```
 C:\ProgramData\OSDeployCore\cache\windows-os\
 C:\ProgramData\OSDeployCore\cache\windows-re\
 ```
 
-When both matching import directories already exist, `Update-OSDeployCoreOS` skips that ESD. When only one exists, it processes the ESD again to complete the pair.
+When both matching directories already exist, `Update-OSDeployCoreRE` skips that ESD. When only one exists, it processes the ESD again to complete the pair.
 
 ## WinPE Drivers
 
@@ -182,17 +182,17 @@ When no imported Windows source exists, the driver command automatically skips W
 
 ## Hydra Boot Media
 
-Hydration calls the boot builder with an architecture-specific name and automatic source selection:
+Hydration calls the boot builder with automatic source selection:
 
 ```powershell
-Build-OSDeployBoot -Name "Hydra-$arch" -Auto
+Build-OSDeployBoot -Auto
 ```
 
 `Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
 
-`-Auto` skips the saved-profile picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes or updates the `Hydra-amd64` or `Hydra-arm64` profile and discovers profile-local content before reaching its build-directory confirmation.
+`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` before reaching its build-directory confirmation.
 
-Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name includes `Hydra-amd64` or `Hydra-arm64`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
+Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name is `OSDeploy`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
 
 ```
 C:\ProgramData\OSDeployCore\boot\
@@ -230,7 +230,7 @@ See [New-OSDeployHyperVM](new-osdeployhypervm.md) for VM defaults and host requi
 | Overall workflow | Bypass the hydration-level confirmation.                                                             |
 | Missing software | Accept every required and optional installation prompt.                                              |
 | ESD update       | Forward `-Force` to refresh selected ESD content. Child cache and recovery prompts can still appear. |
-| Windows import   | No `-Force` parameter is passed. Existing complete imports remain skipped.                           |
+| Windows RE       | No `-Force` parameter is passed. Existing complete exports remain skipped.                           |
 | Driver update    | Forward `-Force` to refresh catalog entries and matching packages.                                   |
 | Boot build       | No `-Force` parameter exists or is passed. Build content selectors can still appear.                 |
 | Hyper-V test     | Accept the hydration-level VM test prompt. No `-Force` parameter is passed to VM creation.           |

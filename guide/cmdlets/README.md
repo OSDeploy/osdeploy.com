@@ -16,6 +16,7 @@ A valid Recast Software Community License is required while the OSDeploy module 
 | --- | --- |
 | [Get-OSDeployModulePath](get-osdeploymodulepath.md) | Locate resources in the OSDeploy module that is loaded in the current session. |
 | [Get-OSDeployModuleVersion](get-osdeploymoduleversion.md) | Return or compare the loaded OSDeploy module version. |
+| [Import-OSDeployLicense](import-osdeploylicense.md) | Import and reconcile a Recast Software license file or ZIP archive. |
 | [Show-OSDeployLicense](show-osdeploylicense.md) | Inspect the selected Recast Software license candidate or display registration guidance. |
 | [Invoke-OSDeployHydration](invoke-osdeployhydration.md) | Prepare a workstation, refresh Windows and driver content, build boot media, and optionally test it in Hyper-V. |
 | [Install-OSDeploySoftware](install-osdeploysoftware/README.md) | Install individual OSDeploy workstation prerequisites and tools. |
@@ -26,7 +27,7 @@ A valid Recast Software Community License is required while the OSDeploy module 
 | --- | --- |
 | [Update-OSDeployCore](update-osdeploycore.md) | Coordinate the Windows ESD, imported Windows image, and WinPE driver updates. |
 | [Update-OSDeployCoreESD](update-osdeploycoreesd.md) | Download and verify Windows Enterprise ESD content. |
-| [Update-OSDeployCoreOS](update-osdeploycoreos.md) | Import Windows OS and WinRE images from cached ESD files. |
+| [Update-OSDeployCoreRE](update-osdeploycorere.md) | Export Windows RE and stage supporting Windows OS content from cached ESD files. |
 | [Update-OSDeployCoreDrivers](update-osdeploycoredrivers.md) | Download and expand WinPE driver packages. |
 | [Build-OSDeployBoot](build-osdeployboot.md) | Build customized WinPE media from imported WinRE or Windows ADK WinPE. |
 | [Update-OSDeployBootISO](update-osdeploybootiso.md) | Rebuild ISO files for an existing OSDeploy boot-media build. |

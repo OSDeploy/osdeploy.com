@@ -8,7 +8,7 @@ description: Configure and create an OSDeploy Hyper-V virtual machine.
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on a physical Windows 11 25H2 build 26200 or later host. PowerShell must be installed from the MSI package, `curl.exe` must be available in `PATH`, and Hyper-V and its PowerShell tools must be enabled.
+Run the function from an elevated PowerShell 7.6 or later session on a physical Windows 11 25H2 build 26200 or later host. PowerShell must be installed from the MSI package, `curl.exe` must be available in `PATH`, a valid Recast Software Community License must be available, and Hyper-V and its PowerShell tools must be enabled.
 
 See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [Microsoft Hyper-V](install-osdeploysoftware/microsoft-hyper-v.md) to enable Hyper-V.
 
