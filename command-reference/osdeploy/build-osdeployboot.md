@@ -1,63 +1,70 @@
 # Build-OSDeployBoot
 
-Builds a customized WinPE boot image from a WinRE or ADK WinPE source.
+Builds customized WinPE boot media from an imported WinRE or Windows ADK source.
 
-| Property     | Value                                                                        |
-|--------------|------------------------------------------------------------------------------|
-| Module       | OSDeploy                                                                     |
-| Platform     | Windows 11 25H2+ (amd64 / arm64)                                            |
-| Requires     | PowerShell 7.6, Windows ADK, OSDCloud module 26.5.24.1+, Run as Administrator |
-| Output path  | `%ProgramData%\OSDeployCore\boot`                                      |
-
-## Description
-
-Creates a bootable WinPE image from an imported WinRE image or the Windows ADK WinPE. The function applies ADK optional components, WinPE drivers, PowerShell module updates, WinPE applications, console settings, wallpaper, and user scripts. Output is written to `%ProgramData%\OSDeployCore\boot`.
-
-By default the function selects an imported WinRE source. Use `-UseAdkWinPE` to build from the ADK WinPE instead.
+| Property | Value |
+| --- | --- |
+| Module | OSDeploy |
+| Platform | Windows 11 25H2 build 26200 or later (amd64 / arm64) |
+| Requires | PowerShell 7.6, Windows ADK and WinPE add-on, OSDCloud 26.7.25.2, Administrator rights, valid license |
+| Output | None; sets `$global:BuildMedia` as process state |
 
 ## Syntax
 
 ```powershell
-# Default parameter set — uses an imported WinRE source
-Build-OSDeployBoot -Name <String> [-Architecture <String>]
-    [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
-    [-SetTimeZone <String>] [-SkipAdkPackages] [-Auto] [-UpdateUSB] [-WhatIf] [-Confirm]
+# Default
+Build-OSDeployBoot [-Architecture <String>] [-Languages <String[]>]
+    [-SetAllIntl <String>] [-SetInputLocale <String>] [-SetTimeZone <String>]
+    [-SkipAdkPackages] [-UpdateUSB] [-Auto] [-Options <String[]>] [-WhatIf] [-Confirm]
 
-# ADK parameter set — uses the Windows ADK winpe.wim
-Build-OSDeployBoot -Name <String> -Architecture <String>
+# Profile
+Build-OSDeployBoot -ProfileName <String> [-Architecture <String>]
     [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
-    [-SetTimeZone <String>] [-SkipAdkPackages] [-UseAdkWinPE] [-UpdateUSB]
-    [-WhatIf] [-Confirm]
+    [-SetTimeZone <String>] [-SkipAdkPackages] [-UpdateUSB] [-Auto]
+    [-Options <String[]>] [-WhatIf] [-Confirm]
+
+# ADK
+Build-OSDeployBoot -Architecture <String> -UseAdkWinPE [-Languages <String[]>]
+    [-SetAllIntl <String>] [-SetInputLocale <String>] [-SetTimeZone <String>]
+    [-SkipAdkPackages] [-UpdateUSB] [-Options <String[]>] [-WhatIf] [-Confirm]
+
+# ADKProfile
+Build-OSDeployBoot -ProfileName <String> -UseAdkWinPE [-Architecture <String>]
+    [-Languages <String[]>] [-SetAllIntl <String>] [-SetInputLocale <String>]
+    [-SetTimeZone <String>] [-SkipAdkPackages] [-UpdateUSB]
+    [-Options <String[]>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
 
-| Parameter         | Type       | Required               | Description                                                                                           |
-|-------------------|------------|------------------------|-------------------------------------------------------------------------------------------------------|
-| `-Name`           | `String`   | Yes (all sets)         | Friendly name for the build. Used to label the output folder.                                         |
-| `-Architecture`   | `String`   | Optional / Yes (ADK)   | Processor architecture: `amd64` or `arm64`. Required with `-UseAdkWinPE`. Default: `amd64`.          |
-| `-Languages`      | `String[]` | No                     | ADK language packs to add. Default: `en-us`. Use `*` to add all available languages.                 |
-| `-SetAllIntl`     | `String`   | No                     | Sets all international settings to the specified locale. Default: `en-us`.                            |
-| `-SetInputLocale` | `String`   | No                     | Sets the default input locale in WinPE. Default: `en-us`.                                            |
-| `-SetTimeZone`    | `String`   | No                     | Sets the WinPE timezone. Default: the current system timezone (from `tzutil /g`).                     |
-| `-SkipAdkPackages`| `Switch`   | No                     | Skips adding ADK optional component packages. Useful for quick testing.                               |
-| `-UseAdkWinPE`    | `Switch`   | Yes (ADK set)          | Uses the ADK `winpe.wim` instead of an imported WinRE source. Requires `-Architecture`.               |
-| `-UpdateUSB`      | `Switch`   | No                     | Copies the completed media to any connected USB partition labeled `USB-WinPE` after the build.        |
-| `-Auto`           | `Switch`   | No (Default set only)  | Automatically detects the host architecture and selects the latest available WinRE source without prompting. Skips build profile selection. |
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `-ProfileName` | `String` | Profile sets | Exact name of an existing architecture-specific profile. The profile is read but not modified. |
+| `-Architecture` | `String` | ADK set | `amd64` or `arm64`; filters WinRE selection or selects ADK paths. |
+| `-Languages` | `String[]` | No | Valid ADK language identifiers or `*`. |
+| `-SetAllIntl` | `String` | No | WinPE international-settings value. |
+| `-SetInputLocale` | `String` | No | WinPE input locale. |
+| `-SetTimeZone` | `String` | No | Value accepted by `tzutil /l`; defaults to the current timezone. |
+| `-SkipAdkPackages` | `Switch` | No | Skip ADK optional-component and language packages. |
+| `-UseAdkWinPE` | `Switch` | ADK sets | Use ADK `winpe.wim`; cannot be combined with `-Auto`. |
+| `-UpdateUSB` | `Switch` | No | Run the final update step for `USB-WinPE` partitions. |
+| `-Auto` | `Switch` | WinRE sets | Select the newest compatible WinRE source, with ADK fallback. |
+| `-Options` | `String[]` | No | `pwsh`, `dart`, or both. |
+| `-WhatIf` | `Switch` | No | Stop at build-directory creation after configuration; a recent profile snapshot can already be written. |
+| `-Confirm` | `Switch` | No | Confirm build-directory creation. |
 
 ## Examples
 
 ```powershell
-# Build from an imported WinRE source with the default name
-Build-OSDeployBoot -Name 'MyPE'
+Build-OSDeployBoot
 ```
 
 ```powershell
-# Build from the ADK WinPE for amd64, skipping optional components
-Build-OSDeployBoot -Name 'TestBuild' -Architecture 'amd64' -UseAdkWinPE -SkipAdkPackages
+Build-OSDeployBoot -ProfileName 'Contoso-amd64' -Options 'pwsh'
 ```
 
 ```powershell
-# Build for arm64 and copy to any connected USB-WinPE drive
-Build-OSDeployBoot -Name 'ARM64-PE' -Architecture 'arm64' -UpdateUSB
+Build-OSDeployBoot -Architecture 'arm64' -UseAdkWinPE
 ```
+
+When `-ProfileName` is omitted, configuration is written to `recent-amd64.json` or `recent-arm64.json`. Named profiles are created and maintained with the BootProfilePreview commands.

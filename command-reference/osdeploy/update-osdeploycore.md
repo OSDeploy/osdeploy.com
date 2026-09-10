@@ -6,11 +6,12 @@ Updates all OSDeployCore assets: Windows Enterprise ESD files, OS images, and Wi
 |----------|-------------------------------------------------------------------|
 | Module   | OSDeploy                                                          |
 | Platform | Windows 11 (amd64 / arm64)                                       |
-| Requires | PowerShell 7.6, Run as Administrator, internet access             |
+| Requires | PowerShell 7.6, Run as Administrator, internet access, valid license |
+| Output   | Mixed `System.IO.FileInfo` and `System.IO.DirectoryInfo` child output |
 
 ## Description
 
-Runs `Update-OSDeployCoreESD`, `Update-OSDeployCoreOS`, and `Update-OSDeployCoreDrivers` in a single call to refresh all local OSDeployCore assets.
+Runs `Update-OSDeployCoreESD`, `Update-OSDeployCoreRE`, and `Update-OSDeployCoreDrivers` in a single call to refresh all local OSDeployCore assets.
 
 Use this function to bring a new build machine up to date or to ensure all cached content is current before running `Build-OSDeployBoot`.
 
@@ -24,8 +25,8 @@ Update-OSDeployCore [-WhatIf] [-Confirm]
 
 | Parameter  | Type     | Required | Description                                                              |
 |------------|----------|----------|--------------------------------------------------------------------------|
-| `-WhatIf`  | `Switch` | No       | Shows what each sub-function would do without performing any downloads.  |
-| `-Confirm` | `Switch` | No       | Prompts for confirmation before running.                                 |
+| `-WhatIf`  | `Switch` | No       | Flows preview behavior to the three stage commands. Core initialization, cache inspection, prompts, and network discovery can still occur. |
+| `-Confirm` | `Switch` | No       | Flows confirmation preference to each stage; the orchestrator has no single workflow confirmation. |
 
 ## Examples
 

@@ -1,12 +1,12 @@
 ---
 description: >-
-  Follow how Update-OSDeployCoreOS turns a verified Enterprise ESD into Windows
+	Follow how Update-OSDeployCoreRE turns a verified Enterprise ESD into Windows
   setup media and OSDeploy Core metadata.
 ---
 
 # Convert ESD to Windows 11 OS
 
-This article follows the main code path in `Update-OSDeployCoreOS` as it transforms a verified Enterprise ESD into a complete Windows setup-media directory.
+This article follows the main code path in `Update-OSDeployCoreRE` as it transforms a verified Enterprise ESD into a complete Windows setup-media directory.
 
 The result is more than an exported `install.wim`. The function rebuilds `boot.wim`, records metadata for every image it uses, and collects selected content from a read-only Windows mount for later boot-image construction.
 
@@ -24,7 +24,7 @@ Each DISM operation writes a log under `.temp\logs`. The function returns the co
 
 ## Resolve the Source ESD
 
-`Get-OSDeployCoreESD` supplies only ESD files whose SHA256 matches the bundled operating-system catalog. `Update-OSDeployCoreOS` can then filter those verified files by architecture:
+`Get-OSDeployCoreESD` supplies only ESD files whose SHA256 matches the bundled operating-system catalog. `Update-OSDeployCoreRE` can then filter those verified files by architecture:
 
 ```powershell
 $esdFiles = Get-OSDeployCoreESD
@@ -212,8 +212,8 @@ Get-WindowsImage -ImagePath $BootWim |
 
 ## Related
 
-* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycoreos.md)
+* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycorere.md)
 * [Insider: The Windows ESD Catalog](windows-esd-catalogs.md)
 * [Insider: Exporting Windows RE](convert-esd-to-windows-re.md)
 * [Insider: Exporting WinPE Drivers from an OS](exporting-winpe-drivers-from-os-wim.md)
-* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update-OSDeployCoreRE command reference](../../command-reference/osdeploy/update-osdeploycorere.md)

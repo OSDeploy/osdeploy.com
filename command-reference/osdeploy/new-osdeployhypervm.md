@@ -6,7 +6,7 @@ Creates a Hyper-V virtual machine pre-configured for OSDeploy testing.
 |----------|------------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                     |
 | Platform | Windows 11 (amd64 / arm64)                                                  |
-| Requires | PowerShell 7.6, Hyper-V enabled, Run as Administrator                        |
+| Requires | PowerShell 7.6, valid license, Hyper-V enabled, Run as Administrator         |
 | Output   | `System.Management.Automation.PSCustomObject`                                |
 
 ## Description

@@ -80,4 +80,4 @@ Get-FileHash `
 
 ## Next Step
 
-Continue with [Install-OSDeployMDT](../install-osdeploymdt.md) when an existing workflow requires OSDeploy integration. See the [Microsoft Deployment Toolkit reference](/broken/pages/8QBjU6vMYXdxHlWOnpo3) for the broader setup context.
+Continue with [Install-OSDeployMDT](../install-osdeploymdt.md) when an existing workflow requires OSDeploy integration.

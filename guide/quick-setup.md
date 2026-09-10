@@ -24,7 +24,7 @@ Use a workstation with:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../osdeploy-guide/requirements/powershell-modules.md)
+* Current [OSDeploy module](requirements/powershell-modules.md)
 * OSDCloud module version `26.5.24.1` or later
 * A valid Recast Software Community License, which is required while the OSDeploy module is in preview; complete [Community Registration](registration.md) to install it
 * Administrator rights

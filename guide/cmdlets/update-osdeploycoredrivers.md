@@ -18,6 +18,8 @@ Update-OSDeployCoreDrivers -Name 'intel-ethernet' -DownloadOnly
 
 `Update-OSDeployCoreDrivers` prepares the network and storage drivers that `Build-OSDeployBoot` can inject into boot images. It discovers the latest packages from each requested source, downloads the archives, and expands them into versioned folders in the OSDeploy Core library.
 
+A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
+
 All matching packages are processed automatically. The command does not display a package picker or ask for confirmation unless `-Confirm` is specified.
 
 <figure><img src="../../.gitbook/assets/image (424).png" alt=""><figcaption></figcaption></figure>
@@ -212,9 +214,5 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 * [Complete OSDeploy Core update](update-osdeploycore.md)
 * [Update-OSDeployCoreDrivers command reference](../../command-reference/osdeploy/update-osdeploycoredrivers.md)
-* [WinPE Drivers overview](/broken/pages/CVKBMSZoucH2as3D7VFG)
-* [Dell WinPE Drivers](/broken/pages/XTULK4EcB6qhwoPfk2nw)
-* [HP WinPE Drivers](/broken/pages/LJaCHx9QaXP2COtZ7kwA)
-* [Intel Ethernet Drivers](/broken/pages/b3NP3NTDXSeoxygsSeDN)
-* [Intel Wireless Drivers](/broken/pages/xR4uES51OgrLBs0FmKKO)
+See [Core WinPE Driver Cleanup](../../osdeploy-insider/how-to/core-winpe-driver-cleanup.md) for repository maintenance guidance.
 * [System Requirements](../requirements/windows-11-os.md)

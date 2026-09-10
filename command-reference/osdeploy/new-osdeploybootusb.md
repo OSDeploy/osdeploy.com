@@ -6,7 +6,7 @@ Creates a new bootable OSDeploy USB drive from an OSDeployCore BootImage build.
 |----------|-------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                |
 | Platform | Windows 11 (amd64 / arm64)                                             |
-| Requires | Run as Administrator, a completed BootImage build, a USB drive ≥ 7 GB  |
+| Requires | Valid license, Run as Administrator, a completed BootImage build, a USB drive ≥ 7 GB |
 
 ## Description
 
@@ -27,7 +27,7 @@ This function clears and repartitions the selected USB disk. All existing data o
 ## Syntax
 
 ```powershell
-New-OSDeployBootUSB [-BootLabel <String>] [-DataLabel <String>]
+New-OSDeployBootUSB [-BootLabel <String>] [-DataLabel <String>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters
@@ -36,6 +36,8 @@ New-OSDeployBootUSB [-BootLabel <String>] [-DataLabel <String>]
 |--------------|----------|----------|------------------------------------------------------------------------------------|
 | `-BootLabel` | `String` | No       | Volume label for the FAT32 boot partition. Max 11 characters. Default: `OSDEPLOY`. |
 | `-DataLabel` | `String` | No       | Volume label for the NTFS data partition. Max 32 characters. Default: `OSDCloud`.  |
+| `-WhatIf`    | `Switch` | No       | Preview the destructive disk-preparation operation after interactive selections. |
+| `-Confirm`   | `Switch` | No       | Confirm the destructive disk-preparation operation. |
 
 ## Examples
 

@@ -6,6 +6,8 @@ description: Refresh Windows ESD, Windows OS and recovery, and WinPE driver cont
 
 `Update-OSDeployCore` runs the complete OSDeploy Core content refresh. It downloads and verifies catalog-selected Windows Enterprise ESD files, imports those files as Windows OS and Windows Recovery Environment (WinRE) sources, and then refreshes the WinPE driver catalog and packages.
 
+A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
+
 Use the individual stage commands when you need architecture, source, force, or download-only controls. The orchestrator has no stage-specific parameters.
 
 ## Requirements
@@ -65,7 +67,7 @@ The command initializes the OSDeploy Core paths, then invokes these public comma
 | Stage | Command | Behavior |
 | --- | --- | --- |
 | 1 | `Update-OSDeployCoreESD` | Selects the newest bundled OS catalog, resolves host-supported en-US Enterprise ESD entries, reuses verified cache files, and prompts before each required download. |
-| 2 | `Update-OSDeployCoreOS` | Reads only ESDs that match the newest catalog checksum, imports Windows setup and WinRE content, and stages Microsoft inbox network drivers. |
+| 2 | `Update-OSDeployCoreRE` | Reads only ESDs that match the newest catalog checksum, exports WinRE, stages supporting Windows OS content, and stages Microsoft inbox network drivers. |
 | 3 | `Update-OSDeployCoreDrivers` | Refreshes all active WinPE driver sources, then downloads and expands all matching packages. Wi-Fi packages are excluded automatically when no valid imported WinRE source exists. |
 
 The order is fixed. Stage two does not download a missing ESD itself, so stage one must complete first. Stage three runs after OS import so a newly created WinRE source can make Wi-Fi packages eligible.
@@ -120,4 +122,4 @@ The function passes pipeline output from each child command through in stage ord
 
 Existing OS imports, declined or failed downloads, unmatched driver sources, and skipped packages produce no result object. Host, warning, verbose, and `WhatIf` messages are not pipeline output.
 
-See [Update Core Content](../basic/update-osdeploycore.md) for the shortest workflow, or continue with the stage guides for [ESD downloads](update-osdeploycoreesd.md), [OS import](update-osdeploycoreos.md), and [WinPE drivers](update-osdeploycoredrivers.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).
+See [Update Core Content](../basic/update-osdeploycore.md) for the shortest workflow, or continue with the stage guides for [ESD downloads](update-osdeploycoreesd.md), [Windows RE export](update-osdeploycorere.md), and [WinPE drivers](update-osdeploycoredrivers.md). For compact syntax, see the [Update-OSDeployCore command reference](../../command-reference/osdeploy/update-osdeploycore.md).

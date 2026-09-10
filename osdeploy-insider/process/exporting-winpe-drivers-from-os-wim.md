@@ -1,12 +1,12 @@
 ---
 description: >-
-  Follow how Update-OSDeployCoreOS discovers and caches Microsoft inbox Ethernet
+	Follow how Update-OSDeployCoreRE discovers and caches Microsoft inbox Ethernet
   and Wi-Fi drivers for WinPE.
 ---
 
 # Exporting WinPE Drivers from OS WIM
 
-This article follows the network-driver extraction path in `Update-OSDeployCoreOS`. While the exported Enterprise image is mounted read-only, OSDeploy identifies Microsoft inbox Ethernet and Wi-Fi packages and copies their DriverStore content into the module-managed WinPE driver cache.
+This article follows the network-driver extraction path in `Update-OSDeployCoreRE`. While the exported Enterprise image is mounted read-only, OSDeploy identifies Microsoft inbox Ethernet and Wi-Fi packages and copies their DriverStore content into the module-managed WinPE driver cache.
 
 This is a targeted export. It does not enumerate every installed driver and it does not collect OEM driver packs.
 
@@ -181,7 +181,7 @@ The cache path also includes the package version. A newer Windows ESD can theref
 Use verbose output to inspect manifest counts, parsed identities, deduplicated record counts, DriverStore searches, copy destinations, and skip reasons:
 
 ```powershell
-Update-OSDeployCoreOS -Architecture amd64 -Verbose
+Update-OSDeployCoreRE -Architecture amd64 -Verbose
 ```
 
 Inspect the cached network-driver families:
@@ -200,8 +200,8 @@ A missing driver directory does not necessarily mean the OS import failed. Manif
 
 ## Related
 
-* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycoreos.md)
+* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycorere.md)
 * [Insider: Building an OS from an ESD](convert-esd-to-windows-11-os.md)
 * [Insider: Exporting Windows RE](convert-esd-to-windows-re.md)
 * [Update WinPE Drivers](../../guide/cmdlets/update-osdeploycoredrivers.md)
-* [Update-OSDeployCoreOS command reference](../../command-reference/osdeploy/update-osdeploycoreos.md)
+* [Update-OSDeployCoreRE command reference](../../command-reference/osdeploy/update-osdeploycorere.md)

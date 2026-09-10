@@ -10,7 +10,7 @@ description: Apply OSDeploy customizations at MDT LiteTouchPE exit stages.
 
 Run this command through the MDT **Update Deployment Share** process on a host with MDT, the Windows ADK, the WinPE add-on, DISM, Windows PowerShell, PowerShell 7, and internet access for uncached tools and modules. The WIM stage also uses `curl.exe`, `robocopy.exe`, `reg.exe`, PowerShellGet, and Windows image servicing commands.
 
-Initialize the deployment share first with [Install-OSDeployMDT](install-osdeploymdt.md). See [Microsoft Deployment Toolkit](/broken/pages/waD3ryEEjkQj6wqEhrGA) for the related setup.
+Initialize the deployment share first with [Install-OSDeployMDT](install-osdeploymdt.md). See [Microsoft MDT](install-osdeploysoftware/microsoft-mdt.md) for the related setup.
 
 {% hint style="warning" %}
 Do not simulate an MDT stage against an arbitrary path. The function assumes that MDT supplied a valid mounted image or ISO build tree and does not validate every environment value before changing content.

@@ -24,9 +24,9 @@ Run the function on a workstation that meets these requirements:
 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
-* Current [OSDeploy module](../../osdeploy-guide/requirements/powershell-modules.md)
+* Current [OSDeploy module](../requirements/powershell-modules.md)
 * Configured [OSDeploy Core](update-osdeploycore.md)
-* [Windows ADK and WinPE add-on](/broken/pages/KKnKou096GC0HYAS6jiH)
+* [Windows ADK and WinPE add-on](../cmdlets/install-osdeploysoftware/windows-adk-25h2.md)
 * OSDCloud module version `26.7.25.2` or later
 * Administrator rights
 * `curl.exe` available in `PATH`
@@ -39,13 +39,13 @@ The function stops before source selection when Windows, PowerShell, `curl.exe`,
 {% step %}
 ### Run the Build
 
-Open an elevated PowerShell 7.6 session and provide a name for the build:
+Open an elevated PowerShell 7.6 session and run:
 
 ```powershell
-Build-OSDeployBoot -Name 'MyPE'
+Build-OSDeployBoot
 ```
 
-Select an imported WinRE image, a saved profile or shared content, and a wallpaper when prompted. The default workflow uses these settings:
+Select an imported WinRE image, shared content, and a wallpaper when prompted. The default workflow uses these settings:
 
 | Setting         | Default                                                       |
 | --------------- | ------------------------------------------------------------- |
@@ -56,7 +56,7 @@ Select an imported WinRE image, a saved profile or shared content, and a wallpap
 | USB update      | Disabled                                                      |
 | Existing folder | Add a numeric suffix instead of overwriting                   |
 
-The function validates the environment, loads or creates a build profile, prepares and mounts `boot.wim`, adds the selected packages and content, saves the image, and creates the bootable media and ISO files. When compatible Secure Boot files exist in the selected WinRE source, it also creates CA 2023 media. ADK-sourced builds do not create the additional CA 2023 media.
+The function validates the environment, writes the configuration to `recent-amd64.json` or `recent-arm64.json`, prepares and mounts `boot.wim`, adds the selected packages and content, saves the image, and creates bootable media named `OSDeploy`. When compatible Secure Boot files exist in the selected WinRE source, it also creates CA 2023 media. ADK-sourced builds do not create the additional CA 2023 media.
 {% endstep %}
 {% endstepper %}
 

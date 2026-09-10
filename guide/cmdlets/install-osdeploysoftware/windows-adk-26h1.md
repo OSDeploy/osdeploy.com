@@ -84,4 +84,4 @@ Test-Path 'C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\
 
 ## Next Step
 
-Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md) when the intended source and kit align. See the [Windows ADK 26H1 reference](/broken/pages/Bx8J8y9gkS8gpEo5vMqc) for the broader ADK setup context.
+Install [7-Zip](7-zip.md), then continue with [Build-OSDeployBoot](../build-osdeployboot.md) when the intended source and kit align.

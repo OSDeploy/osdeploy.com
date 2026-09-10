@@ -6,7 +6,7 @@ Updates an existing OSDeploy USB drive with new BootMedia from an OSDeployCore B
 |----------|-----------------------------------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                                            |
 | Platform | Windows 11 (amd64 / arm64)                                                                         |
-| Requires | Run as Administrator, a completed BootImage build, a USB drive previously created by `New-OSDeployBootUSB` |
+| Requires | Valid license, Run as Administrator, a completed BootImage build, a USB drive previously created by `New-OSDeployBootUSB` |
 
 ## Description
 

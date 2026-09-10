@@ -17,7 +17,8 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 The workstation must also have:
 
 * The [OSDeploy module](../requirements/powershell-modules.md).
-* The [Windows ADK Deployment Tools](/broken/pages/KKnKou096GC0HYAS6jiH), including `oscdimg.exe`.
+* A valid Recast Software Community License for direct invocation.
+* The [Windows ADK Deployment Tools](install-osdeploysoftware/windows-adk-25h2.md), including `oscdimg.exe`.
 * `Out-GridView` for selecting a completed build.
 * A completed build under `C:\ProgramData\OSDeployCore\boot` with a `bootmedia` directory.
 

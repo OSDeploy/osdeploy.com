@@ -339,4 +339,4 @@ Updating the OSDeploy module can therefore update the available Windows media wi
 
 * [Update Windows 11 ESD](../../guide/cmdlets/update-osdeploycoreesd.md)
 * [Update-OSDeployCoreESD command reference](../../command-reference/osdeploy/update-osdeploycoreesd.md)
-* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycoreos.md)
+* [Update Windows 11 OS](../../guide/cmdlets/update-osdeploycorere.md)
