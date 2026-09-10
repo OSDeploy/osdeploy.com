@@ -1,6 +1,6 @@
 ---
 description: >-
-	Follow how Update-OSDeployCoreRE turns a verified Enterprise ESD into Windows
+  Follow how Update-OSDeployCoreRE turns a verified Enterprise ESD into Windows
   setup media and OSDeploy Core metadata.
 ---
 
