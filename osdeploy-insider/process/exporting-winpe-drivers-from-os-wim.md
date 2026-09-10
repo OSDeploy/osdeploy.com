@@ -1,6 +1,6 @@
 ---
 description: >-
-	Follow how Update-OSDeployCoreRE discovers and caches Microsoft inbox Ethernet
+  Follow how Update-OSDeployCoreRE discovers and caches Microsoft inbox Ethernet
   and Wi-Fi drivers for WinPE.
 ---
 
