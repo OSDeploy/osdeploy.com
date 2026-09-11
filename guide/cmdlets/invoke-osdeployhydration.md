@@ -169,13 +169,13 @@ When both matching directories already exist, `Update-OSDeployCoreRE` skips that
 
 Hydration runs `Update-OSDeployCoreDrivers` for the detected architecture without specifying `-Name`, so every active matching source is processed. Current AMD64 sources include Dell, HP, Intel Ethernet, and Intel Wi-Fi packages. An ARM64 run can find no matching vendor packages when the installed OSDeploy configuration contains no active ARM64 sources.
 
-The driver command discovers current package metadata, updates its local catalog, downloads and verifies matching archives, and expands them into the module-managed OSDeploy Core driver cache. A source failure writes a warning and does not prevent later sources from being processed.
+The driver command discovers current package metadata, updates its local catalog, downloads and verifies matching archives, and expands them into the module-managed OSDeploy Core driver library. A source failure writes a warning and does not prevent later sources from being processed.
 
 Downloads and expanded content are stored below:
 
 ```
 C:\ProgramData\OSDeployCore\cache\downloads\
-C:\ProgramData\OSDeployCore\cache\winpedrivers-<architecture>\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-<architecture>\
 ```
 
 When no imported Windows source exists, the driver command automatically skips Wi-Fi packages because wireless drivers apply to WinRE-based boot images, not ADK WinPE.
@@ -190,7 +190,7 @@ Build-OSDeployBoot -Auto
 
 `Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
 
-`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` before reaching its build-directory confirmation.
+`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` under `boot-assets\osdeployboot-profiles` before reaching its build-directory confirmation.
 
 Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name is `OSDeploy`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
 

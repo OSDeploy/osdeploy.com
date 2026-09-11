@@ -5,7 +5,7 @@ OSDeploy is the dedicated site for the [Recast OSDeploy PowerShell Module](https
 The OSDeploy PowerShell module is currently in preview, with its final release expected mid-September at Workplace Ninja Summit 2026 in Baden, Switzerland.
 
 {% hint style="warning" %}
-A valid free Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](guide/registration.md) before running OSDeploy commands. This requirement does not apply to standalone use of the OSDCloud or legacy OSD modules.
+A valid free Recast Software Community License is required when running gated OSDeploy update commands directly. Complete [Community Registration](guide/registration.md) before running the Core, boot-profile update, or boot ISO update workflows. This requirement does not apply to standalone use of the OSDCloud or legacy OSD modules.
 {% endhint %}
 
 {% hint style="info" %}
@@ -21,5 +21,5 @@ OSDeploy is one of three PowerShell modules, with each module owns a distinct ph
 | Module                                         | What it does                                 | Where it runs        | Status                |
 | ---------------------------------------------- | -------------------------------------------- | -------------------- | --------------------- |
 | [OSDeploy](command-reference/osdeploy/)        | Builds and customizes WinPE boot images      | Windows 11 (full OS) | Preview               |
-| [OSDCloud](/broken/pages/xATFEheG9Abfxu0ZXNXF) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
+| [OSDCloud](https://www.powershellgallery.com/packages/OSDCloud/) | Deploys Windows 11 from cloud-hosted content | WinPE                | Current / Recommended |
 | [OSD](command-reference/osd/)                  | Provides legacy OSDCloud v1 deployment       | WinPE                | Maintained (legacy)   |

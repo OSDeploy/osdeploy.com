@@ -146,20 +146,22 @@ In download-only mode, the command does not create the expanded driver folder or
 
 ## Driver Library
 
-During normal processing, expanded drivers and package metadata are stored in the architecture-specific module-managed cache:
+During normal processing, expanded drivers and package metadata are stored in the unified architecture-specific driver library under Boot-Assets:
 
 ```
-C:\ProgramData\OSDeployCore\cache\winpedrivers-<architecture>\<name>-<version>\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-<architecture>\<name>-<version>\
 ```
 
 List the module-managed driver folders after processing:
 
 ```powershell
-Get-ChildItem -Path "$env:ProgramData\OSDeployCore\cache\winpedrivers-*\*" -Directory |
+Get-ChildItem -Path "$env:ProgramData\OSDeployCore\boot-assets\winpedrivers-*\*" -Directory |
 	Select-Object Name, Parent, LastWriteTime, FullName
 ```
 
-User-managed drivers remain separate under `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` and `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64`. `Update-OSDeployCoreDrivers` does not add, update, or remove content in those repository folders.
+Module-managed and user-added packages share these Boot-Assets roots. The update command manages packages represented by its catalog; review custom content before removing or replacing directories manually.
+
+Core path initialization migrates drivers from legacy cache, root-level, `repository`, and `OSDRepo` locations. Existing Boot-Assets content takes precedence during general legacy-content merges, while root-level managed driver content replaces matching Boot-Assets content. Unresolved conflicts remain in their source location and produce a warning.
 
 ## Refresh Cached Packages
 

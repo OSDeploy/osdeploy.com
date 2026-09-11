@@ -2,7 +2,7 @@
 description: >-
   Agent instructions for generating a valid Build-OSDeployBoot command from a
   user's requested source, profile, architecture, and build options.
-icon: terminal
+icon: brackets-curly
 ---
 
 # Build-OSDeployBoot
@@ -42,7 +42,6 @@ Execution requires:
 | Requirement | Required state |
 | --- | --- |
 | Module | Current OSDeploy module exporting `Build-OSDeployBoot` |
-| License | Valid Recast Software Community License for direct invocation |
 | OSDeploy Core | Initialized and populated for the requested workflow |
 | Windows ADK | Windows ADK and WinPE add-on installed |
 | OSDCloud | Version `26.7.25.2` or later |
@@ -201,7 +200,7 @@ Build-OSDeployBoot -Auto -WhatIf
 ```
 
 {% hint style="warning" %}
-`-WhatIf` is not read-only. Without `-ProfileName`, the function can initialize repository paths, display selectors, write `recent-amd64.json` or `recent-arm64.json`, and stage temporary profile content before it stops at build-directory creation.
+`-WhatIf` is not read-only. Without `-ProfileName`, the function can initialize Boot-Assets paths, display selectors, write `recent-amd64.json` or `recent-arm64.json`, and stage temporary profile content before it stops at build-directory creation. The analytics event is sent before `ShouldProcess`, so `-WhatIf` does not prevent it.
 {% endhint %}
 
 ## Automatic and interactive behavior

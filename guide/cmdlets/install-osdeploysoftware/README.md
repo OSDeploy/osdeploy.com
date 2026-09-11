@@ -13,14 +13,13 @@ Run the command from an elevated PowerShell session on a workstation that meets 
 * Windows 11 25H2 build 26200 or later
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../../requirements/powershell-modules.md)
-* A valid Recast Software Community License
 * `curl.exe` available in `PATH`
 * Internet access for downloads and installations
 
 Components installed through WinGet also require `winget.exe`, supplied by App Installer. MDT additionally requires `msiexec.exe`; Hyper-V requires the Windows optional-feature cmdlets.
 
 {% hint style="warning" %}
-The command checks Windows, the Windows build, PowerShell, the PowerShell installation type, `curl.exe`, administrator access, and licensing before it lists or previews components. An invalid license displays `Show-OSDeployLicense` and stops without returning component data.
+The command checks Windows, the Windows build, PowerShell, the PowerShell installation type, `curl.exe`, and administrator access before it lists or previews components.
 {% endhint %}
 
 ## Components

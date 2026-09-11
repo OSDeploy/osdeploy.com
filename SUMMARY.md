@@ -2,6 +2,7 @@
 
 * [OSDeploy Home](README.md "Home")
 * [Support](support.md)
+* [Privacy](privacy.md)
 * [Events](events.md)
 
 ## OSDeploy Guide <a href="#guide" id="guide"></a>
@@ -38,6 +39,9 @@
   * [Update-OSDeployCoreRE](guide/cmdlets/update-osdeploycorere.md)
   * [Update-OSDeployCoreDrivers](guide/cmdlets/update-osdeploycoredrivers.md)
   * [Build-OSDeployBoot](guide/cmdlets/build-osdeployboot.md)
+  * [New-OSDeployBootProfilePreview](guide/cmdlets/new-osdeploybootprofilepreview.md)
+  * [Update-OSDeployBootProfilePreview](guide/cmdlets/update-osdeploybootprofilepreview.md)
+  * [Delete-OSDeployBootProfilePreview](guide/cmdlets/delete-osdeploybootprofilepreview.md)
   * [Update-OSDeployBootISO](guide/cmdlets/update-osdeploybootiso.md)
   * [New-OSDeployBootUSB](guide/cmdlets/new-osdeploybootusb.md)
   * [Update-OSDeployBootUSB](guide/cmdlets/update-osdeploybootusb.md)

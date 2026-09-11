@@ -4,14 +4,14 @@ The **OSDeploy** module runs on Windows 11 25H2 to create and maintain WinPE boo
 
 | Property | Value |
 | --- | --- |
-| Module version | 26.9.10 |
+| Module version | 26.9.11 |
 | Gallery | [powershellgallery.com/packages/OSDeploy](https://www.powershellgallery.com/packages/OSDeploy/) |
 | Platform | Windows 11 25H2 |
 | Architecture | amd64 / arm64 |
 | Status | Preview |
 
 {% hint style="warning" %}
-A valid Recast Software Community License is required for gated OSDeploy commands while the module is in preview. Complete [Community Registration](../../guide/registration.md) before running the build and update workflows.
+A valid Recast Software Community License is required for direct calls to the gated Core update, boot-profile update, and boot ISO update commands. Complete [Community Registration](../../guide/registration.md) before using those workflows.
 {% endhint %}
 
 ## Install
@@ -22,7 +22,7 @@ Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 
 ## Functions
 
-OSDeploy 26.9.10 exports 20 public functions.
+OSDeploy 26.9.11 exports 20 public functions.
 
 ### Module and License
 
@@ -49,7 +49,7 @@ OSDeploy 26.9.10 exports 20 public functions.
 | [Update-OSDeployCoreRE](update-osdeploycorere.md) | Export WinRE and stage supporting Windows OS content. |
 | [Update-OSDeployCoreDrivers](update-osdeploycoredrivers.md) | Download and expand WinPE driver packages. |
 
-### Boot Media and Profiles
+### OSDeploy Boot
 
 | Function | Description |
 | --- | --- |
@@ -57,9 +57,19 @@ OSDeploy 26.9.10 exports 20 public functions.
 | [New-OSDeployBootProfilePreview](new-osdeploybootprofilepreview.md) | Create a persistent boot profile. |
 | [Update-OSDeployBootProfilePreview](update-osdeploybootprofilepreview.md) | Update a persistent boot profile. |
 | [Delete-OSDeployBootProfilePreview](delete-osdeploybootprofilepreview.md) | Delete a persistent boot profile. |
+
+### Boot Media
+
+| Function | Description |
+| --- | --- |
 | [Update-OSDeployBootISO](update-osdeploybootiso.md) | Rebuild ISO files for completed boot media. |
 | [New-OSDeployBootUSB](new-osdeploybootusb.md) | Prepare a new bootable USB disk. |
 | [Update-OSDeployBootUSB](update-osdeploybootusb.md) | Refresh an existing boot USB. |
+
+### Hyper-V
+
+| Function | Description |
+| --- | --- |
 | [New-OSDeployHyperVM](new-osdeployhypervm.md) | Create a Hyper-V test VM from an OSDeploy ISO. |
 
 ### MDT Integration

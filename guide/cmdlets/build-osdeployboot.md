@@ -15,7 +15,6 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 Install and configure these components before starting a build:
 
 * [OSDeploy module](../requirements/powershell-modules.md)
-* A valid Recast Software Community License for direct invocation
 * [OSDeploy Core](../basic/update-osdeploycore.md)
 * [Windows ADK and WinPE add-on](install-osdeploysoftware/windows-adk-25h2.md)
 * OSDCloud module version `26.7.25.2` or later
@@ -27,7 +26,7 @@ Install-Module -Name OSDCloud -Force -SkipPublisherCheck
 ```
 
 {% hint style="warning" %}
-The function stops before source selection when Windows, PowerShell, `curl.exe`, administrator access, licensing, OSDCloud, or Windows ADK requirements are not met. An invalid license displays `Show-OSDeployLicense`. The Windows ADK is required even when the build source is an imported WinRE image.
+The function stops before source selection when Windows, PowerShell, `curl.exe`, administrator access, OSDCloud, or Windows ADK requirements are not met. The Windows ADK is required even when the build source is an imported WinRE image. `Build-OSDeployBoot` does not use the shared OSDeploy license gate, but available license identity can be included in analytics and generated media.
 {% endhint %}
 
 ## Parameters
@@ -194,25 +193,26 @@ The name is the selected profile name without its architecture suffix, or `OSDep
 Saved profiles use flat, architecture-qualified directories under:
 
 ```
-%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\{Name}-{Architecture}\osdeployboot.json
+%ProgramData%\OSDeployCore\boot-assets\osdeployboot-profiles\{Name}-{Architecture}\osdeployboot.json
 ```
 
 `-ProfileName` requires an exact readable profile. The saved profile supplies its architecture, explicit content paths, languages, international settings, timezone, and options. Explicit command-line configuration overrides saved values for the current build only. The function validates configured paths but does not display shared-content or wallpaper selectors and does not change the profile JSON or profile-local files.
 
 | Token                       | Resolved module path           |
 | --------------------------- | ------------------------------ |
+| `${{ OSDeployCore }}`       | Current OSDeployCore data root |
 | `${{ OSDeployModulePath }}` | Installed OSDeploy module base |
 | `${{ OSDCloudModulePath }}` | Loaded OSDCloud module base    |
 | `${{ OSDModulePath }}`      | Loaded OSD module base         |
 
-When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Module-managed drivers are selected from `%ProgramData%\OSDeployCore\cache\winpedrivers-{Architecture}`. User-managed drivers are selected from `%ProgramData%\OSDeployCore\repository\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
+When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Shared module-managed and user-added drivers are selected from `%ProgramData%\OSDeployCore\boot-assets\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
 
 ```
-%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\recent-amd64.json
-%ProgramData%\OSDeployCore\repository\osdeployboot-profiles\recent-arm64.json
+%ProgramData%\OSDeployCore\boot-assets\osdeployboot-profiles\recent-amd64.json
+%ProgramData%\OSDeployCore\boot-assets\osdeployboot-profiles\recent-arm64.json
 ```
 
-The recent JSON snapshot remains after success, cancellation, a declined build operation, or a later terminating error. Selected wallpaper and other temporary companion content are removed after the build attempt. Shared scripts can come from the OSDeploy repository or the installed OSDeploy, OSDCloud, and OSD module roots. Use `New-OSDeployBootProfilePreview` and `Update-OSDeployBootProfilePreview` to manage named profiles.
+The recent JSON snapshot remains after success, cancellation, a declined build operation, or a later terminating error. Profile-local companion content is created in a disposable temporary directory and removed after the build attempt. Shared scripts can come from Boot-Assets or the installed OSDeploy, OSDCloud, and OSD module roots. Use `New-OSDeployBootProfilePreview` and `Update-OSDeployBootProfilePreview` to manage named profiles.
 
 ## Profile-Local Content
 
@@ -221,27 +221,25 @@ Keep portable content beside `osdeployboot.json` to include it without storing a
 ```
 {profile}\
 |-- osdeployboot.json
-|-- build-mediascript\
-|-- build-winpeapp\
+|-- boot-mediascript\
 |-- winpedrivers-{Architecture}\
-|-- build-winpescript\
-|-- build-winpewallpaper\
+|-- boot-winpescript\
+|-- wallpaper.jpg
 `-- WinPEStartup\
     |-- Profiles\
-    `-- Scripts\
+	`-- Assets\
 ```
 
 The build applies profile content as follows:
 
 | Content               | Discovery and precedence                                                                                                                                                                                                                                                    |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| WinPE app scripts     | Run explicit profile paths first, then sorted `*.ps1` files from `build-winpeapp` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                         |
-| WinPE scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `build-winpescript` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                      |
-| Media scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `build-mediascript` and its immediate subdirectories after the image is dismounted. Duplicate paths are ignored case-insensitively.                                                                        |
+| WinPE scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `boot-winpescript` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                        |
+| Media scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `boot-mediascript` and its immediate subdirectories after the image is dismounted. Duplicate paths are ignored case-insensitively.                                                                            |
 | WinPE drivers         | Add explicit paths first. When recursive `*.inf` files exist under the architecture-matched local `winpedrivers-amd64` or `winpedrivers-arm64` directory, append that directory once and let DISM add its drivers recursively.                                                            |
 | WinPEStartup profiles | Copy explicit JSON files first, then sorted root-level JSON files from `WinPEStartup\Profiles`. A local file with the same destination name replaces the explicit file.                                                                                                     |
-| WinPEStartup scripts  | Copy all content under `WinPEStartup\Scripts` recursively with overwrite. These paths are not stored in `osdeployboot.json`.                                                                                                                                                |
-| Wallpaper             | Use the first JPG sorted by full path in `build-winpewallpaper`, then legacy `{profile}\wallpaper.jpg`, then the bundled default. When neither profile location contains a wallpaper, a shared wallpaper can be selected and saved as `build-winpewallpaper\wallpaper.jpg`. |
+| WinPEStartup assets   | Copy all content under `WinPEStartup\Assets` recursively with overwrite. These paths are not stored in `osdeployboot.json`.                                                                                                                                                  |
+| Wallpaper             | Use profile-root `wallpaper.jpg`, then the bundled default. New and updated profiles can select a shared JPG from `boot-assets\boot-wallpaper`, which is copied to the profile root.                                                                                           |
 
 Missing configured content produces a warning and that item is skipped. A failing custom script writes a non-terminating error so later build steps can continue.
 
@@ -260,6 +258,10 @@ When compatible updated Secure Boot files exist in an imported WinRE source, the
 The function calls `ShouldProcess` before creating the build output directories. Before that call, it performs requirement checks, initializes OSDeploy Core state, selects the source and content, loads a named profile or writes a recent snapshot, resolves wallpaper, populates `$global:BuildMedia`, displays the configuration, and waits five seconds.
 
 With `-WhatIf`, the function stops at the directory operation. It does not create or service the build media, mount an image, create an ISO, or update USB media. A recent profile JSON and temporary companion content can be written before that gate. With `-Confirm`, declining the directory operation stops the command.
+
+The command sends one `Build-OSDeployBoot` analytics event after displaying the configuration and waiting five seconds, but before evaluating `ShouldProcess`. Therefore, `-WhatIf` and declining `-Confirm` do not prevent the event. See [OSDeploy Privacy](../../privacy.md) for the event fields, identifier handling, and operator choices.
+
+Generated WinPE includes `ID_OSDEPLOYDEVICE` and `ID_OSDEPLOYBOOT` for device and build identity. When a selected license is available, the image can also include `ID_REGISTEREDEMAIL` and `ID_REGISTEREDLICENSE`. Review generated media before distributing it outside the organization.
 
 ## Build Output
 

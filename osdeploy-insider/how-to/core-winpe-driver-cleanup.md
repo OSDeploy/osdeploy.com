@@ -17,11 +17,11 @@ Keep the newest known-working version of each driver family and architecture. Do
 Expanded driver folders are stored by architecture:
 
 ```
-C:\ProgramData\OSDeployCore\cache\winpedrivers-amd64\
-C:\ProgramData\OSDeployCore\cache\winpedrivers-arm64\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-amd64\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-arm64\
 ```
 
-These roots contain module-managed packages. User-managed drivers are stored separately under `C:\ProgramData\OSDeployCore\repository\winpedrivers-amd64` and `C:\ProgramData\OSDeployCore\repository\winpedrivers-arm64`; maintain those folders according to your own repository workflow.
+These roots contain downloaded, exported, and user-managed packages for the matching architecture. Legacy root-level and `repository` driver folders are migration sources, not current authoring destinations.
 
 A folder name contains the driver family and version. For example:
 
@@ -43,7 +43,7 @@ Close any active OSDeploy build, then open an elevated PowerShell 7 session.
 List the expanded folders for both architectures:
 
 ```powershell
-$DriverRoots = Get-Item "$env:ProgramData\OSDeployCore\cache\winpedrivers-*"
+$DriverRoots = Get-Item "$env:ProgramData\OSDeployCore\boot-assets\winpedrivers-*"
 
 Get-ChildItem -Path $DriverRoots.FullName -Directory -ErrorAction SilentlyContinue |
 	Select-Object Name, Parent, LastWriteTime, FullName |

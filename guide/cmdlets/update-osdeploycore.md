@@ -76,7 +76,7 @@ The orchestrator does not catch stage errors. A terminating error stops the work
 
 ## File Effects
 
-Before the stages run, Core path initialization can create the standard cache and repository directory tree under `%ProgramData%\OSDeployCore`. It can also migrate legacy repository folders and build profiles, normalize profile names and properties, and rewrite persisted paths that refer to legacy locations.
+Before the stages run, Core path initialization can create the standard cache and Boot-Assets directory tree under `%ProgramData%\OSDeployCore`. It can also migrate legacy `repository` and `OSDRepo` content and build profiles, normalize profile names and properties, and rewrite persisted paths that refer to legacy locations. Existing cache and root-level driver libraries move into Boot-Assets. Root-level managed content replaces matching Boot-Assets content; unresolved source conflicts remain in place with a warning.
 
 The update stages can then change these primary locations:
 
@@ -87,10 +87,8 @@ The update stages can then change these primary locations:
 | `%ProgramData%\OSDeployCore\cache\windows-re` | Recovery images and metadata derived from the matching Windows OS imports. |
 | `%ProgramData%\OSDeployCore\cache\config\winpedrivers.json` | Merged local WinPE driver catalog. |
 | `%ProgramData%\OSDeployCore\cache\downloads` | Cached vendor driver package archives. |
-| `%ProgramData%\OSDeployCore\cache\winpedrivers-amd64` | Module-managed AMD64 vendor packages and Microsoft inbox network drivers used by boot builds. |
-| `%ProgramData%\OSDeployCore\cache\winpedrivers-arm64` | Module-managed ARM64 vendor packages and Microsoft inbox network drivers used by boot builds. |
-| `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` | User-managed AMD64 drivers available to boot builds. |
-| `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64` | User-managed ARM64 drivers available to boot builds. |
+| `%ProgramData%\OSDeployCore\boot-assets\winpedrivers-amd64` | Shared AMD64 module-managed and user-added drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\boot-assets\winpedrivers-arm64` | Shared ARM64 module-managed and user-added drivers used by boot builds. |
 
 Existing valid content is reused by default. See the stage guides for checksum fallback, duplicate-import, catalog-merge, force, and expansion behavior.
 

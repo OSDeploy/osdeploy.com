@@ -6,7 +6,7 @@ Installs OS deployment prerequisite software on Windows.
 |----------|------------------------------------------------------------------------|
 | Module   | OSDeploy                                                               |
 | Platform | Windows 11 (amd64 / arm64)                                            |
-| Requires | PowerShell 7.6; valid license; Administrator rights for ADK, MDT, and Hyper-V installs; winget for Git and VS Code |
+| Requires | PowerShell 7.6; Administrator rights; winget for Git, VS Code, and 7-Zip components |
 | Output   | `System.Management.Automation.PSCustomObject`                          |
 
 ## Description

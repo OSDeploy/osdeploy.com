@@ -76,7 +76,9 @@ Install `OSD` only when a workflow requires legacy OSD or OSDCloud v1 commands.
 {% step %}
 ### Register the OSDeploy PC
 
-Complete [Community Registration](../registration.md) and confirm that `Show-OSDeployLicense` returns a valid Recast Software Community License. Registration is required while the OSDeploy module is in preview.
+Complete [Community Registration](../registration.md) before directly running a gated update command. Confirm that `Show-OSDeployLicense` returns a valid Recast Software Community License.
+
+The current shared gate applies to `Update-OSDeployBootISO`, `Update-OSDeployBootProfilePreview`, `Update-OSDeployCore`, `Update-OSDeployCoreDrivers`, `Update-OSDeployCoreESD`, and `Update-OSDeployCoreRE`. Core updates invoked immediately by `Invoke-OSDeployHydration` use its limited caller exception.
 {% endstep %}
 {% endstepper %}
 

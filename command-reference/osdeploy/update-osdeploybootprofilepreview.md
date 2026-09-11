@@ -2,6 +2,8 @@
 
 Updates an existing OSDeploy Boot profile without building media.
 
+Requires a valid Recast Software Community License when called directly.
+
 ## Syntax
 
 ```powershell
