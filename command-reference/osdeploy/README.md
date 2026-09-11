@@ -4,14 +4,14 @@ The **OSDeploy** module runs on Windows 11 25H2 to create and maintain WinPE boo
 
 | Property | Value |
 | --- | --- |
-| Module version | 26.9.10 |
+| Module version | 26.9.11 |
 | Gallery | [powershellgallery.com/packages/OSDeploy](https://www.powershellgallery.com/packages/OSDeploy/) |
 | Platform | Windows 11 25H2 |
 | Architecture | amd64 / arm64 |
 | Status | Preview |
 
 {% hint style="warning" %}
-A valid Recast Software Community License is required for gated OSDeploy commands while the module is in preview. Complete [Community Registration](../../guide/registration.md) before running the build and update workflows.
+A valid Recast Software Community License is required for direct calls to the gated Core update, boot-profile update, and boot ISO update commands. Complete [Community Registration](../../guide/registration.md) before using those workflows.
 {% endhint %}
 
 ## Install
@@ -22,7 +22,7 @@ Install-Module -Name OSDeploy -Force -SkipPublisherCheck
 
 ## Functions
 
-OSDeploy 26.9.10 exports 20 public functions.
+OSDeploy 26.9.11 exports 20 public functions.
 
 ### Module and License
 

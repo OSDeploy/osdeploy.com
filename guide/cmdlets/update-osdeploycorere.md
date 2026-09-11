@@ -81,8 +81,8 @@ The matching Windows RE content is written under:
 Microsoft inbox network drivers are staged by architecture under:
 
 ```text
-%ProgramData%\OSDeployCore\winpedrivers-amd64\
-%ProgramData%\OSDeployCore\winpedrivers-arm64\
+%ProgramData%\OSDeployCore\boot-assets\winpedrivers-amd64\
+%ProgramData%\OSDeployCore\boot-assets\winpedrivers-arm64\
 ```
 
 The destination name combines the Windows build, architecture, edition, and language, such as `26200.8653-amd64-enterprise-en-us`.

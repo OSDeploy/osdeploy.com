@@ -27,4 +27,4 @@ Delete-OSDeployBootProfilePreview -ProfileName 'Contoso-amd64'
 Delete-OSDeployBootProfilePreview -ProfileName 'Contoso-amd64' -Force
 ```
 
-Generated boot media, shared repository content, and cached content are not removed. Deletion is recursive and cannot be undone by this command. The command returns no pipeline object.
+Generated boot media, shared Boot-Assets content, and cached content are not removed. Deletion is recursive and cannot be undone by this command. The command returns no pipeline object.

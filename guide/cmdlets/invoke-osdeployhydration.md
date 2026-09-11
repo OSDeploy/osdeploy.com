@@ -175,7 +175,7 @@ Downloads and expanded content are stored below:
 
 ```
 C:\ProgramData\OSDeployCore\cache\downloads\
-C:\ProgramData\OSDeployCore\winpedrivers-<architecture>\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-<architecture>\
 ```
 
 When no imported Windows source exists, the driver command automatically skips Wi-Fi packages because wireless drivers apply to WinRE-based boot images, not ADK WinPE.
@@ -190,7 +190,7 @@ Build-OSDeployBoot -Auto
 
 `Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
 
-`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE applications, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` before reaching its build-directory confirmation.
+`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` under `boot-assets\osdeployboot-profiles` before reaching its build-directory confirmation.
 
 Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name is `OSDeploy`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
 

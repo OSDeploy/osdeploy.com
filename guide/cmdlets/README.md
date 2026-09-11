@@ -7,7 +7,7 @@ description: Use task-oriented guides for the public commands in the OSDeploy Po
 Use these guides to run OSDeploy commands and understand their requirements, prompts, selection behavior, side effects, and output. Start with [Basic Setup](../basic/README.md) for the shortest workstation setup workflow. Use the [OSDeploy command reference](../../command-reference/osdeploy/README.md) for compact syntax and output lookup.
 
 {% hint style="warning" %}
-A valid Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](../registration.md) before running OSDeploy commands.
+A valid Recast Software Community License is required for direct calls to the gated Core update, boot-profile update, and boot ISO update commands. Complete [Community Registration](../registration.md) before using those workflows. Review each command guide for its exact requirement.
 {% endhint %}
 
 ## Workstation Setup
@@ -30,6 +30,9 @@ A valid Recast Software Community License is required while the OSDeploy module 
 | [Update-OSDeployCoreRE](update-osdeploycorere.md) | Export Windows RE and stage supporting Windows OS content from cached ESD files. |
 | [Update-OSDeployCoreDrivers](update-osdeploycoredrivers.md) | Download and expand WinPE driver packages. |
 | [Build-OSDeployBoot](build-osdeployboot.md) | Build customized WinPE media from imported WinRE or Windows ADK WinPE. |
+| [New-OSDeployBootProfilePreview](new-osdeploybootprofilepreview.md) | Create a persistent architecture-specific boot profile without building media. |
+| [Update-OSDeployBootProfilePreview](update-osdeploybootprofilepreview.md) | Update an existing boot profile's settings and shared-content selections. |
+| [Delete-OSDeployBootProfilePreview](delete-osdeploybootprofilepreview.md) | Delete a profile and its profile-local content. |
 | [Update-OSDeployBootISO](update-osdeploybootiso.md) | Rebuild ISO files for an existing OSDeploy boot-media build. |
 
 ## USB, Hyper-V, and MDT

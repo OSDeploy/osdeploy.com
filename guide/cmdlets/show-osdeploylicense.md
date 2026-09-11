@@ -6,9 +6,9 @@ description: >-
 
 # Show-OSDeployLicense
 
-`Show-OSDeployLicense` searches the standard Recast Software license directory and returns one selected `.license2` candidate as a PowerShell object. Use the returned properties to inspect its source file, identity, dates, authorized-command count, and schema validation results. Selection does not require the candidate to be valid or unexpired.
+`Show-OSDeployLicense` searches the standard Recast Software license directory and returns the selected `.license2` candidate only when its structural validation succeeds. Use the returned properties to inspect its source file, identity, dates, authorized-command count, and schema validation results. A structurally valid candidate can still be expired.
 
-When no candidate can be selected, the function writes a warning and displays Community License registration, installation, and verification instructions. That path writes host guidance and returns no object.
+When no candidate can be selected, or when the selected candidate is invalid, the function displays Community License registration, installation, and verification instructions. That path writes host guidance and returns no object. An invalid selected candidate also produces a warning.
 
 ## Requirements
 
@@ -44,7 +44,7 @@ Discover the available `.license2` files and write the selected candidate to the
 Show-OSDeployLicense
 ```
 
-When no candidate can be selected, the command displays registration guidance and returns no object.
+When no valid candidate can be returned, the command displays registration guidance and returns no object.
 
 ### Capture the selected license
 
@@ -63,24 +63,13 @@ $license | Format-List `
 	IsValid
 ```
 
-`$license` is `$null` when discovery does not produce a parseable candidate.
+`$license` is `$null` when discovery does not produce a candidate or selects an invalid candidate.
 
-### Check validation errors
+### Confirm structural validation
 
-Inspect the validation result before relying on the selected candidate:
+Every object returned by the public command has `IsValid` set to `$true`. A null result means discovery found no candidate or selected one that failed structural validation.
 
-```powershell
-$license = Show-OSDeployLicense
-
-if (-not $license) {
-	Write-Warning 'No license candidate was selected.'
-}
-elseif (-not $license.IsValid) {
-	$license.ValidationErrors
-}
-```
-
-`IsValid` reports the schema checks performed during discovery. It does not indicate that the expiration dates are current.
+`IsValid` does not indicate that the expiration dates are current.
 
 ### Check expiration dates
 
@@ -97,7 +86,7 @@ $now = Get-Date
 }
 ```
 
-The command can select and return an expired candidate. It does not calculate `Expired` or `ActivationExpired` properties.
+The command can return a structurally valid but expired candidate. It does not calculate `Expired` or `ActivationExpired` properties.
 
 ### Identify the selected source file
 
@@ -127,7 +116,7 @@ The command delegates discovery to `Get-OSDCoreLicense` with its default path. D
 6. Validate expected fields and normalize GUID and date values.
 7. Deduplicate candidates.
 8. Rank the remaining candidates by email, modification time, and file name.
-9. Return the first ranked candidate.
+9. Return the first ranked candidate to `Show-OSDeployLicense` for its final validity check.
 
 Discovery is not recursive. A `.license2` file in a child directory is not considered.
 
@@ -176,7 +165,7 @@ The first candidate for an identity is retained. Because files are processed new
 
 Within the same email rank, select the candidate with the newest source-file `LastWriteTime`. When timestamps match, sort by `FileName` ascending.
 
-Selection does not filter on `IsValid`, `Expiration`, `ActivationExpiration`, `LicenseType`, or authorized-command count. A higher-ranked invalid or expired candidate can therefore be returned before a lower-ranked current candidate.
+Internal selection does not filter on `IsValid`, `Expiration`, `ActivationExpiration`, `LicenseType`, or authorized-command count. A higher-ranked invalid candidate can therefore prevent a lower-ranked valid candidate from being considered. The public command returns the selected candidate only when `IsValid` is `$true`; expiration alone does not prevent return.
 
 ## No-Candidate Behavior
 
@@ -186,15 +175,16 @@ The function returns no object when:
 * No root-level `.license2` files exist.
 * Every discovered file is unreadable or contains invalid JSON.
 * Parsing produces no candidate entries.
+* The selected candidate has `IsValid` set to `$false`.
 
-In this path, `Show-OSDeployLicense` writes a warning and displays instructions to:
+In this path, `Show-OSDeployLicense` displays instructions to:
 
 1. Open the Recast Software Community Portal.
 2. Download the Right Click Tools Community Edition license ZIP.
 3. Extract and copy the `.license2` file into the standard license directory.
 4. Verify the file with `Get-ChildItem`.
 
-The guidance is host output, not a structured return object.
+The guidance is host output, not a structured return object. An invalid selected candidate also writes a warning before the guidance.
 
 ## Side Effects
 
@@ -204,7 +194,7 @@ The command does not copy, rename, modify, or delete license files. It does not 
 
 ## Output
 
-When a candidate is selected, the command returns a `System.Management.Automation.PSCustomObject` with these properties:
+When a structurally valid candidate is selected, the command returns a `System.Management.Automation.PSCustomObject` with these properties:
 
 | Property                       | Description                                                                                                            |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |

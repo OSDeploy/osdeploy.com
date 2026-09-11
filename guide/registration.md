@@ -4,10 +4,10 @@ description: Register an OSDeploy PC with a free Recast Software Community Licen
 
 # Community Registration
 
-Download and import a free Recast Software Community License, then use `Show-OSDeployLicense` to confirm that OSDeploy can discover and validate it. Complete registration before using the OSDeploy module.
+Download and import a free Recast Software Community License, then use `Show-OSDeployLicense` to confirm that OSDeploy can discover and validate it. Complete registration before running a gated OSDeploy update command directly.
 
 {% hint style="warning" %}
-A valid Recast Software Community License is required while the OSDeploy module is in preview. This requirement applies to OSDeploy on the PC used to create boot media. It does not apply to standalone use of the OSDCloud or legacy OSD modules in WinPE.
+A valid Recast Software Community License is required for direct calls to `Update-OSDeployCore`, `Update-OSDeployCoreESD`, `Update-OSDeployCoreRE`, `Update-OSDeployCoreDrivers`, `Update-OSDeployBootProfilePreview`, and `Update-OSDeployBootISO`. The Core update commands called immediately by `Invoke-OSDeployHydration` use the hydration exception. This requirement does not apply to standalone use of the OSDCloud or legacy OSD modules in WinPE.
 {% endhint %}
 
 ## Register the OSDeploy PC

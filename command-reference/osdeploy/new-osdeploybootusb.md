@@ -6,7 +6,7 @@ Creates a new bootable OSDeploy USB drive from an OSDeployCore BootImage build.
 |----------|-------------------------------------------------------------------------|
 | Module   | OSDeploy                                                                |
 | Platform | Windows 11 (amd64 / arm64)                                             |
-| Requires | Valid license, Run as Administrator, a completed BootImage build, a USB drive ≥ 7 GB |
+| Requires | Run as Administrator, a completed BootImage build, a USB drive at least 7 GB |
 
 ## Description
 

@@ -6,7 +6,7 @@ Builds customized WinPE boot media from an imported WinRE or Windows ADK source.
 | --- | --- |
 | Module | OSDeploy |
 | Platform | Windows 11 25H2 build 26200 or later (amd64 / arm64) |
-| Requires | PowerShell 7.6, Windows ADK and WinPE add-on, OSDCloud 26.7.25.2, Administrator rights, valid license |
+| Requires | PowerShell 7.6, Windows ADK and WinPE add-on, OSDCloud 26.7.25.2, Administrator rights |
 | Output | None; sets `$global:BuildMedia` as process state |
 
 ## Syntax

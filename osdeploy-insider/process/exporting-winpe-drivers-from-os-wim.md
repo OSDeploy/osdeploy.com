@@ -129,11 +129,11 @@ If no matching directory is found, the function writes a verbose message and mov
 Driver packages are stored under:
 
 ```
-C:\ProgramData\OSDeployCore\winpedrivers-amd64\
-C:\ProgramData\OSDeployCore\winpedrivers-arm64\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-amd64\
+C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-arm64\
 ```
 
-The architecture is encoded in the module-managed driver root. Each root is then organized by family and version, followed by the normalized driver name:
+The architecture is encoded in the Boot-Assets driver root. Each root is then organized by family and version, followed by the normalized driver name:
 
 ```
 winpedrivers-amd64\
@@ -174,7 +174,7 @@ The command can process AMD64 and ARM64 ESDs in one run. Driver discovery occurs
 
 The architecture in the destination path comes from the package manifest rather than from the public `-Architecture` parameter. In normal media these values align, but using the manifest keeps each package tied to its own servicing identity.
 
-The driver-library path also includes the package version. A newer Windows ESD can therefore add a newer family directory without overwriting the older package set. The separate `Update-OSDeployCoreDrivers` workflow manages vendor packages in the same architecture-specific root directories. User-managed drivers remain separate under `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` and `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64`.
+The driver-library path also includes the package version. A newer Windows ESD can therefore add a newer family directory without overwriting the older package set. The separate `Update-OSDeployCoreDrivers` workflow manages vendor packages in the same architecture-specific root directories. User-managed drivers also belong in these unified Boot-Assets roots.
 
 ## Review Driver Diagnostics
 
@@ -187,7 +187,7 @@ Update-OSDeployCoreRE -Architecture amd64 -Verbose
 Inspect the module-managed network-driver families:
 
 ```powershell
-$DriverRoots = Get-Item 'C:\ProgramData\OSDeployCore\winpedrivers-*'
+$DriverRoots = Get-Item 'C:\ProgramData\OSDeployCore\boot-assets\winpedrivers-*'
 
 Get-ChildItem -Path $DriverRoots.FullName -Directory -Recurse |
 	Where-Object Name -Like 'microsoft-windows-*' |

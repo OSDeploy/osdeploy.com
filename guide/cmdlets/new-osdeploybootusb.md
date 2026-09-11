@@ -14,7 +14,6 @@ Run the function from an elevated PowerShell 7.6 or later session on Windows 11 
 
 The workstation must also have:
 
-* A valid Recast Software Community License.
 * A completed OSDeploy Boot build under `C:\ProgramData\OSDeployCore\boot`.
 * `Out-GridView` for selecting the build and boot-media folder.
 * An online USB disk larger than 7 GiB and smaller than 2000 GiB.

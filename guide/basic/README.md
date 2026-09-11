@@ -9,7 +9,7 @@ description: >-
 Use these steps to quickly prepare a Windows 11 workstation, build OSDeploy boot media, and create or test the media. Run the commands from an elevated PowerShell 7.6 or later session.
 
 {% hint style="warning" %}
-A valid Recast Software Community License is required while the OSDeploy module is in preview. Complete [Community Registration](../registration.md) before running these commands.
+A valid Recast Software Community License is required when `Update-OSDeployCore` is called directly. Complete [Community Registration](../registration.md) before running that update step. The software installation, boot build, Hyper-V, and USB commands shown here do not use the shared license gate.
 {% endhint %}
 
 ## Complete the Basic Setup

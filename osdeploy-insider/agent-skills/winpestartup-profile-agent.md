@@ -10,7 +10,7 @@ icon: brackets-curly
 Use these instructions to create, edit, or validate a WinPEStartup Profile JSON file that configures `Invoke-WinPEStartup`.
 
 {% hint style="info" %}
-Create user-authored profiles in `C:\ProgramData\OSDeployCore\repository\winpestartup-profiles`. `Build-OSDeployBoot` can select profiles from this shared repository and copy them into the WinPE boot image.
+Create user-authored profiles in `C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles`. `Build-OSDeployBoot` can select profiles from this shared Boot-Assets library and copy them into the WinPE boot image.
 {% endhint %}
 
 ## Agent contract
@@ -61,12 +61,12 @@ Use these conservative defaults:
 Create new profiles at:
 
 ```text
-C:\ProgramData\OSDeployCore\repository\winpestartup-profiles\<name>.json
+C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\<name>.json
 ```
 
 Create the `winpestartup-profiles` directory when it does not exist.
 
-An OSDeploy Boot profile can also contain JSON files in its local `WinPEStartup\profiles` directory. Those files are copied automatically during a build, but the shared user repository is the standard destination for newly authored profiles.
+An OSDeploy Boot profile can also contain JSON files in its local `WinPEStartup\profiles` directory. Those files are copied automatically during a build, but the shared Boot-Assets library is the standard destination for newly authored profiles.
 
 ## Configuration reference
 
@@ -122,7 +122,7 @@ Set a phase's `NoExit` property only when the user requests an interactive child
 
 ## Example
 
-For a profile named `Deploy-And-Restart`, create `C:\ProgramData\OSDeployCore\repository\winpestartup-profiles\Deploy-And-Restart.json`:
+For a profile named `Deploy-And-Restart`, create `C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\Deploy-And-Restart.json`:
 
 {% code title="Deploy-And-Restart.json" %}
 ```json
@@ -193,7 +193,7 @@ Report the profile path, validation result, and a concise summary of the configu
 After creating or editing a profile, parse and type-check it with PowerShell. Use the same procedure for a validation-only request. This code reads profile values but never invokes a stored command:
 
 ```powershell
-$profilePath = 'C:\ProgramData\OSDeployCore\repository\winpestartup-profiles\Deploy-And-Restart.json'
+$profilePath = 'C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\Deploy-And-Restart.json'
 $profile = Get-Content -LiteralPath $profilePath -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
 
 $booleanKeys = @(
