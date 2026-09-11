@@ -154,5 +154,5 @@ Update-OSDeployCoreRE -Architecture amd64
 * [Complete OSDeploy Core update](update-osdeploycore.md)
 * [Update-OSDeployCoreESD command reference](../../command-reference/osdeploy/update-osdeploycoreesd.md)
 * [Update-OSDeployCoreRE command reference](../../command-reference/osdeploy/update-osdeploycorere.md)
-* [Insider: The Windows ESD Catalog](../../osdeploy-insider/process/windows-esd-catalogs.md)
+* [Insider: The Windows ESD Catalog](../../osdeploy-insider/reference/windows-esd-catalogs.md)
 * [System Requirements](../requirements/windows-11-os.md)

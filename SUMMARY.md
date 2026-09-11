@@ -53,15 +53,17 @@
 
 * [How To](osdeploy-insider/how-to/README.md)
   * [Core WinPE Driver Cleanup](osdeploy-insider/how-to/core-winpe-driver-cleanup.md)
-* [Process](osdeploy-insider/process/README.md)
-  * [Windows ESD Catalogs](osdeploy-insider/process/windows-esd-catalogs.md)
-  * [Convert ESD to Windows 11 OS](osdeploy-insider/process/convert-esd-to-windows-11-os.md)
-  * [Convert ESD to Windows RE](osdeploy-insider/process/convert-esd-to-windows-re.md)
-  * [Exporting WinPE Drivers from OS WIM](osdeploy-insider/process/exporting-winpe-drivers-from-os-wim.md)
-* [Agent Skills](osdeploy-insider/agent-skills/README.md)
-  * [WinPEStartup Profile Agent](osdeploy-insider/agent-skills/winpestartup-profile-agent.md)
-  * [Build-OSDeployBoot](osdeploy-insider/agent-skills/build-osdeployboot.md)
-  * [New-OSDeployHyperVM](osdeploy-insider/agent-skills/new-osdeployhypervm.md)
+* [Reference](osdeploy-insider/reference/README.md)
+  * [OSDeployCore Boot-Assets](osdeploy-insider/reference/osdeploycore-boot-assets.md)
+  * [OSDeployCore Cache](osdeploy-insider/reference/osdeploycore-cache.md)
+  * [Windows ESD Catalogs](osdeploy-insider/reference/windows-esd-catalogs.md)
+  * [Convert ESD to Windows 11 OS](osdeploy-insider/reference/convert-esd-to-windows-11-os.md)
+  * [Convert ESD to Windows RE](osdeploy-insider/reference/convert-esd-to-windows-re.md)
+  * [Exporting WinPE Drivers from OS WIM](osdeploy-insider/reference/exporting-winpe-drivers-from-os-wim.md)
+* [Agents and Skills](osdeploy-insider/agents-skills/README.md)
+  * [WinPEStartup Profile Agent](osdeploy-insider/agents-skills/winpestartup-profile-agent.md)
+  * [Build-OSDeployBoot](osdeploy-insider/agents-skills/build-osdeployboot.md)
+  * [New-OSDeployHyperVM](osdeploy-insider/agents-skills/new-osdeployhypervm.md)
 
 ## Command Reference
 

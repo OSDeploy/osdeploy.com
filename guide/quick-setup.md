@@ -6,9 +6,9 @@ description: >-
 
 # Quick Setup
 
-Use `Invoke-OSDeployHydration` to prepare an OSDeploy workstation, download current Windows and WinPE driver content, and create OSDCloud boot media named `Hydra`.
+Use `Invoke-OSDeployHydration` to prepare an OSDeploy workstation, download current Windows and WinPE driver content, and create OSDCloud boot media.
 
-<figure><img src="../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (632).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="warning" %}
 Hydration installs software, downloads Windows and driver content, and creates boot media under `C:\ProgramData\OSDeployCore`. If Hydration enables Hyper-V, restart Windows before creating a test VM.
