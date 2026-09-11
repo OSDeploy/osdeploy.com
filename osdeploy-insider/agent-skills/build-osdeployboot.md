@@ -2,7 +2,7 @@
 description: >-
   Agent instructions for generating a valid Build-OSDeployBoot command from a
   user's requested source, profile, architecture, and build options.
-icon: terminal
+icon: brackets-curly
 ---
 
 # Build-OSDeployBoot

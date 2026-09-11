@@ -76,7 +76,7 @@ The orchestrator does not catch stage errors. A terminating error stops the work
 
 ## File Effects
 
-Before the stages run, Core path initialization can create the standard cache and repository directory tree under `%ProgramData%\OSDeployCore`. It can also migrate legacy repository folders and build profiles, normalize profile names and properties, and rewrite persisted paths that refer to legacy locations.
+Before the stages run, Core path initialization can create the standard cache and repository directory tree under `%ProgramData%\OSDeployCore`. It can also migrate legacy repository folders and build profiles, normalize profile names and properties, and rewrite persisted paths that refer to legacy locations. Module-managed drivers under the legacy `cache\winpedrivers-amd64` and `cache\winpedrivers-arm64` paths move to the OSDeployCore root. Nonconflicting content is merged; destination conflicts remain at the legacy source and produce a warning.
 
 The update stages can then change these primary locations:
 
@@ -87,8 +87,8 @@ The update stages can then change these primary locations:
 | `%ProgramData%\OSDeployCore\cache\windows-re` | Recovery images and metadata derived from the matching Windows OS imports. |
 | `%ProgramData%\OSDeployCore\cache\config\winpedrivers.json` | Merged local WinPE driver catalog. |
 | `%ProgramData%\OSDeployCore\cache\downloads` | Cached vendor driver package archives. |
-| `%ProgramData%\OSDeployCore\cache\winpedrivers-amd64` | Module-managed AMD64 vendor packages and Microsoft inbox network drivers used by boot builds. |
-| `%ProgramData%\OSDeployCore\cache\winpedrivers-arm64` | Module-managed ARM64 vendor packages and Microsoft inbox network drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\winpedrivers-amd64` | Module-managed AMD64 vendor packages and Microsoft inbox network drivers used by boot builds. |
+| `%ProgramData%\OSDeployCore\winpedrivers-arm64` | Module-managed ARM64 vendor packages and Microsoft inbox network drivers used by boot builds. |
 | `%ProgramData%\OSDeployCore\repository\winpedrivers-amd64` | User-managed AMD64 drivers available to boot builds. |
 | `%ProgramData%\OSDeployCore\repository\winpedrivers-arm64` | User-managed ARM64 drivers available to boot builds. |
 

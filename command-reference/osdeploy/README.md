@@ -49,7 +49,7 @@ OSDeploy 26.9.10 exports 20 public functions.
 | [Update-OSDeployCoreRE](update-osdeploycorere.md) | Export WinRE and stage supporting Windows OS content. |
 | [Update-OSDeployCoreDrivers](update-osdeploycoredrivers.md) | Download and expand WinPE driver packages. |
 
-### Boot Media and Profiles
+### OSDeploy Boot
 
 | Function | Description |
 | --- | --- |
@@ -57,9 +57,19 @@ OSDeploy 26.9.10 exports 20 public functions.
 | [New-OSDeployBootProfilePreview](new-osdeploybootprofilepreview.md) | Create a persistent boot profile. |
 | [Update-OSDeployBootProfilePreview](update-osdeploybootprofilepreview.md) | Update a persistent boot profile. |
 | [Delete-OSDeployBootProfilePreview](delete-osdeploybootprofilepreview.md) | Delete a persistent boot profile. |
+
+### Boot Media
+
+| Function | Description |
+| --- | --- |
 | [Update-OSDeployBootISO](update-osdeploybootiso.md) | Rebuild ISO files for completed boot media. |
 | [New-OSDeployBootUSB](new-osdeploybootusb.md) | Prepare a new bootable USB disk. |
 | [Update-OSDeployBootUSB](update-osdeploybootusb.md) | Refresh an existing boot USB. |
+
+### Hyper-V
+
+| Function | Description |
+| --- | --- |
 | [New-OSDeployHyperVM](new-osdeployhypervm.md) | Create a Hyper-V test VM from an OSDeploy ISO. |
 
 ### MDT Integration

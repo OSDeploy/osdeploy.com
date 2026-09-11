@@ -16,7 +16,7 @@ Initialize the deployment share first with [Install-OSDeployMDT](install-osdeplo
 Do not simulate an MDT stage against an arbitrary path. The function assumes that MDT supplied a valid mounted image or ISO build tree and does not validate every environment value before changing content.
 {% endhint %}
 
-The implemented WIM app and driver paths are `amd64` oriented. AzCopy and curl download only amd64 payloads, 7-Zip copies only its x64 payload, OSDeploy driver selection reads `cache\winpedrivers-amd64` and `repository\winpedrivers-amd64`, and driver log entries record `amd64`.
+The implemented WIM app and driver paths are `amd64` oriented. AzCopy and curl download only amd64 payloads, 7-Zip copies only its x64 payload, OSDeploy driver selection reads `winpedrivers-amd64` at the OSDeployCore root and `repository\winpedrivers-amd64`, and driver log entries record `amd64`.
 
 ## Parameters
 
@@ -138,7 +138,7 @@ The function reads `CONTENT\winpe-drivers.json` when present. Invalid JSON warns
 Driver selection then follows this order:
 
 1. Enumerate each immediate subdirectory under `DEPLOYROOT\Templates\winpe-drivers` and apply it automatically with recursive, unsigned-driver servicing unless its folder name is already logged.
-2. Enumerate unapplied immediate subdirectories under the OSDeploy Core `cache\winpedrivers-amd64` and `repository\winpedrivers-amd64` paths.
+2. Enumerate unapplied immediate subdirectories under the OSDeploy Core root-level `winpedrivers-amd64` and `repository\winpedrivers-amd64` paths.
 3. When OSDeploy Core drivers are available, open `Out-GridView` with multi-selection. Cancel the picker to skip these optional drivers.
 
 Deduplication uses the driver folder `Name`, not the full path or file contents. Applied entries are written to `CONTENT\winpe-drivers.json` and copied to `DEPLOYROOT\Boot\winpe-drivers.json`. `Add-WindowsDriver` servicing objects can reach the success pipeline.

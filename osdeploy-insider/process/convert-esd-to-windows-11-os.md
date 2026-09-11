@@ -164,14 +164,14 @@ Mount-WindowsImage -ImagePath $DestinationImagePath -Index 1 -Path $MountPath -R
 
 The function uses that mount to collect content without servicing or committing changes to the WIM:
 
-| Content                                                | Cached location                                     |
+| Content                                                | Stored location                                     |
 | ------------------------------------------------------ | --------------------------------------------------- |
 | `SOFTWARE` and `SYSTEM` registry hives                 | `.temp\os-software.hive` and `.temp\os-system.hive` |
 | `Windows\Boot`                                         | `.core\os-boot\`                                    |
 | Selected System32 executables, DLLs, and related files | `.core\os-files\Windows\System32\`                  |
 | Windows PowerShell modules                             | `.core\os-files\Program Files\WindowsPowerShell\`   |
 | Windows RE image and metadata                          | `.wim\winre.wim` and `.core\winre-*`                |
-| Inbox Ethernet and Wi-Fi drivers                       | `cache\winpedrivers-{Architecture}\`                |
+| Inbox Ethernet and Wi-Fi drivers                       | `winpedrivers-{Architecture}\`                      |
 
 The selected operating-system files include tools and dependencies that can supplement a boot image, such as `curl.exe`, `makecab.exe`, `tar.exe`, `systeminfo.exe`, and Windows PowerShell modules. OSDeploy copies only the patterns defined by the function rather than the entire installed operating system.
 

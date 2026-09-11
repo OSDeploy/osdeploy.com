@@ -169,13 +169,13 @@ When both matching directories already exist, `Update-OSDeployCoreRE` skips that
 
 Hydration runs `Update-OSDeployCoreDrivers` for the detected architecture without specifying `-Name`, so every active matching source is processed. Current AMD64 sources include Dell, HP, Intel Ethernet, and Intel Wi-Fi packages. An ARM64 run can find no matching vendor packages when the installed OSDeploy configuration contains no active ARM64 sources.
 
-The driver command discovers current package metadata, updates its local catalog, downloads and verifies matching archives, and expands them into the module-managed OSDeploy Core driver cache. A source failure writes a warning and does not prevent later sources from being processed.
+The driver command discovers current package metadata, updates its local catalog, downloads and verifies matching archives, and expands them into the module-managed OSDeploy Core driver library. A source failure writes a warning and does not prevent later sources from being processed.
 
 Downloads and expanded content are stored below:
 
 ```
 C:\ProgramData\OSDeployCore\cache\downloads\
-C:\ProgramData\OSDeployCore\cache\winpedrivers-<architecture>\
+C:\ProgramData\OSDeployCore\winpedrivers-<architecture>\
 ```
 
 When no imported Windows source exists, the driver command automatically skips Wi-Fi packages because wireless drivers apply to WinRE-based boot images, not ADK WinPE.

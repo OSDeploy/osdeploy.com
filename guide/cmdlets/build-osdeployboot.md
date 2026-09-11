@@ -205,7 +205,7 @@ Saved profiles use flat, architecture-qualified directories under:
 | `${{ OSDCloudModulePath }}` | Loaded OSDCloud module base    |
 | `${{ OSDModulePath }}`      | Loaded OSD module base         |
 
-When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Module-managed drivers are selected from `%ProgramData%\OSDeployCore\cache\winpedrivers-{Architecture}`. User-managed drivers are selected from `%ProgramData%\OSDeployCore\repository\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
+When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Module-managed drivers are selected from `%ProgramData%\OSDeployCore\winpedrivers-{Architecture}`. User-managed drivers are selected from `%ProgramData%\OSDeployCore\repository\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
 
 ```
 %ProgramData%\OSDeployCore\repository\osdeployboot-profiles\recent-amd64.json
