@@ -22,50 +22,30 @@ Run these steps on a prepared [Windows 11 OSDeploy PC](windows-11-os.md) with In
 {% step %}
 ### Download the Latest MSI
 
-Run this script to detect the OSDeploy PC architecture and download the matching MSI package from the latest stable PowerShell release:
+Follow Microsoft's guidance on installing the latest PowerShell 7 MSI:
 
-```powershell
-$Release = Invoke-RestMethod -Uri 'https://api.github.com/repos/PowerShell/PowerShell/releases/latest'
-$Version = $Release.tag_name.TrimStart('v')
-$Architecture = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'arm64' } else { 'x64' }
-$MsiFileName = "PowerShell-$Version-win-$Architecture.msi"
-$DownloadFolder = Join-Path $env:ProgramData 'OSDeployCore\software\Microsoft.PowerShell'
-$MsiPath = Join-Path $DownloadFolder $MsiFileName
-
-New-Item -Path $DownloadFolder -ItemType Directory -Force | Out-Null
-
-$Asset = $Release.assets | Where-Object name -EQ $MsiFileName
-if (-not $Asset) {
-	throw "The $MsiFileName asset was not found in the latest stable PowerShell release."
-}
-
-curl.exe -L -o $MsiPath $Asset.browser_download_url
-```
+{% embed url="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6#install-the-msi-package" %}
 {% endstep %}
 
 {% step %}
-### Install the MSI
+### MSI Parameters
 
-Silently install PowerShell with the recommended options from Microsoft:
+Install PowerShell with all available options (recommended):
 
 ```powershell
-$MsiParameters = @(
-	"/package `"$MsiPath`""
-	'/quiet'
-	'/norestart'
-	'ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1'
-	'ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1'
-	'ENABLE_PSREMOTING=1'
-	'REGISTER_MANIFEST=1'
-	'USE_MU=1'
-	'ENABLE_MU=1'
-	'ADD_PATH=1'
+$msiParams = @(
+    '/package'
+    'PowerShell-7.6.6-win-x64.msi'
+    '/quiet'
+    'ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1'
+    'ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1'
+    'ENABLE_PSREMOTING=1'
+    'REGISTER_MANIFEST=1'
+    'USE_MU=1'
+    'ENABLE_MU=1'
+    'ADD_PATH=1'
 )
-
-& msiexec.exe $MsiParameters
-if ($LASTEXITCODE -notin 0, 3010) {
-	throw "PowerShell MSI installation failed with exit code $LASTEXITCODE."
-}
+msiexec.exe @msiParams
 ```
 
 See [Install the MSI package with command-line options](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6#install-the-msi-package-with-command-line-options) for details about these installer properties.
@@ -82,6 +62,14 @@ $PSHOME
 ```
 
 The output must report `Core`, PowerShell 7.6 or later, and a `$PSHOME` under `$env:ProgramFiles\PowerShell\7`. Restart Windows first if `msiexec.exe` returned exit code `3010`.
+{% endstep %}
+
+{% step %}
+### Windows Terminal
+
+Make sure to set and save PowerShell as the Default profile in Windows Terminal, replacing Windows PowerShell.
+
+<figure><img src="../../.gitbook/assets/image (695).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 {% endstepper %}
 
