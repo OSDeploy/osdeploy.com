@@ -25,8 +25,8 @@ Follow these rules:
 * Accept a filename only. Reject rooted paths, path separators, `.`, and `..`.
 * Create or edit the JSON file directly. Do not use or recommend an OSDeploy function to author it.
 * Do not write a profile into an installed PowerShell module directory.
-* Use a flat JSON object with exact `Invoke-WinPEStartup:` property names.
-* Use native JSON booleans and arrays of strings. Do not use quoted booleans, nested objects, comments, or unsupported properties.
+* Use one JSON object with exact `Invoke-WinPEStartup:` property names and, when needed, one `env` metadata object.
+* Use native JSON booleans and arrays of strings. Do not use quoted booleans, comments, unsupported properties, or nested objects other than `env`.
 * Omit unrequested properties so they inherit OSDCloud defaults.
 * Do not emit empty arrays unless the user explicitly wants to clear an inherited collection.
 * Read an existing profile before changing it and preserve unrelated supported properties and formatting where practical.
@@ -72,6 +72,7 @@ An OSDeploy Boot profile can also contain JSON files in its local `WinPEStartup\
 
 | Property | JSON value | Effect |
 | --- | --- | --- |
+| `env` | object | Define environment-variable metadata as string, number, or boolean values. |
 | `Invoke-WinPEStartup:SkipOnScreenKeyboard` | boolean | Skip the on-screen keyboard check. |
 | `Invoke-WinPEStartup:ShowPnpDevices` | boolean | Show Plug and Play device hardware. |
 | `Invoke-WinPEStartup:ShowPnpErrors` | boolean | Show Plug and Play device errors. |
@@ -91,6 +92,7 @@ An OSDeploy Boot profile can also contain JSON files in its local `WinPEStartup\
 
 Apply these inheritance rules:
 
+* Use `env` for profile metadata such as `WINPESTARTUP_AUTHOR` and `WINPESTARTUP_PROFILE`. Do not add both `env` and its supported alias, `Environment`.
 * An omitted property inherits the OSDCloud default.
 * An explicit boolean overrides its inherited value.
 * A string array replaces the inherited collection. An empty array intentionally clears it.
@@ -120,21 +122,61 @@ Use `Restart-Computer -Force` to restart after deployment. Use `shutdown.exe` on
 
 Set a phase's `NoExit` property only when the user requests an interactive child PowerShell window. `Invoke-WinPEStartup` waits for that process to close.
 
-## Example
+## Bundled module examples
 
-For a profile named `Deploy-And-Restart`, create `C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\Deploy-And-Restart.json`:
+Use the profiles bundled in `OSDeploy\core\winpestartup-profiles` and `OSDCloud\core\winpestartup-profiles` as authoring examples. Treat files in installed module directories as read-only references; create user-authored profiles in the shared Boot-Assets library.
 
-{% code title="Deploy-And-Restart.json" %}
+The bundled `Default.json` profile displays OSDCloud device information and keeps the main child PowerShell process open:
+
+{% code title="Default.json" %}
 ```json
 {
-  "Invoke-WinPEStartup:InvokeMainCommand": [
-    "Show-OSDCloudDeviceInfo",
-    "Deploy-OSDCloud"
-  ],
-  "Invoke-WinPEStartup:InvokeMainCommandEA": "Stop",
-  "Invoke-WinPEStartup:InvokeShutdownCommand": [
-    "Restart-Computer -Force"
-  ]
+    "env": {
+        "WINPESTARTUP_AUTHOR": "OSDeploy",
+        "WINPESTARTUP_PROFILE": "Default"
+    },
+    "Invoke-WinPEStartup:InvokeMainCommand": [
+        "Show-OSDCloudDeviceInfo"
+    ],
+    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+}
+```
+{% endcode %}
+
+The bundled `Recovery Environment.json` profile starts Windows Recovery Environment and keeps its main child PowerShell process open:
+
+{% code title="Recovery Environment.json" %}
+```json
+{
+    "env": {
+        "WINPESTARTUP_AUTHOR": "OSDeploy",
+        "WINPESTARTUP_PROFILE": "Recovery Environment"
+    },
+    "Invoke-WinPEStartup:InvokeMainCommand": [
+        "X:\\sources\\recovery\\RecEnv.exe"
+    ],
+    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+}
+```
+{% endcode %}
+
+The bundled OSDCloud `OSDCloud.json` profile displays device information, starts an OSDCloud deployment, and keeps the main child PowerShell process open:
+
+{% code title="OSDCloud.json" %}
+```json
+{
+    "env": {
+        "WINPESTARTUP_AUTHOR": "OSDeploy",
+        "WINPESTARTUP_PROFILE": "OSDCloud"
+    },
+    "Invoke-WinPEStartup:InvokeMainCommand": [
+        "Show-OSDCloudDeviceInfo",
+        "Deploy-OSDCloud"
+    ],
+    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
 }
 ```
 {% endcode %}
@@ -218,13 +260,17 @@ $errorActionKeys = @(
     'Invoke-WinPEStartup:InvokeMainCommandEA'
     'Invoke-WinPEStartup:InvokeShutdownCommandEA'
 )
-$supportedKeys = @($booleanKeys + $arrayKeys + $errorActionKeys)
+$environmentKeys = @('env', 'Environment')
+$supportedKeys = @($booleanKeys + $arrayKeys + $errorActionKeys + $environmentKeys)
 
 if ($profile -isnot [pscustomobject] -or $profile -is [System.Array]) {
     throw 'The profile must contain one JSON object.'
 }
 if (@($profile.PSObject.Properties).Count -eq 0) {
     throw 'The profile must contain at least one explicit setting.'
+}
+if (@($profile.PSObject.Properties | Where-Object { $_.Name -in $environmentKeys }).Count -gt 1) {
+    throw "The profile cannot contain both 'env' and 'Environment' properties."
 }
 
 foreach ($property in $profile.PSObject.Properties) {
@@ -247,6 +293,19 @@ foreach ($property in $profile.PSObject.Properties) {
     if ($property.Name -in $errorActionKeys -and $property.Value -notin @('Continue', 'Stop')) {
         throw "'$($property.Name)' must be 'Continue' or 'Stop'."
     }
+    if ($property.Name -in $environmentKeys) {
+        if ($property.Value -isnot [pscustomobject]) {
+            throw "'$($property.Name)' must be a JSON object."
+        }
+        foreach ($environmentProperty in $property.Value.PSObject.Properties) {
+            if ([string]::IsNullOrWhiteSpace($environmentProperty.Name) -or $environmentProperty.Name.Contains('=') -or $environmentProperty.Name.Contains([char]0)) {
+                throw "'$($property.Name)' contains an invalid environment variable name."
+            }
+            if ($null -eq $environmentProperty.Value -or $environmentProperty.Value -isnot [System.IConvertible]) {
+                throw "Environment variable '$($environmentProperty.Name)' must be a string, number, or boolean."
+            }
+        }
+    }
 }
 
 $profile.PSObject.Properties.Name
@@ -254,8 +313,10 @@ $profile.PSObject.Properties.Name
 
 Before completing the request, confirm that:
 
-* The result is one flat object with at least one explicit setting.
-* Every property starts with `Invoke-WinPEStartup:` and appears in the configuration reference.
+* The result is one object with at least one explicit setting.
+* Every top-level property is `env`, `Environment`, or a supported `Invoke-WinPEStartup:` property.
+* The profile does not contain both `env` and `Environment`.
+* Environment-variable names are valid and their values are strings, numbers, or booleans.
 * Switch-like settings are booleans.
 * Module and command settings are arrays containing only non-empty strings.
 * Error-action values are `Continue` or `Stop`.
