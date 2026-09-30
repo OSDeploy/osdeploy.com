@@ -25,7 +25,8 @@ A valid Recast Software Community License is required for direct calls to the ga
 
 | Guide | Use it to |
 | --- | --- |
-| [Update-OSDeployCore](update-osdeploycore.md) | Coordinate the Windows ESD, imported Windows image, and WinPE driver updates. |
+| [Update-OSDeployCore](update-osdeploycore.md) | Coordinate catalog, Windows ESD, imported Windows image, and WinPE driver updates. |
+| [Update-OSDeployCoreCatalogOS](update-osdeploycorecatalogos.md) | Acquire, validate, publish, and cache the current Windows 11 operating system catalog. |
 | [Update-OSDeployCoreESD](update-osdeploycoreesd.md) | Download and verify Windows Enterprise ESD content. |
 | [Update-OSDeployCoreRE](update-osdeploycorere.md) | Export Windows RE and stage supporting Windows OS content from cached ESD files. |
 | [Update-OSDeployCoreDrivers](update-osdeploycoredrivers.md) | Download and expand WinPE driver packages. |

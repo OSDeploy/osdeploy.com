@@ -2,7 +2,7 @@
 description: Remove obsolete WinPE driver versions from the OSDeploy Core library.
 ---
 
-# Core WinPE Driver Cleanup
+# OSDeploy Core: Removing Unused WinPE Drivers
 
 `Update-OSDeployCoreDrivers` stores each driver release in a separate versioned folder. New releases do not replace older folders. Over time, the library can contain multiple Dell, HP, Intel, and Microsoft driver versions.
 

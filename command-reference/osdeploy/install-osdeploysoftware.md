@@ -21,7 +21,7 @@ Supported components:
 
 | Name           | Full Name                                       | Install Method        |
 |----------------|-------------------------------------------------|-----------------------|
-| `adk-25h2`     | Windows ADK 10.1.26100.2454 + WinPE add-on     | `curl.exe` download   |
+| `adk-26h2`     | Windows ADK 10.1.26100.9457 + WinPE add-on     | `curl.exe` download   |
 | `adk-26h1`     | Windows ADK 10.1.28000.1 + WinPE add-on        | `curl.exe` download   |
 | `mdt`          | Microsoft Deployment Toolkit 6.3.8456.1000      | `curl.exe` download   |
 | `git`          | Git for Windows                                 | winget                |

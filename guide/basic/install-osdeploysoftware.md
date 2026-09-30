@@ -32,7 +32,7 @@ The function stops before previewing or installing the software when a Windows, 
 Open an elevated PowerShell 7.6 session and preview both components without making changes:
 
 ```powershell
-Install-OSDeploySoftware -Name 'adk-25h2', '7zip'
+Install-OSDeploySoftware -Name 'adk-26h2', '7zip'
 ```
 
 Review the returned source, installation details, and commands for Windows ADK 25H2 and 7-Zip.
@@ -44,11 +44,11 @@ Review the returned source, installation details, and commands for Windows ADK 2
 Install both components:
 
 ```powershell
-Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
+Install-OSDeploySoftware -Name 'adk-26h2', '7zip' -Force
 ```
 
 The function downloads and installs Windows ADK 25H2 and its matching WinPE add-on. It also installs 7-Zip and prepares the amd64 and arm64 7-Zip files used in OSDeploy boot images.
 {% endstep %}
 {% endstepper %}
 
-For installation and download behavior, see [Windows ADK 25H2](../cmdlets/install-osdeploysoftware/windows-adk-25h2.md) and [7-Zip](../cmdlets/install-osdeploysoftware/7-zip.md).
+For installation and download behavior, see [Windows ADK 26H2](../cmdlets/install-osdeploysoftware/windows-adk-26h2.md) and [7-Zip](../cmdlets/install-osdeploysoftware/7-zip.md).

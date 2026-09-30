@@ -12,7 +12,7 @@ Use the individual stage commands when you need architecture, source, force, or 
 
 ## Requirements
 
-Run the command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the command from an elevated PowerShell 7.6 or later session on Windows 11. During preview, hosts earlier than Windows 11 26H2 build 26300 warn and continue. Build 26300 will be required for release. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 Install or update the [OSDeploy module](../requirements/powershell-modules.md) before refreshing Core content. Internet access is required for uncached ESD files, driver catalog discovery, and uncached driver packages. Allow substantial free space under `%ProgramData%\OSDeployCore` for source ESDs, expanded setup media, recovery images, and drivers.
 
@@ -26,14 +26,14 @@ The command stops before the first update stage when a Windows version, PowerShe
 
 | Parameter | Type | Default | Accepted values and behavior |
 | --- | --- | --- | --- |
-| `-WhatIf` | Common parameter | Not enabled | Passes preview behavior to all three stage commands. Requirement checks, Core path initialization, cache inspection, prompts, and network discovery can still occur. |
+| `-WhatIf` | Common parameter | Not enabled | Passes preview behavior to all four stage commands. Catalog acquisition and validation, requirement checks, Core path initialization, cache inspection, prompts, and network discovery can still occur. |
 | `-Confirm` | Common parameter | Not enabled | Flows the confirmation preference to the stage commands. The orchestrator does not present one confirmation for the complete workflow. |
 
 ## Examples
 
 ### Refresh all Core content
 
-Run all three update stages in dependency order:
+Run all four update stages in dependency order:
 
 ```powershell
 Update-OSDeployCore
@@ -66,9 +66,10 @@ The command initializes the OSDeploy Core paths, then invokes these public comma
 
 | Stage | Command | Behavior |
 | --- | --- | --- |
-| 1 | `Update-OSDeployCoreESD` | Selects the newest bundled OS catalog, resolves host-supported en-US Enterprise ESD entries, reuses verified cache files, and prompts before each required download. |
-| 2 | `Update-OSDeployCoreRE` | Reads only ESDs that match the newest catalog checksum, exports WinRE, stages supporting Windows OS content, and stages Microsoft inbox network drivers. |
-| 3 | `Update-OSDeployCoreDrivers` | Refreshes all active WinPE driver sources, then downloads and expands all matching packages. Wi-Fi packages are excluded automatically when no valid imported WinRE source exists. |
+| 1 | `Update-OSDeployCoreCatalogOS` | Acquires and validates the current catalog, publishes it to the module, and synchronizes the Core cache. |
+| 2 | `Update-OSDeployCoreESD` | Selects the newest recognized module or cached catalog and downloads or reuses matching Enterprise ESD files. |
+| 3 | `Update-OSDeployCoreRE` | Exports WinRE and stages supporting Windows OS content and inbox network drivers. |
+| 4 | `Update-OSDeployCoreDrivers` | Refreshes WinPE driver sources, then downloads and expands matching packages. |
 
 The order is fixed. Stage two does not download a missing ESD itself, so stage one must complete first. Stage three runs after OS import so a newly created WinRE source can make Wi-Fi packages eligible.
 

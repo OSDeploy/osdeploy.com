@@ -11,7 +11,7 @@ Updates all OSDeployCore assets: Windows Enterprise ESD files, OS images, and Wi
 
 ## Description
 
-Runs `Update-OSDeployCoreESD`, `Update-OSDeployCoreRE`, and `Update-OSDeployCoreDrivers` in a single call to refresh all local OSDeployCore assets.
+Runs `Update-OSDeployCoreCatalogOS`, `Update-OSDeployCoreESD`, `Update-OSDeployCoreRE`, and `Update-OSDeployCoreDrivers` in a single call to refresh all local OSDeployCore assets.
 
 Use this function to bring a new build machine up to date or to ensure all cached content is current before running `Build-OSDeployBoot`.
 

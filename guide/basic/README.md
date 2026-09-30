@@ -21,7 +21,7 @@ A valid Recast Software Community License is required when `Update-OSDeployCore`
 Install Windows ADK 25H2, its WinPE add-on, and 7-Zip:
 
 ```powershell
-Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
+Install-OSDeploySoftware -Name 'adk-26h2', '7zip' -Force
 ```
 {% endstep %}
 
