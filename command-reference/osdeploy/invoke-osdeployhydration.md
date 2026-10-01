@@ -37,7 +37,7 @@ Invoke-OSDeployHydration -Force
 
 The command validates the workstation, displays the planned workflow, and uses console Yes/No prompts unless `-Force` is supplied. It then:
 
-1. Tests and optionally installs ADK 25H2, 7-Zip, Git, VS Code, VS Code Insiders, and Hyper-V.
+1. Tests and optionally installs ADK 26H2, 7-Zip, Git, VS Code, VS Code Insiders, and Hyper-V.
 2. Runs `Update-OSDeployCoreESD -Architecture $arch`.
 3. Runs `Update-OSDeployCoreRE -Architecture $arch`.
 4. Runs `Update-OSDeployCoreDrivers -Architecture $arch`.

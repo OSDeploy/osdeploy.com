@@ -42,7 +42,7 @@ Run the interactive workflow from the elevated PowerShell 7.6 session:
 Invoke-OSDeployHydration
 ```
 
-Review the workflow and continue. Approve the Windows ADK 25H2 and 7-Zip installations when prompted; declining either required component stops Hydration. Choose whether to install the optional Git, Visual Studio Code, Visual Studio Code Insiders, and Hyper-V components.
+Review the workflow and continue. Approve the Windows ADK 26H2 and 7-Zip installations when prompted; declining either required component stops Hydration. Choose whether to install the optional Git, Visual Studio Code, Visual Studio Code Insiders, and Hyper-V components.
 
 Complete any content and wallpaper selections. Hydration detects the workstation architecture, prepares matching Windows and WinPE driver content, and creates Hydra boot media under `C:\ProgramData\OSDeployCore\boot`. On a physical workstation with Hyper-V enabled, it can also create a VM and boot the generated ISO.
 {% endstep %}
