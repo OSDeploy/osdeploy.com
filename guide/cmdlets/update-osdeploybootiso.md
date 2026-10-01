@@ -18,7 +18,7 @@ The workstation must also have:
 
 * The [OSDeploy module](../requirements/powershell-modules.md).
 * A valid Recast Software Community License for direct invocation.
-* The [Windows ADK Deployment Tools](install-osdeploysoftware/windows-adk-25h2.md), including `oscdimg.exe`.
+* The [Windows ADK Deployment Tools](install-osdeploysoftware/windows-adk-26h2.md), including `oscdimg.exe`.
 * `Out-GridView` for selecting a completed build.
 * A completed build under `C:\ProgramData\OSDeployCore\boot` with a `bootmedia` directory.
 

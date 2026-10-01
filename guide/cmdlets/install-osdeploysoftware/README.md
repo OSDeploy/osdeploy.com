@@ -10,7 +10,7 @@ description: List, preview, download, or install the software components used by
 
 Run the command from an elevated PowerShell session on a workstation that meets all of these requirements:
 
-* Windows 11 25H2 build 26200 or later
+* Windows 11; hosts earlier than Windows 11 26H2 build 26300 warn and continue during preview
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../../requirements/powershell-modules.md)
 * `curl.exe` available in `PATH`
@@ -28,7 +28,7 @@ Use one or more of these exact values with `-Name`:
 
 | Name | Component | Installer or action | Architecture behavior |
 | --- | --- | --- | --- |
-| `adk-25h2` | Windows ADK 25H2 `10.1.26100.2454` and Windows PE add-on | Microsoft setup programs | Uses the setup URLs in current module metadata. |
+| `adk-26h2` | Windows ADK 26H2 `10.1.26100.9457` and Windows PE add-on | Microsoft setup programs | Uses the setup URLs in current module metadata. |
 | `adk-26h1` | Windows ADK 26H1 `10.1.28000.1` and Windows PE add-on | Microsoft setup programs | Uses the setup URLs in current module metadata. |
 | `mdt` | Microsoft Deployment Toolkit `6.3.8456.1000` | x64 MSI | Downloads `MicrosoftDeploymentToolkit_x64.msi`. |
 | `git` | Git for Windows | WinGet package `Git.Git` | The helper does not pass an architecture argument to WinGet. |
@@ -59,10 +59,10 @@ Install-OSDeploySoftware
 
 ### Preview multiple components
 
-Return module metadata and install commands for Windows ADK 25H2 and 7-Zip without downloading or installing them:
+Return module metadata and install commands for Windows ADK 26H2 and 7-Zip without downloading or installing them:
 
 ```powershell
-Install-OSDeploySoftware -Name 'adk-25h2', '7zip'
+Install-OSDeploySoftware -Name 'adk-26h2', '7zip'
 ```
 
 ### Install multiple components
@@ -93,10 +93,10 @@ Install-OSDeploySoftware -Name 'hyperv' -Force -WhatIf
 
 ### Capture action results
 
-Install Windows ADK 25H2 and 7-Zip, then inspect the parent command's component status objects:
+Install Windows ADK 26H2 and 7-Zip, then inspect the parent command's component status objects:
 
 ```powershell
-$result = Install-OSDeploySoftware -Name 'adk-25h2', '7zip' -Force
+$result = Install-OSDeploySoftware -Name 'adk-26h2', '7zip' -Force
 $result | Format-Table
 ```
 

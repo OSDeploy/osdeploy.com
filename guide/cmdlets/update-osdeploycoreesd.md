@@ -1,5 +1,5 @@
 ---
-description: Download and verify Windows 11 25H2 Enterprise ESD files for OSDeploy Core.
+description: Download and verify Windows 11 26H2 Enterprise ESD files for OSDeploy Core.
 ---
 
 # Update-OSDeployCoreESD
@@ -7,7 +7,7 @@ description: Download and verify Windows 11 25H2 Enterprise ESD files for OSDepl
 {% hint style="info" %}
 `Update-OSDeployCoreESD` is the first public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the Windows ESD source files need updating.
 
-**TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 25H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` only when one architecture is needed.
+**TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 26H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` only when one architecture is needed.
 
 ```powershell
 Update-OSDeployCoreESD
@@ -16,7 +16,7 @@ Update-OSDeployCoreESD -Architecture arm64
 ```
 {% endhint %}
 
-`Update-OSDeployCoreESD` downloads the current en-US Windows 11 25H2 Enterprise ESD files from the Microsoft Content Delivery Network. Download URLs, file names, sizes, and SHA256 checksums come from the operating system catalog included with the OSDeploy module.
+`Update-OSDeployCoreESD` downloads the current en-US Windows 11 26H2 Enterprise ESD files from the Microsoft Content Delivery Network. It selects the newest recognized catalog across the module and Core cache.
 
 A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
 
@@ -26,7 +26,7 @@ This command downloads and caches the source ESD files. It does not install Wind
 
 ## Requirements
 
-Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Internet access is required for URL tests and uncached downloads.
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11. During preview, hosts earlier than Windows 11 26H2 build 26300 warn and continue. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Internet access is required for URL tests and uncached downloads.
 
 {% hint style="warning" %}
 The command stops before catalog selection when a Windows version, PowerShell, MSI installation, `curl.exe`, or administrator check fails. It also stops when no catalog XML exists or the newest catalog file name does not match the expected `<build>-win<version>-<release>.xml` format.
@@ -85,7 +85,7 @@ For each ESD that is not already cached, the command:
 Downloads are saved in the version-specific folder:
 
 ```
-C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
+C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 26H2\
 ```
 
 The exact release folder is derived from the newest catalog file name, and the ESD file name can change when the module catalog is updated to a newer Windows build. Core path initialization occurs before catalog processing and can create directories or migrate legacy repository content and profiles.

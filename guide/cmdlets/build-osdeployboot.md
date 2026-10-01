@@ -16,7 +16,7 @@ Install and configure these components before starting a build:
 
 * [OSDeploy module](../requirements/powershell-modules.md)
 * [OSDeploy Core](../basic/update-osdeploycore.md)
-* [Windows ADK and WinPE add-on](install-osdeploysoftware/windows-adk-25h2.md)
+* [Windows ADK and WinPE add-on](install-osdeploysoftware/windows-adk-26h2.md)
 * OSDCloud module version `26.7.25.2` or later
 
 Install or update OSDCloud with:

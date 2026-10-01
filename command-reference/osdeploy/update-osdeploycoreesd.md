@@ -11,7 +11,7 @@ Downloads Windows Enterprise ESD files from the latest OSDeploy OS catalog.
 
 ## Description
 
-Locates the newest XML catalog in the OSDeploy module, resolves eligible en-US Enterprise ESD entries, and downloads them to the release folder under `C:\ProgramData\OSDeployCore\OSDCloud\OS`, such as `Windows 11 25H2`.
+Locates the newest recognized build 26300 XML catalog across the OSDeploy module and Core cache, resolves eligible en-US Enterprise ESD entries, and downloads them under `C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 26H2`.
 
 Each current file is reused when its SHA256 checksum matches. A verified older-catalog file can be retained after an upgrade prompt. Pending URLs are tested before per-file confirmations and transfers begin.
 

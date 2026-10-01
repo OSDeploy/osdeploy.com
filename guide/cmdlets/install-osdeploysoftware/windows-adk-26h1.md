@@ -9,7 +9,7 @@ description: >-
 Use the exact name `adk-26h1` to download or install Windows ADK `10.1.28000.1` and its matching Windows PE add-on. These components provide deployment and WinPE files for workflows that require the 26H1 kit.
 
 {% hint style="warning" %}
-Use Windows ADK 25H2 for the standard OSDeploy and OSDCloud workflow. Select the 26H1 component only when the intended boot-image workflow requires that kit.
+Use Windows ADK 26H2 for the standard OSDeploy and OSDCloud workflow. Select the 26H1 component only when the intended boot-image workflow requires that kit.
 {% endhint %}
 
 ## Requirements

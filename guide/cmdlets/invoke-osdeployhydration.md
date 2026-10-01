@@ -10,7 +10,7 @@ description: >-
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11. During preview, hosts earlier than Windows 11 26H2 build 26300 warn and continue. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 Install the [OSDeploy module](../requirements/powershell-modules.md) and OSDCloud module version `26.5.24.1` or later before starting hydration:
 
@@ -27,7 +27,7 @@ Hydration can install the remaining workstation components:
 
 | Component                         | Requirement                   | Behavior when absent                                   |
 | --------------------------------- | ----------------------------- | ------------------------------------------------------ |
-| Windows ADK 25H2 and WinPE add-on | Required                      | Prompt to install. Declining terminates hydration.     |
+| Windows ADK 26H2 and WinPE add-on | Required                      | Prompt to install. Declining terminates hydration.     |
 | 7-Zip                             | Required                      | Prompt to install. Declining terminates hydration.     |
 | Git for Windows                   | Optional                      | Prompt to install. Declining skips Git and continues.  |
 | Visual Studio Code                | Optional                      | Prompt to install. Declining skips it and continues.   |
@@ -127,7 +127,7 @@ Hydration tests each component before prompting. Existing components are retaine
 For missing required software, accepting the prompt calls:
 
 ```powershell
-Install-OSDeploySoftware -Name 'adk-25h2' -Force
+Install-OSDeploySoftware -Name 'adk-26h2' -Force
 Install-OSDeploySoftware -Name '7zip' -Force
 ```
 
@@ -153,7 +153,7 @@ The ESD command selects the current en-US Windows 11 25H2 Enterprise ESD for the
 Verified ESD files are stored under:
 
 ```
-C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 25H2\
+C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 26H2\
 ```
 
 The export command creates Windows RE and supporting Windows OS content under architecture-specific directories below:

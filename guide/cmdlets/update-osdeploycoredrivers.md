@@ -216,5 +216,5 @@ Expanded driver folders are consumed later by `Build-OSDeployBoot` when it creat
 
 * [Complete OSDeploy Core update](update-osdeploycore.md)
 * [Update-OSDeployCoreDrivers command reference](../../command-reference/osdeploy/update-osdeploycoredrivers.md)
-See [Core WinPE Driver Cleanup](../../osdeploy-insider/how-to/core-winpe-driver-cleanup.md) for repository maintenance guidance.
+See [OSDeploy Core: Removing Unused WinPE Drivers](../../osdeploy-insider/how-to/osdeploy-core-removing-unused-winpe-drivers.md) for repository maintenance guidance.
 * [System Requirements](../requirements/windows-11-os.md)
