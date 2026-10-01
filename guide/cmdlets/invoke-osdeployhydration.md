@@ -148,7 +148,7 @@ Update-OSDeployCoreRE -Architecture $arch
 
 `-Force`, `-WhatIf`, and `-Confirm` are forwarded to `Update-OSDeployCoreESD` through bound parameters. The Windows import receives inherited common-parameter preferences but does not receive `-Force`.
 
-The ESD command selects the current en-US Windows 11 25H2 Enterprise ESD for the detected architecture, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
+The ESD command selects the current en-US Windows 11 26H2 Enterprise ESD for the detected architecture, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
 
 Verified ESD files are stored under:
 
