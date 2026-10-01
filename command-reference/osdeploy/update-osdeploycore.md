@@ -25,7 +25,7 @@ Update-OSDeployCore [-WhatIf] [-Confirm]
 
 | Parameter  | Type     | Required | Description                                                              |
 |------------|----------|----------|--------------------------------------------------------------------------|
-| `-WhatIf`  | `Switch` | No       | Flows preview behavior to the three stage commands. Core initialization, cache inspection, prompts, and network discovery can still occur. |
+| `-WhatIf`  | `Switch` | No       | Flows preview behavior to the four stage commands. Core initialization, cache inspection, prompts, and network discovery can still occur. |
 | `-Confirm` | `Switch` | No       | Flows confirmation preference to each stage; the orchestrator has no single workflow confirmation. |
 
 ## Examples

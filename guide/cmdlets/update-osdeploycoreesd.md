@@ -5,7 +5,7 @@ description: Download and verify Windows 11 26H2 Enterprise ESD files for OSDepl
 # Update-OSDeployCoreESD
 
 {% hint style="info" %}
-`Update-OSDeployCoreESD` is the first public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the Windows ESD source files need updating.
+`Update-OSDeployCoreESD` is the second stage run by `Update-OSDeployCore`, after `Update-OSDeployCoreCatalogOS`. Run it independently when only the Windows ESD source files need updating.
 
 **TLDR:** Run `Update-OSDeployCoreESD` to download the latest Windows 11 26H2 Enterprise ESD files in the OSDeploy catalog. Use `-Architecture` only when one architecture is needed.
 
