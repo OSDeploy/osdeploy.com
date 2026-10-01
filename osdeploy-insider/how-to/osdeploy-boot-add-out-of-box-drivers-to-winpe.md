@@ -64,7 +64,7 @@ Select the new folder when the WinPE driver picker appears. OSDeploy displays on
 
 ## Verify the Build
 
-Review the build output for driver-addition errors and confirm that `boot.wim` was created. Boot the ISO on representative hardware and verify the required device:
+Review the build output for driver-addition errors and confirm that `boot.wim` was created. Boot the ISO on representative hardware and use the following error-only diagnostic to identify devices that did not load successfully:
 
 ```powershell
 Get-PnpDevice |

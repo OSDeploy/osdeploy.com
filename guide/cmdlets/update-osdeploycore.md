@@ -95,11 +95,12 @@ Existing valid content is reused by default. See the stage guides for checksum f
 
 ## WhatIf and Confirmation
 
-`Update-OSDeployCore` declares `SupportsShouldProcess`, but it does not call `ShouldProcess` itself. PowerShell preference variables carry `-WhatIf` and `-Confirm` into the three stage commands, where each operation defines its own boundary.
+`Update-OSDeployCore` declares `SupportsShouldProcess`, but it does not call `ShouldProcess` itself. PowerShell preference variables carry `-WhatIf` and `-Confirm` into the four stage commands, where each operation defines its own boundary.
 
 With `-WhatIf`:
 
 * Core path initialization still runs and is not protected by `ShouldProcess`.
+* Catalog acquisition, extraction, and validation still run. Catalog publication and Core cache synchronization are protected by `ShouldProcess`.
 * ESD catalog parsing, cache hashing, older-cache lookup, URL reachability tests, and `ShouldContinue` prompts can still occur. Verified cached ESD files can still be returned.
 * OS source discovery and checksum verification still occur, but each import is skipped at its destination-level `ShouldProcess` call.
 * Driver source discovery can contact vendor endpoints. The driver catalog directory can be created, but the catalog write, package download, and expansion are skipped.
