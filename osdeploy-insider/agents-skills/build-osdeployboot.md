@@ -209,7 +209,7 @@ When neither `-Auto` nor `-UseAdkWinPE` is present, the command displays the imp
 
 When `-Auto` is present, the function derives an omitted architecture from `PROCESSOR_ARCHITECTURE`, selects the newest imported WinRE for that architecture, and falls back to ADK WinPE when no match exists.
 
-When `-ProfileName` is omitted, the function displays shared selectors for compatible drivers, scripts, WinPEStartup profiles, and wallpaper, then writes the resolved configuration to the matching recent architecture profile. When `-ProfileName` is present, the function loads that profile without shared-content or wallpaper selectors and does not modify the named profile.
+When `-ProfileName` is omitted, the function displays shared selectors for compatible drivers, scripts, WinpeStartup profiles, and wallpaper, then writes the resolved configuration to the matching recent architecture profile. When `-ProfileName` is present, the function loads that profile without shared-content or wallpaper selectors and does not modify the named profile.
 
 Before creating build directories, the function displays the configuration and waits five seconds. A normal command then builds media under `C:\ProgramData\OSDeployCore\boot`. `-UpdateUSB` also targets accessible partitions labeled `USB-WinPE` after the build.
 

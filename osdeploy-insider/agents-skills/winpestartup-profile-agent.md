@@ -1,13 +1,13 @@
 ---
 description: >-
-  Agent instructions for creating, editing, and validating WinPEStartup Profile
+  Agent instructions for creating, editing, and validating WinpeStartup Profile
   JSON files for OSDeploy Boot and OSDCloud.
 icon: brackets-curly
 ---
 
-# WinPEStartup Profile Agent
+# WinpeStartup Profile Agent
 
-Use these instructions to create, edit, or validate a WinPEStartup Profile JSON file that configures `Invoke-WinPEStartup`.
+Use these instructions to create, edit, or validate a WinpeStartup Profile JSON file that configures `Invoke-WinpeStartup`.
 
 {% hint style="info" %}
 Create user-authored profiles in `C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles`. `Build-OSDeployBoot` can select profiles from this shared Boot-Assets library and copy them into the WinPE boot image.
@@ -25,7 +25,7 @@ Follow these rules:
 * Accept a filename only. Reject rooted paths, path separators, `.`, and `..`.
 * Create or edit the JSON file directly. Do not use or recommend an OSDeploy function to author it.
 * Do not write a profile into an installed PowerShell module directory.
-* Use one JSON object with exact `Invoke-WinPEStartup:` property names and, when needed, one `env` metadata object.
+* Use one JSON object with exact `Invoke-WinpeStartup:` property names and, when needed, one `env` metadata object.
 * Use native JSON booleans and arrays of strings. Do not use quoted booleans, comments, unsupported properties, or nested objects other than `env`.
 * Omit unrequested properties so they inherit OSDCloud defaults.
 * Do not emit empty arrays unless the user explicitly wants to clear an inherited collection.
@@ -66,29 +66,29 @@ C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\<name>.json
 
 Create the `winpestartup-profiles` directory when it does not exist.
 
-An OSDeploy Boot profile can also contain JSON files in its local `WinPEStartup\profiles` directory. Those files are copied automatically during a build, but the shared Boot-Assets library is the standard destination for newly authored profiles.
+An OSDeploy Boot profile can also contain JSON files in its local `WinpeStartup\profiles` directory. Those files are copied automatically during a build, but the shared Boot-Assets library is the standard destination for newly authored profiles.
 
 ## Configuration reference
 
 | Property | JSON value | Effect |
 | --- | --- | --- |
 | `env` | object | Define environment-variable metadata as string, number, or boolean values. |
-| `Invoke-WinPEStartup:SkipOnScreenKeyboard` | boolean | Skip the on-screen keyboard check. |
-| `Invoke-WinPEStartup:ShowPnpDevices` | boolean | Show Plug and Play device hardware. |
-| `Invoke-WinPEStartup:ShowPnpErrors` | boolean | Show Plug and Play device errors. |
-| `Invoke-WinPEStartup:SkipWiFi` | boolean | Skip Wi-Fi startup and connection checks. |
-| `Invoke-WinPEStartup:SkipIPConfig` | boolean | Skip the IP configuration display. |
-| `Invoke-WinPEStartup:SkipUpdateOSDCloud` | boolean | Skip the OSDCloud module update. |
-| `Invoke-WinPEStartup:InstallModule` | string array | Install or update additional PowerShell modules. |
-| `Invoke-WinPEStartup:InvokeStartupCommand` | string array | Run preparation commands before the main phase. |
-| `Invoke-WinPEStartup:InvokeStartupCommandNoExit` | boolean | Keep the startup child PowerShell process open. |
-| `Invoke-WinPEStartup:InvokeStartupCommandEA` | `Continue` or `Stop` | Handle startup child-process failure. |
-| `Invoke-WinPEStartup:InvokeMainCommand` | string array | Run deployment, inspection, or other primary commands. |
-| `Invoke-WinPEStartup:InvokeMainCommandNoExit` | boolean | Keep the main child PowerShell process open. |
-| `Invoke-WinPEStartup:InvokeMainCommandEA` | `Continue` or `Stop` | Handle main child-process failure. |
-| `Invoke-WinPEStartup:InvokeShutdownCommand` | string array | Run final commands after the main phase. |
-| `Invoke-WinPEStartup:InvokeShutdownCommandNoExit` | boolean | Keep the shutdown child PowerShell process open. |
-| `Invoke-WinPEStartup:InvokeShutdownCommandEA` | `Continue` or `Stop` | Handle shutdown child-process failure. |
+| `Invoke-WinpeStartup:SkipOnScreenKeyboard` | boolean | Skip the on-screen keyboard check. |
+| `Invoke-WinpeStartup:ShowPnpDevices` | boolean | Show Plug and Play device hardware. |
+| `Invoke-WinpeStartup:ShowPnpErrors` | boolean | Show Plug and Play device errors. |
+| `Invoke-WinpeStartup:SkipWiFi` | boolean | Skip Wi-Fi startup and connection checks. |
+| `Invoke-WinpeStartup:SkipIPConfig` | boolean | Skip the IP configuration display. |
+| `Invoke-WinpeStartup:SkipUpdateOSDCloud` | boolean | Skip the OSDCloud module update. |
+| `Invoke-WinpeStartup:InstallModule` | string array | Install or update additional PowerShell modules. |
+| `Invoke-WinpeStartup:InvokeStartupCommand` | string array | Run preparation commands before the main phase. |
+| `Invoke-WinpeStartup:InvokeStartupCommandNoExit` | boolean | Keep the startup child PowerShell process open. |
+| `Invoke-WinpeStartup:InvokeStartupCommandEA` | `Continue` or `Stop` | Handle startup child-process failure. |
+| `Invoke-WinpeStartup:InvokeMainCommand` | string array | Run deployment, inspection, or other primary commands. |
+| `Invoke-WinpeStartup:InvokeMainCommandNoExit` | boolean | Keep the main child PowerShell process open. |
+| `Invoke-WinpeStartup:InvokeMainCommandEA` | `Continue` or `Stop` | Handle main child-process failure. |
+| `Invoke-WinpeStartup:InvokeShutdownCommand` | string array | Run final commands after the main phase. |
+| `Invoke-WinpeStartup:InvokeShutdownCommandNoExit` | boolean | Keep the shutdown child PowerShell process open. |
+| `Invoke-WinpeStartup:InvokeShutdownCommandEA` | `Continue` or `Stop` | Handle shutdown child-process failure. |
 
 Apply these inheritance rules:
 
@@ -98,7 +98,7 @@ Apply these inheritance rules:
 * A string array replaces the inherited collection. An empty array intentionally clears it.
 * `Continue` writes a warning and proceeds after a child-process failure.
 * `Stop` raises a terminating error.
-* Explicit `Invoke-WinPEStartup` arguments override profile values. Profile values override OSDCloud module defaults.
+* Explicit `Invoke-WinpeStartup` arguments override profile values. Profile values override OSDCloud module defaults.
 
 ## Command behavior
 
@@ -110,7 +110,7 @@ Use the phase that matches the command's purpose:
 2. Use `InvokeMainCommand` for device inspection, deployment, and the primary task.
 3. Use `InvokeShutdownCommand` for final actions such as restarting the device.
 
-A command entry beginning with `http://` or `https://` is converted by `Invoke-WinPEStartup` to:
+A command entry beginning with `http://` or `https://` is converted by `Invoke-WinpeStartup` to:
 
 ```powershell
 Invoke-RestMethod -Uri '<url>' | Invoke-Expression
@@ -120,7 +120,7 @@ Write the URL directly in the profile. Do not wrap it in `Invoke-RestMethod`.
 
 Use `Restart-Computer -Force` to restart after deployment. Use `shutdown.exe` only when its specific options are required.
 
-Set a phase's `NoExit` property only when the user requests an interactive child PowerShell window. `Invoke-WinPEStartup` waits for that process to close.
+Set a phase's `NoExit` property only when the user requests an interactive child PowerShell window. `Invoke-WinpeStartup` waits for that process to close.
 
 ## Bundled module examples
 
@@ -135,11 +135,11 @@ The bundled `Default.json` profile displays OSDCloud device information and keep
         "WINPESTARTUP_AUTHOR": "OSDeploy",
         "WINPESTARTUP_PROFILE": "Default"
     },
-    "Invoke-WinPEStartup:InvokeMainCommand": [
+    "Invoke-WinpeStartup:InvokeMainCommand": [
         "Show-OSDCloudDeviceInfo"
     ],
-    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
-    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+    "Invoke-WinpeStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinpeStartup:InvokeMainCommandEA": "Continue"
 }
 ```
 {% endcode %}
@@ -153,11 +153,11 @@ The bundled `Recovery Environment.json` profile starts Windows Recovery Environm
         "WINPESTARTUP_AUTHOR": "OSDeploy",
         "WINPESTARTUP_PROFILE": "Recovery Environment"
     },
-    "Invoke-WinPEStartup:InvokeMainCommand": [
+    "Invoke-WinpeStartup:InvokeMainCommand": [
         "X:\\sources\\recovery\\RecEnv.exe"
     ],
-    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
-    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+    "Invoke-WinpeStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinpeStartup:InvokeMainCommandEA": "Continue"
 }
 ```
 {% endcode %}
@@ -171,22 +171,22 @@ The bundled OSDCloud `OSDCloud.json` profile displays device information, starts
         "WINPESTARTUP_AUTHOR": "OSDeploy",
         "WINPESTARTUP_PROFILE": "OSDCloud"
     },
-    "Invoke-WinPEStartup:InvokeMainCommand": [
+    "Invoke-WinpeStartup:InvokeMainCommand": [
         "Show-OSDCloudDeviceInfo",
         "Deploy-OSDCloud"
     ],
-    "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
-    "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+    "Invoke-WinpeStartup:InvokeMainCommandNoExit": true,
+    "Invoke-WinpeStartup:InvokeMainCommandEA": "Continue"
 }
 ```
 {% endcode %}
 
 ## Build and runtime lifecycle
 
-1. `Build-OSDeployBoot` includes JSON files from the shared user repository in its WinPEStartup profile selector.
-2. Selected paths are saved in the build profile's `WinPEStartupProfile` property.
-3. The build copies selected files into `WinPEStartup\profiles` in the mounted WinPE image.
-4. In WinPE, `Invoke-WinPEStartup` scans drives `C:` through `Z:` for `<drive>:\WinPEStartup\profiles\*.json`.
+1. `Build-OSDeployBoot` includes JSON files from the shared user repository in its WinpeStartup profile selector.
+2. Selected paths are saved in the build profile's `WinpeStartupProfile` property.
+3. The build copies selected files into `WinpeStartup\profiles` in the mounted WinPE image.
+4. In WinPE, `Invoke-WinpeStartup` scans drives `C:` through `Z:` for `<drive>:\WinpeStartup\profiles\*.json`.
 5. One discovered profile is selected automatically. Multiple profiles produce a numbered selection prompt.
 6. Cancelling the prompt or selecting a malformed profile stops the remaining startup sequence. A malformed profile also produces a warning.
 
@@ -239,26 +239,26 @@ $profilePath = 'C:\ProgramData\OSDeployCore\boot-assets\winpestartup-profiles\De
 $profile = Get-Content -LiteralPath $profilePath -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
 
 $booleanKeys = @(
-    'Invoke-WinPEStartup:SkipOnScreenKeyboard'
-    'Invoke-WinPEStartup:ShowPnpDevices'
-    'Invoke-WinPEStartup:ShowPnpErrors'
-    'Invoke-WinPEStartup:SkipWiFi'
-    'Invoke-WinPEStartup:SkipIPConfig'
-    'Invoke-WinPEStartup:SkipUpdateOSDCloud'
-    'Invoke-WinPEStartup:InvokeStartupCommandNoExit'
-    'Invoke-WinPEStartup:InvokeMainCommandNoExit'
-    'Invoke-WinPEStartup:InvokeShutdownCommandNoExit'
+    'Invoke-WinpeStartup:SkipOnScreenKeyboard'
+    'Invoke-WinpeStartup:ShowPnpDevices'
+    'Invoke-WinpeStartup:ShowPnpErrors'
+    'Invoke-WinpeStartup:SkipWiFi'
+    'Invoke-WinpeStartup:SkipIPConfig'
+    'Invoke-WinpeStartup:SkipUpdateOSDCloud'
+    'Invoke-WinpeStartup:InvokeStartupCommandNoExit'
+    'Invoke-WinpeStartup:InvokeMainCommandNoExit'
+    'Invoke-WinpeStartup:InvokeShutdownCommandNoExit'
 )
 $arrayKeys = @(
-    'Invoke-WinPEStartup:InstallModule'
-    'Invoke-WinPEStartup:InvokeStartupCommand'
-    'Invoke-WinPEStartup:InvokeMainCommand'
-    'Invoke-WinPEStartup:InvokeShutdownCommand'
+    'Invoke-WinpeStartup:InstallModule'
+    'Invoke-WinpeStartup:InvokeStartupCommand'
+    'Invoke-WinpeStartup:InvokeMainCommand'
+    'Invoke-WinpeStartup:InvokeShutdownCommand'
 )
 $errorActionKeys = @(
-    'Invoke-WinPEStartup:InvokeStartupCommandEA'
-    'Invoke-WinPEStartup:InvokeMainCommandEA'
-    'Invoke-WinPEStartup:InvokeShutdownCommandEA'
+    'Invoke-WinpeStartup:InvokeStartupCommandEA'
+    'Invoke-WinpeStartup:InvokeMainCommandEA'
+    'Invoke-WinpeStartup:InvokeShutdownCommandEA'
 )
 $environmentKeys = @('env', 'Environment')
 $supportedKeys = @($booleanKeys + $arrayKeys + $errorActionKeys + $environmentKeys)
@@ -314,7 +314,7 @@ $profile.PSObject.Properties.Name
 Before completing the request, confirm that:
 
 * The result is one object with at least one explicit setting.
-* Every top-level property is `env`, `Environment`, or a supported `Invoke-WinPEStartup:` property.
+* Every top-level property is `env`, `Environment`, or a supported `Invoke-WinpeStartup:` property.
 * The profile does not contain both `env` and `Environment`.
 * Environment-variable names are valid and their values are strings, numbers, or booleans.
 * Switch-like settings are booleans.
