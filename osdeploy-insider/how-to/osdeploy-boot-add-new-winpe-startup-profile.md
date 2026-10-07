@@ -1,10 +1,10 @@
 ---
-description: Create a WinPEStartup profile that runs OSDCloud automatically and restarts after a successful deployment.
+description: Create a WinpeStartup profile that runs OSDCloud automatically and restarts after a successful deployment.
 ---
 
-# OSDeploy Boot: Add a New WinPE Startup Profile
+# OSDeploy Boot: Add a New WinpeStartup Profile
 
-Create a custom WinPEStartup profile to display device information, start OSDCloud automatically, and restart the device after the deployment command completes successfully.
+Create a custom WinpeStartup profile to display device information, start OSDCloud automatically, and restart the device after the deployment command completes successfully.
 
 {% hint style="warning" %}
 This profile starts deployment without leaving an interactive PowerShell window open and restarts immediately after `Deploy-OSDCloud` returns successfully. Test the profile before using it in production.
@@ -27,15 +27,15 @@ New-Item -Path $ProfileDirectory -ItemType Directory -Force | Out-Null
     "WINPESTARTUP_AUTHOR": "OSDeploy",
     "WINPESTARTUP_PROFILE": "OSDCloud Restart"
   },
-  "Invoke-WinPEStartup:InvokeMainCommand": [
+  "Invoke-WinpeStartup:InvokeMainCommand": [
     "Show-OSDCloudDeviceInfo",
     "Deploy-OSDCloud"
   ],
-  "Invoke-WinPEStartup:InvokeMainCommandEA": "Stop",
-  "Invoke-WinPEStartup:InvokeShutdownCommand": [
+  "Invoke-WinpeStartup:InvokeMainCommandEA": "Stop",
+  "Invoke-WinpeStartup:InvokeShutdownCommand": [
     "Restart-Computer -Force"
   ],
-  "Invoke-WinPEStartup:InvokeShutdownCommandEA": "Stop"
+  "Invoke-WinpeStartup:InvokeShutdownCommandEA": "Stop"
 }
 '@ | Set-Content -LiteralPath $ProfilePath -Encoding utf8
 ```
@@ -54,7 +54,7 @@ $Profile |
 
 Confirm that the output contains one `env` object, the two main commands, and the restart command. Do not define both `env` and `Environment` in the same profile.
 
-## Add the WinPEStartup Profile to a Build
+## Add the WinpeStartup Profile to a Build
 
 Start an interactive build:
 
@@ -62,7 +62,7 @@ Start an interactive build:
 Build-OSDeployBoot
 ```
 
-Select `OSDCloud Restart.json` when the WinPEStartup profile picker appears, then complete the remaining prompts. OSDeploy copies the selected JSON into `WinPEStartup\profiles` in the mounted image. Profile choices are sorted by name. Select only this WinPEStartup profile when startup must be automatic; including multiple WinPEStartup profiles causes a numbered selection prompt in WinPE.
+Select `OSDCloud Restart.json` when the WinpeStartup profile picker appears, then complete the remaining prompts. OSDeploy copies the selected JSON into `WinpeStartup\profiles` in the mounted image. Profile choices are sorted by name. Select only this WinpeStartup profile when startup must be automatic; including multiple WinpeStartup profiles causes a numbered selection prompt in WinPE.
 
 ## Test the Startup Flow
 
@@ -74,4 +74,4 @@ Boot the generated ISO in a test virtual machine before using physical hardware.
 4. A successful return from the deployment command triggers `Restart-Computer -Force`.
 5. A terminating deployment error prevents the shutdown phase from running.
 
-See the [WinPEStartup Profile Agent](../agents-skills/winpestartup-profile-agent.md) for every supported property and validation rule.
+See the [WinpeStartup Profile Agent](../agents-skills/winpestartup-profile-agent.md) for every supported property and validation rule.

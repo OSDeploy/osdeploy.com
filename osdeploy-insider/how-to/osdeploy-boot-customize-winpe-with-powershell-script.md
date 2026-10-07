@@ -47,7 +47,7 @@ Build-OSDeployBoot
 
 ## Build and Verify
 
-Complete the remaining prompts to build the media. The script runs near the end of mounted-image servicing, before WinPEStartup content and drivers are added. Script success-stream output is passed through by the build step; a script failure writes a non-terminating error and later build steps can continue.
+Complete the remaining prompts to build the media. The script runs near the end of mounted-image servicing, before WinpeStartup content and drivers are added. Script success-stream output is passed through by the build step; a script failure writes a non-terminating error and later build steps can continue.
 
 Boot the resulting media and confirm this file exists:
 
