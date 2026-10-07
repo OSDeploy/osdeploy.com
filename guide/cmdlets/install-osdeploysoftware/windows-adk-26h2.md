@@ -11,7 +11,7 @@ Use the exact name `adk-26h2` to download or install Windows ADK `10.1.26100.945
 <figure><img src="../../../.gitbook/assets/image (190).png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-Windows ADK 26H2 is required for the standard OSDeploy and OSDCloud workflow.
+OSDeploy media, USB, and Core workflows accept ADK `10.1.26100.2454` or `10.1.26100.9457`, each with its matching Windows PE add-on. This component installs the current 26H2 kit, version `10.1.26100.9457`. The supported 25H2 kit, version `10.1.26100.2454`, also remains valid.
 {% endhint %}
 
 ## Requirements
@@ -45,13 +45,13 @@ When no ADK is detected, the helper creates offline layouts and silently install
 The setup programs and offline layout content are retained under:
 
 ```
-C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.2454\
+C:\ProgramData\OSDeployCore\software\Microsoft.WindowsADK_10.1.26100.9457\
 ```
 
 The setup processes run quietly with CEIP disabled and `/norestart`. Any nonzero download, layout, ADK, or WinPE setup exit code stops the command.
 
 {% hint style="info" %}
-If any Windows ADK version is registered, the helper downloads the two setup programs but keeps the installed version and skips layout creation and installation. It still creates the missing x86 `WinPE_OCs` directory used by the MDT Windows PE MMC snap-in when needed.
+If any Windows ADK version is registered, the helper downloads the two setup programs but keeps the installed version and skips layout creation and installation. OSDeploy media, USB, and Core workflows accept only ADK `10.1.26100.2454` or `10.1.26100.9457`; another installed version does not satisfy those requirements. The helper still creates the missing x86 `WinPE_OCs` directory used by the MDT Windows PE MMC snap-in when needed.
 {% endhint %}
 
 ## Download Only

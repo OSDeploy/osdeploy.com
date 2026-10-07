@@ -4,7 +4,7 @@ description: Update the selections and settings of an existing OSDeploy Boot pro
 
 # Update-OSDeployBootProfilePreview
 
-`Update-OSDeployBootProfilePreview` updates an existing profile without building media. It preserves omitted regional settings and options, while rerunning the shared content and wallpaper selectors.
+`Update-OSDeployBootProfilePreview` updates an existing profile without building media. It preserves omitted regional settings and options, while rerunning the shared content selectors, including WinpeStartup Core folders, and wallpaper.
 
 ## Requirements
 
@@ -49,9 +49,9 @@ Update-OSDeployBootProfilePreview -ProfileName 'Contoso-amd64' -WhatIf
 
 ## Selection and Preservation
 
-The profile architecture is read from `osdeployboot.json` and must be `amd64` or `arm64`. The command reselects shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper.
+The profile architecture is read from `osdeployboot.json` and must be `amd64` or `arm64`. The command reselects shared drivers, WinPE scripts, media scripts, WinpeStartup Core folders, WinpeStartup profiles, and wallpaper.
 
-Canceling the driver, script, media-script, or startup-profile selector clears the corresponding saved value. Canceling wallpaper selection preserves the current profile-root `wallpaper.jpg`.
+Canceling the driver, script, media-script, WinpeStartup Core, or startup-profile selector clears the corresponding saved value. Canceling wallpaper selection preserves the current profile-root `wallpaper.jpg`.
 
 Omitted `Languages`, `SetAllIntl`, `SetInputLocale`, `SetTimeZone`, and `Options` values are read from the existing profile. Explicit values replace them. Paths beneath OSDeployCore are stored with the portable `${{ OSDeployCore }}` token.
 

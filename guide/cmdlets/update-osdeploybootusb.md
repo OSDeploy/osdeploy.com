@@ -8,7 +8,7 @@ description: Refresh existing OSDeploy USB volumes from a selected standard or C
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 The workstation must also have:
 
@@ -20,7 +20,7 @@ The workstation must also have:
 See [Module Setup](../requirements/powershell-modules.md) to install OSDeploy and [OSDeploy Boot](../basic/build-osdeployboot.md) to create completed boot media.
 
 {% hint style="warning" %}
-The function updates every connected USB volume whose label matches `-BootLabel` or `-DataLabel`. Disconnect unrelated USB storage that uses the same labels before running the command.
+The function updates every connected USB volume whose label matches the selected boot label or `-DataLabel`. When `-BootLabel` is omitted, this includes the architecture-specific label and legacy `OSDEPLOY` volumes. Disconnect unrelated USB storage that uses the same labels before running the command.
 {% endhint %}
 
 ## Update Guidance
@@ -29,10 +29,10 @@ Use `Update-OSDeployBootUSB` for a prepared USB drive whose partition layout doe
 
 The update copies and overwrites source files but does not mirror the source tree. Files that exist only on the destination remain in place.
 
-| Content                | Matching label        | Destination                                      | Behavior                                                                     |
-| ---------------------- | --------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------- |
-| Selected BootMedia     | `OSDEPLOY` by default | Root of every matching USB volume                | Copy the complete source tree and write `BootMedia.json`.                    |
-| Local OSDCloud content | `OSDCloud` by default | `OSDCloud` directory on each matching USB volume | Check free space, prompt separately for each volume, and copy when approved. |
+| Content                | Matching label                                                                         | Destination                          | Behavior                                                                                                                                 |
+| ---------------------- | -------------------------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Selected BootMedia     | `BOOT-AMD64` or `BOOT-ARM64` from build metadata; also matches legacy `OSDEPLOY` volumes when `-BootLabel` is omitted | Root of every matching USB volume | Copy the complete source tree and write `BootMedia.json`; successfully updated legacy volumes are relabeled to match the build architecture. |
+| Local OSDCloud content | `OSDCloud` by default                                                                  | `OSDCloud` directory on each matching USB volume | Check free space, prompt separately for each volume, and copy when approved.                                                              |
 
 ## Parameters
 
@@ -40,9 +40,9 @@ All parameters are optional. The function has one parameter set and does not acc
 
 | Parameter    | Type             | Default     | Accepted values and behavior                                                                                                                                                                   |
 | ------------ | ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters. Every connected USB volume whose file-system label equals this value is updated.                                                                             |
+| `-BootLabel` | `String`         | Architecture-specific; also targets legacy `OSDEPLOY` volumes | Use from 0 through 11 characters. When omitted, the selected build's `properties.json` determines the architecture-specific label. An explicit label targets only that label and disables automatic relabeling. |
 | `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters. Every matching USB volume is considered for the optional OSDCloud copy.                                                                                      |
-| `-WhatIf`    | Common parameter | Not enabled | Perform prerequisite checks, media selection, volume discovery, and free-space checks. Change the AutoRun policy, report gated writes, and still display the OSDCloud `ShouldContinue` prompt. |
+| `-WhatIf`    | Common parameter | Not enabled | Perform prerequisite checks, media selection, volume discovery, and free-space checks. Change the AutoRun policy, report gated writes and legacy-label changes, and still display the OSDCloud `ShouldContinue` prompt. |
 | `-Confirm`   | Common parameter | Not enabled | Request confirmation for each BootMedia copy, metadata write, and approved OSDCloud copy. The function uses the default `Medium` impact, so these prompts do not appear under PowerShell's default `High` preference unless requested. It does not suppress the separate OSDCloud prompt. |
 
 Label comparisons use PowerShell's default case-insensitive equality. An empty string passes parameter validation, but a volume is selected only when its provider-returned label equals that value.
@@ -51,7 +51,7 @@ Label comparisons use PowerShell's default case-insensitive equality. An empty s
 
 ### Update USB volumes with the default labels
 
-Select a completed build and boot-media folder, then update every connected USB volume labeled `OSDEPLOY`. When local OSDCloud content exists, the function also evaluates volumes labeled `OSDCloud`:
+Select a completed build and boot-media folder, then update every connected USB volume matching that build's architecture-specific label and any legacy `OSDEPLOY` label. After a successful copy and metadata write, legacy volumes are relabeled to the architecture-specific label. When local OSDCloud content exists, the function also evaluates volumes labeled `OSDCloud`:
 
 ```powershell
 Update-OSDeployBootUSB
@@ -118,6 +118,8 @@ The function selects source content before discovering USB volumes:
 4. Sort those directories by name and full path, then open a second single-selection `Out-GridView` picker.
 
 The function writes a warning and returns when no completed build exists, either picker is canceled, or no supported boot-media folder is selected. Canceling either selector occurs before the AutoRun policy is changed.
+
+When `-BootLabel` is omitted, the selected build's `properties.json` must contain valid architecture metadata. Missing or invalid metadata stops the command before USB updates. Supplying `-BootLabel` targets only that label and skips metadata lookup and legacy-label migration.
 
 After both selections, the function sets this machine-wide policy value without `ShouldProcess` protection:
 

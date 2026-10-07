@@ -26,7 +26,7 @@ Shared Boot-Assets content is normally selected while creating or updating a bui
 | `osdeployboot-profiles` | Saved build profiles and profile-local content | When selecting, creating, updating, previewing, or building a named profile |
 | `winpedrivers-amd64` | Expanded amd64 WinPE driver packages | During amd64 boot image servicing |
 | `winpedrivers-arm64` | Expanded arm64 WinPE driver packages | During arm64 boot image servicing |
-| `winpestartup-profiles` | JSON configuration consumed by `Invoke-WinPEStartup` | Copied into the mounted image for use when WinPE starts |
+| `winpestartup-profiles` | JSON configuration consumed by `Invoke-WinpeStartup` | Copied into the mounted image for use when WinPE starts |
 
 ## `boot-mediascript`
 
@@ -60,7 +60,7 @@ The `boot-winpescript` folder is the shared library for PowerShell scripts that 
 
 OSDeploy discovers `*.ps1` files at the folder root and one directory below it. It also searches `core\boot-winpescript` in the installed OSDeploy, OSDCloud, and OSD modules. When an architecture is known, filenames containing the opposite architecture name are excluded from the selection list.
 
-Selected paths are stored in the profile's `WinPEScript` property. During `Build-OSDeployBoot`, they execute in the current PowerShell session near the end of mounted-image servicing, before profile-local WinPEStartup content and selected drivers are added.
+Selected paths are stored in the profile's `WinPEScript` property. During `Build-OSDeployBoot`, they execute in the current PowerShell session near the end of mounted-image servicing, before profile-local WinpeStartup content and selected drivers are added.
 
 A named profile can also contain its own `boot-winpescript` folder. Explicitly configured scripts run first, followed by profile-local scripts sorted by full path. Discovery is limited to the folder root and its immediate subdirectories, and duplicate paths run only once.
 
@@ -78,7 +78,7 @@ For example:
 osdeployboot-profiles\BranchOffice-amd64\osdeployboot.json
 ```
 
-The JSON file records the architecture, languages, regional settings, timezone, options, and explicitly selected paths for drivers, WinPE scripts, media scripts, and WinPEStartup profiles. OSDeploy converts supported absolute paths to portable tokens where possible:
+The JSON file records the architecture, languages, regional settings, timezone, options, and explicitly selected paths for drivers, WinPE scripts, media scripts, and WinpeStartup profiles. OSDeploy converts supported absolute paths to portable tokens where possible:
 
 | Token | Resolves to |
 | --- | --- |
@@ -105,7 +105,7 @@ osdeployboot-profiles\BranchOffice-amd64\
 |   `-- Configure-WinPE.ps1
 |-- winpedrivers-amd64\
 |   `-- Vendor\Device\driver.inf
-`-- WinPEStartup\
+`-- WinpeStartup\
 	|-- profiles\
 	|   `-- BranchOffice.json
 	`-- assets\
@@ -120,10 +120,10 @@ This content does not need to be added to `osdeployboot.json`. When the named pr
 | `boot-mediascript\*.ps1` | Runs after explicitly configured media scripts |
 | `boot-winpescript\*.ps1` | Runs after explicitly configured WinPE scripts |
 | `winpedrivers-<Architecture>` | Added recursively when the matching folder contains at least one INF file |
-| `WinPEStartup\profiles\*.json` | Copied after explicitly selected startup profiles; a matching file name replaces the earlier copy |
-| `WinPEStartup\assets` | Copied recursively into `WinPEStartup\assets` in the mounted image with overwrite enabled |
+| `WinpeStartup\profiles\*.json` | Copied after explicitly selected startup profiles; a matching file name replaces the earlier copy |
+| `WinpeStartup\assets` | Copied recursively into `WinpeStartup\assets` in the mounted image with overwrite enabled |
 
-Profile initialization creates only `WinPEStartup\profiles` and `WinPEStartup\assets`. Add profile-local script and driver folders when the profile requires them.
+Profile initialization creates only `WinpeStartup\profiles` and `WinpeStartup\assets`. Add profile-local script and driver folders when the profile requires them.
 
 ## `winpedrivers-amd64`
 
@@ -151,21 +151,21 @@ Selected shared paths are processed before an architecture-matched profile-local
 
 ## `winpestartup-profiles`
 
-The `winpestartup-profiles` folder is the shared library for JSON profiles consumed by `Invoke-WinPEStartup` after the built image starts. Profiles can control startup, main, shutdown, restart, module, Wi-Fi, IP configuration, device display, and PowerShell command behavior.
+The `winpestartup-profiles` folder is the shared library for JSON profiles consumed by `Invoke-WinpeStartup` after the built image starts. Profiles can control startup, main, shutdown, restart, module, Wi-Fi, IP configuration, device display, and PowerShell command behavior.
 
 Store JSON files directly in this folder. The selector does not search subdirectories or filter profiles by architecture. It also includes root-level JSON files from `core\winpestartup-profiles` in the installed OSDeploy, OSDCloud, and OSD modules.
 
-`New-WinPEStartupProfile` creates and validates a profile in this shared folder. During build profile creation or update, one or more startup profiles can be selected and their paths are stored in `WinPEStartupProfile`.
+`New-WinpeStartupProfile` creates and validates a profile in this shared folder. During build profile creation or update, one or more startup profiles can be selected and their paths are stored in `WinpeStartupProfile`.
 
 While the WIM is mounted, `Build-OSDeployBoot` copies the selected files into:
 
 ```text
-WinPEStartup\profiles
+WinpeStartup\profiles
 ```
 
-Files from the selected build profile's local `WinPEStartup\profiles` folder are copied afterward. Because the copy uses overwrite behavior, a profile-local JSON file with the same file name replaces the explicitly selected file in the mounted image.
+Files from the selected build profile's local `WinpeStartup\profiles` folder are copied afterward. Because the copy uses overwrite behavior, a profile-local JSON file with the same file name replaces the explicitly selected file in the mounted image.
 
-Profile-local `WinPEStartup\assets` is handled separately. It is not a shared top-level Boot-Assets folder and is not recorded in `osdeployboot.json`; all of its content is copied recursively into the mounted image whenever that profile is built.
+Profile-local `WinpeStartup\assets` is handled separately. It is not a shared top-level Boot-Assets folder and is not recorded in `osdeployboot.json`; all of its content is copied recursively into the mounted image whenever that profile is built.
 
 ## Folder creation
 

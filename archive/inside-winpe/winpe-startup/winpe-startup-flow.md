@@ -1,6 +1,6 @@
-# WinPE Startup Flow
+# WinpeStartup Flow
 
-We've taken a look at two steps of the WinPE Startup flow, but there are a few more steps in this process
+We've taken a look at two steps of the WinpeStartup flow, but there are a few more steps in this process
 
 {% stepper %}
 {% step %}
@@ -14,7 +14,7 @@ Winlogon reads the value of CmdLine, which is winpeshl.exe
 
 Initializes PNP and WallpaperHost.exe
 
-Executes commands from winpeshl.ini but this is skipped as this file doesn't exist. MDT would utilize this method for WinPE startup.
+Executes commands from winpeshl.ini but this is skipped as this file doesn't exist. MDT would utilize this method for WinpeStartup.
 
 Tries to execute \[SystemDrive]\\$Windows.\~BT\sources\setup.exe (does not exist)
 

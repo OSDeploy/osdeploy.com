@@ -20,7 +20,7 @@ Do not use the default WinGet command to install PowerShell. Beginning with Powe
 
 Use a PC with:
 
-* Windows 11 25H2, build 26200 or later
+* Windows 11 25H2, build 26200, or Windows 11 26H2, build 26300
 * amd64 architecture
 * Local administrative rights
 * At least 50 GB of free space on the system volume

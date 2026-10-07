@@ -4,7 +4,7 @@ description: Create a persistent architecture-specific OSDeploy Boot profile wit
 
 # New-OSDeployBootProfilePreview
 
-`New-OSDeployBootProfilePreview` creates a reusable OSDeploy Boot profile from a selected cached Windows Recovery image. It derives the architecture, selects shared Boot-Assets content, and writes portable settings to `osdeployboot.json` without building media.
+`New-OSDeployBootProfilePreview` creates a reusable OSDeploy Boot profile from a selected cached Windows Recovery image. It derives the architecture, selects shared Boot-Assets content including WinpeStartup Core folders, and writes portable settings to `osdeployboot.json` without building media.
 
 ## Requirements
 
@@ -61,9 +61,9 @@ Profiles are stored under:
 
 The selected recovery image controls the profile architecture. Existing profile directories are not overwritten. If no recovery image is selected, the command warns and creates nothing.
 
-The command selects shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Paths beneath OSDeployCore are saved with the portable `${{ OSDeployCore }}` token. The selected wallpaper is copied to the profile root as `wallpaper.jpg`.
+The command selects shared drivers, WinPE scripts, media scripts, WinpeStartup Core folders, WinpeStartup profiles, and wallpaper. Paths beneath OSDeployCore are saved with the portable `${{ OSDeployCore }}` token. The selected wallpaper is copied to the profile root as `wallpaper.jpg`.
 
-Profile-local content can be added beside `osdeployboot.json` under `boot-mediascript`, `boot-winpescript`, the matching `winpedrivers-<architecture>` directory, `WinPEStartup\profiles`, and `WinPEStartup\assets`.
+Profile-local content can be added beside `osdeployboot.json` under `boot-mediascript`, `boot-winpescript`, the matching `winpedrivers-<architecture>` directory, and `WinpeStartup\core`, `WinpeStartup\profiles`, and `WinpeStartup\assets`.
 
 ## WhatIf and Confirmation
 

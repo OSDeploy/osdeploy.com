@@ -8,7 +8,9 @@ description: Acquire, validate, publish, and cache the current Windows 11 operat
 
 ## Requirements
 
-Run the command on Windows with PowerShell 7.6 or later. Internet access, `expand.exe`, writable temporary storage, and write access to the module and Core cache are required.
+Run the command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. Internet access, `expand.exe`, writable temporary storage, and write access to the module and Core cache are also required.
+
+The host build and installed ADK limit the catalog release. ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects Windows 11 26H2 only when the host is also 26H2. Unsupported Windows or ADK versions stop the command before its Microsoft request.
 
 ## Parameters
 

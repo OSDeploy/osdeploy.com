@@ -10,7 +10,7 @@ description: >-
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 The workstation must also have:
 
@@ -29,10 +29,10 @@ The function removes every partition and all data from the selected USB disk. Co
 
 The partition sizes and file systems are fixed. Only their labels can be changed.
 
-| Partition | Size            | File system   | Default label | Purpose                                                              |
-| --------- | --------------- | ------------- | ------------- | -------------------------------------------------------------------- |
-| Boot      | 4 GB            | FAT32, active | `OSDEPLOY`    | Stores the selected `bootmedia` or `bootmedia_ca2023` tree.          |
-| Data      | Remaining space | NTFS          | `OSDCloud`    | Stores local OSDeploy Core OSDCloud content when it exists and fits. |
+| Partition | Size            | File system   | Default label         | Purpose                                                              |
+| --------- | --------------- | ------------- | --------------------- | -------------------------------------------------------------------- |
+| Boot      | 4 GB            | FAT32, active | Architecture-specific | Stores the selected `bootmedia` or `bootmedia_ca2023` tree.          |
+| Data      | Remaining space | NTFS          | `OSDCloud`            | Stores local OSDeploy Core OSDCloud content when it exists and fits. |
 
 Use short, recognizable labels. An empty label is valid, but it makes the partitions harder to identify in later workflows.
 
@@ -40,24 +40,26 @@ Use short, recognizable labels. An empty label is valid, but it makes the partit
 
 All parameters are optional. The function has one parameter set and does not accept pipeline input.
 
-| Parameter    | Type             | Default     | Accepted values and behavior                                                                                                                                                             |
-| ------------ | ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-BootLabel` | `String`         | `OSDEPLOY`  | Use from 0 through 11 characters for the FAT32 boot-partition label.                                                                                                                     |
-| `-DataLabel` | `String`         | `OSDCloud`  | Use from 0 through 32 characters for the NTFS data-partition label.                                                                                                                      |
-| `-WhatIf`    | Common parameter | Not enabled | Run discovery and selection, report gated disk and copy operations, and return before partition creation. The AutoRun policy change and empty-disk MBR conversion are not gated.         |
-| `-Confirm`   | Common parameter | Not enabled | Request confirmation for each gated clear, partition, and copy operation. `ConfirmImpact` is `High`, so these prompts appear under PowerShell's default `High` confirmation preference even without `-Confirm`. |
+| Parameter    | Type             | Default                | Accepted values and behavior                                                                                                                                                                   |
+| ------------ | ---------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-BootLabel` | `String`         | Architecture-specific  | Use from 0 through 11 characters. When omitted, the selected build's `properties.json` determines `BOOT-AMD64` or `BOOT-ARM64`.                                                                |
+| `-DataLabel` | `String`         | `OSDCloud`             | Use from 0 through 32 characters for the NTFS data-partition label.                                                                                                                            |
+| `-WhatIf`    | Common parameter | Not enabled            | Run discovery and selection, report gated disk and copy operations, and return before partition creation. The AutoRun policy change and empty-disk MBR conversion are not gated.                |
+| `-Confirm`   | Common parameter | Not enabled            | Request confirmation for each gated clear, partition, and copy operation. `ConfirmImpact` is `High`, so these prompts appear under PowerShell's default `High` confirmation preference even without `-Confirm`. |
 
 ## Examples
 
 ### Create a USB with the default labels
 
-Select an eligible USB disk, a completed build, and one of its boot-media folders. The function creates partitions labeled `OSDEPLOY` and `OSDCloud`:
+Select an eligible USB disk, a completed build, and one of its boot-media folders. The function labels the boot partition `BOOT-AMD64` or `BOOT-ARM64` from the selected build metadata and labels the data partition `OSDCloud`:
 
 ```powershell
 New-OSDeployBootUSB
 ```
 
 Confirm the disk clear when the selected disk has partitions, then confirm partition creation and each applicable copy operation.
+
+If the selected build's architecture metadata is missing or invalid, the function stops before preparing the disk. Set `-BootLabel` explicitly to bypass automatic labeling.
 
 ### Use custom partition labels
 
