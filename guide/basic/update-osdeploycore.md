@@ -16,10 +16,11 @@ Use `Update-OSDeployCore` to prepare the local content library used to build OSD
 
 Run the function on a workstation that meets these requirements:
 
-* Windows 11 25H2 build 26200 or later
+* Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
 * [Required software](install-osdeploysoftware.md)
+* Windows ADK `10.1.26100.2454` or `10.1.26100.9457`
 * Administrator rights
 * `curl.exe` available in `PATH`
 * Internet access and enough storage for Windows source files and drivers

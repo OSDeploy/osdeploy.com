@@ -18,9 +18,10 @@ Use `Update-OSDeployBootUSB` when an existing OSDeploy USB drive only needs refr
 
 Run the function on a workstation that meets these requirements:
 
-* Windows 11 25H2 build 26200 or later
+* Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
+* Windows ADK `10.1.26100.2454` or `10.1.26100.9457`
 * Administrator rights
 * `curl.exe` available in `PATH`
 * `Out-GridView` for selecting the build and media folder
@@ -47,11 +48,13 @@ Select an eligible USB disk by number, choose a completed build, and select its 
 | ---------------------- | ----------------------------------- |
 | Partition style        | MBR                                 |
 | Boot partition         | 4 GB, FAT32, active                 |
-| Boot label             | `OSDEPLOY`                          |
+| Boot label             | `BOOT-AMD64` or `BOOT-ARM64`, based on the selected build |
 | Data partition         | Remaining space, NTFS               |
 | Data label             | `OSDCloud`                          |
 | Boot media             | Interactive selection               |
 | Local OSDCloud content | Copy when present and space permits |
+
+When `-BootLabel` is omitted, the function reads the selected build's architecture from `properties.json`. If that metadata is missing or invalid, the command stops before preparing the disk. Specify `-BootLabel` to use a custom label instead.
 
 {% hint style="info" %}
 The 4 GB FAT32 boot partition is fixed. Store larger local operating-system content on the NTFS data partition rather than expanding the boot partition.

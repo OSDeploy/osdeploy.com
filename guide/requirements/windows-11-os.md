@@ -4,7 +4,7 @@ description: Prepare a supported Windows 11 workstation for OSDeploy.
 
 # Windows 11
 
-Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
+Use a fully updated Windows 11 25H2 (build 26200) or Windows 11 26H2 (build 26300) amd64 computer as the OSDeploy PC.
 
 ## Prepare the OSDeploy PC
 
@@ -14,7 +14,7 @@ Use a fully updated Windows 11 25H2 amd64 computer as the OSDeploy PC.
 
 Use a workstation that meets these requirements:
 
-* Windows 11 25H2, build 26200 or later
+* Windows 11 25H2, build 26200, or Windows 11 26H2, build 26300
 * amd64 architecture
 * Local administrative rights
 * At least 50 GB of free space on the system volume
@@ -49,7 +49,7 @@ $IsAdministrator = ([Security.Principal.WindowsPrincipal] [Security.Principal.Wi
 }
 ```
 
-Confirm that the output reports Windows 11 25H2, build 26200 or later, `AMD64`, administrative rights, and at least 50 GB of free space. `ARM64` is possible but not fully tested.
+Confirm that the output reports Windows 11 25H2 (build 26200) or Windows 11 26H2 (build 26300), `AMD64`, administrative rights, and at least 50 GB of free space. `ARM64` is possible but not fully tested.
 {% endstep %}
 
 {% step %}

@@ -22,11 +22,12 @@ OSDeploy creates and maintains the boot media on the workstation. OSDCloud runs 
 
 Run the function on a workstation that meets these requirements:
 
-* Windows 11 25H2 build 26200 or later
+* Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../requirements/powershell-modules.md)
 * Configured [OSDeploy Core](update-osdeploycore.md)
 * [Windows ADK and WinPE add-on](../cmdlets/install-osdeploysoftware/windows-adk-26h2.md)
+* Windows ADK `10.1.26100.2454` or `10.1.26100.9457`
 * OSDCloud module version `26.7.25.2` or later
 * Administrator rights
 * `curl.exe` available in `PATH`
@@ -45,7 +46,7 @@ Open an elevated PowerShell 7.6 session and run:
 Build-OSDeployBoot
 ```
 
-Select an imported WinRE image, shared content, and a wallpaper when prompted. The default workflow uses these settings:
+Select an imported WinRE image, shared drivers and scripts, WinpeStartup Core folders and profiles, and a wallpaper when prompted. The default workflow uses these settings:
 
 | Setting         | Default                                                       |
 | --------------- | ------------------------------------------------------------- |

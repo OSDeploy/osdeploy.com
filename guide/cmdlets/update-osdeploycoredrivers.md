@@ -5,7 +5,7 @@ description: Download and prepare WinPE driver packages for OSDeploy Core boot i
 # Update-OSDeployCoreDrivers
 
 {% hint style="info" %}
-`Update-OSDeployCoreDrivers` is the third public OSDeploy PowerShell module sub-function run by `Update-OSDeployCore`. Run it independently when only the WinPE driver library needs updating.
+`Update-OSDeployCoreDrivers` is the final stage run by `Update-OSDeployCore`. Run it independently when only the WinPE driver library needs updating.
 
 **TLDR:** Run `Update-OSDeployCoreDrivers` to update all active driver sources. Use `-Name` only when specific sources are needed.
 
@@ -17,6 +17,8 @@ Update-OSDeployCoreDrivers -Name 'intel-ethernet' -DownloadOnly
 {% endhint %}
 
 `Update-OSDeployCoreDrivers` prepares the network and storage drivers that `Build-OSDeployBoot` can inject into boot images. It discovers the latest packages from each requested source, downloads the archives, and expands them into versioned folders in the OSDeploy Core library.
+
+Before refreshing catalogs, the command scans filesystem drives other than the system drive for existing `OSDCloud\winpedrivers-amd64`, `OSDCloud\winpedrivers-arm64`, and `OSDeployCore\boot-assets\winpedrivers-{amd64,arm64}` folders. It imports top-level driver folders that are not already present into the matching Boot-Assets library. Both architectures are imported regardless of `-Name` or `-Architecture`; existing Boot-Assets folders are not overwritten. If both source locations contain the same folder on one drive, the `OSDCloud` copy takes precedence; if a folder exists on multiple drives, the first drive found is used.
 
 A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
 
@@ -40,8 +42,8 @@ The command stops before driver processing when a Windows version, PowerShell, M
 | `-Force`           | `Switch`         | Not enabled | Re-downloads matching package archives instead of reusing a valid cache file. The catalog helper accepts this switch but does not change discovery behavior. Existing nonempty Dell, HP, and Intel expanded folders are still reused.                           |
 | `-SkipWifiDrivers` | `Switch`         | Not enabled | Excludes package names containing `wifi` or `wireless`. The command enables this automatically when no valid imported WinRE source is found.                                                                                                                    |
 | `-DownloadOnly`    | `Switch`         | Not enabled | Returns after saving package archives in the download cache. Expansion and `package.json` creation are skipped.                                                                                                                                                 |
-| `-Architecture`    | `String`         | Automatic   | Use `amd64` or `arm64`. Omission permits both. The filter applies to package processing, not catalog refresh, and packages with a blank architecture remain eligible.                                                                                           |
-| `-WhatIf`          | Common parameter | Not enabled | Runs catalog and package discovery with child preview enabled. Protected catalog writes, downloads, and expansion are skipped, but initialization, vendor requests, catalog-directory creation, and cache reads can still occur.                                |
+| `-Architecture`    | `String`         | Automatic   | Use `amd64` or `arm64`. Omission permits both. The filter applies to package processing, not catalog refresh or the import of existing folders; imported folders from both architectures are retained. Packages with a blank architecture remain eligible. |
+| `-WhatIf`          | Common parameter | Not enabled | Runs catalog and package discovery with child preview enabled. Cross-drive folder imports, protected catalog writes, downloads, and expansion are reported but skipped. Initialization, vendor requests, catalog-directory creation, and cache reads can still occur. |
 | `-Confirm`         | Common parameter | Not enabled | Prompts once before the combined catalog refresh and package-processing operation. Child confirmation prompts are suppressed.                                                                                                                                   |
 
 ## Driver Sources
@@ -183,7 +185,7 @@ Use `-WhatIf` to show the catalog and package actions without downloading or exp
 Update-OSDeployCoreDrivers -Name 'dell', 'hp' -WhatIf
 ```
 
-The public command takes a dedicated preview path so child commands can report their planned actions. It can still initialize and migrate Core paths, inspect imported WinRE sources, contact vendors, load the existing catalog, and create the catalog parent directory. The catalog file is not written and package handlers are not invoked because child `ShouldProcess` calls decline the mutations.
+The public command takes a dedicated preview path so child commands can report their planned actions. It can still initialize and migrate Core paths, scan other drives for driver folders, inspect imported WinRE sources, contact vendors, load the existing catalog, and create the catalog parent directory. Driver-folder imports, the catalog write, and package processing are skipped because their `ShouldProcess` calls decline the mutations.
 
 Use `-Verbose` to display source discovery, catalog merge, package selection, cache, and expansion details:
 

@@ -10,7 +10,7 @@ description: List, preview, download, or install the software components used by
 
 Run the command from an elevated PowerShell session on a workstation that meets all of these requirements:
 
-* Windows 11; hosts earlier than Windows 11 26H2 build 26300 warn and continue during preview
+* Windows 11 25H2 (build 26200) or later
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](../../requirements/powershell-modules.md)
 * `curl.exe` available in `PATH`

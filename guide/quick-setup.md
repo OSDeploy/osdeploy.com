@@ -22,10 +22,11 @@ Hydration installs software, downloads Windows and driver content, and creates b
 
 Use a workstation with:
 
-* Windows 11 25H2 build 26200 or later
+* Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](requirements/powershell-modules.md)
 * OSDCloud module version `26.5.24.1` or later
+* Windows ADK `10.1.26100.2454` or `10.1.26100.9457` for boot-image builds and OS image selection; Hydration offers ADK 26H2 when no ADK is installed
 * A Recast Software Community License is recommended for direct use of gated update commands; the Core update commands invoked by Hydration use its immediate-caller exception
 * Administrator rights
 * `curl.exe` available in `PATH`

@@ -10,7 +10,7 @@ description: >-
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or later. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 Install and configure these components before starting a build:
 
@@ -18,6 +18,8 @@ Install and configure these components before starting a build:
 * [OSDeploy Core](../basic/update-osdeploycore.md)
 * [Windows ADK and WinPE add-on](install-osdeploysoftware/windows-adk-26h2.md)
 * OSDCloud module version `26.7.25.2` or later
+
+The installed ADK must be version `10.1.26100.2454` or `10.1.26100.9457`, with its WinPE add-on. The selected WinRE release is limited by the host build and ADK: ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects Windows 11 26H2 only when the host is also 26H2.
 
 Install or update OSDCloud with:
 
@@ -205,7 +207,7 @@ Saved profiles use flat, architecture-qualified directories under:
 | `${{ OSDCloudModulePath }}` | Loaded OSDCloud module base    |
 | `${{ OSDModulePath }}`      | Loaded OSD module base         |
 
-When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper. Shared module-managed and user-added drivers are selected from `%ProgramData%\OSDeployCore\boot-assets\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
+When `-ProfileName` is omitted, the function presents shared selectors for compatible drivers, WinPE scripts, media scripts, WinpeStartup Core folders, WinpeStartup profiles, and wallpaper. Shared module-managed and user-added drivers are selected from `%ProgramData%\OSDeployCore\boot-assets\winpedrivers-{Architecture}`. It writes the configuration before build confirmation to:
 
 ```
 %ProgramData%\OSDeployCore\boot-assets\osdeployboot-profiles\recent-amd64.json
@@ -225,21 +227,23 @@ Keep portable content beside `osdeployboot.json` to include it without storing a
 |-- winpedrivers-{Architecture}\
 |-- boot-winpescript\
 |-- wallpaper.jpg
-`-- WinPEStartup\
-    |-- Profiles\
-	`-- Assets\
+`-- WinpeStartup\
+    |-- core\
+    |-- profiles\
+	`-- assets\
 ```
 
 The build applies profile content as follows:
 
-| Content               | Discovery and precedence                                                                                                                                                                                                                                                    |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| WinPE scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `boot-winpescript` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                        |
-| Media scripts         | Run explicit profile paths first, then sorted `*.ps1` files from `boot-mediascript` and its immediate subdirectories after the image is dismounted. Duplicate paths are ignored case-insensitively.                                                                            |
-| WinPE drivers         | Add explicit paths first. When recursive `*.inf` files exist under the architecture-matched local `winpedrivers-amd64` or `winpedrivers-arm64` directory, append that directory once and let DISM add its drivers recursively.                                                            |
-| WinPEStartup profiles | Copy explicit JSON files first, then sorted root-level JSON files from `WinPEStartup\Profiles`. A local file with the same destination name replaces the explicit file.                                                                                                     |
-| WinPEStartup assets   | Copy all content under `WinPEStartup\Assets` recursively with overwrite. These paths are not stored in `osdeployboot.json`.                                                                                                                                                  |
-| Wallpaper             | Use profile-root `wallpaper.jpg`, then the bundled default. New and updated profiles can select a shared JPG from `boot-assets\boot-wallpaper`, which is copied to the profile root.                                                                                           |
+| Content                  | Discovery and precedence                                                                                                                                                                                                                                                            |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| WinPE scripts            | Run explicit profile paths first, then sorted `*.ps1` files from `boot-winpescript` and its immediate subdirectories. Duplicate paths are ignored case-insensitively.                                                                                                                 |
+| Media scripts            | Run explicit profile paths first, then sorted `*.ps1` files from `boot-mediascript` and its immediate subdirectories after the image is dismounted. Duplicate paths are ignored case-insensitively.                                                                                     |
+| WinPE drivers            | Add explicit paths first. When recursive `*.inf` files exist under the architecture-matched local `winpedrivers-amd64` or `winpedrivers-arm64` directory, append that directory once and let DISM add its drivers recursively.                                                         |
+| WinpeStartup Core folders | Automatically includes `boot-assets\winpestartup-core\main`, then selected shared folders and immediate profile-local child folders. Copies each to `WinpeStartup\core\<FolderName>` in the image; same-name folders merge recursively and existing files are overwritten.              |
+| WinpeStartup profiles   | Copy explicit JSON files first, then sorted root-level JSON files from `WinpeStartup\profiles`. A local file with the same destination name replaces the explicit file.                                                                                                                 |
+| WinpeStartup assets     | Copy all content under `WinpeStartup\assets` recursively with overwrite. These paths are not stored in `osdeployboot.json`.                                                                                                                                                            |
+| Wallpaper                | Use profile-root `wallpaper.jpg`, then the bundled default. New and updated profiles can select a shared JPG from `boot-assets\boot-wallpaper`, which is copied to the profile root.                                                                                                  |
 
 Missing configured content produces a warning and that item is skipped. A failing custom script writes a non-terminating error so later build steps can continue.
 
@@ -261,7 +265,7 @@ With `-WhatIf`, the function stops at the directory operation. It does not creat
 
 The command sends one `Build-OSDeployBoot` analytics event after displaying the configuration and waiting five seconds, but before evaluating `ShouldProcess`. Therefore, `-WhatIf` and declining `-Confirm` do not prevent the event. See [OSDeploy Privacy](../../privacy.md) for the event fields, identifier handling, and operator choices.
 
-Generated WinPE includes `ID_OSDEPLOYDEVICE` and `ID_OSDEPLOYBOOT` for device and build identity. When a selected license is available, the image can also include `ID_REGISTEREDEMAIL` and `ID_REGISTEREDLICENSE`. Review generated media before distributing it outside the organization.
+Generated WinPE includes `ID_OSDEPLOYDEVICE` and `ID_OSDEPLOYBOOT` for device and build identity. `ID_OSDEPLOYDEVICE` is a SHA-256 hash of the device UUID, or a generated GUID when the UUID is unavailable. The image includes `ID_REGISTEREDEMAIL` and `ID_REGISTEREDLICENSE` only when those license values are available. Missing UUID or license data does not prevent the build. Review generated media before distributing it outside the organization.
 
 ## Build Output
 

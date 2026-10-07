@@ -10,7 +10,7 @@ description: >-
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11. During preview, hosts earlier than Windows 11 26H2 build 26300 warn and continue. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 Install the [OSDeploy module](../requirements/powershell-modules.md) and OSDCloud module version `26.5.24.1` or later before starting hydration:
 
@@ -27,7 +27,7 @@ Hydration can install the remaining workstation components:
 
 | Component                         | Requirement                   | Behavior when absent                                   |
 | --------------------------------- | ----------------------------- | ------------------------------------------------------ |
-| Windows ADK 26H2 and WinPE add-on | Required                      | Prompt to install. Declining terminates hydration.     |
+| Windows ADK and WinPE add-on | Required                      | Requires ADK `10.1.26100.2454` or `10.1.26100.9457`. If no ADK is installed, prompts to install ADK 26H2. Declining terminates hydration. |
 | 7-Zip                             | Required                      | Prompt to install. Declining terminates hydration.     |
 | Git for Windows                   | Optional                      | Prompt to install. Declining skips Git and continues.  |
 | Visual Studio Code                | Optional                      | Prompt to install. Declining skips it and continues.   |
@@ -148,12 +148,12 @@ Update-OSDeployCoreRE -Architecture $arch
 
 `-Force`, `-WhatIf`, and `-Confirm` are forwarded to `Update-OSDeployCoreESD` through bound parameters. The Windows import receives inherited common-parameter preferences but does not receive `-Force`.
 
-The ESD command selects the current en-US Windows 11 26H2 Enterprise ESD for the detected architecture, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
+The ESD command selects the en-US Enterprise ESD for the Windows release permitted by the host build and installed ADK, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects 26H2 only when the host is also 26H2. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
 
 Verified ESD files are stored under:
 
 ```
-C:\ProgramData\OSDeployCore\OSDCloud\OS\Windows 11 26H2\
+C:\ProgramData\OSDeployCore\OSDCloud\OS\<Windows release>\
 ```
 
 The export command creates Windows RE and supporting Windows OS content under architecture-specific directories below:
@@ -190,7 +190,7 @@ Build-OSDeployBoot -Auto
 
 `Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
 
-`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE scripts, media scripts, WinPEStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` under `boot-assets\osdeployboot-profiles` before reaching its build-directory confirmation.
+`-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE scripts, media scripts, WinpeStartup Core folders, WinpeStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` under `boot-assets\osdeployboot-profiles` before reaching its build-directory confirmation.
 
 Completed media is written to a new architecture-specific build directory below `C:\ProgramData\OSDeployCore\boot`. The build name is `OSDeploy`; if the generated directory already exists, the builder adds a numeric suffix instead of overwriting it.
 
