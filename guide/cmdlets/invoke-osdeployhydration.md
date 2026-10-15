@@ -27,7 +27,7 @@ Hydration can install the remaining workstation components:
 
 | Component                         | Requirement                   | Behavior when absent                                   |
 | --------------------------------- | ----------------------------- | ------------------------------------------------------ |
-| Windows ADK and WinPE add-on | Required                      | Requires ADK `10.1.26100.2454` or `10.1.26100.9457`. If no ADK is installed, prompts to install ADK 26H2. Declining terminates hydration. |
+| Windows ADK and WinPE add-on | Required                      | Requires ADK `10.1.26100.2454` or `10.1.26100.9457`. ADK `10.1.26100.2454` is supported only on a Windows 11 25H2 host; ADK `10.1.26100.9457` is supported on a 25H2 or 26H2 host. If no ADK is installed, prompts to install ADK 26H2. Declining terminates hydration. |
 | 7-Zip                             | Required                      | Prompt to install. Declining terminates hydration.     |
 | Git for Windows                   | Optional                      | Prompt to install. Declining skips Git and continues.  |
 | Visual Studio Code                | Optional                      | Prompt to install. Declining skips it and continues.   |
@@ -148,7 +148,7 @@ Update-OSDeployCoreRE -Architecture $arch
 
 `-Force`, `-WhatIf`, and `-Confirm` are forwarded to `Update-OSDeployCoreESD` through bound parameters. The Windows import receives inherited common-parameter preferences but does not receive `-Force`.
 
-The ESD command selects the en-US Enterprise ESD for the Windows release permitted by the host build and installed ADK, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects 26H2 only when the host is also 26H2. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
+The ESD command selects the en-US Enterprise ESD for the target Windows release, checks cached files and download availability, downloads when required, and verifies the SHA256 checksum. ADK `10.1.26100.2454` targets Windows 11 25H2 (build `26200`) and is supported only on a 25H2 host. ADK `10.1.26100.9457` targets Windows 11 26H2 (build `26300`) on either supported host release. `-Force` requests a refresh even when a verified current file exists. ESD cache and recovery decisions can still require confirmation.
 
 Verified ESD files are stored under:
 
@@ -188,7 +188,7 @@ Hydration calls the boot builder with automatic source selection:
 Build-OSDeployBoot -Auto
 ```
 
-`Build-OSDeployBoot` derives the architecture from the host, selects the newest imported WinRE source for that architecture, and falls back to the architecture-specific ADK `winpe.wim` when no WinRE source is available.
+`Build-OSDeployBoot` selects the newest imported WinRE source matching its resolved architecture and the Windows build targeted by the installed ADK. It falls back to the architecture-specific ADK `winpe.wim` when no matching WinRE source is available.
 
 `-Auto` skips the WinRE source picker but does not suppress every selector. Shared drivers, WinPE scripts, media scripts, WinpeStartup Core folders, WinpeStartup profiles, and wallpaper can still require selection. The builder writes `recent-amd64.json` or `recent-arm64.json` under `boot-assets\osdeployboot-profiles` before reaching its build-directory confirmation.
 

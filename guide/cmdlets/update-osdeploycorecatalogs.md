@@ -2,15 +2,17 @@
 description: Acquire, validate, publish, and cache the current Windows 11 operating system catalog.
 ---
 
-# Update-OSDeployCoreCatalogOS
+# Update-OSDeployCoreCatalogs
 
-`Update-OSDeployCoreCatalogOS` downloads the current Windows 11 products catalog from Microsoft, validates it, publishes it in the OSDeploy module, and synchronizes the OSDeploy Core catalog cache.
+`Update-OSDeployCoreCatalogs` downloads the current Windows 11 products catalog from Microsoft, validates it, publishes it in the OSDeploy module, and synchronizes the OSDeploy Core catalog cache.
 
 ## Requirements
 
-Run the command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. Internet access, `expand.exe`, writable temporary storage, and write access to the module and Core cache are also required.
+Run the command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. ADK `10.1.26100.2454` is supported only on a Windows 11 25H2 host and targets build `26200`; ADK `10.1.26100.9457` is supported on either host release and targets build `26300`. Internet access, `expand.exe`, writable temporary storage, and write access to the module and Core cache are also required.
 
-The host build and installed ADK limit the catalog release. ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects Windows 11 26H2 only when the host is also 26H2. Unsupported Windows or ADK versions stop the command before its Microsoft request.
+A valid [Recast Software Community License](../registration.md) is required for direct invocation. If no valid license is found, the command displays license guidance and returns. Its immediate call from `Invoke-OSDeployHydration` is exempt from this direct-call gate.
+
+The exact ADK version determines the catalog release. Unsupported host and ADK combinations stop the command before its Microsoft request.
 
 ## Parameters
 
@@ -25,13 +27,13 @@ The host build and installed ADK limit the catalog release. ADK `10.1.26100.2454
 ### Update the catalog
 
 ```powershell
-Update-OSDeployCoreCatalogOS
+Update-OSDeployCoreCatalogs
 ```
 
 ### Validate without publishing
 
 ```powershell
-Update-OSDeployCoreCatalogOS -WhatIf
+Update-OSDeployCoreCatalogs -WhatIf
 ```
 
 ## Validation and Output

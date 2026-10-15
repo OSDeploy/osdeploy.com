@@ -19,7 +19,7 @@ Install and configure these components before starting a build:
 * [Windows ADK and WinPE add-on](install-osdeploysoftware/windows-adk-26h2.md)
 * OSDCloud module version `26.7.25.2` or later
 
-The installed ADK must be version `10.1.26100.2454` or `10.1.26100.9457`, with its WinPE add-on. The selected WinRE release is limited by the host build and ADK: ADK `10.1.26100.2454` selects Windows 11 25H2; ADK `10.1.26100.9457` selects Windows 11 26H2 only when the host is also 26H2.
+The installed ADK must be version `10.1.26100.2454` or `10.1.26100.9457`, with its WinPE add-on. ADK `10.1.26100.2454` is supported only on a Windows 11 25H2 host and targets build `26200`. ADK `10.1.26100.9457` is supported on either host release and targets build `26300`. WinRE selection is filtered to that target build and the resolved architecture.
 
 Install or update OSDCloud with:
 
@@ -38,7 +38,7 @@ The function stops before source selection when Windows, PowerShell, `curl.exe`,
 | Parameter | Type | Default | Accepted values and behavior |
 | --- | --- | --- | --- |
 | `-ProfileName` | `String` | None | Required in the `Profile` and `ADKProfile` sets. Specify the exact name of an existing architecture-specific profile, such as `Contoso-amd64`. Tab completion lists readable profiles. The command does not create or update the named profile. |
-| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. In WinRE sets, the value filters source selection. `-Auto` derives an omitted value from `PROCESSOR_ARCHITECTURE`. ADK builds require a value unless the profile supplies it. |
+| `-Architecture` | `String` | Automatic | Use `amd64` or `arm64`. In WinRE sets, the value filters source selection. When omitted, the running operating system architecture is used unless a matching profile supplies it. |
 | `-Languages` | `String[]` | None | Add validated ADK languages. Use `*` to enumerate all available language directories except the independently processed `en-us` base. An explicit value overrides a loaded profile for this build only. |
 | `-SetAllIntl` | `String` | Profile value or none | Pass a locale to the WinPE international-settings step. An explicit value overrides a loaded profile for this build only. |
 | `-SetInputLocale` | `String` | Profile value or none | Pass an input locale to the WinPE servicing steps. An explicit value overrides a loaded profile for this build only. |
@@ -46,7 +46,7 @@ The function stops before source selection when Windows, PowerShell, `curl.exe`,
 | `-SkipAdkPackages` | `Switch` | Not enabled | Skip ADK optional-component and language-package installation. Other image customization still runs. |
 | `-UseAdkWinPE` | `Switch` | Not enabled | Required in the `ADK` and `ADKProfile` sets. Use the ADK `winpe.wim`. Cannot be combined with `-Auto`. |
 | `-UpdateUSB` | `Switch` | Not enabled | After the build, run the USB update step against partitions labeled `USB-WinPE`. |
-| `-Auto` | `Switch` | Not enabled | In the `Default` and `Profile` sets, select the newest compatible imported WinRE source without the source picker. Fall back to ADK WinPE when none is available. |
+| `-Auto` | `Switch` | Not enabled | In the `Default` and `Profile` sets, select the newest imported WinRE source matching the resolved architecture and target Windows build without the source picker. Fall back to ADK WinPE when none is available. |
 | `-Options` | `String[]` | Profile value or none | Use `pwsh`, `dart`, or both. An explicit value overrides a loaded profile for this build only. |
 | `-WhatIf` | Common parameter | Not enabled | Complete prerequisite checks and configuration, then stop at the build-directory operation. Without `-ProfileName`, the recent profile snapshot can already have been written. |
 | `-Confirm` | Common parameter | Not enabled | Prompt before creating the build output directories. Declining stops the build after configuration. |
@@ -172,15 +172,14 @@ Build-OSDeployBoot `
 
 ## Source Selection
 
-The `Default` and `Profile` parameter sets start with an imported WinRE source:
+The command resolves architecture from the matching saved profile when one is loaded; otherwise, it uses the running operating system architecture unless `-Architecture` is specified. The `Default` and `Profile` parameter sets then select imported WinRE sources matching both that architecture and the Windows build targeted by the installed ADK:
 
-1. With `-Auto`, derive an omitted architecture from `PROCESSOR_ARCHITECTURE`, find imported WinRE images for that architecture, sort by OS version descending, and select the newest image.
-2. With `-Architecture`, show the interactive WinRE selector filtered to that architecture.
-3. Without either option, show the interactive selector for all supported imported WinRE images.
-4. If no WinRE image is selected or available, warn and fall back to ADK WinPE. When the architecture is still unset, derive it from the host.
-5. Resolve the architecture-specific ADK paths. The function stops when the architecture or required ADK paths cannot be resolved.
+1. With `-Auto`, select the newest matching image without showing the WinRE selector.
+2. Without `-Auto`, show the interactive selector for matching images.
+3. If no matching image is selected or available, warn and fall back to ADK WinPE using the resolved architecture.
+4. The `ADK` and `ADKProfile` parameter sets bypass WinRE selection and use the architecture-specific ADK `winpe.wim`.
 
-The `ADK` and `ADKProfile` parameter sets bypass WinRE selection and use the architecture-specific ADK `winpe.wim`.
+The ADK `10.1.26100.2454` targets Windows build `26200` (Windows 11 25H2). ADK `10.1.26100.9457` targets build `26300` (Windows 11 26H2), including when installed on a 25H2 host.
 
 The build folder name uses this format:
 

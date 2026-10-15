@@ -5,7 +5,7 @@ Builds customized WinPE boot media from an imported WinRE or Windows ADK source.
 | Property | Value |
 | --- | --- |
 | Module | OSDeploy |
-| Platform | Windows 11 25H2 build 26200 or later (amd64 / arm64) |
+| Platform | Windows 11 25H2 build 26200 or 26H2 build 26300 (amd64 / arm64) |
 | Requires | PowerShell 7.6, Windows ADK and WinPE add-on, OSDCloud 26.7.25.2, Administrator rights |
 | Output | None; sets `$global:BuildMedia` as process state |
 
@@ -40,7 +40,7 @@ Build-OSDeployBoot -ProfileName <String> -UseAdkWinPE [-Architecture <String>]
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `-ProfileName` | `String` | Profile sets | Exact name of an existing architecture-specific profile. The profile is read but not modified. |
-| `-Architecture` | `String` | ADK set | `amd64` or `arm64`; filters WinRE selection or selects ADK paths. |
+| `-Architecture` | `String` | No | `amd64` or `arm64`; filters WinRE selection or selects ADK paths. Defaults to the running OS architecture unless a matching profile supplies it. |
 | `-Languages` | `String[]` | No | Valid ADK language identifiers or `*`. |
 | `-SetAllIntl` | `String` | No | WinPE international-settings value. |
 | `-SetInputLocale` | `String` | No | WinPE input locale. |
@@ -48,7 +48,7 @@ Build-OSDeployBoot -ProfileName <String> -UseAdkWinPE [-Architecture <String>]
 | `-SkipAdkPackages` | `Switch` | No | Skip ADK optional-component and language packages. |
 | `-UseAdkWinPE` | `Switch` | ADK sets | Use ADK `winpe.wim`; cannot be combined with `-Auto`. |
 | `-UpdateUSB` | `Switch` | No | Run the final update step for `USB-WinPE` partitions. |
-| `-Auto` | `Switch` | WinRE sets | Select the newest compatible WinRE source, with ADK fallback. |
+| `-Auto` | `Switch` | WinRE sets | Select the newest WinRE source matching the resolved architecture and target Windows build, with ADK fallback. |
 | `-Options` | `String[]` | No | `pwsh`, `dart`, or both. |
 | `-WhatIf` | `Switch` | No | Stop at build-directory creation after configuration; a recent profile snapshot can already be written. |
 | `-Confirm` | `Switch` | No | Confirm build-directory creation. |

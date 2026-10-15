@@ -25,6 +25,8 @@ Run the function on a workstation that meets these requirements:
 * `curl.exe` available in `PATH`
 * Internet access and enough storage for Windows source files and drivers
 
+ADK `10.1.26100.2454` is supported only on a Windows 11 25H2 host and targets Windows 11 25H2 (build `26200`). ADK `10.1.26100.9457` is supported on Windows 11 25H2 or 26H2 hosts and targets Windows 11 26H2 (build `26300`).
+
 {% hint style="warning" %}
 Windows source files are large, and preparing the images can take time. Keep the elevated PowerShell session open until the command finishes.
 {% endhint %}

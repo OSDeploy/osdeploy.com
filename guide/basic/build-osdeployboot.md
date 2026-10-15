@@ -35,6 +35,8 @@ Run the function on a workstation that meets these requirements:
 {% hint style="warning" %}
 The function stops before source selection when Windows, PowerShell, `curl.exe`, administrator access, OSDCloud, or Windows ADK requirements are not met. The Windows ADK is required even when the build source is an imported WinRE image.
 {% endhint %}
+
+ADK `10.1.26100.2454` is supported only on a Windows 11 25H2 host and targets build `26200`. ADK `10.1.26100.9457` is supported on either host release and targets build `26300`. WinRE selection is limited to the target build and resolved architecture.
 {% endstep %}
 
 {% step %}
@@ -51,7 +53,7 @@ Select an imported WinRE image, shared drivers and scripts, WinpeStartup Core fo
 | Setting         | Default                                                       |
 | --------------- | ------------------------------------------------------------- |
 | Source image    | Selected WinRE image, with Windows ADK WinPE fallback         |
-| Architecture    | Selected WinRE architecture, or host architecture on fallback |
+| Architecture    | Matching profile architecture, explicit `-Architecture`, or running OS architecture |
 | Timezone        | Current system timezone                                       |
 | ADK packages    | Installed                                                     |
 | USB update      | Disabled                                                      |

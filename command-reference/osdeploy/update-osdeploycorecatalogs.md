@@ -1,11 +1,11 @@
-# Update-OSDeployCoreCatalogOS
+# Update-OSDeployCoreCatalogs
 
 Acquires, validates, publishes, and caches the current Windows 11 operating system catalog.
 
 ## Syntax
 
 ```powershell
-Update-OSDeployCoreCatalogOS [-MinimumItemCount <Int32>] [-WhatIf] [-Confirm]
+Update-OSDeployCoreCatalogs [-MinimumItemCount <Int32>] [-WhatIf] [-Confirm]
 ```
 
 ## Parameters

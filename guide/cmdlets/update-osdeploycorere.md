@@ -4,13 +4,13 @@ description: Export Windows Recovery Environment images and supporting Windows O
 
 # Update-OSDeployCoreRE
 
-`Update-OSDeployCoreRE` is the second stage run by `Update-OSDeployCore`. It reads verified Enterprise ESD files from the current OSDeploy catalog, exports Windows Recovery Environment images, and stages the supporting Windows setup, image, boot, metadata, and network-driver content.
+`Update-OSDeployCoreRE` is the third stage run by `Update-OSDeployCore`. It reads verified Enterprise ESD files from the current OSDeploy catalog, exports Windows Recovery Environment images, and stages the supporting Windows setup, image, boot, metadata, and network-driver content.
 
 The command does not download Windows. Run `Update-OSDeployCoreESD` first so the required ESD files are available locally.
 
 ## Requirements
 
-Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. PowerShell must be installed from the MSI package, and `curl.exe`, the DISM PowerShell cmdlets, and `robocopy.exe` must be available.
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. ADK `10.1.26100.2454` is supported only on a 25H2 host and targets Windows 11 25H2 (build `26200`); ADK `10.1.26100.9457` is supported on either host release and targets Windows 11 26H2 (build `26300`). PowerShell must be installed from the MSI package, and `curl.exe`, the DISM PowerShell cmdlets, and `robocopy.exe` must be available.
 
 A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
 

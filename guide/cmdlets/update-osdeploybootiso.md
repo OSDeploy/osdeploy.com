@@ -12,7 +12,7 @@ The command rebuilds `bootmedia.iso` from `bootmedia`. When the selected build a
 
 ## Requirements
 
-Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457` with its Deployment Tools. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
+Run the function from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457` with its Deployment Tools. ADK `10.1.26100.2454` is supported only on a 25H2 host; ADK `10.1.26100.9457` is supported on either host release. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`.
 
 The workstation must also have:
 

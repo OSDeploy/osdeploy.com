@@ -26,7 +26,7 @@ Use a workstation with:
 * PowerShell 7.6 or later installed from the MSI package
 * Current [OSDeploy module](requirements/powershell-modules.md)
 * OSDCloud module version `26.5.24.1` or later
-* Windows ADK `10.1.26100.2454` or `10.1.26100.9457` for boot-image builds and OS image selection; Hydration offers ADK 26H2 when no ADK is installed
+* Windows ADK `10.1.26100.2454` or `10.1.26100.9457` for boot-image builds and OS image selection. ADK `10.1.26100.2454` is for Windows 11 25H2 hosts; ADK `10.1.26100.9457` is supported on Windows 11 25H2 or 26H2 hosts. Hydration offers ADK 26H2 when no ADK is installed.
 * A Recast Software Community License is recommended for direct use of gated update commands; the Core update commands invoked by Hydration use its immediate-caller exception
 * Administrator rights
 * `curl.exe` available in `PATH`

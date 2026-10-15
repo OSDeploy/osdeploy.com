@@ -5,7 +5,7 @@ description: Download and verify the Windows Enterprise ESD files permitted by t
 # Update-OSDeployCoreESD
 
 {% hint style="info" %}
-`Update-OSDeployCoreESD` is the second stage run by `Update-OSDeployCore`, after `Update-OSDeployCoreCatalogOS`. Run it independently when only the Windows ESD source files need updating.
+`Update-OSDeployCoreESD` is the second stage run by `Update-OSDeployCore`, after `Update-OSDeployCoreCatalogs`. Run it independently when only the Windows ESD source files need updating.
 
 **TLDR:** Run `Update-OSDeployCoreESD` to download the latest Enterprise ESD files for the Windows release permitted by the host and installed ADK. Use `-Architecture` only when one architecture is needed.
 
@@ -16,7 +16,7 @@ Update-OSDeployCoreESD -Architecture arm64
 ```
 {% endhint %}
 
-`Update-OSDeployCoreESD` downloads the current en-US Windows Enterprise ESD files from the Microsoft Content Delivery Network. It selects the newest recognized catalog for the Windows release permitted by the host build and installed ADK, across the module and Core cache. Catalog build `26200` maps to Windows 11 25H2; build `26300` maps to Windows 11 26H2.
+`Update-OSDeployCoreESD` downloads the current en-US Windows Enterprise ESD files from the Microsoft Content Delivery Network. It selects the newest recognized catalog for the target Windows release, across the module and Core cache. ADK `10.1.26100.2454` targets Windows 11 25H2 (build `26200`) and is supported only on a 25H2 host. ADK `10.1.26100.9457` targets Windows 11 26H2 (build `26300`) on either supported host release.
 
 A valid Recast Software license is required when the command is called directly. If no valid license is found, the command displays license guidance and returns. The immediate call from `Invoke-OSDeployHydration` is the only license-gate exception.
 
@@ -26,7 +26,7 @@ This command downloads and caches the source ESD files. It does not install Wind
 
 ## Requirements
 
-Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Internet access is required for URL tests and uncached downloads.
+Run this command from an elevated PowerShell 7.6 or later session on Windows 11 25H2 build 26200 or Windows 11 26H2 build 26300. Install ADK `10.1.26100.2454` or `10.1.26100.9457`. ADK `10.1.26100.2454` is supported only on a 25H2 host; ADK `10.1.26100.9457` is supported on either host release. PowerShell must be installed from the MSI package, and `curl.exe` must be available in `PATH`. Internet access is required for URL tests and uncached downloads.
 
 {% hint style="warning" %}
 The command stops before catalog selection when a Windows version, PowerShell, MSI installation, `curl.exe`, or administrator check fails. It also stops when no catalog XML exists or the newest catalog file name does not match the expected `<build>-win<version>-<release>.xml` format.
